@@ -2,6 +2,7 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../contexts/userContext";
 import style from './login.module.css'
+import axios from "axios";
 
 export default function Login() {
 
@@ -10,8 +11,20 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const login = () => {
-
+    const login = async() => {
+        console.log('test');
+        
+        try {
+            const response = await axios.get(process.env.URL + `/users/${email}`);
+            if(response.data) {
+                console.log(response.data);
+                
+            } else {
+               console.log('user doesnt exist');
+            }
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     return (
@@ -50,7 +63,7 @@ export default function Login() {
                         </section>
 
                         <section className={style.btnLogin}>
-                            <button className={style.btn} onClick={login}>ENTRAR</button>
+                            <button className={style.btn} onClick={() => login()}>ENTRAR</button>
                         </section>
 
                     </article>
