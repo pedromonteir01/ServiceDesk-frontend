@@ -1,6 +1,9 @@
 import Header from "../Components/Header/Header";
 import styles from "./request.module.css";
 import Image from "next/image";
+
+import { HiMenuAlt2 } from "react-icons/hi";
+
 export default function Request() {
   return (
     <div className={styles.generalDiv}>
@@ -13,6 +16,15 @@ export default function Request() {
           height={300}
           className={styles.logo}
         />
+      </div>
+
+      <div className={styles.requestButton}>
+        <div>
+          <button className={styles.buttonCategory}>
+            <HiMenuAlt2 />
+          </button>
+        </div>
+        <div></div>
       </div>
     </div>
   );
