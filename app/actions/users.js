@@ -32,3 +32,13 @@ export const getUserByName= async(name) => {
         console.log('Error in feetching data:', e);
     }
 }
+
+export const getUserByRole = async(role) => {
+    try {
+        const response = await fetch(`${api}/users/role/${role}`);
+        const data = response.json();
+        return data;
+    } catch(e) {
+        console.log('Error in feetching data:', e);
+    }
+}
