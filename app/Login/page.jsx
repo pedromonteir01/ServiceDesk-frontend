@@ -20,14 +20,27 @@ export default function Login() {
                     <article>
                         { /* login */ }
 
+                        <h2>Faça o Login</h2>
+
                         { /* input field */ }
-                        <section>
+                        <section className={style.inputField}>
                             <label htmlFor="email">Email: </label>
                             <input 
                             type="text" 
                             name="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </section>
+
+                        { /* input field */ }
+                        <section className={style.inputField}>
+                            <label htmlFor="password">Senha: </label>
+                            <input 
+                            type="text" 
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             />
                         </section>
                     </article>
