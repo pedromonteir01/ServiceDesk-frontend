@@ -1,3 +1,4 @@
+'use client'
 import { useState, useContext } from "react";
 import { UserContext } from "../contexts/userContext";
 import style from './login.module.css'
