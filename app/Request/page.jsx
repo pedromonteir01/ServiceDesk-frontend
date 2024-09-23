@@ -24,7 +24,9 @@ export default function Request() {
             <HiMenuAlt2 />
           </button>
         </div>
-        <div></div>
+        <div>
+          <button className={styles.buttonRequest}>Solicitar Ajuda</button>
+        </div>
       </div>
     </div>
   );
