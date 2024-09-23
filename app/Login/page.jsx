@@ -63,7 +63,7 @@ export default function Login() {
                         </section>
 
                         <section className={style.btnLogin}>
-                            <button className={style.btn} onClick={() => login()}>ENTRAR</button>
+                            <button className={style.btn} onClick={login}>ENTRAR</button>
                         </section>
 
                     </article>
