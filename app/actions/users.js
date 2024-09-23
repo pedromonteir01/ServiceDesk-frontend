@@ -22,3 +22,13 @@ export const getUserByEmail = async(email) => {
         console.log('Error in feetching data:', e);
     }
 }
+
+export const getUserByName= async(name) => {
+    try {
+        const response = await fetch(`${api}/users/name/${name}`);
+        const data = response.json();
+        return data;
+    } catch(e) {
+        console.log('Error in feetching data:', e);
+    }
+}
