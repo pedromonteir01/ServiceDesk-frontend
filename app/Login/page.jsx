@@ -10,6 +10,10 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const login = () => {
+
+    }
+
     return (
         <main className={style.container}>
             {
@@ -44,6 +48,11 @@ export default function Login() {
                             onChange={(e) => setPassword(e.target.value)}
                             />
                         </section>
+
+                        <section className={style.btnLogin}>
+                            <button className={style.btn} onClick={login}>ENTRAR</button>
+                        </section>
+
                     </article>
                 )   
             }
