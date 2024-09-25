@@ -62,8 +62,9 @@ export default function Request() {
         autor="Arthur Borges"
         status="PENDENTE"
       />
-
+      <div>
       <Footer />
+      </div>
     </div>
   );
 }
