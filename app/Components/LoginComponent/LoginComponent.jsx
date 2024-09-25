@@ -1,4 +1,14 @@
+'use client';
+import { UserContext } from "@/app/contexts/userContext";
+import { useState, useEffect, useContext } from "react";
+
 const LoginComponent = () => {
+
+    const { user, setUser } = useContext(UserContext);
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     return (
         <article>
             { /* login */}
