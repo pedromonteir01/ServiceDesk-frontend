@@ -13,7 +13,7 @@ const UserComponent = () => {
                 user ? (
                     <UserPage user={user}/>
                 ) : (
-                    <LoginComponent/>
+                    <LoginComponent setUser={setUser}/>
                 )
             }
         </>

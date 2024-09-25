@@ -1,24 +1,27 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getUserByEmail } from "@/app/actions/users";
+import { useRouter } from "next/navigation";
 import style from '@/app/Login/login.module.css'
 
-const LoginComponent = () => {
+const LoginComponent = ({ setUser }) => {
+
+    const router = useRouter();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const login = async(email, password) => {
-        console.log(email);
-        const userExists = await getUserByEmail(email);
-        console.log(userExists);
-        if(userExists) {
-            alert('oie');
-        } else {
-            alert('tchau');
-        }
+        const user = await getUserByEmail(email);
+        console.log(user);
+        
+        if(user) {
+           if(user.password == password) {
+            setUser(user)
+            router.replace('/');
+           }
+        } 
     }
-
-
 
     return (
         <article>
