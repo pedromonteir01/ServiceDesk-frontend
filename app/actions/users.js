@@ -1,5 +1,7 @@
 'use server';
 
+import axios from "axios";
+
 const api = process.env.URL;
 
 export const getAllUsers = async() => {
@@ -15,9 +17,8 @@ export const getAllUsers = async() => {
 
 export const getUserByEmail = async(email) => {
     try {
-        const response = await fetch(`${api}/users/${email}`);
-        const data = response.json();
-        return data;
+        const response = await axios.get(`${api}/users/${email}`);
+        return response.data;
     } catch(e) {
         console.log('Error in feetching data:', e);
     }

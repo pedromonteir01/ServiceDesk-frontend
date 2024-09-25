@@ -1,13 +1,24 @@
 'use client';
-import { UserContext } from "@/app/contexts/userContext";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
+import { getUserByEmail } from "@/app/actions/users";
+import style from '@/app/Login/login.module.css'
 
 const LoginComponent = () => {
-
-    const { user, setUser } = useContext(UserContext);
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const login = async(email, password) => {
+        console.log(email);
+        const userExists = await getUserByEmail(email);
+        console.log(userExists);
+        if(userExists) {
+            alert('oie');
+        } else {
+            alert('tchau');
+        }
+    }
+
+
 
     return (
         <article>
@@ -38,7 +49,7 @@ const LoginComponent = () => {
             </section>
 
             <section className={style.btnLogin}>
-                <button className={style.btn} onClick={login}>ENTRAR</button>
+                <button className={style.btn} onClick={() => login(email, password)}>ENTRAR</button>
             </section>
 
         </article>
