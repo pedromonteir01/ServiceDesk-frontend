@@ -1,0 +1,69 @@
+.render {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 1.5rem;
+  flex-direction: column;
+  color: #000;
+  background-color: #fff;
+  width: 35%;
+  border-radius: 10px;
+  height: auto;
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #000;
+}
+
+.tituloReq {
+  font-size: 30px;
+  border-bottom: solid 2px;
+  margin: 0.5rem;
+}
+
+.descReq {
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.autorReq {
+  align-items: center;
+  justify-content: center;
+}
+
+.statusReqP {
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem;
+  background-color: #ff7700;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.statusReqC {
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem;
+  background-color: #00b609;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .render {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10%;
+  }
+
+  .text {
+    margin: 0;
+  }
+}
