@@ -40,7 +40,8 @@
   }
 }
 
-.footerBottom .copyrightText {
+.copyrightText {
   font-size: 1rem;
   color: rgb(230, 226, 226);
+  z-index: 9999;
 }
