@@ -6,6 +6,7 @@ import Image from "next/image";
 import { RiMenuSearchLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import Footer from "../Components/Footer/Footer";
+import RenderTest from "../Components/RenderTest/renderTest";
 
 export default function Request() {
   const teste = () => {
@@ -41,39 +42,27 @@ export default function Request() {
         </div>
       </div>
 
-      <div className={styles.render}>
-        <Image
-          src="/ventquebrado.jpg"
-          width={600}
-          height={250}
-          className={styles.imageReq}
-        />
-        <div className={styles.text}>
-          <h1 className={styles.tituloReq}>SALA 1</h1>
-          <h4 className={styles.descReq}>
-            Ventilador está altamente derrotado.{" "}
-          </h4>
-          <p className={styles.autorReq}>Caique Naimi</p>
-          <p className={styles.statusReq}>PENDENTE</p>
-        </div>
-      </div>
+      <RenderTest
+        local="SALA 1"
+        desc="Lâmpada queimada"
+        autor="Pedro Moneteiro"
+        status="PENDENTE"
+      />
 
-      <div className={styles.render}>
-        <Image
-          src="/ventquebrado.jpg"
-          width={600}
-          height={250}
-          className={styles.imageReq}
-        />
-        <div className={styles.text}>
-          <h1 className={styles.tituloReq}>SALA 1</h1>
-          <h4 className={styles.descReq}>
-            Ventilador está altamente derrotado.{" "}
-          </h4>
-          <p className={styles.autorReq}>Caique Naimi</p>
-          <p className={styles.statusReq}>PENDENTE</p>
-        </div>
-      </div>
+      <RenderTest
+        local="SALA 2"
+        desc="Ar condicionado quebrado"
+        autor="Caique Naimi"
+        status="CONCLUIDO"
+      />
+
+      <RenderTest
+        local="BANHEIRO"
+        desc="Privada quebrada"
+        autor="Arthur Borges"
+        status="PENDENTE"
+      />
+
       <Footer />
     </div>
   );
