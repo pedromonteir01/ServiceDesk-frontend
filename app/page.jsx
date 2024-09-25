@@ -5,6 +5,7 @@ import Footer from "./components/footer/footer";
 
 export default function Home() {
   return (
+    <main>
     <div className={styles.container}>
       <Header />
       {/* <div className={styles.videobanner}>
@@ -36,5 +37,6 @@ export default function Home() {
         </div>
       <Footer />
       </div>
+    </main>
   );
 }
