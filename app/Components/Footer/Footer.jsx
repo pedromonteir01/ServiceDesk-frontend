@@ -32,7 +32,7 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.footerBottom}>
-        <h2 /* data-aos="fade-up" */>R. Artur Fernandes Querido, 55 - Vila Santo Antonio, Valinhos - SP, 13270-530</h2>
+        <h2 /* data-aos="fade-up" */>R. Artur Fernandes Querido, 55 - Vila Santo Antonio, Valinhos - SP</h2>
         <p /* data-aos="fade-up" */ className={styles.copyrightText}>
           &copy; 2024 BFlow. Todos os direitos reservados.
         </p>
