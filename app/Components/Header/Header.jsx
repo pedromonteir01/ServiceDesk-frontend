@@ -22,6 +22,9 @@ const Header = () => {
         <li className={styles.links}>
           <Link href="https://www.fiesp.com.br/instituto-roberto-simonsen-irs/">IRS</Link>
         </li>
+        <li className={styles.links}>
+          <Link href="/Login">LOGIN</Link>
+        </li>
       </ul>
     </nav>
   );
