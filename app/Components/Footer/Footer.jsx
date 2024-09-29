@@ -14,29 +14,38 @@ export default function Footer() {
   }, []);
 
   return (
-    <div className={styles.generalDiv}>
+    <footer className={styles.generalDiv}>
       <div className={styles.socialDiv}>
         <div data-aos="fade-up" className={styles.socialIcons}>
-          <a target="blank" href="https://m.facebook.com/senaisp.valinhos/">
-            <LuFacebook className="icon" />
+          <a
+            target="_blank"
+            href="https://m.facebook.com/senaisp.valinhos/"
+            aria-label="Facebook"
+          >
+            <LuFacebook className={styles.icon} />
           </a>
           <a
-            target="blank"
+            target="_blank"
             href="https://www.youtube.com/channel/UCrnBCwEuWcBiiunMbZk8FnA"
+            aria-label="YouTube"
           >
-            <FiYoutube className="icon" />
+            <FiYoutube className={styles.icon} />
           </a>
-          <a target="blank" href="https://instagram.com/senaivalinhos">
-            <FaInstagram className="icon" />
+          <a
+            target="_blank"
+            href="https://instagram.com/senaivalinhos"
+            aria-label="Instagram"
+          >
+            <FaInstagram className={styles.icon} />
           </a>
         </div>
       </div>
       <div className={styles.footerBottom}>
-        <h2 /* data-aos="fade-up" */>R. Artur Fernandes Querido, 55 - Vila Santo Antonio, Valinhos - SP</h2>
-        <p /* data-aos="fade-up" */ className={styles.copyrightText}>
+        <h2>R. Artur Fernandes Querido, 55 - Vila Santo Antonio, Valinhos - SP</h2>
+        <p className={styles.copyrightText}>
           &copy; 2024 BFlow. Todos os direitos reservados.
         </p>
       </div>
-    </div>
+    </footer>
   );
 }
