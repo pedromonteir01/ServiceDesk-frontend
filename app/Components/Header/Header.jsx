@@ -8,19 +8,32 @@ const Header = () => {
 
       <ul className={styles.menu}>
         <li className={styles.links}>
-          <Link href="https://www.fiesp.com.br/">FIESP</Link>
+          <Link target="blank" href="https://www.fiesp.com.br/">
+            FIESP
+          </Link>
         </li>
         <li className={styles.links}>
-          <Link href="https://www.ciesp.com.br/">CIESP</Link>
+          <Link target="blank" href="https://www.ciesp.com.br/">
+            CIESP
+          </Link>
         </li>
         <li className={styles.links}>
-          <Link href="https://www.sesisp.org.br/">SESI</Link>
+          <Link target="blank" href="https://www.sesisp.org.br/">
+            SESI
+          </Link>
         </li>
         <li className={styles.links}>
-          <Link href="https://www.sp.senai.br/">SENAI</Link>
+          <Link target="blank" href="https://www.sp.senai.br/">
+            SENAI
+          </Link>
         </li>
         <li className={styles.links}>
-          <Link href="https://www.fiesp.com.br/instituto-roberto-simonsen-irs/">IRS</Link>
+          <Link
+            target="blank"
+            href="https://www.fiesp.com.br/instituto-roberto-simonsen-irs/"
+          >
+            IRS
+          </Link>
         </li>
         <li className={styles.links}>
           <Link href="/Login">LOGIN</Link>
@@ -31,6 +44,6 @@ const Header = () => {
       </ul>
     </nav>
   );
-}
+};
 
 export default Header;
