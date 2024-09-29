@@ -7,7 +7,7 @@ export default function RenderTest({ local, desc, autor, status }) {
         <h1 className={styles.tituloReq}>{local}</h1>
         <h4 className={styles.descReq}>{desc}</h4>
         <p className={styles.autorReq}>{autor}</p>
-        {status == "PENDENTE" ? (
+        {status === "PENDENTE" ? (
           <p className={styles.statusReqP}>{status}</p>
         ) : (
           <p className={styles.statusReqC}>{status}</p>
