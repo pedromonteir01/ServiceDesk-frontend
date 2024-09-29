@@ -25,6 +25,9 @@ const Header = () => {
         <li className={styles.links}>
           <Link href="/Login">LOGIN</Link>
         </li>
+        <li className={styles.links}>
+          <Link href="/Request">SOLICITAÇÕES</Link>
+        </li>
       </ul>
     </nav>
   );
