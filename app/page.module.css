@@ -1,7 +1,8 @@
-.container{
+.container {
     flex-direction: column;
 }
-.falsedivbase{
+
+.falsedivbase {
     background-color: rgb(243, 243, 243);
     width: 100%;
     height: 25rem;
@@ -9,41 +10,48 @@
     align-items: center;
     display: flex;
 }
-.containerText{
+
+.containerText {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
 }
-.title{
+
+.title {
     text-align: center;
     text-decoration: underline;
     font-size: 20px;
     margin-bottom: 15px;
 }
-.description{
+
+.description {
     text-align: center;
     text-align: justify;
     font-size: 15px;
     width: 85%;
 }
-.titleFunction{
+
+.titleFunction {
     font-size: 15px;
     margin-top: 2rem;
     margin-bottom: 1rem;
     text-align: center;
 }
-.buttonFunction{
+
+.buttonFunction {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 1rem;
 }
-.button{
+
+.button {
     padding: 1rem;
     background-color: red;
     color: white;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
