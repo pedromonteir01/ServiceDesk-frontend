@@ -1,10 +1,20 @@
 import styles from "./header.module.css";
 import Link from "next/link";
+import HamburgerMenu from '../MenuBtn/menuBtn';
+import { useState } from 'react';
 
-const Header = () => {
-  return (
-    <nav className={styles.generalDiv}>
-      <div className={styles.senai}></div>
+  const Header = () => {
+    const [isOpen, setIsOpen] = useState(true);
+  
+    const toggle = () => {
+      setIsOpen(!isOpen);
+      console.log(isOpen);
+    }
+  
+    return (
+      <nav className={styles.generalDiv}>
+        <div className={styles.senai}></div>
+        <HamburgerMenu isOpen={toggle} />
 
       <ul className={styles.menu}>
         <li className={styles.links}>
