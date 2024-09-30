@@ -35,6 +35,12 @@ a {
   text-decoration: none;
 }
 
+.icon {
+  color: #fff;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

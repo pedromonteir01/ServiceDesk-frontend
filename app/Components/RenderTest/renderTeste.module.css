@@ -1,0 +1,84 @@
+.render {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  width: 35%;
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.render:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #333;
+}
+
+.tituloReq {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.descReq {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  color: #555;
+}
+
+.autorReq {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+.statusReqP,
+.statusReqC {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  color: #fff;
+}
+
+.statusReqP {
+  background-color: #ff7700;
+}
+
+.statusReqC {
+  background-color: #00b609;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  .render {
+    width: 90%;
+    margin: 1rem 0;
+  }
+
+  .tituloReq {
+    font-size: 1.5rem;
+  }
+
+  .descReq {
+    font-size: 1rem;
+  }
+
+  .autorReq {
+    font-size: 0.9rem;
+  }
+}
