@@ -18,7 +18,6 @@ export const getAllUsers = async() => {
 export const getUserByEmail = async(email) => {
     try {
         const response = await axios.get(`${api}/users/${email}`);
-        console.log("TESTE!!!!!!!!:" + response.data);
         return response.data;        
     } catch(e) {
         console.log('Error in feetching data:', e);
