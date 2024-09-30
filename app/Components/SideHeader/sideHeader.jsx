@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 import { Avatar } from 'primereact/avatar';
@@ -10,10 +10,14 @@ import style from './sideHeader.module.css';
 const SideHeader = ({ isOpen }) => {
     const [visible, setVisible] = useState(isOpen);
     const btnRefs = useRef({});
+    
+    useEffect(() => {
+        setVisible(isOpen);
+    }, [isOpen])
+    
     return (
-      <Sidebar
+        <Sidebar
         visible={visible}
-        onHide={() => setVisible(true)}
         content={({ closeIconRef, hide }) => (
           <div className="border-right-1" style={{ width: '280px', height: '100vh', position: 'absolute', top: 50, left: 0 }}>
             <div className="flex flex-column h-full">
