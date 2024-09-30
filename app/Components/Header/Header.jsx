@@ -1,6 +1,7 @@
 import styles from "./header.module.css";
 import Link from "next/link";
 import HamburgerMenu from '../MenuBtn/menuBtn';
+import SideHeader from "../SideHeader/sideHeader";
 import { useState } from 'react';
 
   const Header = () => {
@@ -8,14 +9,15 @@ import { useState } from 'react';
   
     const toggle = () => {
       setIsOpen(!isOpen);
-      console.log(isOpen);
     }
   
     return (
       <nav className={styles.generalDiv}>
         <div className={styles.senai}></div>
-        <HamburgerMenu isOpen={toggle} />
-
+        <HamburgerMenu open={isOpen} onClick={toggle} />
+        <div className={styles.menuD}>
+        {isOpen? <SideHeader isOpen={isOpen} /> : null}
+        </div>
       <ul className={styles.menu}>
         <li className={styles.links}>
           <Link target="blank" href="https://www.fiesp.com.br/">
