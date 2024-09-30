@@ -33,7 +33,7 @@ export default function Cadastro() {
   return (
     <main className={style.main}>
       {/* Cadastro */}
-      <article >
+      <article className={style.articleCadastro}>
         <section className={style.alignCenter}>
             <Image src="/logoSesi.svg" alt="Logo" width={280} height={80} />
           <h2>Crie sua conta para acessar</h2>
@@ -48,7 +48,7 @@ export default function Cadastro() {
         {/* input field */}
         <section className={style.inputField}>
           <label htmlFor="email">Email educacional: </label>
-          <input type="text" name="email" />
+          <input type="text" name="email" className={style.inputs}/>
         </section>
 
         {/* input field */}
