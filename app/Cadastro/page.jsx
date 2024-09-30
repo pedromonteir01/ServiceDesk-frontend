@@ -57,6 +57,7 @@ export default function Cadastro() {
           <input type="text" name="password" />
         </section>
 
+        {/* input field */}
         <section className={style.inputField}>
           <label htmlFor="password">Confirmar senha: </label>
           <input type="text" name="password" value={confirmarSenha} />
