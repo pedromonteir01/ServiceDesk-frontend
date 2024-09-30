@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../Register/register.module.css'
 import { createUser } from '@/app/actions/users';
+import { toast, ToastContainer } from 'react-toastify';
 
 const RegisterComponent = () => {
 
@@ -13,11 +14,23 @@ const RegisterComponent = () => {
     const [password, setPassword] = useState('');
 
     const signUp = async(name, email, password) => {
-        try {
+        if(!name || !email || !password) {
+            console.log('oi');
+            
+            toast.error('COMPLETAR OS DADOS', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: 'Bounce',
+                });
+        } else {
             await createUser({ name: name.toLowerCase(), email: email, password: password, isAdmin: 'user', isStudent: 'student' });
             router.replace('/Login');
-        } catch(e) {
-            console.log(e);
         }
     }
 
@@ -68,7 +81,6 @@ const RegisterComponent = () => {
                     <button className={styles.btn}>CADASTRAR</button>
                 </section>
             </form>
-
         </article>
     );
 }
