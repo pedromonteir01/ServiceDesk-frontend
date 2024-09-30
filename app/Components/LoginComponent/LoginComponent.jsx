@@ -9,22 +9,11 @@ import { useRouter } from "next/navigation";
 import style from "@/app/Login/login.module.css";
 
 const LoginComponent = ({ setUser }) => {
-  const [validated, setValidated] = useState(false);
-
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
-  };
-
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const login = async (email, password) => {
     const user = await getUserByEmail(email);
@@ -34,9 +23,21 @@ const LoginComponent = ({ setUser }) => {
       if (user.password === password) {
         setUser(user);
         router.replace("/");
+      } else {
+        handleError();
       }
+    } else {
+      handleError();
     }
   };
+
+  const handleError = () => {
+    setError(true);
+    setTimeout(() => {
+      setError(false);
+    }, 5000);
+    
+  }
 
   return (
     <div className={style.loginContainer}>
@@ -69,6 +70,14 @@ const LoginComponent = ({ setUser }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </section>
+
+          {
+            error && 
+            <div className={style.error}>
+              <p style={{color: 'red', textTransform:'uppercase'}}>Erro!</p>
+              <p>Usuário ou senha estão incorretos</p>
+            </div>
+          }
 
           <section className={style.btnLogin}>
             <button className={style.btn}>ENTRAR</button>
