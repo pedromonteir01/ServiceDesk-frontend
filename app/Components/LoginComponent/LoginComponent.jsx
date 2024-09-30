@@ -43,7 +43,7 @@ const LoginComponent = ({ setUser }) => {
       <article className={style.loginBox}>
         <h2 className={style.loginTitle}>Faça o Login</h2>
 
-=
+
         <form onSubmit={(e) => {
           e.preventDefault();
           login(email, password);
