@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../Register/register.module.css'
+import { createUser } from '@/app/actions/users';
 
 const RegisterComponent = () => {
 
@@ -11,6 +12,11 @@ const RegisterComponent = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const signUp = async(name, email, password) => {
+        await createUser({ name: name, email: email, password: password, isAdmin: 'user', isStudent: 'student' });
+        router('/Login');
+    }
+
     return (
         <article className={styles.loginBox}>
 
@@ -18,6 +24,7 @@ const RegisterComponent = () => {
 
             <form onSubmit={(e) => {
                 e.preventDefault();
+                signUp(name, email, password);
             }}>
 
                 <section className={styles.inputField}>
