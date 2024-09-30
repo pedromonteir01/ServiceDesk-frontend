@@ -1,29 +1,27 @@
 'use client';
-import React, { useState, useRef } from 'react';
-import { Button } from '@nextui-org/react'; // Assumindo que você está usando NextUI
-import Hamburger from './Hamburger'; // Componente de ícone de hamburguer
+import React, { useState } from 'react';
+import Hamburger from 'hamburger-react';
+import { Button } from 'primereact/button';
 
+const HamburgerMenu = ({ isOpen }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(isOpen);
 
-const HamburgerMenu = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const btnRef = useRef(null);
-  
-    const toggleMenu = () => {
-      setIsOpen(!isOpen);
-    };
-  
-    return (
-      <div className="relative">
-        <Button 
-          ref={btnRef} 
-          color="primary" 
-          onClick={toggleMenu}
-          className="absolute top-4 left-4"
-        >
-          <Hamburger open={isOpen} />
-        </Button>
-      </div>
-    );
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
-  
-  export default HamburgerMenu;
+
+  return (
+    <div className="relative">
+      <Button 
+        type="button"
+        color="primary" 
+        onClick={toggleMenu}
+        className="absolute top-4 left-4"
+      >
+        <Hamburger open={isMenuOpen} />
+      </Button>
+    </div>
+  );
+};
+
+export default HamburgerMenu;
