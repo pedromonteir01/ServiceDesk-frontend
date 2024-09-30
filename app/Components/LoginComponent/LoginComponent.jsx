@@ -43,37 +43,37 @@ const LoginComponent = ({ setUser }) => {
       <article className={style.loginBox}>
         <h2 className={style.loginTitle}>Faça o Login</h2>
 
-        <section className={style.inputField}>
-          <label htmlFor="email" className={style.label}>
-            Email:
-          </label>
-          <input
-            type="text"
-            name="email"
-            value={email}
-            className={style.input}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </section>
+=
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          login(email, password);
+        }}>
+          <section className={style.inputField}>
+            <label htmlFor="email" className={style.label}>Email:</label>
+            <input
+              type="text"
+              name="email"
+              value={email}
+              className={style.input}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </section>
 
-        <section className={style.inputField}>
-          <label htmlFor="password" className={style.label}>
-            Senha:
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            className={style.input}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </section>
+          <section className={style.inputField}>
+            <label htmlFor="password" className={style.label}>Senha:</label>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              className={style.input}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </section>
 
-        <section className={style.btnLogin}>
-          <button className={style.btn} onClick={() => login(email, password)}>
-            ENTRAR
-          </button>
-        </section>
+          <section className={style.btnLogin}>
+            <button className={style.btn}>ENTRAR</button>
+          </section>
+        </form>
       </article>
     </div>
   );

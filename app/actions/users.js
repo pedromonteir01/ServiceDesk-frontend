@@ -43,10 +43,9 @@ export const getUserByRole = async(role) => {
 
 export const createUser = async(user) => {
     try {
-        const response = await axios.post(`${api}/users`, { 
+        await axios.post(`${api}/users`, { 
             name: user.name, email: user.email, password: user.password, isAdmin: user.isAdmin, isStudent: user.isStudent 
-        });
-        return response.data;
+        });        
     } catch(e) {
         console.log('Error in feetching data:', e);
     }
