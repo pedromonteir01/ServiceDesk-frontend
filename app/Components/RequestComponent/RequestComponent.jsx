@@ -1,4 +1,6 @@
 "use client";
+import { useContext } from "react";
+import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestComponent.module.css";
 import Image from "next/image";
 
@@ -7,6 +9,9 @@ import { CiSearch } from "react-icons/ci";
 import RenderTest from "../RenderTest/renderTest";
 
 export default function RequestComponent() {
+
+  const { user } = useContext(UserContext);
+
   const teste = () => {
     console.log("chamando requisição");
   };
