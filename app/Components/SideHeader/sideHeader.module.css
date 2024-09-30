@@ -3,8 +3,9 @@
     top: 0;
     left: 0;
 }
-.side{
-    position: absolute;
-    top: 50;
-    left: 0;
+.containerS{
+    display: flex;
+    flex-direction: column;
+    background-color: '#ff0000';
+    height: 100vh;
 }

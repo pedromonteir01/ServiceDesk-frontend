@@ -18,7 +18,7 @@ const SideHeader = () => {
     const btnRef4 = useRef(null);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-content-center h-100vh">
             <div className={style.sideHeader}>
             <Button type="button"  onClick={() => setVisible(true)} aria-label="Menu" aria-haspopup="true" aria-controls="app-sidebar-2" aria-expanded={visible}>
                       <Hamburger toggled={isOpen} toggle={setOpen} />
@@ -30,11 +30,10 @@ const SideHeader = () => {
                 onHide={() => setVisible(false)}
                 content={({ closeIconRef, hide }) => (
                     <div>
-                        <div id="app-sidebar-2" className="surface-section border-right-1" style={{ width: '280px', position: 'absolute', top: 50, left:0 }}>
+                        <div id="app-sidebar-2" className="surface-section border-right-1" style={{ width: '280px', height: '100vh', position: 'absolute', top: 50, left:0 }}>
                             <div className="flex flex-column h-full">
                                 <div className="flex align-items-center justify-content-between px-4 pt-3">
                                     <span className="inline-flex align-items-center gap-2">
-                                        <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g mask="url(#mask0_2642_713)">
                                                 <path
                                                     fillRule="evenodd"
@@ -53,7 +52,6 @@ const SideHeader = () => {
                                             <path d="M18.4011 18.0694L26.7658 14.9901L27.9329 10.1788L20.5409 10.7562L18.2066 18.0694H18.4011Z" fill="var(--primary-color)" />
                                             <path d="M21.1245 10.1789L24.8545 9.794L22.4862 7.09967H19.7628L21.1245 10.1789Z" fill="var(--primary-color)" />
                                             <path d="M12.1762 10.1789L8.4462 9.794L10.8145 7.09967H13.5378L12.1762 10.1789Z" fill="var(--primary-color)" />
-                                        </svg>
                                         <span className="font-semibold text-2xl text-primary">
                                             SENAI
                                         </span>
