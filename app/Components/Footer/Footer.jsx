@@ -16,7 +16,7 @@ export default function Footer() {
   return (
     <footer className={styles.generalDiv}>
       <div className={styles.socialDiv}>
-        <div data-aos="fade-up" className={styles.socialIcons}>
+        <div /*  data-aos="fade-up" */ className={styles.socialIcons}>
           <a
             target="_blank"
             href="https://m.facebook.com/senaisp.valinhos/"

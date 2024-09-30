@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestComponent.module.css";
 import Image from "next/image";
-import { getAllRequests } from "@/app/actions/request";
 import { RiMenuSearchLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { TailSpin } from "react-loader-spinner";
@@ -73,28 +72,19 @@ export default function RequestComponent() {
             wrapperStyle={{}}
           />
         </div>
+      ) : apiData.length === 0 ? (
+        <p className={styles.txtNoneRequest}>Nenhuma requisição encontrada</p>
       ) : (
         <>
-          <RenderTest
-            local="SALA 1"
-            desc="Lâmpada queimada"
-            autor="Pedro Moneteiro"
-            status="PENDENTE"
-          />
-
-          <RenderTest
-            local="SALA 2"
-            desc="Ar condicionado quebrado"
-            autor="Caique Naimi"
-            status="CONCLUIDO"
-          />
-
-          <RenderTest
-            local="BANHEIRO"
-            desc="Privada quebrada"
-            autor="Arthur Borges"
-            status="PENDENTE"
-          />
+          {apiData.map((item) => (
+            <RenderTest
+              key={item.id || item.local}
+              local={item.local}
+              desc={item.desc}
+              autor={item.autor}
+              status={item.status}
+            />
+          ))}
         </>
       )}
     </>

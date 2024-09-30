@@ -95,6 +95,15 @@
     border-radius: 12px;
     margin-bottom: 1rem;
   }
+
+  .txtNoneRequest {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    font-size: 20px;
+  }
   
   @media screen and (max-width: 768px) {
     .render {
