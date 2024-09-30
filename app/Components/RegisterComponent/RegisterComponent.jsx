@@ -13,8 +13,12 @@ const RegisterComponent = () => {
     const [password, setPassword] = useState('');
 
     const signUp = async(name, email, password) => {
-        await createUser({ name: name, email: email, password: password, isAdmin: 'user', isStudent: 'student' });
-        router('/Login');
+        try {
+            await createUser({ name: name.toLowerCase(), email: email, password: password, isAdmin: 'user', isStudent: 'student' });
+            router.replace('/Login');
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     return (
