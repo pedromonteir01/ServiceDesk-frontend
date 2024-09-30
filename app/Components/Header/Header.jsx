@@ -41,6 +41,9 @@ const Header = () => {
         <li className={styles.links}>
           <Link href="/Request">SOLICITAÇÕES</Link>
         </li>
+        <li className={styles.links}>
+          <Link href="/Register">REGISTRAR</Link>
+        </li>
       </ul>
     </nav>
   );
