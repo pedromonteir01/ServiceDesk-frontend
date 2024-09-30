@@ -30,7 +30,7 @@ const SideHeader = () => {
                 onHide={() => setVisible(false)}
                 content={({ closeIconRef, hide }) => (
                     <div>
-                        <div id="app-sidebar-2" className="surface-section border-right-1" style={{ width: '280px', marginTop: '30px' }}>
+                        <div id="app-sidebar-2" className="surface-section border-right-1" style={{ width: '280px', position: 'absolute', top: 50, left:0 }}>
                             <div className="flex flex-column h-full">
                                 <div className="flex align-items-center justify-content-between px-4 pt-3">
                                     <span className="inline-flex align-items-center gap-2">

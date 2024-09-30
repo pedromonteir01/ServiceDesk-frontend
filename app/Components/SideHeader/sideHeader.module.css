@@ -3,3 +3,8 @@
     top: 0;
     left: 0;
 }
+.side{
+    position: absolute;
+    top: 50;
+    left: 0;
+}
