@@ -7,7 +7,6 @@ import Row from "react-bootstrap/Row";
 import { getUserByEmail } from "@/app/actions/users";
 import { useRouter } from "next/navigation";
 import style from "@/app/Login/login.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const LoginComponent = ({ setUser }) => {
   const [validated, setValidated] = useState(false);
