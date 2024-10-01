@@ -1,7 +1,14 @@
 import styles from "./header.module.css";
 import Link from "next/link";
+import { useContext } from "react";
+import { UserContext } from "@/app/contexts/userContext";
 
 const Header = () => {
+
+  const { user } = useContext(UserContext);
+
+  const useName = user.name.split(' ');
+
   return (
     <nav className={styles.generalDiv}>
       <div className={styles.senai}></div>
@@ -28,15 +35,12 @@ const Header = () => {
           </Link>
         </li>
         <li className={styles.links}>
-          <Link
-            target="blank"
-            href="https://www.fiesp.com.br/instituto-roberto-simonsen-irs/"
-          >
+          <Link target="blank" href="https://www.fiesp.com.br/instituto-roberto-simonsen-irs/">
             IRS
           </Link>
         </li>
         <li className={styles.links}>
-          <Link href="/Login">LOGIN</Link>
+          <Link href="/Login">{ user ? useName[0] : 'LOGIN' }</Link>
         </li>
         <li className={styles.links}>
           <Link href="/Request">SOLICITAÇÕES</Link>
