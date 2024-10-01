@@ -8,11 +8,13 @@ import { CiSearch } from "react-icons/ci";
 import { TailSpin } from "react-loader-spinner";
 import RenderTest from "../RenderTest/renderTest";
 import { getAllRequests } from "@/app/actions/request";
+import { useRouter } from "next/navigation"; 
 
 export default function RequestComponent() {
   const { user } = useContext(UserContext);
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter(); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,8 +36,8 @@ export default function RequestComponent() {
     fetchData();
   }, []);
 
-  const teste = () => {
-    console.log("chamando requisição");
+  const handleRequestCreate = () => {
+    router.push("/RequestCreate"); 
   };
 
   return (
@@ -60,7 +62,7 @@ export default function RequestComponent() {
           <RiMenuSearchLine color="#ff0000" size={30} />
         </div>
         <div>
-          <button className={styles.buttonRequest} onClick={teste}>
+        <button className={styles.buttonRequest} onClick={handleRequestCreate}>
             Adicionar Requisição
           </button>
         </div>
