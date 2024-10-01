@@ -27,6 +27,7 @@
     margin-bottom: 1.5rem;
     color: #333;
     font-weight: 600;
+    margin-bottom: 7dvh;
   }
   
   /* Campos de entrada */
@@ -86,6 +87,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 0.5rem;
+    min-height: 6dvh;
   }
   
   /* Responsividade */
