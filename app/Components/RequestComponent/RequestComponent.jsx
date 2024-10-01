@@ -7,6 +7,7 @@ import { RiMenuSearchLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { TailSpin } from "react-loader-spinner";
 import RenderTest from "../RenderTest/renderTest";
+import { getAllRequests } from "@/app/actions/request";
 
 export default function RequestComponent() {
   const { user } = useContext(UserContext);
@@ -18,7 +19,11 @@ export default function RequestComponent() {
       try {
         const dados = await getAllRequests();
         console.log("dados", dados);
-        setApiData(dados.requests);
+        if (Array.isArray(dados.requests.requests)) {
+          setApiData(dados.requests.requests);
+        } else {
+          setApiData([]);
+        }
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -80,9 +85,9 @@ export default function RequestComponent() {
             <RenderTest
               key={item.id || item.local}
               local={item.local}
-              desc={item.desc}
-              autor={item.autor}
-              status={item.status}
+              desc={item.description}
+              autor={item.email}
+              status={item.status_request ? "CONCLUIDO" : "PENDENTE"} 
             />
           ))}
         </>
