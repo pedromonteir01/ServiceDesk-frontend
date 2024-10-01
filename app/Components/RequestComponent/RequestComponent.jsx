@@ -40,9 +40,7 @@ export default function RequestComponent() {
     router.push("/RequestCreate");
   };
 
-  // Função para ordenar as requisições, priorizando as inconcluídas
   const sortedApiData = apiData.sort((a, b) => {
-    // Se o status de 'a' for inconcluído (falso) e o de 'b' for concluído (verdadeiro), 'a' deve vir primeiro
     return (a.status_request ? 1 : 0) - (b.status_request ? 1 : 0);
   });
 
