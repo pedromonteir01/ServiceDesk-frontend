@@ -1,23 +1,24 @@
 import styles from "./header.module.css";
 import Link from "next/link";
-import HamburgerMenu from '../MenuBtn/menuBtn';
 import SideHeader from "../SideHeader/sideHeader";
+import { FaBars } from 'react-icons/fa';
 import { useState } from 'react';
 
-  const Header = () => {
-    const [isOpen, setIsOpen] = useState(false);
-  
-    const toggle = () => {
-      setIsOpen(!isOpen);
-    }
-  
-    return (
-      <nav className={styles.generalDiv}>
-        <div className={styles.senai}></div>
-        <HamburgerMenu open={isOpen} onClick={toggle} />
-        <div className={styles.menuD}>
-        {isOpen? <SideHeader isOpen={isOpen} /> : null}
+const Header = () => {
+  const [sidebar, setSidebar] = useState(false);
+
+  const showSidebar = () => setSidebar(!sidebar);
+  const closeSidebar = () => setSidebar(false);
+
+  return (
+    <nav className={styles.generalDiv}>
+      <div className={styles.senai}></div>
+      <div className={styles.menuD}>
+      <div className={styles.align}>
+        <FaBars onClick={showSidebar} />
+        {sidebar && <SideHeader isActive={sidebar} onClose={closeSidebar} />}
         </div>
+      </div>
       <ul className={styles.menu}>
         <li className={styles.links}>
           <Link target="blank" href="https://www.fiesp.com.br/">
