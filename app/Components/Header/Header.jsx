@@ -3,6 +3,7 @@ import Link from "next/link";
 import SideHeader from "../SideHeader/sideHeader";
 import { FaBars } from 'react-icons/fa';
 import { useState } from 'react';
+import Hamburger from "hamburger-react";
 
 const Header = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -15,7 +16,7 @@ const Header = () => {
       <div className={styles.senai}></div>
       <div className={styles.menuD}>
       <div className={styles.align}>
-        <FaBars onClick={showSidebar} />
+        <Hamburger toggled={sidebar} toggle={showSidebar} color="#fff" />
         {sidebar && <SideHeader isActive={sidebar} onClose={closeSidebar} />}
         </div>
       </div>
