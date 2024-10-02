@@ -20,7 +20,7 @@ const RegisterComponent = () => {
        } else if(confirm !== password) {
             toast.error('SENHAS DISCREPANTES');
        } else {
-            const response = await createUser({ name: name.toLowerCase(), email: email, password: password, isAdmin: 'user', isStudent: 'student' });
+            const response = await createUser({ name: name.toLowerCase(), email: email, password: password, isAdmin: 'user', isStudent: 'student' });            
             if(response.errors) {
                 for(let i = 0; i < response.errors.length; i++) {
                     toast.error(response.errors[i].split('_').join(' ').toUpperCase());
@@ -39,7 +39,7 @@ const RegisterComponent = () => {
                 <h2 className={styles.loginTitle}>CADASTRE-SE</h2>
 
                 <form onSubmit={(e) => {
-                    e.preventDefault();
+                    e.preventDefault();                    
                     signUp(name, email, password, confirmPassowrd);
                 }}>
 
