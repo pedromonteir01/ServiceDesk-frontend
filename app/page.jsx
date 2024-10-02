@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "./components/Header/Header";
@@ -8,6 +9,8 @@ export default function Home() {
     <main>
     <div className={styles.container}>
       <Header />
+      <div className={styles.sideHeader}>
+      </div>
       {/* <div className={styles.videobanner}>
       <Image
         src="/vercel.svg"
