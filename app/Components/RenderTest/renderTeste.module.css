@@ -63,7 +63,29 @@
   background-color: #00b609;
 }
 
-/* Responsividade */
+.btns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.btns .btnRemove {
+  background-color: #ff0000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btns .btnEdit {
+  background-color: #ff0000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .render {
     width: 90%;

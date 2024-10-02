@@ -46,9 +46,10 @@ export const createUser = async(user) => {
         const response = await axios.post(`${api}/users`, { 
             name: user.name, email: user.email, password: user.password, isAdmin: user.isAdmin, isStudent: user.isStudent 
         });
-        return response.data;
+        return response.data;        
     } catch(e) {
-        console.log('Error in feetching data:', e);
+        console.log('Error in fetching data:', e.response.data);
+        return e.response.data;
     }
 }
 
