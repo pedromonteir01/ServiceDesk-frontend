@@ -7,27 +7,27 @@ import Row from "react-bootstrap/Row";
 import { getUserByEmail } from "@/app/actions/users";
 import { useRouter } from "next/navigation";
 import style from "@/app/Login/login.module.css";
+import toast from "react-hot-toast";
 
 const LoginComponent = ({ setUser }) => {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
 
   const login = async (email, password) => {
     const user = await getUserByEmail(email);
-    console.log(user);
-
     if (user) {
       if (user.password === password) {
         setUser(user);
+        let useName = user.name.split(' ');
+        toast.success(`SEJA BEM-VINDO, ${useName[0]}!`);
         router.replace("/");
       } else {
-        handleError();
+        toast.error('USUÁRIO OU SENHA INCORRETOS');
       }
     } else {
-      handleError();
+      toast.error('USUÁRIO OU SENHA INCORRETOS');
     }
   };
 
@@ -70,16 +70,6 @@ const LoginComponent = ({ setUser }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </section>
-
-          <div className={style.error}>
-          {
-            error && 
-            <>
-              <p style={{color: 'red', textTransform:'uppercase'}}>Erro!</p>
-              <p style={{color: 'black'}}>Usuário ou senha estão incorretos</p>
-            </>
-          }
-          </div>
 
           <section className={style.btnLogin}>
             <button className={style.btn}>ENTRAR</button>

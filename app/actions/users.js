@@ -43,11 +43,13 @@ export const getUserByRole = async(role) => {
 
 export const createUser = async(user) => {
     try {
-        await axios.post(`${api}/users`, { 
+        const response = await axios.post(`${api}/users`, { 
             name: user.name, email: user.email, password: user.password, isAdmin: user.isAdmin, isStudent: user.isStudent 
-        });        
+        });
+        return response.data;        
     } catch(e) {
-        console.log('Error in feetching data:', e);
+        console.log('Error in fetching data:', e.response.data);
+        return e.response.data;
     }
 }
 
