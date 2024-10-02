@@ -6,7 +6,6 @@ const Sidebar = ({ isActive, onClose }) => {
   return (
     <div className={`sidebar ${isActive ? 'sidebar-open' : ''}`}>
       
-      <FaTimes onClick={onClose} />
       <div className="content">
         <SidebarItem Icon={FaHome} Text="Home" />
         <SidebarItem Icon={FaChartBar} Text="Statistics" />
