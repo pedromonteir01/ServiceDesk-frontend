@@ -1,3 +1,4 @@
+'use client';
 import styles from "./header.module.css";
 import Link from "next/link";
 import { useContext } from "react";
@@ -7,7 +8,13 @@ const Header = () => {
 
   const { user } = useContext(UserContext);
 
-  const useName = user.name.split(' ');
+  let useName;
+
+  if(user) {
+    useName = user.name.split(' ');
+  } else {
+    useName = '';
+  }
 
   return (
     <nav className={styles.generalDiv}>
@@ -40,10 +47,10 @@ const Header = () => {
           </Link>
         </li>
         <li className={styles.links}>
-          <Link href="/Login">{ user ? useName[0] : 'LOGIN' }</Link>
+          <Link href="/Request">SOLICITAÇÕES</Link>
         </li>
         <li className={styles.links}>
-          <Link href="/Request">SOLICITAÇÕES</Link>
+          <Link href="/Login">{ user ? useName[0].toUpperCase() : 'LOGIN' }</Link>
         </li>
         <li className={styles.links}>
           <Link href="/Register">REGISTRAR</Link>
