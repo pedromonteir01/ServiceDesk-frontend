@@ -3,7 +3,6 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/footer/footer";
-import SideHeader from "./components/SideHeader/sideHeader";
 
 export default function Home() {
   return (
@@ -11,7 +10,6 @@ export default function Home() {
     <div className={styles.container}>
       <Header />
       <div className={styles.sideHeader}>
-      <SideHeader />
       </div>
       {/* <div className={styles.videobanner}>
       <Image
