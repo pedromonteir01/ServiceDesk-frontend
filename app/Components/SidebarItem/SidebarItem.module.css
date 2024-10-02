@@ -1,22 +1,18 @@
 .container {
     display: flex;
     align-items: center;
-    background-color: #1A202C;
+    background-color: transparent;
     font-size: 15px;
     color: white;
     padding: 0.5rem;
     cursor: pointer;
     border-radius: 10px;
     margin-bottom: 1rem;
-    margin-left: 0.5rem;
     margin-right: 0.5rem;
   }
   
   .container svg {
-    margin: 0 20px;
+    margin: 0 8px;
   }
   
-  .container:hover {
-    background-color: black;
-  }
   
