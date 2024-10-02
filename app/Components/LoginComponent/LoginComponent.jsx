@@ -71,13 +71,15 @@ const LoginComponent = ({ setUser }) => {
             />
           </section>
 
+          <div className={style.error}>
           {
             error && 
-            <div className={style.error}>
+            <>
               <p style={{color: 'red', textTransform:'uppercase'}}>Erro!</p>
-              <p>Usuário ou senha estão incorretos</p>
-            </div>
+              <p style={{color: 'black'}}>Usuário ou senha estão incorretos</p>
+            </>
           }
+          </div>
 
           <section className={style.btnLogin}>
             <button className={style.btn}>ENTRAR</button>
