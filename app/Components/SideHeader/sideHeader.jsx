@@ -4,7 +4,7 @@ import styles from './sideHeader.module.css';
 
 const Sidebar = ({ isActive, onClose }) => {
   return (
-    <div className={`sidebar ${isActive ? 'sidebar-open' : ''}`}>
+    <div className={`sidebar ${isActive ? 'sidebar-open' : ''}`} style={{backgroundColor: '#ff0000', height: '100vh', position:'fixed', zIndex:999}}>
       
       <div className="content">
         <SidebarItem Icon={FaHome} Text="Home" />
