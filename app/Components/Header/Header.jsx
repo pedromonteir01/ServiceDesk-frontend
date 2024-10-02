@@ -3,10 +3,12 @@ import styles from "./header.module.css";
 import Link from "next/link";
 import { useContext } from "react";
 import { UserContext } from "@/app/contexts/userContext";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
 
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const router = useRouter();
 
   let useName;
 
@@ -14,6 +16,11 @@ const Header = () => {
     useName = user.name.split(' ');
   } else {
     useName = '';
+  }
+
+  const logout = () => {
+    setUser(null);
+    router.replace('/');
   }
 
   return (
@@ -52,9 +59,17 @@ const Header = () => {
         <li className={styles.links}>
           <Link href="/Login">{ user ? useName[0].toUpperCase() : 'LOGIN' }</Link>
         </li>
-        <li className={styles.links}>
-          <Link href="/Register">REGISTRAR</Link>
-        </li>
+        {
+          user ? (
+            <li className={styles.links} onClick={() => logout()}>
+              <p style={{ cursor: 'pointer' }}>SAIR</p>
+            </li>
+          ) : (
+            <li className={styles.links}>
+              <Link href="/Register">REGISTRAR</Link>
+            </li>
+          )
+        }
       </ul>
     </nav>
   );
