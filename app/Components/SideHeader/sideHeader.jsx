@@ -1,4 +1,4 @@
-import { FaTimes, FaHome, FaChartBar, FaUserAlt, FaEnvelope, FaRegCalendarAlt, FaIdCardAlt, FaRegFileAlt, FaRegSun } from 'react-icons/fa';
+import { FaTimes, FaHome, FaChartBar, FaUserAlt, FaRegSun } from 'react-icons/fa';
 import SidebarItem from '../SidebarItem/SidebarItem';
 import styles from './sideHeader.module.css';
 

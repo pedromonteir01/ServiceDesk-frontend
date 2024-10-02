@@ -1,41 +1,54 @@
 .sidebar {
-    background-color: transparent;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-  }
+  background-color: transparent;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
 
-  .container{
-    background-color: transparent;
-    margin-top: 5rem;
-    font-size: 15px;
-    color: white;
-    cursor: pointer;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    margin-right: 0.5rem;
-  }
-  
-  .sidebar svg {
-    position: fixed;
-    color: white;
-    margin-top: 10rem;
-    margin-bottom: 10rem;
-    margin-left: 32px;
-    cursor: pointer;
-  }
+.container {
+  background-color: transparent;
+  margin-top: 5rem;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: showHeader 0.5s forwards;
+}
 
-  .sidebar svg:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+@keyframes showHeader {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  @keyframes showSidebar {
-    from {
-      opacity: 0;
-      width: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
+
+.sidebar svg {
+  position: fixed;
+  color: white;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  margin-left: 32px;
+  cursor: pointer;
+}
+
+.sidebar svg:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes showSidebar {
+  from {
+    opacity: 0;
+    width: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
