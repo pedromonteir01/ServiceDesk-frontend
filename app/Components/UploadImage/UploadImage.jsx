@@ -4,27 +4,31 @@ import api from "./../../../config/configAPI.js";
 
 export default function UploadImage() {
   const [image, setImage] = useState("");
+  const [status, setStatus] = useState({
+    type: "",
+    message: "",
+  });
 
   const uploadImage = async (e) => {
     e.preventDefault();
-    console.log("uploadImage");
     const formData = new FormData();
     formData.append("image", image);
-
-    const headers = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
     await api
-      .post("/upload-image", formData, headers)
+      .post("/upload-image", formData)
       .then((response) => {
         console.log(response);
+        setStatus({
+          type: "success",
+          message: response.data.message,
+        });
       })
       .catch((err) => {
         if (err.response) {
           console.log(err.reponse);
+          setStatus({
+            type: "error",
+            message: err.response.data.message,
+          });
         } else {
           console.log("Erro: Tente Mais Tarde");
         }
@@ -33,6 +37,7 @@ export default function UploadImage() {
   return (
     <>
       <h1>Upload Image</h1>
+
       <form onSubmit={uploadImage}>
         <label>Upload Image</label>
         <input
