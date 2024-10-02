@@ -5,7 +5,7 @@ import styles from './register.module.css'
 
 export default function Register() {
     return (
-        <main className={styles.container}>
+        <main>
             <Header/>
             <RegisterComponent/>
             <Footer/>
