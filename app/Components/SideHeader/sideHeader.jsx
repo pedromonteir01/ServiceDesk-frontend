@@ -6,7 +6,7 @@ const Sidebar = ({ isActive, onClose }) => {
   return (
     <div className={`sidebar ${isActive ? 'sidebar-open' : ''}`} style={{backgroundColor: '#ff0000', height: '100vh', position:'fixed', zIndex:999}}>
       
-      <div className="content">
+      <div className={styles.container}>
         <SidebarItem Icon={FaHome} Text="Início" />
         <SidebarItem Icon={FaChartBar} Text="Requisições" />
         <SidebarItem Icon={FaRegSun} Text="Configurações" />
