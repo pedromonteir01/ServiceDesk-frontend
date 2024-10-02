@@ -83,6 +83,7 @@ const RegisterComponent = () => {
                     </section>
                 </form>
             </article>
+            <ToastContainer/>
         </div>
     );
 }
