@@ -20,6 +20,8 @@ const LoginComponent = ({ setUser }) => {
     if (user) {
       if (user.password === password) {
         setUser(user);
+        let useName = user.name.split(' ');
+        toast.success(`SEJA BEM-VINDO, ${useName[0]}!`);
         router.replace("/");
       } else {
         toast.error('USUÁRIO OU SENHA INCORRETOS');
