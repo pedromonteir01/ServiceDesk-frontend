@@ -23,6 +23,7 @@ const RegisterComponent = () => {
                     toast.error(response.errors[i].split('_').join(' ').toUpperCase());
                 }
             } else {
+                toast.success('USUÁRIO CADASTRADO');
                 router.replace('/Login');
             }
        }
@@ -32,7 +33,7 @@ const RegisterComponent = () => {
         <div className={styles.container}>
             <article className={styles.loginBox}>
 
-                <h2 className={styles.loginTitle}>Faça o Login</h2>
+                <h2 className={styles.loginTitle}>CADASTRE-SE</h2>
 
                 <form onSubmit={(e) => {
                     e.preventDefault();
