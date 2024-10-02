@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
 import api from "./../../../config/configAPI.js";
+import styles from "./updloadImage.module.css";
+
+import { IoCloudDownloadOutline } from "react-icons/io5";
 
 export default function UploadImage() {
   const [image, setImage] = useState("");
@@ -36,19 +39,24 @@ export default function UploadImage() {
   };
   return (
     <>
-      <h1>Upload Image</h1>
+      <div className={styles.container}>
+        <form onSubmit={uploadImage}>
+          <label className={styles.label}>Upload Image</label>
+          <div className={styles.imagemUpload}>
+            <input
+              type="file"
+              name="image"
+              onChange={(e) => setImage(e.target.files[0])}
+              className={styles.fileInput}
+            />
+          </div>
+          <br></br>
 
-      <form onSubmit={uploadImage}>
-        <label>Upload Image</label>
-        <input
-          type="file"
-          name="image"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-        <br></br>
-
-        <button type="submit">Enviar</button>
-      </form>
+          <button type="submit" className={styles.button}>
+            Enviar
+          </button>
+        </form>
+      </div>
     </>
   );
 }
