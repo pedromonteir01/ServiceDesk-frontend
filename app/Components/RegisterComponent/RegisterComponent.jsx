@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../Register/register.module.css'
 import { createUser } from '@/app/actions/users';
-import { toast, ToastContainer } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 const RegisterComponent = () => {
 
@@ -14,24 +14,18 @@ const RegisterComponent = () => {
     const [password, setPassword] = useState('');
 
     const signUp = async (name, email, password) => {
-        if (!name || !email || !password) {
-            console.log('oi');
-
-            toast.error('COMPLETAR OS DADOS', {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: 'Bounce',
-            });
-        } else {
-            await createUser({ name: name.toLowerCase(), email: email, password: password, isAdmin: 'user', isStudent: 'student' });
-            router.replace('/Login');
-        }
+       if(!name || !email ||!password) {
+            toast.error('DADOS INCOMPLETOS');
+       } else {
+            const response = await createUser({ name: name.toLowerCase(), email: email, password: password, isAdmin: 'user', isStudent: 'student' });
+            if(response.errors) {
+                for(let i = 0; i < response.errors.length; i++) {
+                    toast.error(response.errors[i]);
+                }
+            } else {
+                router.replace('/Login');
+            }
+       }
     }
 
     return (
@@ -83,7 +77,6 @@ const RegisterComponent = () => {
                     </section>
                 </form>
             </article>
-            <ToastContainer/>
         </div>
     );
 }
