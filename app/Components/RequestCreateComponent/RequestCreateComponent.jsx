@@ -11,6 +11,7 @@ export default function RequestCreateComponent() {
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
@@ -19,6 +20,7 @@ export default function RequestCreateComponent() {
     const file = event.target.files[0];
     if (file) {
       setImage(file);
+      setImagePreview(URL.createObjectURL(file));
     }
   };
 
@@ -47,6 +49,7 @@ export default function RequestCreateComponent() {
       setDescription("");
       setLocal("");
       setImage(null);
+      setImagePreview(null);
 
       router.push("/RequestComponent");
     }
@@ -79,7 +82,12 @@ export default function RequestCreateComponent() {
           />
 
           <label className={styles.label}>Imagem</label>
-          <div className={styles.imageUpload} onClick={() => document.querySelector(`.${styles.fileInput}`).click()}>
+          <div
+            className={styles.imageUpload}
+            onClick={() =>
+              document.querySelector(`.${styles.fileInput}`).click()
+            }
+          >
             <input
               type="file"
               name="image"
@@ -90,6 +98,19 @@ export default function RequestCreateComponent() {
             <IoCloudDownloadOutline color="#000" fontSize={30} />
             <span>Inserir imagem</span>
           </div>
+
+          {image && (
+            <div className={styles.previewContainer}>
+              {imagePreview && (
+                <img
+                  src={imagePreview}
+                  alt="Image Preview"
+                  className={styles.imagePreview}
+                />
+              )}
+              <p className={styles.fileName}>{image.name}</p>
+            </div>
+          )}
 
           <label className={styles.label}>Qual foi o local?</label>
           <select

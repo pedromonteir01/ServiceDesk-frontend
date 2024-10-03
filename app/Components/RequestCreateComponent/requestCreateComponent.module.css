@@ -20,12 +20,23 @@
 
 .submitButton {
     margin-top: 20px;
+    padding: 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submitButton:hover {
+    background-color: darkred;
 }
 
 .logo {
     display: flex;
     top: 0;
-  }
+}
 
 .title {
     font-size: 24px;
@@ -71,37 +82,29 @@
     position: relative;
     transition: border 0.3s ease;
     height: 15vh;
-  }
-  
-  .imageUpload:hover {
-    border: 2px dashed #000;
-  }
+}
 
-  
-  .fileInput {
+.imageUpload:hover {
+    border: 2px dashed #000;
+}
+
+.fileInput {
     display: none;
-  }
-  
-  .imageUpload span {
+}
+
+.imageUpload span {
     color: #000;
     margin-top: 10px;
     font-size: 14px;
-  }
-  
-  .button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
+}
+
+.fileName {
+    color: #000;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+
 .select {
     width: 100%;
     padding: 10px;
@@ -110,18 +113,4 @@
     margin-bottom: 20px;
     background-color: #f2f2f2;
     color: #333;
-}
-
-.submitButton {
-    padding: 15px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.submitButton:hover {
-    background-color: darkred;
 }
