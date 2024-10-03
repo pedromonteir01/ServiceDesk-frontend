@@ -90,9 +90,6 @@ export default function RequestCreateComponent() {
             <IoCloudDownloadOutline color="#000" fontSize={30} />
             <span>Inserir imagem</span>
           </div>
-          <p className={styles.imageHint}>
-            Tire uma foto para facilitar a localização
-          </p>
 
           <label className={styles.label}>Qual foi o local?</label>
           <select
