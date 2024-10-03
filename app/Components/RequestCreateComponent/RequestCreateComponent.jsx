@@ -25,14 +25,15 @@ export default function RequestCreateComponent() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = {
-      title,
-      description,
-      local,
-      image,
-      status_request: "inconclued",
-      date_request: new Date().toISOString(),
-    };
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("local", local);
+    if (image) {
+      formData.append("image", image);
+    }
+    formData.append("status_request", "inconclued");
+    formData.append("date_request", new Date().toISOString());
 
     const result = await createRequest(formData);
 
@@ -78,12 +79,13 @@ export default function RequestCreateComponent() {
           />
 
           <label className={styles.label}>Imagem</label>
-          <div className={styles.imageUpload}>
+          <div className={styles.imageUpload} onClick={() => document.querySelector(`.${styles.fileInput}`).click()}>
             <input
               type="file"
-              accept="image/*"
-              className={styles.fileInput}
+              name="image"
               onChange={handleImageChange}
+              className={styles.fileInput}
+              accept="image/*"
             />
             <IoCloudDownloadOutline color="#000" fontSize={30} />
             <span>Inserir imagem</span>
