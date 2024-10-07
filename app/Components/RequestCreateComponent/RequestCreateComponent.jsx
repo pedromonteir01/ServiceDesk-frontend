@@ -5,15 +5,14 @@ import { IoCloudDownloadOutline } from "react-icons/io5";
 import { createRequest } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
-export default function RequestCreateComponent() {
+const RequestCreateComponent = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
 
   const handleImageChange = (event) => {
@@ -24,37 +23,29 @@ export default function RequestCreateComponent() {
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("local", local);
-    if (image) {
-      formData.append("image", image);
-    }
-    formData.append("status_request", "inconclued");
-    formData.append("date_request", new Date().toISOString());
-
-    const result = await createRequest(formData);
-
-    if (result.error) {
-      setErrorMessage(result.message);
-      setSuccessMessage("");
+  const requestCreate = async (title, description, local, image) => {
+    console.log("image");
+    console.log(image);
+    
+    if (!title || !description || !local || !image) {
+      toast.error("PREENCHA TODOS OS CAMPOS");
     } else {
-      setSuccessMessage(result.message);
-      setErrorMessage("");
-      setTitle("");
-      setDescription("");
-      setLocal("");
-      setImage(null);
-      setImagePreview(null);
-
-      router.push("/RequestComponent");
+      const response = await createRequest({
+        title: title,
+        description: description,
+        local: local,
+        image: image.name,
+      });
+      if (response.error) {
+        for (let i = 0; i < response.error.length; i++) {
+          toast.error(response.error[i].split("_").join(" ").toUpperCase());
+        }
+      } else {
+        toast.success("REQUISIÇÃO CRIADA");
+        router.replace("/requests");
+      }
     }
   };
-
   return (
     <>
       <Image
@@ -68,12 +59,20 @@ export default function RequestCreateComponent() {
         <h1 className={styles.title}>
           Relate aqui seu <span className={styles.problemText}>problema</span>
         </h1>
-        {errorMessage && <div className={styles.error}>{errorMessage}</div>}
-        {successMessage && (
-          <div className={styles.success}>{successMessage}</div>
-        )}
 
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            requestCreate(title, description, local, image);
+          }}
+        >
+          <label className={styles.label}>Assunto:</label>
+          <input
+            type="text"
+            className={styles.titleInput}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
           <label className={styles.label}>O que aconteceu? Descreva</label>
           <textarea
             className={styles.descriptionInput}
@@ -129,4 +128,6 @@ export default function RequestCreateComponent() {
       </div>
     </>
   );
-}
+};
+
+export default RequestCreateComponent;

@@ -86,14 +86,17 @@ export const getRequestByUser = async (user) => {
   }
 };
 
-export const createRequest = async (request) => {
+export const createRequest = async ({name, description, local, image}) => {
   try {
-    const response = await axios.post(`${api}/requests`, request);  
-    return {
-      status: "success",
-      message: "Request created",
-      data: response.data,
-    };
+    const response = await axios.post(`${api}/requests`, name, description, local, image, {
+      headers: { "Content-Type": "application/json" },
+    });
+    // return {
+    //   status: "success",
+    //   message: "Request created",
+    //   data: response.data,
+    // };
+    return response.data;
   } catch (e) {
     console.log("Error creating request:", e);
     return { error: "Error creating request", message: e.message };

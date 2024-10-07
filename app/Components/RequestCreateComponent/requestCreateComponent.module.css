@@ -57,6 +57,16 @@
     align-self: flex-start;
 }
 
+.titleInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    background-color: #f2f2f2;
+    color: #000;
+}
+
 .descriptionInput {
     width: 100%;
     height: 100px;

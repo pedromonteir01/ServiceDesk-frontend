@@ -68,7 +68,7 @@ export default function RequestComponent() {
   });
 
   return (
-    <>
+    <div className="fullsize">
       <div className={styles.init}>
         <div>
           <Image
@@ -79,6 +79,7 @@ export default function RequestComponent() {
             className={styles.logo}
           />
         </div>
+
         {
           user &&
           user.isadmin &&
@@ -120,7 +121,9 @@ export default function RequestComponent() {
           />
         </div>
       ) : sortedApiData.length === 0 ? (
-        <p className={styles.txtNoneRequest}>Nenhuma requisição encontrada</p>
+        <p className={styles.txtNoneRequest}>
+          Nenhuma requisição encontrada!!!
+        </p>
       ) : (
         <>
           {sortedApiData.map((item) => (
@@ -134,6 +137,6 @@ export default function RequestComponent() {
           ))}
         </>
       )}
-    </>
+    </div>
   );
 }

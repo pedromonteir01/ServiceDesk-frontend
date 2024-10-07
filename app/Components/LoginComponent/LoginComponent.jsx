@@ -20,14 +20,14 @@ const LoginComponent = ({ setUser }) => {
     if (user) {
       if (user.password === password) {
         setUser(user);
-        let useName = user.name.split(' ');
+        let useName = user.name.split(" ");
         toast.success(`SEJA BEM-VINDO, ${useName[0]}!`);
         router.replace("/");
       } else {
-        toast.error('USUÁRIO OU SENHA INCORRETOS');
+        toast.error("USUÁRIO OU SENHA INCORRETOS");
       }
     } else {
-      toast.error('USUÁRIO OU SENHA INCORRETOS');
+      toast.error("USUÁRIO OU SENHA INCORRETOS");
     }
   };
 
@@ -36,21 +36,23 @@ const LoginComponent = ({ setUser }) => {
     setTimeout(() => {
       setError(false);
     }, 5000);
-    
-  }
+  };
 
   return (
     <div className={style.loginContainer}>
       <article className={style.loginBox}>
         <h2 className={style.loginTitle}>Faça o Login</h2>
 
-
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          login(email, password);
-        }}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            login(email, password);
+          }}
+        >
           <section className={style.inputField}>
-            <label htmlFor="email" className={style.label}>Email:</label>
+            <label htmlFor="email" className={style.label}>
+              Email:
+            </label>
             <input
               type="text"
               name="email"
@@ -61,7 +63,9 @@ const LoginComponent = ({ setUser }) => {
           </section>
 
           <section className={style.inputField}>
-            <label htmlFor="password" className={style.label}>Senha:</label>
+            <label htmlFor="password" className={style.label}>
+              Senha:
+            </label>
             <input
               type="password"
               name="password"
