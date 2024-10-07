@@ -8,7 +8,7 @@ const Sidebar = ({ isActive, onClose }) => {
   const { setUser, user } = useContext(UserContext);
 
   return (
-    <div className={`sidebar ${isActive ? 'sidebar-open' : ''}`} style={{backgroundColor: '#ff0000', height: '100vh', position:'fixed', zIndex:999}}>
+    <div className={`sidebar ${isActive ? 'sidebar-open' : ''}`} style={{backgroundColor: '#ff0000', height: '100vh', position:'fixed', zIndex:999, transition: 'all 0.3s ease-in-out'}}>
       
       <div className={styles.container}>
         <SidebarItem Icon={FaHome} Text="Início" href="/" />
