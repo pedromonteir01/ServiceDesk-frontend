@@ -1,4 +1,4 @@
-import { FaTimes, FaHome, FaChartBar, FaUserAlt, FaRegSun, FaUserLock, FaUserCog } from 'react-icons/fa';
+import { FaHome, FaTools , FaUser, FaRegSun, FaUserLock, FaUserCog } from 'react-icons/fa';
 import SidebarItem from '../SidebarItem/SidebarItem';
 import styles from './sideHeader.module.css';
 import { useContext } from "react";
@@ -12,12 +12,12 @@ const Sidebar = ({ isActive, onClose }) => {
       
       <div className={styles.container}>
         <SidebarItem Icon={FaHome} Text="Início" href="/" />
-        <SidebarItem Icon={FaChartBar} Text="Solicitações" href="/Request" />
-        <SidebarItem Icon={FaRegSun} Text="Configurações" href="/" />
+        <SidebarItem Icon={FaTools} Text="Solicitações" href="/Request" />
+        <SidebarItem Icon={FaRegSun} Text="Ajustes" href="/" />
         { user ? <SidebarItem Icon={FaUserCog} Text="Perfil" href="/Profile" /> : 
         <>
         <SidebarItem Icon={FaUserLock} Text="Registrar" href="/Register" />
-        <SidebarItem Icon={FaUserAlt} Text="Login" href="/Login" />
+        <SidebarItem Icon={FaUser} Text="Login" href="/Login" />
         </>
         }
       </div>

@@ -6,15 +6,17 @@
     color: white;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    cursor: pointer;
+    padding-right: 0.5rem;
     border-radius: 10px;
     margin-bottom: 1rem;
     margin-left: 0.2rem;
     margin-right: 0.5rem;
+    cursor: pointer;
   }
   
   .container svg {
     margin: 0 8px;
+    font-size: 17px;
   }
 
     .container:hover {
