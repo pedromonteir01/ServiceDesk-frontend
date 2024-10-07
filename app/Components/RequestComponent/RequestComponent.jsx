@@ -28,11 +28,9 @@ export default function RequestComponent() {
         } else {
           setApiData([]);
         }
-
-        const info = await getAllReqsWithLocals();
-        setLocals(info);
+        setLocals(await getAllReqsWithLocals());
         
-        console.log(info);
+        console.log(locals);
         //console.log(locals);
         
         
@@ -55,11 +53,11 @@ export default function RequestComponent() {
     console.log(array.local);
     console.log(array.quantity);
     
-    let element;
-    for(let i = 0; i <= array.length; i ++) {
-      element = array[i].quantity;
-      if(element < array[i].quantity) {
-        element = array[i].quantity;
+    let element = locals[0].quantity
+    for(let i = 0; i <= locals.length; i ++) {
+      let other = locals[i]
+      if(element < other.quantity) {
+        element = other.quantity;
       }
     }
     return element;
@@ -84,10 +82,13 @@ export default function RequestComponent() {
         {
           user &&
           user.isadmin &&
+          sortedApiData &&
           <div className={styles.data}>
             
-            <p>{handleMoreReq(locals)}</p>
+            <p>{handleMoreReq(locals)}!!!!!!!!!</p>
           </div>
+        }
+        {console.log(locals)
         }
         <div>
           <CiSearch color="#000" size={30} />
