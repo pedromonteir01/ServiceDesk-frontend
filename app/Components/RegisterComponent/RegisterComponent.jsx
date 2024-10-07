@@ -1,19 +1,24 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../../Register/register.module.css";
 import { createUser } from "@/app/actions/users";
 import toast from "react-hot-toast";
+import { UserContext } from "@/app/contexts/userContext";
 
 const RegisterComponent = () => {
   const router = useRouter();
 
+  const { user } = useContext(UserContext);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassowrd, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isAdmin, setIsAdmin] = useState("user");
+  const [isStudent, setIsStudent] = useState("student");
 
-  const signUp = async (name, email, password, confirm) => {
+  const signUp = async (name, email, password, confirm, isAdmin, isStudent) => {
     if (!name || !email || !password) {
       toast.error("DADOS INCOMPLETOS");
     } else if (confirm !== password) {
@@ -23,8 +28,8 @@ const RegisterComponent = () => {
         name: name.toLowerCase(),
         email: email,
         password: password,
-        isAdmin: "user",
-        isStudent: "student",
+        isAdmin: isAdmin,
+        isStudent: isStudent,
       });
       if (response.errors) {
         for (let i = 0; i < response.errors.length; i++) {
@@ -32,7 +37,9 @@ const RegisterComponent = () => {
         }
       } else {
         toast.success("USUÁRIO CADASTRADO");
-        router.replace("/Login");
+        if (user) {
+          user.isadmin ? null : router.replace("/Login");
+        }
       }
     }
   };
@@ -45,7 +52,7 @@ const RegisterComponent = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            signUp(name, email, password, confirmPassowrd);
+            signUp(name, email, password, confirmPassword, isAdmin, isStudent);
           }}
         >
           <section className={styles.inputField}>
@@ -88,17 +95,52 @@ const RegisterComponent = () => {
           </section>
 
           <section className={styles.inputField}>
-            <label htmlFor="confirm" className={styles.label}>
+            <label htmlFor="confirmPassword" className={styles.label}>
               Confirmar senha:
             </label>
             <input
               type="password"
-              name="confirm"
-              value={confirmPassowrd}
+              name="confirmPassword"
+              value={confirmPassword}
               className={styles.input}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </section>
+
+          {/* Exibe os selects apenas se o usuário atual for um administrador */}
+          {user && user.isadmin ? (
+            <>
+              <section className={styles.inputField}>
+                <label htmlFor="isAdmin" className={styles.label}>
+                  É administrador?
+                </label>
+                <select
+                  name="isAdmin"
+                  value={isAdmin}
+                  className={styles.input}
+                  onChange={(e) => setIsAdmin(e.target.value === "true")}
+                >
+                  <option value="admin">Sim</option>
+                  <option value="user">Não</option>
+                </select>
+              </section>
+
+              <section className={styles.inputField}>
+                <label htmlFor="isStudent" className={styles.label}>
+                  É aluno?
+                </label>
+                <select
+                  name="isStudent"
+                  value={isStudent}
+                  className={styles.input}
+                  onChange={(e) => setIsStudent(e.target.value === "true")}
+                >
+                  <option value="student">Sim</option>
+                  <option value="educator">Não</option>
+                </select>
+              </section>
+            </>
+          ) : null}
 
           <section className={styles.btnLogin}>
             <button className={styles.btn}>CADASTRAR</button>
@@ -106,6 +148,7 @@ const RegisterComponent = () => {
         </form>
       </article>
     </div>
+    //criando comentario para aparecer a branch e ser mergeada
   );
 };
 
