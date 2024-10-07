@@ -1,12 +1,16 @@
+// SidebarItem.js
 import React from 'react'
+import Link from 'next/link'
 import styles from './SidebarItem.module.css'
 
-const SidebarItem = ({ Icon, Text }) => {
+const SidebarItem = ({ Icon, Text, href }) => {
   return (
-    <div className={styles.container}>
-      <Icon />
-      {Text}
-    </div>
+    <Link className={styles.container} href={href}>
+      <div >
+        <Icon />
+        {Text}
+      </div>
+    </Link>
   )
 }
 
