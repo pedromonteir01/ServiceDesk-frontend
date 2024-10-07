@@ -32,7 +32,7 @@ Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciame
 - **Styled Components**: Estilização dos componentes de forma modular.
 - **React Router**: Navegação entre as diferentes páginas do aplicativo.
 
-## Instalação e Configuração
+## Instalação e Configuração ⚙
 
 ### Pré-requisitos
 
