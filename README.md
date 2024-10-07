@@ -44,7 +44,8 @@ Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciame
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seu_usuario/service-desk-frontend.git
+   git clone https://github.com/seu_usuario/ServiceDesk-frontend
+frontend.git
    ```
 
 2. Entre no diretório do projeto:
