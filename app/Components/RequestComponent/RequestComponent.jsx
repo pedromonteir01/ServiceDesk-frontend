@@ -56,6 +56,13 @@ export default function RequestComponent() {
             className={styles.logo}
           />
         </div>
+        {
+          user &&
+          user.isadmin &&
+          <div className={styles.data}>
+
+          </div>
+        }
         <div>
           <CiSearch color="#000" size={30} />
         </div>
