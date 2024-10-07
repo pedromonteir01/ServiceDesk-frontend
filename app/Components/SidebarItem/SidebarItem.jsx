@@ -5,8 +5,8 @@ import styles from './SidebarItem.module.css'
 
 const SidebarItem = ({ Icon, Text, href }) => {
   return (
-    <Link href={href}>
-      <div className={styles.container}>
+    <Link className={styles.container} href={href}>
+      <div >
         <Icon />
         {Text}
       </div>
