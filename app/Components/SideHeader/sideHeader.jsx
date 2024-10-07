@@ -7,10 +7,10 @@ const Sidebar = ({ isActive, onClose }) => {
     <div className={`sidebar ${isActive ? 'sidebar-open' : ''}`} style={{backgroundColor: '#ff0000', height: '100vh', position:'fixed', zIndex:999}}>
       
       <div className={styles.container}>
-        <SidebarItem Icon={FaHome} Text="Início" />
-        <SidebarItem Icon={FaChartBar} Text="Requisições" />
-        <SidebarItem Icon={FaRegSun} Text="Configurações" />
-        <SidebarItem Icon={FaUserAlt} Text="Usuário" />
+        <SidebarItem Icon={FaHome} Text="Início" href="/" />
+        <SidebarItem Icon={FaChartBar} Text="Requisições" href="/request" />
+        <SidebarItem Icon={FaRegSun} Text="Configurações" href="/" />
+        <SidebarItem Icon={FaUserAlt} Text="Usuário" href="/" />
       </div>
     </div>
   );
