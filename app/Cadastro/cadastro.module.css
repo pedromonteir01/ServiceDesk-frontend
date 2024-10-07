@@ -12,32 +12,6 @@
  justify-content: center;
  flex-direction: column;
 }
-.inputField {
-    display: flex;
-    flex-direction: column;
-}
-
-.btnLogin {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1rem;
-}
-
-.btn {
-    padding: 0.75rem;
-    width: 70%;
-    border-radius: 12px;
-    border: none;
-    background-color: #ff0000;
-    color: white;
-}
-
-.btn:hover {
-    scale: 1.08;
-    transition: 0.1s ease-in-out;
-}
 
 .articleCadastro{
     flex-direction: column;
@@ -48,51 +22,51 @@
     padding: 2rem;
 }
 
-.inputs{
-    margin: 1rem;
-    height: 50px;
-    min-width: 350px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    font-size: 16px;
+.inputField {
+  margin-bottom: 1.5rem;
 }
 
-/*
 .input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    color: #333;
-    background-color: #fff;
-    transition: border 0.3s;
-  }
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff; /* Cor branca */
+  transition: border 0.3s;
+}
 
-  .input:focus {
-    border-color: #ff0000;
-    outline: none;
-  }
+.input:focus {
+  border-color: #ff0000;
+  outline: none;
+}
 
-  .btnLogin {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .btn {
-    padding: 0.75rem;
-    width: 80%;
-    border-radius: 12px;
-    border: none;
-    background-color: #ff0000;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-  }
-  
-  .btn:hover {
-    transform: scale(1.05);
-    background-color: #cc0000;
-  }
-    */
+.btnLogin {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  padding: 0.75rem;
+  width: 80%;
+  border-radius: 12px;
+  border: none;
+  background-color: #ff0000;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  background-color: #cc0000;
+}
+
+.label {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: #555;
+}

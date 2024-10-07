@@ -41,26 +41,26 @@ export default function Cadastro() {
 
         {/* input field */}
         <section className={style.inputField}>
-          <label htmlFor="name">Nome: </label>
-          <input type="text" name="Nome" />
+          <label htmlFor="name" className={style.label}>Nome: </label>
+          <input type="text" name="Nome" className={style.input}/>
         </section>
 
         {/* input field */}
         <section className={style.inputField}>
-          <label htmlFor="email">Email educacional: </label>
-          <input type="text" name="email" className={style.inputs}/>
+          <label htmlFor="email" className={style.label}>Email educacional: </label>
+          <input type="text" name="email" className={style.input}/>
         </section>
 
         {/* input field */}
         <section className={style.inputField}>
-          <label htmlFor="password">Senha: </label>
-          <input type="text" name="password" />
+          <label htmlFor="password" className={style.label}>Senha: </label>
+          <input type="text" name="password" className={style.input}/>
         </section>
 
         {/* input field */}
         <section className={style.inputField}>
-          <label htmlFor="password">Confirmar senha: </label>
-          <input type="text" name="password" value={confirmarSenha} />
+          <label htmlFor="password" className={style.label}>Confirmar senha: </label>
+          <input type="text" name="password" value={confirmarSenha} className={style.input}/>
         </section>
 
         <section className={style.btnLogin}>
