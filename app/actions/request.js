@@ -86,9 +86,9 @@ export const getRequestByUser = async (user) => {
   }
 };
 
-export const createRequest = async ({name, description, local, image}) => {
+export const createRequest = async (request) => {
   try {
-    const response = await axios.post(`${api}/requests`, name, description, local, image, {
+    const response = await axios.post(`${api}/requests`, request, {
       headers: { "Content-Type": "application/json" },
     });
     // return {
