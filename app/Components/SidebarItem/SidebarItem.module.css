@@ -15,8 +15,14 @@
     margin: 0 8px;
   }
 
-  .container:hover {
-    color: rgb(202, 202, 202);
+    .container:hover {
+    color: #e4e4e4;
+    transform: scale(1.04);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .container:hover svg {
+    color: #d6d6d6;
   }
   
   

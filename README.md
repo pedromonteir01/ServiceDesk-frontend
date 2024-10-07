@@ -1,6 +1,6 @@
-# SERVICE Front-End
+# SERVICE DESK Front-End
 
-Este é o repositório do projeto de front-end para um sistema de Service Desk. Ele permite que os usuários criem, visualizem e acompanhem tickets de suporte, facilitando a comunicação entre usuários e a equipe de suporte.
+Este é um projeto de front-end para um sistema de Service Desk do SENAI-Valinhos. Ele permite que os usuários criem uma requisição de um problema na infraestrutura, facilitando a comunicação entre alunos e a equipe SENAI.
 
 ## Índice
 - [Visão Geral](#visão-geral)
@@ -14,15 +14,15 @@ Este é o repositório do projeto de front-end para um sistema de Service Desk. 
 
 ## Visão Geral
 
-Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciamento de tickets, onde os usuários podem registrar problemas e a equipe de suporte pode gerenciar e responder a essas solicitações. O objetivo é melhorar a eficiência no atendimento e garantir um fluxo organizado de comunicação.
+Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciamento de requisição de manutenções, onde os alunos podem registrar problemas na infraestrutura e o administrador pode gerenciar e responder a essas solicitações. O objetivo é melhorar a eficiência no atendimento, garantir um fluxo organizado de comunicação e facilitar a manutenção do patrimônio do SENAI.
 
 ## Funcionalidades
 
-- **Registro de Tickets**: Permite aos usuários criar novos tickets de suporte.
-- **Visualização de Tickets**: Os usuários podem visualizar o status dos seus tickets.
-- **Atualização e Resposta a Tickets**: A equipe de suporte pode responder aos tickets e atualizar seu status.
-- **Notificações**: Informações sobre atualizações de tickets para garantir que os usuários estejam sempre informados.
-- **Pesquisa e Filtro**: Permite pesquisar e filtrar tickets por diferentes critérios, como status, prioridade e data.
+- **Registro de Requisições**: Permite aos usuários criar novas requisições.
+- **Visualização de Requisições**: Os usuários podem visualizar o status das suas requisições.
+- **Atualização e Resposta a Requisições**: A equipe de suporte pode responder as requisições e atualizar seu status.
+- **Notificações**: Informações sobre atualizações de Requisições para garantir que os alunos estejam sempre informados.
+- **Pesquisa e Filtro**: Permite pesquisar e filtrar requisições por diferentes critérios, como status, prioridade e data.
 
 ## Tecnologias Utilizadas
 
@@ -32,7 +32,7 @@ Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciame
 - **Styled Components**: Estilização dos componentes de forma modular.
 - **React Router**: Navegação entre as diferentes páginas do aplicativo.
 
-## Instalação e Configuração
+## Instalação e Configuração ⚙
 
 ### Pré-requisitos
 
@@ -44,7 +44,8 @@ Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciame
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seu_usuario/service-desk-frontend.git
+   git clone https://github.com/seu_usuario/ServiceDesk-frontend.git
+
    ```
 
 2. Entre no diretório do projeto:
@@ -89,7 +90,7 @@ Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciame
 
 2. Abra [http://localhost:3000](http://localhost:3000) no navegador para visualizar o projeto.
 
-3. Use a interface para criar, visualizar e gerenciar tickets de suporte.
+3. Use a interface para criar, visualizar e gerenciar requisição de manutenção.
 
 ## Scripts Disponíveis
 
