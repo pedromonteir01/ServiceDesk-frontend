@@ -20,12 +20,23 @@
 
 .submitButton {
     margin-top: 20px;
+    padding: 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submitButton:hover {
+    background-color: darkred;
 }
 
 .logo {
     display: flex;
     top: 0;
-  }
+}
 
 .title {
     font-size: 24px;
@@ -69,6 +80,12 @@
     margin-bottom: 10px;
     cursor: pointer;
     position: relative;
+    transition: border 0.3s ease;
+    height: 15vh;
+}
+
+.imageUpload:hover {
+    border: 2px dashed #000;
 }
 
 .fileInput {
@@ -77,13 +94,16 @@
 
 .imageUpload span {
     color: #000;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-.imageHint {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 20px;
+.fileName {
+    color: #000;
+    margin-top: 10px;
+    font-size: 14px;
 }
+
 
 .select {
     width: 100%;
@@ -93,18 +113,4 @@
     margin-bottom: 20px;
     background-color: #f2f2f2;
     color: #333;
-}
-
-.submitButton {
-    padding: 15px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.submitButton:hover {
-    background-color: darkred;
 }

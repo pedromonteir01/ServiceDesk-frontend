@@ -11,6 +11,7 @@ export default function RequestCreateComponent() {
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
@@ -19,20 +20,22 @@ export default function RequestCreateComponent() {
     const file = event.target.files[0];
     if (file) {
       setImage(file);
+      setImagePreview(URL.createObjectURL(file));
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = {
-      title,
-      description,
-      local,
-      image,
-      status_request: "inconclued",
-      date_request: new Date().toISOString(),
-    };
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("local", local);
+    if (image) {
+      formData.append("image", image);
+    }
+    formData.append("status_request", "inconclued");
+    formData.append("date_request", new Date().toISOString());
 
     const result = await createRequest(formData);
 
@@ -46,6 +49,7 @@ export default function RequestCreateComponent() {
       setDescription("");
       setLocal("");
       setImage(null);
+      setImagePreview(null);
 
       router.push("/RequestComponent");
     }
@@ -78,19 +82,35 @@ export default function RequestCreateComponent() {
           />
 
           <label className={styles.label}>Imagem</label>
-          <div className={styles.imageUpload}>
+          <div
+            className={styles.imageUpload}
+            onClick={() =>
+              document.querySelector(`.${styles.fileInput}`).click()
+            }
+          >
             <input
               type="file"
-              accept="image/*"
-              className={styles.fileInput}
+              name="image"
               onChange={handleImageChange}
+              className={styles.fileInput}
+              accept="image/*"
             />
             <IoCloudDownloadOutline color="#000" fontSize={30} />
             <span>Inserir imagem</span>
           </div>
-          <p className={styles.imageHint}>
-            Tire uma foto para facilitar a localização
-          </p>
+
+          {image && (
+            <div className={styles.previewContainer}>
+              {imagePreview && (
+                <img
+                  src={imagePreview}
+                  alt="Imagem Preview"
+                  className={styles.imagePreview}
+                />
+              )}
+              <p className={styles.fileName}>{image.name}</p>
+            </div>
+          )}
 
           <label className={styles.label}>Qual foi o local?</label>
           <select
