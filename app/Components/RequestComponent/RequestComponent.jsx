@@ -60,7 +60,7 @@ export default function RequestComponent() {
           user &&
           user.isadmin &&
           <div className={styles.data}>
-
+            
           </div>
         }
         <div>
