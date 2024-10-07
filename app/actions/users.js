@@ -51,8 +51,8 @@ export const createUser = async (user) => {
     });
     return response.data;
   } catch (e) {
-    console.log("Error in fetching data:", e.response);
-    return e.response;
+    console.log("Error in fetching data:", e.response.data);
+    return e.response.data;
   }
 };
 
