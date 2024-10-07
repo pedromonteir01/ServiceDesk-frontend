@@ -88,9 +88,7 @@ export const getRequestByUser = async (user) => {
 
 export const createRequest = async (request) => {
   try {
-    const response = await axios.post(`${api}/requests`, request, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await axios.post(`${api}/requests`, request);  
     return {
       status: "success",
       message: "Request created",
