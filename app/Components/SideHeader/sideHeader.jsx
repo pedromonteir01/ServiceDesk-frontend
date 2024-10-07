@@ -8,7 +8,7 @@ const Sidebar = ({ isActive, onClose }) => {
       
       <div className={styles.container}>
         <SidebarItem Icon={FaHome} Text="Início" href="/" />
-        <SidebarItem Icon={FaChartBar} Text="Requisições" href="/request" />
+        <SidebarItem Icon={FaChartBar} Text="Requisições" href="/Request" />
         <SidebarItem Icon={FaRegSun} Text="Configurações" href="/" />
         <SidebarItem Icon={FaUserAlt} Text="Usuário" href="/" />
       </div>
