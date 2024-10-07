@@ -104,7 +104,7 @@ export default function RequestCreateComponent() {
               {imagePreview && (
                 <img
                   src={imagePreview}
-                  alt="Image Preview"
+                  alt="Imagem Preview"
                   className={styles.imagePreview}
                 />
               )}
