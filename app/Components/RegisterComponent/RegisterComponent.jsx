@@ -143,6 +143,7 @@ const RegisterComponent = ({ currentUser }) => {
         </form>
       </article>
     </div>
+    //criando comentario para aparecer a branch e ser mergeada
   );
 };
 
