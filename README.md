@@ -1,6 +1,6 @@
-# SERVICE Front-End
+# SERVICE DESK Front-End
 
-Este é o repositório do projeto de front-end para um sistema de Service Desk. Ele permite que os usuários criem, visualizem e acompanhem tickets de suporte, facilitando a comunicação entre usuários e a equipe de suporte.
+Este é um projeto de front-end para um sistema de Service Desk do SENAI-Valinhos. Ele permite que os usuários criem uma requisição  e acompanhem tickets de suporte, facilitando a comunicação entre usuários e a equipe de suporte.
 
 ## Índice
 - [Visão Geral](#visão-geral)
@@ -14,7 +14,7 @@ Este é o repositório do projeto de front-end para um sistema de Service Desk. 
 
 ## Visão Geral
 
-Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciamento de tickets, onde os usuários podem registrar problemas e a equipe de suporte pode gerenciar e responder a essas solicitações. O objetivo é melhorar a eficiência no atendimento e garantir um fluxo organizado de comunicação.
+Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciamento de requisição, onde os alunos podem registrar problemas na infraestrutura e o administrador pode gerenciar e responder a essas solicitações. O objetivo é melhorar a eficiência no atendimento, garantir um fluxo organizado de comunicação e facilitar a manutenção do patrimônio do SENAI.
 
 ## Funcionalidades
 
