@@ -10,11 +10,7 @@ const Sidebar = ({ isActive, onClose }) => {
         <SidebarItem Icon={FaHome} Text="Início" href="/" />
         <SidebarItem Icon={FaChartBar} Text="Requisições" href="/Request" />
         <SidebarItem Icon={FaRegSun} Text="Configurações" href="/" />
-        {/* {userregistered ? (
-          <SidebarItem Icon={FaUserAlt} Text="Perfil" href="/Profile" />
-        ) : (
-          <SidebarItem Icon={FaUserAlt} Text="Registrar" href="/Register" />
-        )} */}
+        <SidebarItem Icon={FaUserAlt} Text="Usuário" href="/" />
       </div>
     </div>
   );
