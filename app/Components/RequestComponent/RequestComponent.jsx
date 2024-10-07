@@ -8,24 +8,34 @@ import { CiSearch } from "react-icons/ci";
 import { TailSpin } from "react-loader-spinner";
 import RenderTest from "../RenderTest/renderTest";
 import { getAllRequests } from "@/app/actions/request";
+import { getAllReqsWithLocals } from "@/app/actions/data";
 import { useRouter } from "next/navigation";
 
 export default function RequestComponent() {
   const { user } = useContext(UserContext);
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [locals, setLocals] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const dados = await getAllRequests();
-        console.log("dados", dados);
+        console.log("dados", dados.requests.requests);
         if (Array.isArray(dados.requests.requests)) {
           setApiData(dados.requests.requests);
         } else {
           setApiData([]);
         }
+
+        const info = await getAllReqsWithLocals();
+        setLocals(info);
+        
+        console.log(info);
+        //console.log(locals);
+        
+        
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -39,6 +49,21 @@ export default function RequestComponent() {
   const handleRequestCreate = () => {
     router.push("/RequestCreate");
   };
+
+  function handleMoreReq(array) {
+    console.log(array);
+    console.log(array.local);
+    console.log(array.quantity);
+    
+    let element;
+    for(let i = 0; i <= array.length; i ++) {
+      element = array[i].quantity;
+      if(element < array[i].quantity) {
+        element = array[i].quantity;
+      }
+    }
+    return element;
+  }
 
   const sortedApiData = apiData.sort((a, b) => {
     return (a.status_request ? 1 : 0) - (b.status_request ? 1 : 0);
@@ -61,6 +86,7 @@ export default function RequestComponent() {
           user.isadmin &&
           <div className={styles.data}>
             
+            <p>{handleMoreReq(locals)}</p>
           </div>
         }
         <div>
@@ -81,7 +107,6 @@ export default function RequestComponent() {
           </button>
         </div>
       </div>
-
       {loading ? (
         <div className={styles.loading}>
           <TailSpin
