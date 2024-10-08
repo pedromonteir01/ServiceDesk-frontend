@@ -11,7 +11,7 @@ export default function Request() {
     <div className={styles.generalDiv}>
       <Header />
       <RequestComponent />
-      <TestePedro label="Teste" value="Valor" context="Contexto" />
+      <TestePedro label="Teste" value="7" context="Contexto" />
       <Footer />
     </div>
   );
