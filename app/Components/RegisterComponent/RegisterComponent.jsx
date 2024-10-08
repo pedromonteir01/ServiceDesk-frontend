@@ -36,6 +36,12 @@ const RegisterComponent = () => {
           toast.error(response.errors[i].split("_").join(" ").toUpperCase());
         }
       } else {
+        
+        if(response.message) {
+            toast.error(response.message.toUpperCase());
+            return false;
+        }
+        
         toast.success("USUÁRIO CADASTRADO");
         if (user) {
           user.isadmin ? null : router.replace("/Login");
