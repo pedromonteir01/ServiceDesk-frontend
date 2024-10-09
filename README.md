@@ -1,6 +1,6 @@
 # SERVICE DESK Front-End
 
-Este é um projeto de front-end para um sistema de Service Desk do SENAI-Valinhos. Ele permite que os usuários criem uma requisição de um problema na infraestrutura, facilitando a comunicação entre alunos e a equipe SENAI.
+Este é um projeto de front-end para um sistema de Service Desk do SENAI-Valinhos. Ele permite que os usuários criem uma requisição de um problema na infraestrutura, facilitando a comunicação entre alunos e a equipe de manutenção do SENAI-Valinhos.
 
 ## Índice
 - [Visão Geral](#visão-geral)
@@ -20,9 +20,8 @@ Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciame
 
 - **Registro de Requisições**: Permite aos usuários criar novas requisições.
 - **Visualização de Requisições**: Os usuários podem visualizar o status das suas requisições.
-- **Atualização e Resposta a Requisições**: A equipe de suporte pode responder as requisições e atualizar seu status.
-- **Notificações**: Informações sobre atualizações de Requisições para garantir que os alunos estejam sempre informados.
-- **Pesquisa e Filtro**: Permite pesquisar e filtrar requisições por diferentes critérios, como status, prioridade e data.
+- **Atualização de Requisições**: A equipe de manutenção pode atualizar seu status.
+- **Pesquisa e Filtro**: Permite pesquisar e filtrar requisições por diferentes critérios, como status, local e data.
 
 ## Tecnologias Utilizadas
 
