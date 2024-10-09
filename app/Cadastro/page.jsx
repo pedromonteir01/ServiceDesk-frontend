@@ -32,13 +32,13 @@ export default function Cadastro() {
     }
   };
   return (
-    <main>
-      <div className={style.loginContainer}>
+    <div className={style.main}>
+      <div className={style.cadastroContainer}>
         {/* Cadastro */}
-        <article className={style.loginBox}>
+        <article className={style.cadastroBox}>
           <section>
             <Image src="/logoSesi.svg" alt="Logo" width={280} height={80} />
-            <h2 className={style.loginTitle}>Crie sua conta para acessar</h2>
+            <h2 className={style.cadastroTitle}>Crie sua conta para acessar</h2>
           </section>
 
           {/* input field */}
@@ -78,12 +78,12 @@ export default function Cadastro() {
             />
           </section>
 
-          <section className={style.btnLogin}>
+          <section className={style.btnCadastro}>
             <button className={style.btn}>ENTRAR</button>
           </section>
         </article>
       </div>
       <Footer />
-    </main>
+    </div>
   );
 }

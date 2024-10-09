@@ -1,4 +1,12 @@
-.loginContainer {
+.main{
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.cadastroContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,9 +14,10 @@
   min-height: 80dvh;
   background-color: #f4f4f4;
   padding: 2rem;
+  flex: 1;
 }
 
-.loginBox {
+.cadastroBox {
   background-color: #ffffff;
   padding: 2rem;
   margin: 2rem;
@@ -19,7 +28,7 @@
   text-align: center;
 }
 
-.loginTitle {
+.cadastroTitle {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   color: #333;
@@ -47,7 +56,7 @@
   outline: none;
 }
 
-.btnLogin {
+.btnCadastro {
   display: flex;
   justify-content: center;
 }
