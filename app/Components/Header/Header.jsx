@@ -29,6 +29,7 @@ const Header = () => {
 
   const logout = () => {
     setUser(null);
+    localStorage.clear();
     router.replace("/");
   };
 

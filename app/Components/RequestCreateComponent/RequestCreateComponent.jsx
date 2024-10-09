@@ -37,7 +37,9 @@ const RequestCreateComponent = () => {
       formData.append("date_request", date_request.toISOString());
 
       try {
-        const response = await createRequest(formData);
+        console.log(localStorage.getItem('usertoken'));
+        
+        const response = await createRequest(formData, localStorage.getItem('usertoken'));
 
         console.log("Response:", response); // Log the full response
 

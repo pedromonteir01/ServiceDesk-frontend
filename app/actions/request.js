@@ -86,10 +86,12 @@ export const getRequestByUser = async (user) => {
   }
 };
 
-export const createRequest = async (request) => {
+export const createRequest = async (request, token) => {
   try {
     const response = await axios.post(`${api}/requests`, request, {
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
     // return {
     //   status: "success",
