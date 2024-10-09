@@ -41,7 +41,7 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.footerBottom}>
-        <h2>R. Artur Fernandes Querido, 55 - Vila Santo Antonio, Valinhos - SP</h2>
+        <p className={styles.endereco}>R. Artur Fernandes Querido, 55 - Vila Santo Antonio, Valinhos - SP</p>
         <p className={styles.copyrightText}>
           &copy; 2024 BFlow. Todos os direitos reservados.
         </p>
