@@ -18,7 +18,9 @@ const LoginComponent = ({ setUser }) => {
   const login = async (email, password) => {
     const response = await loginInAPI({ email: email, password: password });
     if (response.user) {
-        localStorage.setItem('usertoken', response.token);
+        localStorage.setItem('usertoken', response.refreshToken);
+        console.log(response.refreshToken);
+        console.log(response.accessToken);
         setUser(response.user);
         let useName = response.user.name.split(' ');
         toast.success(`SEJA BEM-VINDO, ${useName[0].toUpperCase()}`);
