@@ -10,6 +10,7 @@ import RenderTest from "../RenderTest/renderTest";
 import { getAllRequests } from "@/app/actions/request";
 import { getAllReqsWithLocals } from "@/app/actions/data";
 import { useRouter } from "next/navigation";
+import TestePedro from "../TestePedro/testePedro";
 
 export default function RequestComponent() {
   const { user } = useContext(UserContext);
@@ -29,11 +30,10 @@ export default function RequestComponent() {
           setApiData([]);
         }
         setLocals(await getAllReqsWithLocals());
-        
+
         console.log(locals);
         //console.log(locals);
-        
-        
+
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -52,11 +52,11 @@ export default function RequestComponent() {
     console.log(array);
     console.log(array.local);
     console.log(array.quantity);
-    
-    let element = locals[0].quantity
-    for(let i = 0; i <= locals.length; i ++) {
-      let other = locals[i]
-      if(element < other.quantity) {
+
+    let element = locals[0].quantity;
+    for (let i = 0; i <= locals.length; i++) {
+      let other = locals[i];
+      if (element < other.quantity) {
         element = other.quantity;
       }
     }
@@ -74,23 +74,22 @@ export default function RequestComponent() {
           <Image
             src="/senaicerto.png"
             alt="Logo do Senai"
-            width={200}
-            height={200}
+            width={170}
+            height={170}
             className={styles.logo}
           />
         </div>
 
-        {
-          user &&
-          user.isadmin &&
-          sortedApiData &&
+        <div className={styles.context}>
+          <TestePedro context={"Context"} label={"Teste"} value={"7"} />
+        </div>
+
+        {user && user.isadmin && sortedApiData && (
           <div className={styles.data}>
-            
             <p>{handleMoreReq(locals)}!!!!!!!!!</p>
           </div>
-        }
-        {console.log(locals)
-        }
+        )}
+        {console.log(locals)}
         <div>
           <CiSearch color="#000" size={30} />
         </div>
