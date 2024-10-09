@@ -57,7 +57,7 @@ const Header = () => {
             SESI
           </Link>
         </li>
-        <li className={styles.links}>
+        <li id={styles.senai}>
           <Link target="blank" href="https://www.sp.senai.br/">
             SENAI
           </Link>
