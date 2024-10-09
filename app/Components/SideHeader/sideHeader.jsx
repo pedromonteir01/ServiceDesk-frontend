@@ -12,7 +12,7 @@ import { useContext } from "react";
 import { UserContext } from "@/app/contexts/userContext";
 
 const Sidebar = ({ isActive, onClose }) => {
-  const { setUser, user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <div
@@ -30,7 +30,13 @@ const Sidebar = ({ isActive, onClose }) => {
         <SidebarItem Icon={FaTools} Text="Solicitações" href="/Request" />
         <SidebarItem Icon={FaRegSun} Text="Ajustes" href="/" />
         {user ? (
-          <SidebarItem Icon={FaUserCog} Text="Perfil" href="/Profile" />
+          <>
+            <SidebarItem Icon={FaUserCog} Text="Perfil" href="/Profile" />
+            { 
+              user.isadmin && <SidebarItem Icon={FaUserLock} Text="Registrar" href="/Register" />
+            }
+          </>
+
         ) : (
           <>
             <SidebarItem Icon={FaUserLock} Text="Registrar" href="/Register" />

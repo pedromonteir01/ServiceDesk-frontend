@@ -36,10 +36,13 @@ const RegisterComponent = () => {
           toast.error(response.errors[i].split("_").join(" ").toUpperCase());
         }
       } else {
-        toast.success("USUÁRIO CADASTRADO");
-        if (user) {
-          user.isadmin ? null : router.replace("/Login");
+        
+        if(response.error) {
+            toast.error(response.error.toUpperCase());
+            return false;
         }
+        toast.success("USUÁRIO CADASTRADO");
+        user && user.isadmin ? null : router.replace("/Login");
       }
     }
   };

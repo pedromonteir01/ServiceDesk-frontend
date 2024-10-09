@@ -24,28 +24,35 @@ const RequestCreateComponent = () => {
   };
 
   const requestCreate = async (title, description, local, image) => {
-    console.log("image");
-    console.log(image);
-    
+    const date_request = new Date();
+
     if (!title || !description || !local || !image) {
       toast.error("PREENCHA TODOS OS CAMPOS");
     } else {
-      const response = await createRequest({
-        title: title,
-        description: description,
-        local: local,
-        image: image.name,
-      });
-      if (response.error) {
-        for (let i = 0; i < response.error.length; i++) {
-          toast.error(response.error[i].split("_").join(" ").toUpperCase());
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("local", local);
+      formData.append("image", image);
+      formData.append("date_request", date_request.toISOString());
+
+      try {
+        const response = await createRequest(formData);
+
+        if (response.error) {
+          for (let i = 0; i < response.error.length; i++) {
+            toast.error(response.error[i].split("_").join(" ").toUpperCase());
+          }
+        } else {
+          toast.success("REQUISIÇÃO CRIADA");
+          router.replace("/requests");
         }
-      } else {
-        toast.success("REQUISIÇÃO CRIADA");
-        router.replace("/requests");
+      } catch (error) {
+        toast.error("Erro ao criar requisição");
       }
     }
   };
+
   return (
     <>
       <Image
