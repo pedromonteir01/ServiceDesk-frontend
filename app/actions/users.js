@@ -41,6 +41,19 @@ export const getUserByRole = async(role) => {
     }
 }
 
+export const loginInAPI = async({email, password}) => {
+    try {
+        const response = await axios.post(`${api}/authenticate`, { 
+            email: email, 
+            password: password 
+        });
+
+        return response.data;
+    } catch(e) {
+        return e.response.data
+    }
+}
+
 export const createUser = async(user) => {
     try {
         const response = await axios.post(`${api}/users`, { 

@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
-import { getUserByEmail } from "@/app/actions/users";
+import { getUserByEmail, loginInAPI } from "@/app/actions/users";
 import { useRouter } from "next/navigation";
 import style from "@/app/Login/login.module.css";
 import toast from "react-hot-toast";
@@ -16,26 +16,16 @@ const LoginComponent = ({ setUser }) => {
   const [password, setPassword] = useState("");
 
   const login = async (email, password) => {
-    const user = await getUserByEmail(email);
-    if (user) {
-      if (user.password === password) {
-        setUser(user);
-        let useName = user.name.split(" ");
-        toast.success(`SEJA BEM-VINDO, ${useName[0]}!`);
-        router.replace("/");
-      } else {
-        toast.error("USUÁRIO OU SENHA INCORRETOS");
-      }
+    const response = await loginInAPI({ email: email, password: password });
+    if (response.user) {
+        localStorage.setItem('usertoken', response.token);
+        setUser(response.user);
+        let useName = response.user.name.split(' ');
+        toast.success(`SEJA BEM-VINDO, ${useName[0].toUpperCase()}`);
+        router.replace('/');
     } else {
       toast.error("USUÁRIO OU SENHA INCORRETOS");
     }
-  };
-
-  const handleError = () => {
-    setError(true);
-    setTimeout(() => {
-      setError(false);
-    }, 5000);
   };
 
   return (
