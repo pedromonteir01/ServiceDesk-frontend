@@ -33,13 +33,16 @@ const RequestCreateComponent = () => {
       formData.append("title", title);
       formData.append("description", description);
       formData.append("local", local);
-      formData.append("image", image);
+      formData.append("image", image.name);
       formData.append("date_request", date_request.toISOString());
 
       try {
         const response = await createRequest(formData);
 
+        console.log("Response:", response); // Log the full response
+
         if (response.error) {
+          console.error("Server error:", response.error);
           for (let i = 0; i < response.error.length; i++) {
             toast.error(response.error[i].split("_").join(" ").toUpperCase());
           }
@@ -48,6 +51,7 @@ const RequestCreateComponent = () => {
           router.replace("/requests");
         }
       } catch (error) {
+        console.error("Client-side error:", error);
         toast.error("Erro ao criar requisição");
       }
     }
