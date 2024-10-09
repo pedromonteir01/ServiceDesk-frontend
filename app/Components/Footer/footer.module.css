@@ -6,8 +6,7 @@
   background-color: #949494;
   padding: 2rem 0;
   width: 100%;
-  position: relative;
-  bottom: 0;
+  margin-top: auto;
 }
 
 .socialDiv {
