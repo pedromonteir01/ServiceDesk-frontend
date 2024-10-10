@@ -10,9 +10,17 @@ import SidebarItem from "../SidebarItem/SidebarItem";
 import styles from "./sideHeader.module.css";
 import { useContext } from "react";
 import { UserContext } from "@/app/contexts/userContext";
+import { useRouter } from "next/navigation";
 
 const Sidebar = ({ isActive, onClose }) => {
   const { user, setUser } = useContext(UserContext);
+
+  const router = useRouter();
+
+  const logoff = () => {
+    setUser(null);
+    router.replace('/');
+  }
 
   return (
     <div
@@ -35,7 +43,7 @@ const Sidebar = ({ isActive, onClose }) => {
             { 
               user.isadmin && <SidebarItem Icon={FaUserLock} Text="Registrar" href="/Register" />
             }
-            <button className={styles.logoff} onClick={() => setUser(null)}>SAIR</button>
+            <button className={styles.logoff} onClick={logoff}>SAIR</button>
           </>
 
         ) : (
