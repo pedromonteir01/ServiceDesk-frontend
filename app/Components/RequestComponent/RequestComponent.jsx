@@ -7,7 +7,11 @@ import { RiMenuSearchLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { TailSpin } from "react-loader-spinner";
 import RenderTest from "../RenderTest/renderTest";
-import { getAllRequests } from "@/app/actions/request";
+import {
+  getAllRequests,
+  deleteRequest,
+  updateRequest,
+} from "@/app/actions/request"; // Importa delete e update
 import { getAllReqsWithLocals } from "@/app/actions/data";
 import { useRouter } from "next/navigation";
 import TestePedro from "../TestePedro/testePedro";
@@ -32,7 +36,6 @@ export default function RequestComponent() {
         setLocals(await getAllReqsWithLocals());
 
         console.log(locals);
-        //console.log(locals);
 
         setLoading(false);
       } catch (error) {
@@ -44,6 +47,32 @@ export default function RequestComponent() {
     fetchData();
   }, []);
 
+  // Função para deletar requisição
+  const handleDeleteRequest = async (id) => {
+    try {
+      await deleteRequest(id); // Chama a função deleteRequest
+      setApiData(apiData.filter((request) => request.id !== id)); // Remove a requisição do estado
+    } catch (error) {
+      console.error("Erro ao deletar requisição:", error);
+    }
+  };
+
+  // Função para atualizar status de requisição
+  const handleUpdateRequest = async (id, newStatus) => {
+    try {
+      await updateRequest(id, { status_request: newStatus }); // Chama a função updateRequest com o novo status
+      setApiData(
+        apiData.map((request) =>
+          request.id === id
+            ? { ...request, status_request: newStatus }
+            : request
+        )
+      );
+    } catch (error) {
+      console.error("Erro ao atualizar requisição:", error);
+    }
+  };
+
   const handleRequestCreate = () => {
     router.push("/RequestCreate");
   };
@@ -52,8 +81,8 @@ export default function RequestComponent() {
     if (locals.length === 0) {
       return "Nenhum local encontrado";
     }
-  
-    let element = locals[0]?.quantity; 
+
+    let element = locals[0]?.quantity;
     for (let i = 1; i < locals.length; i++) {
       let other = locals[i];
       if (element < other.quantity) {
@@ -62,7 +91,7 @@ export default function RequestComponent() {
     }
     return element;
   }
-  
+
   const sortedApiData = apiData.sort((a, b) => {
     return (a.status_request ? 1 : 0) - (b.status_request ? 1 : 0);
   });
@@ -132,6 +161,8 @@ export default function RequestComponent() {
               desc={item.description}
               autor={item.email}
               status={item.status_request ? "CONCLUIDO" : "PENDENTE"}
+              onRemove={() => handleDeleteRequest(item.id)}
+              onEdit={() => handleUpdateRequest(item.id, !item.status_request)}
             />
           ))}
         </>
