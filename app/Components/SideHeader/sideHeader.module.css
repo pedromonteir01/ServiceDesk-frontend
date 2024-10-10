@@ -16,7 +16,26 @@
   opacity: 0;
   transform: translateY(-20px);
   animation: showHeader 0.5s forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+.logoff {
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: rgb(234, 234, 234);
+  cursor: pointer;
+  color: black;
+}
+
+.logoff:hover {
+  background-color: rgb(175, 175, 175);
+  transition: 0.2s ease-in-out;
+  scale: 1.1;
+} 
 
 @keyframes showHeader {
   0% {
