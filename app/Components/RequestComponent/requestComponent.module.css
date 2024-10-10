@@ -31,19 +31,20 @@
 
 .dropdown {
   position: absolute;
-  top: -50px; 
+  top: 27px; 
   left: 0;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
   z-index: 100;
-  padding: 5px;
 }
 
 .selectFilter {
   width: 150px;
   padding: 5px;
   border-radius: 4px;
+  background-color: white;
+  color: black;
 }
 
 .fullsize {
