@@ -56,7 +56,7 @@ export default function RequestComponent() {
     }
   };
 
-  const handleUpdateRequest = async (id, newStatus) => {
+  const handleUpdateRequestStatus = async (id, newStatus) => {
     try {
       await updateRequest(id, { status_request: newStatus });
       setApiData(
@@ -160,7 +160,10 @@ export default function RequestComponent() {
               autor={item.email}
               status={item.status_request ? "CONCLUIDO" : "PENDENTE"}
               onRemove={() => handleDeleteRequest(item.id)}
-              onEdit={() => handleUpdateRequest(item.id, !item.status_request)}
+              onEdit={() => console.log("Editar não implementado ainda")} 
+              onStatusChange={() =>
+                handleUpdateRequestStatus(item.id, !item.status_request)
+              } 
             />
           ))}
         </>
