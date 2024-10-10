@@ -11,7 +11,7 @@ import {
   getAllRequests,
   deleteRequest,
   updateRequest,
-} from "@/app/actions/request"; // Importa delete e update
+} from "@/app/actions/request"; 
 import { getAllReqsWithLocals } from "@/app/actions/data";
 import { useRouter } from "next/navigation";
 import TestePedro from "../TestePedro/testePedro";
@@ -47,20 +47,18 @@ export default function RequestComponent() {
     fetchData();
   }, []);
 
-  // Função para deletar requisição
   const handleDeleteRequest = async (id) => {
     try {
-      await deleteRequest(id); // Chama a função deleteRequest
-      setApiData(apiData.filter((request) => request.id !== id)); // Remove a requisição do estado
+      await deleteRequest(id); 
+      setApiData(apiData.filter((request) => request.id !== id));
     } catch (error) {
       console.error("Erro ao deletar requisição:", error);
     }
   };
 
-  // Função para atualizar status de requisição
   const handleUpdateRequest = async (id, newStatus) => {
     try {
-      await updateRequest(id, { status_request: newStatus }); // Chama a função updateRequest com o novo status
+      await updateRequest(id, { status_request: newStatus });
       setApiData(
         apiData.map((request) =>
           request.id === id
