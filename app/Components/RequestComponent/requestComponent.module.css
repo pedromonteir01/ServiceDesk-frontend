@@ -23,14 +23,27 @@
   justify-content: center;
 }
 
-.logo {
-  display: flex;
-  top: 0;
-}
-
 .filter {
   display: flex;
+  position: relative;
   margin-right: 3rem;
+}
+
+.dropdown {
+  position: absolute;
+  top: -50px; 
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 100;
+  padding: 5px;
+}
+
+.selectFilter {
+  width: 150px;
+  padding: 5px;
+  border-radius: 4px;
 }
 
 .fullsize {
@@ -47,39 +60,6 @@
   margin-top: 1rem;
 }
 
-.render {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 3rem 1.5rem;
-  flex-direction: column;
-  color: #000;
-  background-color: #fff;
-  width: 35%;
-  border-radius: 10px;
-  height: auto;
-}
-
-.text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: #000;
-}
-
-.tituloReq {
-  font-size: 30px;
-  border-bottom: solid 2px;
-  margin: 0.5rem;
-}
-
-.descReq {
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
-}
-
 .loading {
   display: flex;
   justify-content: center;
@@ -88,58 +68,10 @@
   margin-left: 5%;
 }
 
-.autorReq {
-  align-items: center;
-  justify-content: center;
-}
-
-.statusReq {
-  align-items: center;
-  justify-content: center;
-  margin: 1.5rem;
-  background-color: #ff7700;
-  padding: 1rem;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-}
-
-.txtNoneRequest {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5%;
-  margin-bottom: 10%;
-  font-size: 20px;
-  height: 400px;
-  color: #000;
-  font-size: 2rem;
-}
-
-.context {
-  position: absolute;
-  justify-content: center;
-  display: flex;
-  width: 100%;
-  margin-top: 4rem;
-}
-
+/* Estilo responsivo */
 @media screen and (max-width: 768px) {
-  .render {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 10%;
-  }
-
   .filter {
     margin-right: 0;
-  }
-
-  .init {
-    margin: 0;
-  }
-
-  .text {
-    margin: 0;
   }
 
   .requestButton {
@@ -153,9 +85,5 @@
 
   .logo {
     display: none;
-  }
-
-  .imageReq {
-    width: 100%;
   }
 }

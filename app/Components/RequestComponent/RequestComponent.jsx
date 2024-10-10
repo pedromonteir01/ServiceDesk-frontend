@@ -11,8 +11,8 @@ import {
   getAllRequests,
   deleteRequest,
   updateRequest,
-} from "@/app/actions/request"; 
-import { getAllReqsWithLocals } from "@/app/actions/data";
+  getRequestByLocal,
+} from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import TestePedro from "../TestePedro/testePedro";
 
@@ -20,23 +20,19 @@ export default function RequestComponent() {
   const { user } = useContext(UserContext);
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [locals, setLocals] = useState([]);
+  const [filterLocal, setFilterLocal] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false); // Estado para controlar a exibição do select
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const dados = await getAllRequests();
-        console.log("dados", dados.requests.requests);
         if (Array.isArray(dados.requests.requests)) {
           setApiData(dados.requests.requests);
         } else {
           setApiData([]);
         }
-        setLocals(await getAllReqsWithLocals());
-
-        console.log(locals);
-
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -49,7 +45,7 @@ export default function RequestComponent() {
 
   const handleDeleteRequest = async (id) => {
     try {
-      await deleteRequest(id); 
+      await deleteRequest(id);
       setApiData(apiData.filter((request) => request.id !== id));
     } catch (error) {
       console.error("Erro ao deletar requisição:", error);
@@ -75,20 +71,23 @@ export default function RequestComponent() {
     router.push("/RequestCreate");
   };
 
-  function handleMoreReq(array) {
-    if (locals.length === 0) {
-      return "Nenhum local encontrado";
-    }
+  const handleFilterByLocal = async (local) => {
+    try {
+      setLoading(true);
+      const filteredRequests = await getRequestByLocal(local);
 
-    let element = locals[0]?.quantity;
-    for (let i = 1; i < locals.length; i++) {
-      let other = locals[i];
-      if (element < other.quantity) {
-        element = other.quantity;
+      if (filteredRequests.requests) {
+        setApiData(filteredRequests.requests);
+      } else {
+        setApiData([]);
       }
+      setLoading(false);
+    } catch (error) {
+      console.error("Erro ao filtrar requisições por local:", error);
+      setLoading(false);
     }
-    return element;
-  }
+    setShowDropdown(false);
+  };
 
   const sortedApiData = apiData.sort((a, b) => {
     return (a.status_request ? 1 : 0) - (b.status_request ? 1 : 0);
@@ -111,12 +110,6 @@ export default function RequestComponent() {
           <TestePedro context={"Context"} label={"Teste"} value={"7"} />
         </div>
 
-        {user && user.isadmin && sortedApiData && (
-          <div className={styles.data}>
-            <p>{handleMoreReq(locals)}!!!!!!!!!</p>
-          </div>
-        )}
-        {console.log(locals)}
         <div>
           <CiSearch color="#000" size={30} />
         </div>
@@ -124,7 +117,28 @@ export default function RequestComponent() {
 
       <div className={styles.requestButton}>
         <div className={styles.filter}>
-        <IoListOutline color="#ff0000" fontSize={30}/>
+          <IoListOutline
+            color="#ff0000"
+            fontSize={30}
+            onClick={() => setShowDropdown(!showDropdown)}
+          />
+          {showDropdown && (
+            <div className={styles.dropdown}>
+              <select
+                value={filterLocal}
+                onChange={(e) => {
+                  setFilterLocal(e.target.value);
+                  handleFilterByLocal(e.target.value);
+                }}
+                className={styles.selectFilter}
+              >
+                <option value="">Todos</option>
+                <option value="Sala 1">Sala 1</option>
+                <option value="Sala 2">Sala 2</option>
+                <option value="Biblioteca">Biblioteca</option>
+              </select>
+            </div>
+          )}
         </div>
         <div>
           <button
@@ -135,6 +149,7 @@ export default function RequestComponent() {
           </button>
         </div>
       </div>
+
       {loading ? (
         <div className={styles.loading}>
           <TailSpin
@@ -160,10 +175,10 @@ export default function RequestComponent() {
               autor={item.email}
               status={item.status_request ? "CONCLUIDO" : "PENDENTE"}
               onRemove={() => handleDeleteRequest(item.id)}
-              onEdit={() => console.log("Editar não implementado ainda")} 
+              onEdit={() => console.log("Editar não implementado ainda")}
               onStatusChange={() =>
                 handleUpdateRequestStatus(item.id, !item.status_request)
-              } 
+              }
             />
           ))}
         </>
