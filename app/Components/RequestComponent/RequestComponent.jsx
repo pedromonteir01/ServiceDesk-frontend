@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestComponent.module.css";
 import Image from "next/image";
-import { RiMenuSearchLine } from "react-icons/ri";
+import { IoListOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { TailSpin } from "react-loader-spinner";
 import RenderTest from "../RenderTest/renderTest";
@@ -124,7 +124,7 @@ export default function RequestComponent() {
 
       <div className={styles.requestButton}>
         <div className={styles.filter}>
-          <RiMenuSearchLine color="#ff0000" size={30} />
+        <IoListOutline color="#ff0000" fontSize={30}/>
         </div>
         <div>
           <button
