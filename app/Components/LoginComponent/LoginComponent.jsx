@@ -1,9 +1,5 @@
 "use client";
 import { useState } from "react";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Row from "react-bootstrap/Row";
 import { getUserByEmail, loginInAPI } from "@/app/actions/users";
 import { useRouter } from "next/navigation";
 import style from "@/app/Login/login.module.css";

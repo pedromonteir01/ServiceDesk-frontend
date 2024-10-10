@@ -49,12 +49,12 @@ export default function RequestComponent() {
   };
 
   function handleMoreReq(array) {
-    console.log(array);
-    console.log(array.local);
-    console.log(array.quantity);
-
-    let element = locals[0].quantity;
-    for (let i = 0; i <= locals.length; i++) {
+    if (locals.length === 0) {
+      return "Nenhum local encontrado";
+    }
+  
+    let element = locals[0]?.quantity; 
+    for (let i = 1; i < locals.length; i++) {
       let other = locals[i];
       if (element < other.quantity) {
         element = other.quantity;
@@ -62,7 +62,7 @@ export default function RequestComponent() {
     }
     return element;
   }
-
+  
   const sortedApiData = apiData.sort((a, b) => {
     return (a.status_request ? 1 : 0) - (b.status_request ? 1 : 0);
   });
