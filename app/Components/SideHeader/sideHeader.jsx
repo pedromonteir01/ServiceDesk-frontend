@@ -19,6 +19,7 @@ const Sidebar = ({ isActive, onClose }) => {
 
   const logoff = () => {
     setUser(null);
+    localStorage.clear();
     router.replace('/');
   }
 
