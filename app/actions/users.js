@@ -99,7 +99,7 @@ export const changePassword = async(password) => {
 
 export const refreshAccessToken = async (refreshToken) => {
     try {
-      const response = await axios.post(`${api}/token/refresh`, { refreshToken });
+      const response = await axios.post(`${api}/authenticate/refresh`, { refreshToken });
       return response.data;  // Retorna novo accessToken e refreshToken
     } catch (e) {
       return e.response.data || { error: 'Token refresh failed' };
