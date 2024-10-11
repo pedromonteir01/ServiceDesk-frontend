@@ -1,26 +1,28 @@
 "use client";
 import { useState } from "react";
-import { getUserByEmail, loginInAPI } from "@/app/actions/users";
+import { loginInAPI } from "@/app/actions/users";
 import { useRouter } from "next/navigation";
 import style from "@/app/Login/login.module.css";
 import toast from "react-hot-toast";
 
-const LoginComponent = ({ setUser }) => {
+const LoginComponent = ({ setUser, setAccessToken, setRefreshToken }) => {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const login = async (email, password) => {
-    const response = await loginInAPI({ email: email, password: password });
+    const response = await loginInAPI({ email, password });
     if (response.user) {
-        localStorage.setItem('usertoken', response.refreshToken);
-        console.log(response.refreshToken);
-        console.log(response.accessToken);
-        setUser(response.user);
-        let useName = response.user.name.split(' ');
-        toast.success(`SEJA BEM-VINDO, ${useName[0].toUpperCase()}`);
-        router.replace('/');
+      localStorage.setItem('accessToken', response.accessToken);
+      localStorage.setItem('refreshToken', response.refreshToken);
+      setAccessToken(response.accessToken);
+      setRefreshToken(response.refreshToken);
+      setUser(response.user);
+
+      let useName = response.user.name.split(' ');
+      toast.success(`SEJA BEM-VINDO, ${useName[0].toUpperCase()}`);
+      router.replace('/');
     } else {
       toast.error("USUÁRIO OU SENHA INCORRETOS");
     }

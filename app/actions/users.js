@@ -1,8 +1,7 @@
 'use server';
-
 import axios from "axios";
 
-const api = process.env.URL;
+const api = process.env.URL;    
 
 export const getAllUsers = async() => {
     try {
@@ -41,18 +40,22 @@ export const getUserByRole = async(role) => {
     }
 }
 
-export const loginInAPI = async({email, password}) => {
+export const loginInAPI = async({ email, password }) => {
     try {
-        const response = await axios.post(`${api}/authenticate`, { 
-            email: email, 
-            password: password 
-        });
-
-        return response.data;
-    } catch(e) {
-        return e.response.data
+      const response = await axios.post(`${api}/authenticate`, { email, password });
+  
+      if (response.data && response.data.refreshToken && response.data.accessToken) {
+        return {
+          user: response.data.user,
+          accessToken: response.data.accessToken,
+          refreshToken: response.data.refreshToken
+        };
+      }
+      return { error: 'Invalid credentials' };
+    } catch (e) {
+      return e.response.data || { error: 'Login failed' };
     }
-}
+  };
 
 export const createUser = async(user) => {
     try {
@@ -93,3 +96,12 @@ export const changePassword = async(password) => {
         console.log('Error in feetching data:', e);
     }
 }
+
+export const refreshAccessToken = async (refreshToken) => {
+    try {
+      const response = await axios.post(`${api}/token/refresh`, { refreshToken });
+      return response.data;  // Retorna novo accessToken e refreshToken
+    } catch (e) {
+      return e.response.data || { error: 'Token refresh failed' };
+    }
+  };
