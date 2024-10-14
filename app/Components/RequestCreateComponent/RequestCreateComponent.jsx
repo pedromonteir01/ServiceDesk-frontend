@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestCreateComponent.module.css";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { createRequest } from "@/app/actions/request";
@@ -7,25 +8,34 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import toast from "react-hot-toast";
 
-// title VARCHAR(35),
-// image VARCHAR(255),
-// description TEXT,
-// local VARCHAR(255),
-// status_request BOOLEAN,
-// date_request DATE,
-// date_conclusion DATE,
-// email VARCHAR(255) REFERENCES users(email)
+// CREATE TABLE requests (
+//   id SERIAL PRIMARY KEY,
+//   title VARCHAR(35),
+//   image VARCHAR(255),
+//   description TEXT,
+//   local VARCHAR(255),
+//   status_request BOOLEAN,
+//   date_request DATE,
+//   date_conclusion DATE,
+//   email VARCHAR(255) REFERENCES users(email)
+// );
 const RequestCreateComponent = () => {
+  const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
-  const [status_request, setStatusRequest] = useState(false);
-  const [date_request, setDateRequest] = useState("");
-  const [date_conclusion, setDateConclusion] = useState("");  
-  const [email, setEmail] = useState(""); 
+  const [email, setEmail] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      setEmail(user.email);
+    } else {
+      setEmail("");
+    }
+  }, [user]); 
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -36,7 +46,10 @@ const RequestCreateComponent = () => {
   };
 
   const requestCreate = async (title, description, local, image) => {
-    const date_request = new Date();
+    console.log("titleasasaas");
+    const date_request = new Date().toISOString();
+    const date_conclusion = new Date().toISOString();
+    const status_request = "inconclued";
 
     if (!title || !description || !local || !image) {
       toast.error("PREENCHA TODOS OS CAMPOS");
@@ -44,18 +57,23 @@ const RequestCreateComponent = () => {
     }
 
     const formData = new FormData();
+    console.log({ title, image, description, local, status_request, date_request, date_conclusion, email });
     formData.append("title", title);
+    formData.append("image", image);
     formData.append("description", description);
     formData.append("local", local);
-    formData.append("image", image);
-    formData.append("date_request", date_request.toISOString());
+    formData.append("status_request", status_request);
+    formData.append("date_request", date_request);
+    formData.append("date_conclusion", date_conclusion);
+    formData.append("email", email);
+
 
     try {
       const token = localStorage.getItem("usertoken");
+      // const response = await createRequest(formData, token);
       const response = await createRequest(formData, token);
-
+      console.log(response);
       if (response.error) {
-        // Aqui você pode lidar com o erro retornado pelo backend
         console.error("Server error:", response);
         toast.error(response.message || "Erro ao criar requisição");
         return;
@@ -71,13 +89,13 @@ const RequestCreateComponent = () => {
 
   return (
     <>
-      <Image
+      {/* <Image
         src="/senaicerto.png"
         alt="Logo do Senai"
         width={200}
         height={200}
         className={styles.logo}
-      />
+      /> */}
       <div className={styles.main}>
         <h1 className={styles.title}>
           Relate aqui seu <span className={styles.problemText}>problema</span>

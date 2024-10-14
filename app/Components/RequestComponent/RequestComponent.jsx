@@ -97,7 +97,7 @@ export default function RequestComponent() {
   return (
     <div className="fullsize">
       <div className={styles.init}>
-        <div>
+        {/* <div>
           <Image
             src="/senaicerto.png"
             alt="Logo do Senai"
@@ -105,7 +105,7 @@ export default function RequestComponent() {
             height={170}
             className={styles.logo}
           />
-        </div>
+        </div> */}
 
         <div className={styles.context}>
           <TestePedro context={"Context"} label={"Teste"} value={"7"} />
