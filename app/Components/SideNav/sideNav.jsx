@@ -7,7 +7,7 @@ import {
   FaUserCog,
 } from "react-icons/fa";
 import SidebarItem from "../SidebarItem/SidebarItem";
-import styles from "./sideHeader.module.css";
+import styles from "./sideNav.module.css";
 import { useContext } from "react";
 import { UserContext } from "@/app/contexts/userContext";
 import { useRouter } from "next/navigation";

@@ -51,9 +51,9 @@ export const loginInAPI = async({ email, password }) => {
           refreshToken: response.data.refreshToken
         };
       }
-      return { error: 'Invalid credentials' };
+      return { error: 'credenciais inválidas' };
     } catch (e) {
-      return e.response.data || { error: 'Login failed' };
+      return e.response.data || { error: 'operação fracassou' };
     }
   };
 

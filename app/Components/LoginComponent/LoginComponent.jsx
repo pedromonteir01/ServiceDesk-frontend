@@ -24,7 +24,8 @@ const LoginComponent = ({ setUser, setAccessToken, setRefreshToken }) => {
       toast.success(`SEJA BEM-VINDO, ${useName[0].toUpperCase()}`);
       router.replace('/');
     } else {
-      toast.error("USUÁRIO OU SENHA INCORRETOS");
+      console.log(response);
+      toast.error(response.error.toUpperCase());
     }
   };
 

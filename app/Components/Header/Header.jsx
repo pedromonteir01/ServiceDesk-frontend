@@ -2,7 +2,7 @@
 import styles from "./header.module.css";
 import Link from "next/link";
 
-import SideHeader from "../SideHeader/sideHeader";
+import SideHeader from "../SideNav/sideNav";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
 import Hamburger from "hamburger-react";
