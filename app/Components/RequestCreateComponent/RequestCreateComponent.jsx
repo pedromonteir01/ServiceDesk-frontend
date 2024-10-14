@@ -28,34 +28,32 @@ const RequestCreateComponent = () => {
 
     if (!title || !description || !local || !image) {
       toast.error("PREENCHA TODOS OS CAMPOS");
-    } else {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("local", local);
-      formData.append("image", image.name);
-      formData.append("date_request", date_request.toISOString());
+      return;
+    }
 
-      try {
-        console.log(localStorage.getItem('usertoken'));
-        
-        const response = await createRequest(formData, localStorage.getItem('usertoken'));
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("local", local);
+    formData.append("image", image);
+    formData.append("date_request", date_request.toISOString());
 
-        console.log("Response:", response); // Log the full response
+    try {
+      const token = localStorage.getItem("usertoken");
+      const response = await createRequest(formData, token);
 
-        if (response.error) {
-          console.error("Server error:", response.error);
-          for (let i = 0; i < response.error.length; i++) {
-            toast.error(response.error[i].split("_").join(" ").toUpperCase());
-          }
-        } else {
-          toast.success("REQUISIÇÃO CRIADA");
-          router.replace("/requests");
-        }
-      } catch (error) {
-        console.error("Client-side error:", error);
-        toast.error("Erro ao criar requisição");
+      if (response.error) {
+        // Aqui você pode lidar com o erro retornado pelo backend
+        console.error("Server error:", response);
+        toast.error(response.message || "Erro ao criar requisição");
+        return;
       }
+
+      toast.success("REQUISIÇÃO CRIADA");
+      router.replace("/Request");
+    } catch (error) {
+      console.error("Client-side error:", error);
+      toast.error("Erro ao criar requisição");
     }
   };
 
