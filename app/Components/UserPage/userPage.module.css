@@ -3,9 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 100%;
     background-color: #ffffff;
-    /* Fundo branco */
     padding: 2rem;
     color: #333;
     /* Texto mais escuro para contraste */
@@ -13,16 +12,17 @@
 }
 
 .info {
-    background-color: #ff0000;
+    background-color: #e6e6e6;
+    margin: 3rem;
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    /* Sombra leve */
+    -webkit-box-shadow: 0px 14px 19px 3px rgba(0,0,0,0.54);
+    -moz-box-shadow: 0px 14px 19px 3px rgba(0,0,0,0.54);
+    box-shadow: 0px 14px 19px 3px rgba(0,0,0,0.54);
     text-align: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 35%;
     color: white;
-    /* Texto branco no fundo vermelho */
 }
 
 .info h2 {
@@ -30,13 +30,12 @@
     margin-bottom: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #ffffff;
-    /* Título branco */
+    color: #000000;
 }
 
 .avatar {
-    width: 150px;
-    height: 150px;
+    width: 40%;
+    height: 40%;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 1.5rem;
@@ -62,4 +61,9 @@
 .txt span {
     font-weight: bold;
     color: #ff0000;
+}
+
+.labelfor {
+    color: black;
+    text-transform: uppercase;
 }

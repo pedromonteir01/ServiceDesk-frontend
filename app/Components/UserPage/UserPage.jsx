@@ -36,9 +36,12 @@ const UserPage = () => {
                 <img src={avatarUrl} alt="Avatar do usuário" className={styles.avatar} />
                 <h2>SEJA BEM-VINDO, {user.name.split(' ')[0].toUpperCase()}!</h2>
                 <div className={styles.content}>
-                    <p className={styles.txt}>Nome: {user.name}</p>
-                    <span className={styles.txt}>Email: {email}</span>
-                    <span className={styles.txt}>Função: {user.isstudent ? 'estudante' : 'funcionário'}</span>
+                    <label className={styles.labelfor}>Nome:</label>
+                    <p className={styles.txt}>{user.name.toUpperCase()}</p>
+                    <label className={styles.labelfor}>Email:</label>
+                    <span className={styles.txt}>{email}</span>
+                    <label className={styles.labelfor}>Função:</label>
+                    <span className={styles.txt}>{user.isstudent ? 'Estudante' : 'Funcionário'}</span>
                 </div>
             </section>
         </article>
