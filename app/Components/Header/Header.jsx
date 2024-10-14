@@ -6,13 +6,8 @@ import SideHeader from "../SideNav/sideNav";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
 import Hamburger from "hamburger-react";
-import { useContext } from "react";
-import { UserContext } from "@/app/contexts/userContext";
-import { useRouter } from "next/navigation";
 
 const Header = () => {
-  const router = useRouter();
-
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);

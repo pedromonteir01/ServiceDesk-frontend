@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './SidebarItem.module.css';
+import styles from './sidebarItem.module.css';
 
 const SidebarItem = ({ Icon, Text, href }) => {
   return (
