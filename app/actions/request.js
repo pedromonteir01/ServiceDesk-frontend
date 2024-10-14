@@ -2,7 +2,8 @@
 
 import axios from "axios";
 
-const api = process.env.URL;
+// const api = process.env.URL;
+const api = "http://localhost:4000";
 
 export const getAllRequests = async () => {
   try {
@@ -87,15 +88,23 @@ export const getRequestByUser = async (user) => {
 };
 
 export const createRequest = async (formData, token) => {
+  console.log("testando createRequest");
+  console.log("FormData no actions:", formData);
   try {
-    const response = await axios.post(`${api}/upload-image`, formData, {
+    // const response = await axios.post(`${api}/upload-image`, formData, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // });
+    const response = await axios.post(`${api}/requests`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log("Response from upload-image:", response.data);
     return response.data;
   } catch (e) {
-    console.log("Error creating request:", e);
+    console.log("Error creating request:", e.response ? e.response.data : e);
     return { error: "Error creating request", message: e.message };
   }
 };
