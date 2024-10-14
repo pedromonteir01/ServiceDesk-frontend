@@ -8,7 +8,7 @@ export const getAllUsers = async() => {
         const response = await axios.get(`${api}/users`);
         return response.data;
     } catch(e) {
-        console.log('Error in feetching data:', e);
+        return e.response.data || { error: 'operação fracassou' };
     }
 }
 
@@ -18,7 +18,7 @@ export const getUserByEmail = async(email) => {
         const response = await axios.get(`${api}/users/${email}`);
         return response.data;        
     } catch(e) {
-        console.log('Error in feetching data:', e);
+        return e.response.data || { error: 'operação fracassou' };
     }
 }
 
@@ -27,7 +27,7 @@ export const getUserByName= async(name) => {
         const response = await axios.get(`${api}/users/name/${name}`);
         return response.data;
     } catch(e) {
-        console.log('Error in feetching data:', e);
+        return e.response.data || { error: 'operação fracassou' };
     }
 }
 
@@ -36,7 +36,7 @@ export const getUserByRole = async(role) => {
         const response = await axios.get(`${api}/users/role/${role}`);
         return response.data;
     } catch(e) {
-        console.log('Error in feetching data:', e);
+        return e.response.data || { error: 'operação fracassou' };
     }
 }
 
@@ -64,7 +64,7 @@ export const createUser = async(user) => {
         });
         return response.data;        
     } catch(e) {
-        return e.response.data;
+        return e.response.data || { error: 'operação fracassou' };
     }
 }
 
@@ -75,7 +75,7 @@ export const updateUser = async(user, email) => {
         });
         return response.data;
     } catch(e) {
-        console.log('Error in feetching data:', e);
+        return e.response.data || { error: 'operação fracassou' };
     }
 }
 
@@ -84,7 +84,7 @@ export const deleteUser = async(email) => {
         const response = await axios.delete(`${api}/users/${email}`);
         return response.data;
     } catch(e) {
-        console.log('Error in feetching data:', e);
+        return e.response.data || { error: 'operação fracassou' };
     }
 }
 
@@ -93,7 +93,7 @@ export const changePassword = async(password) => {
         const response = await axios.patch(`${api}/users/change/password${email}`, { password: password  });
         return response.data;
     } catch(e) {
-        console.log('Error in feetching data:', e);
+        return e.response.data || { error: 'operação fracassou' };
     }
 }
 
@@ -102,7 +102,7 @@ export const refreshAccessToken = async (refreshToken) => {
       const response = await axios.post(`${api}/authenticate/refresh`, { refreshToken });
       return response.data;  // Retorna novo accessToken e refreshToken
     } catch (e) {
-      return e.response.data || { error: 'Token refresh failed' };
+        return e.response.data || { error: 'operação fracassou' };
     }
   };
 
