@@ -1,13 +1,15 @@
 'use client';
+import { useContext } from 'react';
 import styles from './userPage.module.css'
+import { UserContext } from '@/app/contexts/userContext';
 
-const UserPage = ({ user }) => {
+const UserPage = () => {
 
-    const { name, email, password, isAdmin, isStudent } = user;
+    const { user } = useContext(UserContext);
 
     return (
         <article className={styles.container}>
-            <h1>Olá, {name}! Seja bem-vindo</h1>
+            <h1>Olá, {user.name}! Seja bem-vindo</h1>
         </article>
     );
 }

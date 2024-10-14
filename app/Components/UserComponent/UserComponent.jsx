@@ -5,14 +5,14 @@ import UserPage from "../UserPage/UserPage";
 import LoginComponent from "../LoginComponent/LoginComponent";
 
 const UserComponent = () => {
-    const { user, setUser, setAccessToken, setRefreshToken } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     return (
         <>
             {
                 user ? (
-                    <UserPage user={user}/>
+                    <UserPage/>
                 ) : (
-                    <LoginComponent setUser={setUser} setAccessToken={setAccessToken} setRefreshToken={setRefreshToken}/>
+                    <LoginComponent/>
                 )
             }
         </>

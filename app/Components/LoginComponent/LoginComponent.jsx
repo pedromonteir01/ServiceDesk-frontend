@@ -1,11 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { loginInAPI } from "@/app/actions/users";
 import { useRouter } from "next/navigation";
 import style from "@/app/Login/login.module.css";
 import toast from "react-hot-toast";
+import { UserContext } from "@/app/contexts/userContext";
 
-const LoginComponent = ({ setUser, setAccessToken, setRefreshToken }) => {
+const LoginComponent = () => {
+  const { setUser, setAccessToken, setRefreshToken } = useContext(UserContext);
+  
   const router = useRouter();
 
   const [email, setEmail] = useState("");
