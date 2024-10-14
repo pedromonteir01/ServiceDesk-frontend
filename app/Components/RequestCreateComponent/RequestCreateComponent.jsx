@@ -7,11 +7,23 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import toast from "react-hot-toast";
 
+// title VARCHAR(35),
+// image VARCHAR(255),
+// description TEXT,
+// local VARCHAR(255),
+// status_request BOOLEAN,
+// date_request DATE,
+// date_conclusion DATE,
+// email VARCHAR(255) REFERENCES users(email)
 const RequestCreateComponent = () => {
   const [title, setTitle] = useState("");
+  const [image, setImage] = useState(null);
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
-  const [image, setImage] = useState(null);
+  const [status_request, setStatusRequest] = useState(false);
+  const [date_request, setDateRequest] = useState("");
+  const [date_conclusion, setDateConclusion] = useState("");  
+  const [email, setEmail] = useState(""); 
   const [imagePreview, setImagePreview] = useState(null);
   const router = useRouter();
 
