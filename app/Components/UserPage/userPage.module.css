@@ -3,19 +3,51 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80dvh;
-    background-color: #f4f4f4;
+    height: 80vh;
+    background-color: #ffffff; /* Fundo branco */
     padding: 2rem;
-    color: black;
+    color: #333; /* Texto mais escuro para contraste */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background-color: #ff0000; 
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    color: white; /* Texto branco no fundo vermelho */
 }
+
+.info h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffffff; /* Título branco */
+}
+
 .content {
     display: flex;
     flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
 }
+
+.txt {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); 
+    color: #333;
+}
+
+.txt span {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+
