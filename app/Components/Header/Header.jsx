@@ -1,5 +1,5 @@
 "use client";
-import styles from "./header.module.css";
+import styles from "./Header.module.css";
 import Link from "next/link";
 
 import SideHeader from "../SideNav/sideNav";

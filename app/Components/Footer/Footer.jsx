@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-import styles from "./footer.module.css";
+import styles from "./Footer.module.css";
 import { LuFacebook } from "react-icons/lu";
 import { FiYoutube } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa6";
