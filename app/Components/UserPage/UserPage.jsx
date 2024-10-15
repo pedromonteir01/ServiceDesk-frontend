@@ -8,6 +8,7 @@ const UserPage = () => {
     console.log(user);
 
     const [email, setEmail] = useState(user.email);
+    const [edit, setEdit] = useState(false);
     const [avatarUrl, setAvatarUrl] = useState(''); // Estado para armazenar a URL da imagem
 
     const showEmail = () => {
@@ -42,6 +43,9 @@ const UserPage = () => {
                     <span className={styles.txt}>{email}</span>
                     <label className={styles.labelfor}>Função:</label>
                     <span className={styles.txt}>{user.isstudent ? 'Estudante' : 'Funcionário'}</span>
+                    <button className={styles.button} onClick={
+                        edit ? () => setEdit(false) : () => setEdit(true)
+                    }>{edit ? 'CANCELAR' : 'EDITAR'}</button>
                 </div>
             </section>
         </article>

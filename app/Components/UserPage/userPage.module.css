@@ -45,6 +45,7 @@
 .content {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.75rem;
     width: 100%;
 }
@@ -52,6 +53,7 @@
 .txt {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 1rem;
+    min-width: 100%;
     border-radius: 10px;
     font-size: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -66,4 +68,19 @@
 .labelfor {
     color: black;
     text-transform: uppercase;
+}
+
+.button {
+    background-color: #ff0000;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 12px;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.button:hover {
+    scale: 1.1;
+    transition: 0.2s;
+    background-color: #dc0000;
 }
