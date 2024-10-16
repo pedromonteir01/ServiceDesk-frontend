@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import styles from './userPage.module.css';
 import { UserContext } from '@/app/contexts/userContext';
 import Table from '../Table/Table';
+import { getUserByName } from '@/app/actions/users';
 
 const UserPage = () => {
     const { user } = useContext(UserContext);
@@ -27,9 +28,12 @@ const UserPage = () => {
         <article className={styles.container}>
             {
                 user.isadmin ? (
-                    <>
-                        <Table atributtes={['nome', 'email']} content={[{name: 'pedro', email: 'pedrohenriquesilva@aluno.senai.br'}, {name: 'vampel', email: 'pedrormont@gmail.com'}]}/>
-                    </>
+                    <section className={styles.filters}>
+                        <h1>Olá, {user.name.toUpperCase()}! Seja bem-vindo!</h1>
+                        <div className={styles.options}>
+                            <p>oii</p>
+                        </div>
+                    </section>
                 ) : (
                     <>
                         <section className={styles.info}>

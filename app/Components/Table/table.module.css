@@ -1,9 +1,7 @@
-.conatiner {
+.container {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid black;
-    border-collapse: collapse;
-    border-spacing: 0;
 }
 
 .theader {
@@ -11,17 +9,14 @@
     border: 1px solid black;
     font-weight: bold;
     background-color: #f4f4f4;
-    border-collapse: collapse;
 }
 
 .trow {
-    border-collapse: collapse;
     margin: 0;
 }
 
 .tdata {
     padding: 12px;
     border: 1px solid black;
-    border-collapse: collapse;
 }
 

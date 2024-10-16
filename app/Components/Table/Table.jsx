@@ -6,7 +6,7 @@ const Table = ({ atributtes, content }) => {
             <tr className={styles.trow}>
                 {
                     atributtes.map((content) => (
-                        <th className={styles.theader}>{content}</th>
+                        <th className={styles.theader}>{content.toUpperCase()}</th>
                     ))
                 }
             </tr>
