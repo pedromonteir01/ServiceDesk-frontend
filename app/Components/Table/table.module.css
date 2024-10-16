@@ -1,0 +1,12 @@
+.conatiner {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.theader {
+    padding: 12px;
+    border: 1px solid black;
+    font-weight: bold;
+    background-color: #f4f4f4;
+}
+

@@ -1,10 +1,12 @@
+import styles from './table.module.css';
+
 const Table = ({ atributtes, content }) => {
     return (
-        <table>
+        <table className={styles.container}>
             <tr>
                 {
                     atributtes.map((content) => (
-                        <th>{content}</th>
+                        <th className={styles.theader}>{content}</th>
                     ))
                 }
             </tr>
@@ -14,7 +16,7 @@ const Table = ({ atributtes, content }) => {
                     <tr key={index}>
                         {
                         Object.keys(obj).map((key, i) => (
-                            <td key={i}>{obj[key]}</td>
+                            <td style={{padding: 12}} key={i}>{obj[key]}</td>
                         ))
                         }
                     </tr>
