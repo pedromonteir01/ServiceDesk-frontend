@@ -10,6 +10,12 @@ const UserPage = () => {
     const [email, setEmail] = useState(user.email);
     const [edit, setEdit] = useState(false);
 
+    //para pesquisa
+    const [name, setName] = useState('');
+
+    //resposta para tabela
+    const [response, setResponse] = useState([]);
+
     const showEmail = () => {
         let [localPart, domain] = email.split('@');
         let localChars = localPart.split('');
@@ -24,16 +30,35 @@ const UserPage = () => {
         showEmail();
     }, []);
 
+    useEffect(async() => {
+        setResponse(await getUserByName(name));
+        console.log(response);
+        
+    }, [name]);
+
     return (
         <article className={styles.container}>
             {
                 user.isadmin ? (
+                    <>
                     <section className={styles.filters}>
                         <h1>Olá, {user.name.toUpperCase()}! Seja bem-vindo!</h1>
                         <div className={styles.options}>
-                            <p>oii</p>
+                            <div className={styles.search}>
+                                <label htmlFor='name'>Nome: </label>
+                                <input
+                                name='name'
+                                className={styles.inputSearch}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                />
+                            </div>
                         </div>
                     </section>
+                    <section>
+                        <Table atributtes={['nome', 'email', 'função', 'acessos']} content={response}/>
+                    </section>
+                    </>
                 ) : (
                     <>
                         <section className={styles.info}>

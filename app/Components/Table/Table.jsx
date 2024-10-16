@@ -1,6 +1,8 @@
 import styles from './table.module.css';
 
 const Table = ({ atributtes, content }) => {
+    if(!content) {
+    }
     return (
         <table className={styles.container}>
             <tr className={styles.trow}>

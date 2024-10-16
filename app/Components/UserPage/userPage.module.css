@@ -101,3 +101,20 @@
     border: 1px solid black;
     margin: 2rem;
 }
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+}
+
+.inputSearch {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 100%;
+    font-size: medium;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 5px;
+}
