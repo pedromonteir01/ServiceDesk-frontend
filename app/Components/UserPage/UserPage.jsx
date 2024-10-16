@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from './userPage.module.css';
 import { UserContext } from '@/app/contexts/userContext';
+import Table from '../Table/Table';
 
 const UserPage = () => {
     const { user } = useContext(UserContext);
@@ -27,7 +28,7 @@ const UserPage = () => {
             {
                 user.isadmin ? (
                     <>
-                        <p>Olá, admin!</p>
+                        <Table atributtes={['nome', 'email']} content={[{name: 'pedro', email: 'pedrohenriquesilva@aluno.senai.br'}, {name: 'vampel', email: 'pedrormont@gmail.com'}]}/>
                     </>
                 ) : (
                     <>
