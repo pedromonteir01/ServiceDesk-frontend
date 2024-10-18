@@ -1,8 +1,13 @@
 .container {
     display: flex;
     min-height: 100dvh;
+    justify-content: center;
+    align-items: center;
     background-color: #ffffff;
-    padding: 5rem;
+    padding-top: 5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    gap: 2.5rem;
     color: #333;
     /* Texto mais escuro para contraste */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
