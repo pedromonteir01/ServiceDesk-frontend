@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { use, useContext, useEffect, useState } from 'react';
 import styles from './userPage.module.css';
 import { UserContext } from '@/app/contexts/userContext';
 import Table from '../Table/Table';
@@ -30,11 +30,23 @@ const UserPage = () => {
         showEmail();
     }, []);
 
-    useEffect(async() => {
-        setResponse(await getUserByName(name));
-        console.log(response);
+    useEffect(() => {
+        const fetchUsers = async () => {
+            if (name.trim() !== '') {
+                const result = await getUserByName(name);                
+                const formattedResponse = result.users.map(user => ({
+                    0: user.name,
+                    1: user.email,
+                    2: user.isstudent ? 'estudante' : 'funcionário',
+                    3: user.isadmin ? 'administrador' : 'usuário'
+                }));
+            setResponse(formattedResponse);                
+            }
+        };
         
+        fetchUsers();
     }, [name]);
+    
 
     return (
         <article className={styles.container}>
