@@ -33,41 +33,24 @@ const UserPage = () => {
 
     useEffect(() => {
         const fetchUsers = async () => {
+            let result;
 
-            const result = await getAllUsers();
-            const formattedResponse = result.users.map(user => ({
-                0: user.name,
-                1: user.email,
-                2: user.isstudent ? 'estudante' : 'funcionário',
-                3: user.isadmin ? 'administrador' : 'usuário'
-            }));
-            setResponse(formattedResponse);
+            if (name.trim()) result = await getUserByName(name);
+            else if (option.trim()) result = await getUserByRole(option);
+            else result = await getAllUsers();
 
-            if (name.trim() !== '') {
-                const result = await getUserByName(name);
-                const formattedResponse = result.users.map(user => ({
+            setResponse(
+                result.users.map(user => ({
                     0: user.name,
                     1: user.email,
                     2: user.isstudent ? 'estudante' : 'funcionário',
                     3: user.isadmin ? 'administrador' : 'usuário'
-                }));
-                setResponse(formattedResponse);
-            }
-
-            if (option.trim() !== '') {
-                const result = await getUserByRole(option);
-                const formattedResponse = result.users.map(user => ({
-                    0: user.name,
-                    1: user.email,
-                    2: user.isstudent ? 'estudante' : 'funcionário',
-                    3: user.isadmin ? 'administrador' : 'usuário'
-                }));
-                setResponse(formattedResponse);
-            }
+                }))
+            );
         };
 
         fetchUsers();
-    }, [name, option, optionSearch]);
+    }, [name, option]);
 
     useEffect(() => {
         setName('');
