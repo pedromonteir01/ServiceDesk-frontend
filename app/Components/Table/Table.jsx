@@ -2,7 +2,7 @@ import styles from './table.module.css';
 
 const Table = ({ atributtes, content }) => {
     if (!content || content.length === 0) {
-        return <p>Nenhum resultado encontrado.</p>;
+        return <p className={styles.none}>Nenhum resultado encontrado.</p>;
     }
     
     return (

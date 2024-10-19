@@ -2,38 +2,47 @@ import { use, useContext, useEffect, useState } from 'react';
 import styles from './userPage.module.css';
 import { UserContext } from '@/app/contexts/userContext';
 import Table from '../Table/Table';
-import { getUserByName, getUserByRole } from '@/app/actions/users';
+import { getAllUsers, getUserByName, getUserByRole } from '@/app/actions/users';
 
 const UserPage = () => {
     const { user } = useContext(UserContext);
 
     const [email, setEmail] = useState(user.email);
     const [edit, setEdit] = useState(false);
-    const [optionSearch, setOptionSearch] = useState('name');
-    const [option, setOption] = useState('');
 
     //para pesquisa
     const [name, setName] = useState('');
+    const [optionSearch, setOptionSearch] = useState('name');
+    const [option, setOption] = useState('');
 
     //resposta para tabela
     const [response, setResponse] = useState([]);
 
-    const showEmail = () => {
-        let [localPart, domain] = email.split('@');
-        let localChars = localPart.split('');
-        for (let i = 3; i < localChars.length; i++) {
-            localChars[i] = '*';
-        }
-        let response = localChars.join('') + '@' + domain;
-        setEmail(response);
-    };
-
     useEffect(() => {
+        const showEmail = () => {
+            let [localPart, domain] = email.split('@');
+            let localChars = localPart.split('');
+            for (let i = 3; i < localChars.length; i++) {
+                localChars[i] = '*';
+            }
+            let response = localChars.join('') + '@' + domain;
+            setEmail(response);
+        };
         showEmail();
     }, []);
 
     useEffect(() => {
         const fetchUsers = async () => {
+
+            const result = await getAllUsers();
+            const formattedResponse = result.users.map(user => ({
+                0: user.name,
+                1: user.email,
+                2: user.isstudent ? 'estudante' : 'funcionário',
+                3: user.isadmin ? 'administrador' : 'usuário'
+            }));
+            setResponse(formattedResponse);
+
             if (name.trim() !== '') {
                 const result = await getUserByName(name);
                 const formattedResponse = result.users.map(user => ({
@@ -45,7 +54,7 @@ const UserPage = () => {
                 setResponse(formattedResponse);
             }
 
-            if(option.trim() !== '') {
+            if (option.trim() !== '') {
                 const result = await getUserByRole(option);
                 const formattedResponse = result.users.map(user => ({
                     0: user.name,
@@ -54,11 +63,17 @@ const UserPage = () => {
                     3: user.isadmin ? 'administrador' : 'usuário'
                 }));
                 setResponse(formattedResponse);
-            } 
+            }
         };
 
         fetchUsers();
-    }, [name, option]);
+    }, [name, option, optionSearch]);
+
+    useEffect(() => {
+        setName('');
+        setOption('');
+        setResponse([]);
+    }, [optionSearch]);
 
 
     return (
@@ -85,34 +100,41 @@ const UserPage = () => {
                                     {
                                         optionSearch == 'role' &&
                                         <>
-                                        <label htmlFor="role">Função: </label>
-                                        <select 
-                                        name="role"
-                                        value={option}
-                                        onChange={(e) => setOption(e.target.value)}
-                                        >
-                                            <option value=''>Selecione...</option>
-                                            <option value='student'>Estudantes</option>
-                                            <option value='educator'>Funcionários</option>
-                                        </select>
+                                            <label htmlFor="role">Função: </label>
+                                            <select
+                                                name="role"
+                                                className={styles.inputSearch}
+                                                value={option}
+                                                onChange={(e) => setOption(e.target.value)}
+                                            >
+                                                <option value=''>Selecione...</option>
+                                                <option value='student'>Estudantes</option>
+                                                <option value='educator'>Funcionários</option>
+                                            </select>
                                         </>
                                     }
+                                </div>
+                                <div className={styles.choice}>
+                                    <label htmlFor="choice">Por nome:</label>
                                     <input
+                                        name='choice'
                                         type='radio'
                                         value='name'
-                                        checked={option === 'name'}
+                                        checked={optionSearch === 'name'}
                                         onChange={(e) => setOptionSearch(e.target.value)}
                                     />
+                                    <label htmlFor="choice">Por Função:</label>
                                     <input
+                                        name='choice'
                                         type='radio'
                                         value='role'
-                                        checked={option === 'role'}
+                                        checked={optionSearch === 'role'}
                                         onChange={(e) => setOptionSearch(e.target.value)}
                                     />
                                 </div>
                             </div>
                         </section>
-                        <section>
+                        <section className={styles.table}>
                             <Table atributtes={['nome', 'email', 'função', 'acessos']} content={response} />
                         </section>
                     </>
