@@ -3,6 +3,7 @@ import styles from './userPage.module.css';
 import { UserContext } from '@/app/contexts/userContext';
 import Table from '../Table/Table';
 import { getAllUsers, getUserByName, getUserByRole } from '@/app/actions/users';
+import { getAllRequests } from '@/app/actions/request';
 
 const UserPage = () => {
     const { user } = useContext(UserContext);
@@ -11,6 +12,7 @@ const UserPage = () => {
     const [edit, setEdit] = useState(false);
 
     //para pesquisa
+    const [typeSearch, setTypeSearch] = useState('user');
     const [name, setName] = useState('');
     const [optionSearch, setOptionSearch] = useState('name');
     const [option, setOption] = useState('');
@@ -49,8 +51,14 @@ const UserPage = () => {
             );
         };
 
-        fetchUsers();
-    }, [name, option]);
+        const fetchReqs = async() => {
+            let result;
+            result = await getAllRequests();
+            setResponse(result.requests);
+        }
+
+        typeSearch == 'user' ? fetchUsers() : fetchUsers();
+    }, [name, option, typeSearch]);
 
     useEffect(() => {
         setName('');
@@ -68,6 +76,26 @@ const UserPage = () => {
                             <h1>Olá, {user.name.toUpperCase()}! Seja bem-vindo!</h1>
                             <div className={styles.options}>
                                 <div className={styles.search}>
+                                    <h3>FILTRO:</h3>
+                                    <div className={styles.typeSearch}>
+                                        <label htmlFor='type'>Usuário: </label>
+                                        <input
+                                            name='type'
+                                            type='radio'
+                                            value='user'
+                                            checked={typeSearch === 'user'}
+                                            onChange={(e) => setTypeSearch(e.target.value)}
+                                        />
+
+                                        <label htmlFor='type'>Requisições: </label>
+                                        <input
+                                            name='type'
+                                            type='radio'
+                                            value='reqs'
+                                            checked={typeSearch === 'reqs'}
+                                            onChange={(e) => setTypeSearch(e.target.value)}
+                                        />
+                                    </div>
                                     {
                                         optionSearch == 'name' &&
                                         <>
