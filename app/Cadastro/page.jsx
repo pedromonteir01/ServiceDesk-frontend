@@ -37,7 +37,7 @@ export default function Cadastro() {
         {/* Cadastro */}
         <article className={style.cadastroBox}>
           <section>
-            <Image src="/logoSesi.svg" alt="Logo" width={280} height={80} />
+            <Image src="/logoSesai.svg" alt="Logo" width={190} height={80}/>
             <h2 className={style.cadastroTitle}>Crie sua conta para acessar</h2>
           </section>
 
