@@ -78,7 +78,7 @@ export const UserProvider = ({ children }) => {
             if (accessToken && isTokenExpired(accessToken)) {
                 tryLoginWithRefreshToken();
             }
-        }, 1 * 60 * 1000); // Verifica a cada 1 minuto
+        }, 120 * 1000); // Verifica a cada 1 minuto
         return () => clearInterval(interval);
     }, [accessToken, refreshToken]);
 

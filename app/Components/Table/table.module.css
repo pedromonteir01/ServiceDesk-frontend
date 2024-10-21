@@ -1,0 +1,31 @@
+.container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.theader {
+    padding: 12px;
+    border: 1px solid black;
+    font-weight: bold;
+    background-color: rgb(230, 230, 230);
+}
+
+.trow {
+    margin: 0;
+}
+
+.tdata {
+    padding: 12px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.none {
+    font-size: x-large;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
