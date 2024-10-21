@@ -3,11 +3,24 @@
 import axios from "axios";
 
 // const api = process.env.URL;
-const api = "http://localhost:4000";
+const api = process.env.URL;
 
 export const getAllRequests = async () => {
   try {
     const response = await axios.get(`${api}/requests`, { cache: "no-store" });
+    if (response.data.length === 0) {
+      return { message: "none_requests" };
+    }
+    return { results: response.data.length, requests: response.data };
+  } catch (e) {
+    console.log("Error fetching data:", e);
+    return { error: "Error fetching requests", message: e.message };
+  }
+};
+
+export const getRequestsByName = async (title) => {
+  try {
+    const response = await axios.get(`${api}/requests/title/${title}`);
     if (response.data.length === 0) {
       return { message: "none_requests" };
     }

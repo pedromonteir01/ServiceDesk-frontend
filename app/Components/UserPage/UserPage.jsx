@@ -1,4 +1,4 @@
-import { use, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './userPage.module.css';
 import { UserContext } from '@/app/contexts/userContext';
 import Table from '../Table/Table';
@@ -16,6 +16,10 @@ const UserPage = () => {
     const [name, setName] = useState('');
     const [optionSearch, setOptionSearch] = useState('name');
     const [option, setOption] = useState('');
+    const [title, setTitle] = useState('');
+    const [local, setLocal] = useState('');
+    const [status, setStatus] = useState('');
+    const [byUser, setByUser] = useState('');
 
     //resposta para tabela
     const [response, setResponse] = useState([]);
@@ -51,13 +55,13 @@ const UserPage = () => {
             );
         };
 
-        const fetchReqs = async() => {
+        const fetchReqs = async () => {
             let result;
             result = await getAllRequests();
             setResponse(result.requests);
         }
 
-        typeSearch == 'user' ? fetchUsers() : fetchUsers();
+        typeSearch == 'user' ? fetchUsers() : fetchReqs();
     }, [name, option, typeSearch]);
 
     useEffect(() => {
@@ -97,51 +101,72 @@ const UserPage = () => {
                                         />
                                     </div>
                                     {
-                                        optionSearch == 'name' &&
-                                        <>
-                                            <label htmlFor='name'>Nome: </label>
-                                            <input
-                                                name='name'
-                                                className={styles.inputSearch}
-                                                value={name}
-                                                onChange={(e) => setName(e.target.value)}
-                                            />
-                                        </>
-                                    }
-                                    {
-                                        optionSearch == 'role' &&
-                                        <>
-                                            <label htmlFor="role">Função: </label>
-                                            <select
-                                                name="role"
-                                                className={styles.inputSearch}
-                                                value={option}
-                                                onChange={(e) => setOption(e.target.value)}
-                                            >
-                                                <option value=''>Selecione...</option>
-                                                <option value='student'>Estudantes</option>
-                                                <option value='educator'>Funcionários</option>
-                                            </select>
-                                        </>
+                                        typeSearch == 'user' ? (
+                                            <>
+                                                {
+                                                    optionSearch == 'name' &&
+                                                    <>
+                                                        <label htmlFor='name'>Nome: </label>
+                                                        <input
+                                                            name='name'
+                                                            className={styles.inputSearch}
+                                                            value={name}
+                                                            onChange={(e) => setName(e.target.value)}
+                                                        />
+                                                    </>
+                                                }
+                                                {
+                                                    optionSearch == 'role' &&
+                                                    <>
+                                                        <label htmlFor="role">Função: </label>
+                                                        <select
+                                                            name="role"
+                                                            className={styles.inputSearch}
+                                                            value={option}
+                                                            onChange={(e) => setOption(e.target.value)}
+                                                        >
+                                                            <option value=''>Selecione...</option>
+                                                            <option value='student'>Estudantes</option>
+                                                            <option value='educator'>Funcionários</option>
+                                                        </select>
+                                                    </>
+                                                }
+                                            </>
+                                        ) : (
+                                            <>
+
+                                            </>
+                                        )
                                     }
                                 </div>
                                 <div className={styles.choice}>
-                                    <label htmlFor="choice">Por nome:</label>
-                                    <input
-                                        name='choice'
-                                        type='radio'
-                                        value='name'
-                                        checked={optionSearch === 'name'}
-                                        onChange={(e) => setOptionSearch(e.target.value)}
-                                    />
-                                    <label htmlFor="choice">Por Função:</label>
-                                    <input
-                                        name='choice'
-                                        type='radio'
-                                        value='role'
-                                        checked={optionSearch === 'role'}
-                                        onChange={(e) => setOptionSearch(e.target.value)}
-                                    />
+                                    {
+                                        typeSearch == 'user' ? (
+                                            <>
+                                                <label htmlFor="choice">Por nome:</label>
+                                                <input
+                                                    name='choice'
+                                                    type='radio'
+                                                    value='name'
+                                                    checked={optionSearch === 'name'}
+                                                    onChange={(e) => setOptionSearch(e.target.value)}
+                                                />
+                                                <label htmlFor="choice">Por Função:</label>
+                                                <input
+                                                    name='choice'
+                                                    type='radio'
+                                                    value='role'
+                                                    checked={optionSearch === 'role'}
+                                                    onChange={(e) => setOptionSearch(e.target.value)}
+                                                />
+                                            </>
+                                        ) :
+                                            (
+                                            <>
+
+                                            </>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </section>
