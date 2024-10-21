@@ -7,8 +7,8 @@ import Footer from "./components/footer/footer";
 export default function Home() {
   return (
     <main>
-    <div className={styles.container}>
       <Header />
+    <div className={styles.container}>
       <div className={styles.sideHeader}>
       </div>
       {/* <div className={styles.videobanner}>
@@ -38,8 +38,8 @@ export default function Home() {
       <div className={styles.buttonFunction}>
         <button className={styles.button}>Reportar Problema</button>
         </div>
-      <Footer />
       </div>
+      <Footer />
     </main>
   );
 }
