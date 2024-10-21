@@ -5,6 +5,7 @@ import Table from '../Table/Table';
 import { getAllUsers, getUserByName, getUserByRole } from '@/app/actions/users';
 import { getAllRequests, getRequestByStatus, getRequestsByName } from '@/app/actions/request';
 import { getAllReqsWithLocals } from '@/app/actions/data';
+import format from '@/app/utilities/formattedDate';
 
 const UserPage = () => {
     const { user } = useContext(UserContext);
@@ -67,8 +68,8 @@ const UserPage = () => {
                     0: request.title,
                     1: request.local,
                     2: request.status ? 'Concluído' : 'Em andamento',
-                    3: request.date_request.split('-').join('/'),
-                    4: '--' || request.date_conclusion.split('-').join('/'),
+                    3: format(request.date_request),
+                    4: format(request.date_conclusion),
                     5: request.user
                 }))
             );

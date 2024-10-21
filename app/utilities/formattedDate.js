@@ -7,3 +7,5 @@ const format = (date) => {
         return '--';
     }
 }
+
+export default format;
