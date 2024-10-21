@@ -2,15 +2,14 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestComponent.module.css";
-import Image from "next/image";
 import { IoListOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
+import toast from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
 import RenderTest from "../RenderTest/renderTest";
 import {
   getAllRequests,
   deleteRequest,
-  createRequest,
   updateRequest,
   getRequestByLocal,
 } from "@/app/actions/request";
@@ -22,8 +21,10 @@ export default function RequestComponent() {
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterLocal, setFilterLocal] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false); // Estado para controlar a exibição do select
+  const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
+
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -97,20 +98,11 @@ export default function RequestComponent() {
   return (
     <div className="fullsize">
       <div className={styles.init}>
-        {/* <div>
-          <Image
-            src="/senaicerto.png"
-            alt="Logo do Senai"
-            width={170}
-            height={170}
-            className={styles.logo}
-          />
-        </div> */}
-
-        <div className={styles.context}>
-          <TestePedro context={"Context"} label={"Teste"} value={"7"} />
-        </div>
-
+        {apiData.length > 0 && (
+          <div className={styles.context}>
+            <TestePedro context={"Context"} label={"Teste"} value={"7"} />
+          </div>
+        )}
         <div>
           <CiSearch color="#000" size={30} />
         </div>
@@ -163,9 +155,13 @@ export default function RequestComponent() {
           />
         </div>
       ) : sortedApiData.length === 0 ? (
-        <p className={styles.txtNoneRequest}>
-          Nenhuma requisição encontrada!!!
-        </p>
+        <div className={styles.errorTxtDiv}>
+          {
+            toast.error("Nenhuma requisição encontrada", {
+              duration: 3000,
+            })
+          }
+        </div>
       ) : (
         <>
           {sortedApiData.map((item) => (

@@ -49,6 +49,7 @@
 
 .fullsize {
   flex: 1;
+  min-height: 100vh;
 }
 
 .init {
@@ -62,6 +63,14 @@
 }
 
 .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  margin-left: 5%;
+}
+
+.errorTxtDiv {
   display: flex;
   justify-content: center;
   align-items: center;
