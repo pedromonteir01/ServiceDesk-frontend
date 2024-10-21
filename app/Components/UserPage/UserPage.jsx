@@ -6,7 +6,6 @@ import { getAllUsers, getUserByName, getUserByRole } from '@/app/actions/users';
 import { getAllRequests, getRequestByStatus, getRequestsByName } from '@/app/actions/request';
 import { getAllReqsWithLocals } from '@/app/actions/data';
 import format from '@/app/utilities/formattedDate';
-import toast from 'react-hot-toast';
 
 const UserPage = () => {
     const { user } = useContext(UserContext);
@@ -46,7 +45,6 @@ const UserPage = () => {
             else if (option !== '') result = await getUserByRole(option);
             else result = await getAllUsers();
             if(result.message) {
-                toast('Nenhum dado encontrado', { icon: '🎲' });
                 return false;
             }
 
@@ -68,7 +66,6 @@ const UserPage = () => {
             else result = await getAllRequests();
             console.log(result);
             if(result.message) {
-                toast('Nenhum dado encontrado', { icon: '🎲' });
                 return false;
             }
                         
