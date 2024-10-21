@@ -3,7 +3,7 @@ import styles from './userPage.module.css';
 import { UserContext } from '@/app/contexts/userContext';
 import Table from '../Table/Table';
 import { getAllUsers, getUserByName, getUserByRole } from '@/app/actions/users';
-import { getAllRequests, getRequestsByName } from '@/app/actions/request';
+import { getAllRequests, getRequestByStatus, getRequestsByName } from '@/app/actions/request';
 import { getAllReqsWithLocals } from '@/app/actions/data';
 
 const UserPage = () => {
@@ -17,8 +17,8 @@ const UserPage = () => {
     const [name, setName] = useState('');
     const [optionSearch, setOptionSearch] = useState('name');
     const [option, setOption] = useState('');
-    const [local, setLocal] = useState('');
-    const [status, setStatus] = useState('');
+    const [creation, setCreation] = useState('');
+    const [finish, setFinish] = useState('');
     const [byUser, setByUser] = useState('');
 
     //resposta para tabela
@@ -55,13 +55,26 @@ const UserPage = () => {
         };
 
         const fetchReqs = async () => {
-            if (name.trim()) getRequestsByName(name);
-            else if (local.trim()) getAllReqsWithLocals(local);
-            else getAllRequests();
+            let result;
+            if (name.trim()) result = await getRequestsByName(name);
+            else if (optionSearch == 'local') result = await getAllReqsWithLocals(option);
+            else if (optionSearch == 'status') result = await getRequestByStatus(option);
+            else result = await getAllRequests();
+
+            setResponse(
+                result.requests.map(request => ({
+                    0: request.title,
+                    1: request.local,
+                    2: request.status ? 'Concluído' : 'Em andamento',
+                    3: request.creationDate.split('-').join('/'),
+                    4: request.finishDate.split('-').join('/'),
+                    5: request.user
+                }))
+            );
         }
 
         typeSearch == 'user' ? fetchUsers() : fetchReqs();
-    }, [name, local, status, byUser, option, typeSearch]);
+    }, [name, byUser, option, typeSearch]);
 
     useEffect(() => {
         setName('');
@@ -70,6 +83,7 @@ const UserPage = () => {
     }, [optionSearch]);
 
     useEffect(() => {
+        setResponse([]);
         setOptionSearch('name');
     }, [typeSearch]);
 
@@ -139,7 +153,7 @@ const UserPage = () => {
                                                     optionSearch == 'local' &&
                                                     <>
 
-                                                        <label htmlFor="choice">Por status:</label>
+                                                        <label htmlFor="choice">Por local:</label>
                                                         <select
                                                             name="choice"
                                                             className={styles.inputSearch}
@@ -168,6 +182,32 @@ const UserPage = () => {
                                                             <option value='teste2'>Em andamento</option>
                                                             <option value='teste3'>Aguardando manutenção</option>
                                                         </select>
+                                                    </>
+                                                }
+                                                {
+                                                    optionSearch == 'create' &&
+                                                    <>
+                                                        <label htmlFor='create-date'>Data de criação: </label>
+                                                        <input
+                                                            name='create-date'
+                                                            type='date'
+                                                            className={styles.inputSearch}
+                                                            value={creation}
+                                                            onChange={(e) => setCreation(e.target.value)}
+                                                        />
+                                                    </>
+                                                }
+                                                {
+                                                    optionSearch == 'finish' &&
+                                                    <>
+                                                        <label htmlFor='finish-date'>Data de finalização: </label>
+                                                        <input
+                                                            name='finish-date'
+                                                            type='date'
+                                                            className={styles.inputSearch}
+                                                            value={finish}
+                                                            onChange={(e) => setFinish(e.target.value)}
+                                                        />
                                                     </>
                                                 }
                                             </>
@@ -214,6 +254,22 @@ const UserPage = () => {
                                                         checked={optionSearch === 'status'}
                                                         onChange={(e) => setOptionSearch(e.target.value)}
                                                     />
+                                                    <label htmlFor="choice">Por data de criação:</label>
+                                                    <input
+                                                        name='choice'
+                                                        type='radio'
+                                                        value='create'
+                                                        checked={optionSearch === 'create'}
+                                                        onChange={(e) => setOptionSearch(e.target.value)}
+                                                    />
+                                                    <label htmlFor="choice">Por data de finalização:</label>
+                                                    <input
+                                                        name='choice'
+                                                        type='radio'
+                                                        value='finish'
+                                                        checked={optionSearch === 'finish'}
+                                                        onChange={(e) => setOptionSearch(e.target.value)}
+                                                    />
                                                 </>
                                             )
                                     }
@@ -221,7 +277,11 @@ const UserPage = () => {
                             </div>
                         </section>
                         <section className={styles.table}>
-                            <Table atributtes={['nome', 'email', 'função', 'acessos']} content={response} />
+                            {
+                                typeSearch == 'user' ?
+                                    <Table atributtes={['nome', 'email', 'função', 'acessos']} content={response} /> :
+                                    <Table atributtes={['título', 'local', 'status', 'creation', 'finish', 'usuário']} content={response} />
+                            }
                         </section>
                     </>
                 ) : (
