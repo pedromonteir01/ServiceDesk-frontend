@@ -62,7 +62,7 @@ const UserPage = () => {
             else if (optionSearch == 'status') result = await getRequestByStatus(option);
             else result = await getAllRequests();
             console.log(result.requests);
-            
+                        
             setResponse(
                 result.requests.map(request => ({
                     0: request.title,
@@ -70,12 +70,11 @@ const UserPage = () => {
                     2: request.status ? 'Concluído' : 'Em andamento',
                     3: format(request.date_request),
                     4: format(request.date_conclusion),
-                    5: request.user
+                    5: request.email
                 }))
             );
         }
-        console.log(response);
-        
+
         typeSearch == 'user' ? fetchUsers() : fetchReqs();
     }, [name, byUser, option, typeSearch]);
 
