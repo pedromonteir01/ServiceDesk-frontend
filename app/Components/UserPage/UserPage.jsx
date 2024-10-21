@@ -3,7 +3,8 @@ import styles from './userPage.module.css';
 import { UserContext } from '@/app/contexts/userContext';
 import Table from '../Table/Table';
 import { getAllUsers, getUserByName, getUserByRole } from '@/app/actions/users';
-import { getAllRequests } from '@/app/actions/request';
+import { getAllRequests, getRequestsByName } from '@/app/actions/request';
+import { getAllReqsWithLocals } from '@/app/actions/data';
 
 const UserPage = () => {
     const { user } = useContext(UserContext);
@@ -16,7 +17,6 @@ const UserPage = () => {
     const [name, setName] = useState('');
     const [optionSearch, setOptionSearch] = useState('name');
     const [option, setOption] = useState('');
-    const [title, setTitle] = useState('');
     const [local, setLocal] = useState('');
     const [status, setStatus] = useState('');
     const [byUser, setByUser] = useState('');
@@ -40,7 +40,6 @@ const UserPage = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             let result;
-
             if (name.trim()) result = await getUserByName(name);
             else if (option.trim()) result = await getUserByRole(option);
             else result = await getAllUsers();
@@ -56,19 +55,23 @@ const UserPage = () => {
         };
 
         const fetchReqs = async () => {
-            let result;
-            result = await getAllRequests();
-            setResponse(result.requests);
+            if (name.trim()) getRequestsByName(name);
+            else if (local.trim()) getAllReqsWithLocals(local);
+            else getAllRequests();
         }
 
         typeSearch == 'user' ? fetchUsers() : fetchReqs();
-    }, [name, option, typeSearch]);
+    }, [name, local, status, byUser, option, typeSearch]);
 
     useEffect(() => {
         setName('');
         setOption('');
         setResponse([]);
     }, [optionSearch]);
+
+    useEffect(() => {
+        setOptionSearch('name');
+    }, [typeSearch]);
 
 
     return (
@@ -101,56 +104,88 @@ const UserPage = () => {
                                         />
                                     </div>
                                     {
+                                        optionSearch == 'name' &&
+                                        <>
+                                            <label htmlFor='name'>{typeSearch == 'user' ? 'Nome: ' : 'Título: '}</label>
+                                            <input
+                                                name='name'
+                                                className={styles.inputSearch}
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                            />
+                                        </>
+                                    }
+                                    {
                                         typeSearch == 'user' ? (
+
+                                            optionSearch == 'role' &&
+                                            <>
+                                                <label htmlFor="role">Função: </label>
+                                                <select
+                                                    name="role"
+                                                    className={styles.inputSearch}
+                                                    value={option}
+                                                    onChange={(e) => setOption(e.target.value)}
+                                                >
+                                                    <option value=''>Selecione...</option>
+                                                    <option value='student'>Estudantes</option>
+                                                    <option value='educator'>Funcionários</option>
+                                                </select>
+                                            </>
+
+                                        ) : (
                                             <>
                                                 {
-                                                    optionSearch == 'name' &&
+                                                    optionSearch == 'local' &&
                                                     <>
-                                                        <label htmlFor='name'>Nome: </label>
-                                                        <input
-                                                            name='name'
-                                                            className={styles.inputSearch}
-                                                            value={name}
-                                                            onChange={(e) => setName(e.target.value)}
-                                                        />
-                                                    </>
-                                                }
-                                                {
-                                                    optionSearch == 'role' &&
-                                                    <>
-                                                        <label htmlFor="role">Função: </label>
+
+                                                        <label htmlFor="choice">Por status:</label>
                                                         <select
-                                                            name="role"
+                                                            name="choice"
                                                             className={styles.inputSearch}
                                                             value={option}
                                                             onChange={(e) => setOption(e.target.value)}
                                                         >
                                                             <option value=''>Selecione...</option>
-                                                            <option value='student'>Estudantes</option>
-                                                            <option value='educator'>Funcionários</option>
+                                                            <option value='teste1'>Sala 1</option>
+                                                            <option value='teste2'>Sala 2</option>
                                                         </select>
                                                     </>
                                                 }
-                                            </>
-                                        ) : (
-                                            <>
+                                                {
+                                                    optionSearch == 'status' &&
+                                                    <>
 
+                                                        <label htmlFor="choice">Qual o status:</label>
+                                                        <select
+                                                            name="choice"
+                                                            className={styles.inputSearch}
+                                                            value={option}
+                                                            onChange={(e) => setOption(e.target.value)}
+                                                        >
+                                                            <option value=''>Selecione...</option>
+                                                            <option value='teste1'>Concluído</option>
+                                                            <option value='teste2'>Em andamento</option>
+                                                            <option value='teste3'>Aguardando manutenção</option>
+                                                        </select>
+                                                    </>
+                                                }
                                             </>
                                         )
                                     }
                                 </div>
                                 <div className={styles.choice}>
+                                    <label htmlFor="choice">{typeSearch == 'user' ? 'Por nome: ' : 'Por título: '}</label>
+                                    <input
+                                        name='choice'
+                                        type='radio'
+                                        value='name'
+                                        checked={optionSearch === 'name'}
+                                        onChange={(e) => setOptionSearch(e.target.value)}
+                                    />
                                     {
                                         typeSearch == 'user' ? (
                                             <>
-                                                <label htmlFor="choice">Por nome:</label>
-                                                <input
-                                                    name='choice'
-                                                    type='radio'
-                                                    value='name'
-                                                    checked={optionSearch === 'name'}
-                                                    onChange={(e) => setOptionSearch(e.target.value)}
-                                                />
                                                 <label htmlFor="choice">Por Função:</label>
                                                 <input
                                                     name='choice'
@@ -162,10 +197,25 @@ const UserPage = () => {
                                             </>
                                         ) :
                                             (
-                                            <>
-
-                                            </>
-                                        )
+                                                <>
+                                                    <label htmlFor="choice">Por local:</label>
+                                                    <input
+                                                        name='choice'
+                                                        type='radio'
+                                                        value='local'
+                                                        checked={optionSearch === 'local'}
+                                                        onChange={(e) => setOptionSearch(e.target.value)}
+                                                    />
+                                                    <label htmlFor="choice">Por status:</label>
+                                                    <input
+                                                        name='choice'
+                                                        type='radio'
+                                                        value='status'
+                                                        checked={optionSearch === 'status'}
+                                                        onChange={(e) => setOptionSearch(e.target.value)}
+                                                    />
+                                                </>
+                                            )
                                     }
                                 </div>
                             </div>
