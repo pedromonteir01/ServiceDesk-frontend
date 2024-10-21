@@ -7,11 +7,11 @@ const api = process.env.URL;
 
 export const getAllRequests = async () => {
   try {
-    const response = await axios.get(`${api}/requests`, { cache: "no-store" });
+    const response = await axios.get(`${api}/requests`);
     if (response.data.length === 0) {
       return { message: "none_requests" };
-    }
-    return { results: response.data.length, requests: response.data };
+    }    
+    return response.data;
   } catch (e) {
     console.log("Error fetching data:", e);
     return { error: "Error fetching requests", message: e.message };

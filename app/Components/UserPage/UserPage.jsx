@@ -60,19 +60,21 @@ const UserPage = () => {
             else if (optionSearch == 'local') result = await getAllReqsWithLocals(option);
             else if (optionSearch == 'status') result = await getRequestByStatus(option);
             else result = await getAllRequests();
-
+            console.log(result.requests);
+            
             setResponse(
                 result.requests.map(request => ({
                     0: request.title,
                     1: request.local,
                     2: request.status ? 'Concluído' : 'Em andamento',
-                    3: request.creationDate.split('-').join('/'),
-                    4: request.finishDate.split('-').join('/'),
+                    3: request.date_request.split('-').join('/'),
+                    4: '--' || request.date_conclusion.split('-').join('/'),
                     5: request.user
                 }))
             );
         }
-
+        console.log(response);
+        
         typeSearch == 'user' ? fetchUsers() : fetchReqs();
     }, [name, byUser, option, typeSearch]);
 
