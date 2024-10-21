@@ -1,9 +1,14 @@
+import toast from 'react-hot-toast';
 import styles from './table.module.css';
 
 const Table = ({ atributtes, content }) => {
     if (!content || content.length === 0) {
-        return <p className={styles.none}>Nenhum resultado encontrado.</p>;
+        return <p className={styles.none}>Nenhum resultado encontrado</p>;
     }
+
+    if(content.message) {
+        toast(content.message, { icon:'🎲' });
+    } 
     
     return (
         <table className={styles.container}>

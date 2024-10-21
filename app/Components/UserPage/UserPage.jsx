@@ -291,7 +291,7 @@ const UserPage = () => {
                             {
                                 typeSearch == 'user' ?
                                     <Table atributtes={['nome', 'email', 'função', 'acessos']} content={response} /> :
-                                    <Table atributtes={['título', 'local', 'status', 'creation', 'finish', 'usuário']} content={response} />
+                                    <Table atributtes={['título', 'local', 'status', 'dia criado', 'dia finalizado', 'usuário']} content={response} />
                             }
                         </section>
                     </>
