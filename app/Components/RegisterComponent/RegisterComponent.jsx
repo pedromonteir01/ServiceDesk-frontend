@@ -42,10 +42,19 @@ const RegisterComponent = () => {
             return false;
         }
         toast.success("USUÁRIO CADASTRADO");
-        user && user.isadmin ? null : router.replace("/Login");
+        user && user.isadmin ? clearFields() : router.replace("/Login");
       }
     }
   };
+
+  const clearFields = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setIsAdmin('');
+    setIsStudent('');
+  }
 
   return (
     <div className={styles.container}>
