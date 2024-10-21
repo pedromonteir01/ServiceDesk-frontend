@@ -42,7 +42,7 @@ const UserPage = () => {
         const fetchUsers = async () => {
             let result;
             if (name.trim()) result = await getUserByName(name);
-            else if (option.trim()) result = await getUserByRole(option);
+            else if (option !== '') result = await getUserByRole(option);
             else result = await getAllUsers();
 
             setResponse(
