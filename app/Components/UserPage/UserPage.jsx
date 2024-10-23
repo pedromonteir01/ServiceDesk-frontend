@@ -41,9 +41,13 @@ const UserPage = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             let result;
-            if (name.trim()) result = await getUserByName(name);
-            else if (option !== '') result = await getUserByRole(option);
-            else result = await getAllUsers();
+            if (name.trim()) {
+                result = await getUserByName(name);
+            } else if (option != '') {
+                result = await getUserByRole(option);
+            } else {
+                result = await getAllUsers();
+            }
             if(result.message) {
                 return false;
             }
@@ -93,6 +97,7 @@ const UserPage = () => {
     useEffect(() => {
         setResponse([]);
         setOptionSearch('name');
+        setName('');
     }, [typeSearch]);
 
 
