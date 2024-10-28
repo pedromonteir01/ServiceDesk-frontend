@@ -23,7 +23,7 @@ const UserPage = () => {
     const [byUser, setByUser] = useState('');
 
     //resposta para tabela
-    const [response, setResponse] = useState([]);
+    const [response, setResponse] = useState([]);    
 
     useEffect(() => {
         const showEmail = () => {
@@ -41,16 +41,9 @@ const UserPage = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             let result;
-            if (name.trim()) {
-                result = await getUserByName(name);
-            } else if (option != '') {
-                result = await getUserByRole(option);
-            } else {
-                result = await getAllUsers();
-            }
-            if(result.message) {
-                return false;
-            }
+            if (name.trim()) result = await getUserByName(name);
+            else if (option != '') result = await getUserByRole(option);
+            else result = await getAllUsers();
 
             setResponse(
                 result.users.map(user => ({
@@ -60,7 +53,7 @@ const UserPage = () => {
                     3: user.isadmin ? 'administrador' : 'usuário'
                 }))
             );
-        };
+        }
 
         const fetchReqs = async () => {
             let result;
@@ -68,11 +61,7 @@ const UserPage = () => {
             else if (optionSearch == 'local') result = await getAllReqsWithLocals(option);
             else if (optionSearch == 'status') result = await getRequestByStatus(option);
             else result = await getAllRequests();
-            console.log(result);
-            if(result.message) {
-                return false;
-            }
-                        
+
             setResponse(
                 result.requests.map(request => ({
                     0: request.title,
@@ -90,7 +79,6 @@ const UserPage = () => {
 
     useEffect(() => {
         setName('');
-        setOption('');
         setResponse([]);
     }, [optionSearch]);
 
