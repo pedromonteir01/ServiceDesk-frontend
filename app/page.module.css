@@ -84,6 +84,30 @@
     background-color: rgb(220, 1, 1);
 }
 
+.containerIcons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+.icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    width: 10rem;
+    height: 10rem;
+    background-color: rgb(243, 243, 243);
+    border-radius: 5px;
+    border: 2px solid rgb(0, 0, 0);
+}
+.textIcon{
+    text-align: center;
+    margin: 1rem;
+    font-size: 12px;
+    font-weight: bold;
+}
 @media screen and (max-width: 768px) {
     .containerText {
         margin-left: 0;
