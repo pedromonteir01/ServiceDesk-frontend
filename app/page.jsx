@@ -39,7 +39,6 @@ export default function Home() {
         <button className={styles.button}>Reportar Problema</button>
         </div>
       </div>
-      <Footer />
     </main>
   );
 }
