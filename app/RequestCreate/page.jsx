@@ -8,7 +8,6 @@ export default function RequestCreate() {
     <div className={styles.generalDiv}>
       <Header />
       <RequestCreateComponent />
-      <Footer />
     </div>
   );
 }

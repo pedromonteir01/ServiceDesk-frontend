@@ -8,7 +8,6 @@ export default function Request() {
     <div className={styles.generalDiv}>
       <Header />
       <RequestComponent />
-      <Footer />
     </div>
   );
 }

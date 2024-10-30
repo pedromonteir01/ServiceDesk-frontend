@@ -8,7 +8,6 @@ export default function Login() {
         <main>
             <Header/>
             <UserComponent/>
-            <Footer/>
         </main>
     );
 }

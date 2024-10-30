@@ -8,7 +8,6 @@ export default function Register() {
         <main>
             <Header/>
             <RegisterComponent/>
-            <Footer/>
         </main>
     );
 }
