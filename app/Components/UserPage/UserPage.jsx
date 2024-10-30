@@ -23,7 +23,7 @@ const UserPage = () => {
     const [byUser, setByUser] = useState('');
 
     //resposta para tabela
-    const [response, setResponse] = useState([]);    
+    const [response, setResponse] = useState([]);
 
     useEffect(() => {
         const showEmail = () => {
@@ -79,7 +79,6 @@ const UserPage = () => {
 
     useEffect(() => {
         setName('');
-        setResponse([]);
     }, [optionSearch]);
 
     useEffect(() => {
@@ -179,9 +178,8 @@ const UserPage = () => {
                                                             onChange={(e) => setOption(e.target.value)}
                                                         >
                                                             <option value=''>Selecione...</option>
-                                                            <option value='teste1'>Concluído</option>
-                                                            <option value='teste2'>Em andamento</option>
-                                                            <option value='teste3'>Aguardando manutenção</option>
+                                                            <option value='inconclued'>Concluído</option>
+                                                            <option value='conclued'>Aguardando manutenção</option>
                                                         </select>
                                                     </>
                                                 }
@@ -227,7 +225,7 @@ const UserPage = () => {
                                     {
                                         typeSearch == 'user' ? (
                                             <>
-                                                <label htmlFor="choice">Por Função:</label>
+                                                <label   htmlFor="choice">Por Função:</label>
                                                 <input
                                                     name='choice'
                                                     type='radio'
