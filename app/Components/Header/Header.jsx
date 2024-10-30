@@ -46,7 +46,7 @@ const Header = () => {
         <li className={styles.links}>
           <Link
             target="blank"
-            href="https://www.fiesp.com.br/instituto-roberto-simonsen-irs/"
+            href="https://www.fiesp.com.br/"
           >
             IRS
           </Link>
