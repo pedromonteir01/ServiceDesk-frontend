@@ -41,7 +41,17 @@
 .containerTextfUser{
     display: flex;
     flex-direction: column;
-    margin-top: 1.5rem;
+    margin: 1.5rem;
+}
+.containerB{
+    background-color: rgb(243, 243, 243);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0.2rem;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0);
 }
 .title {
     text-align: center;
@@ -85,6 +95,30 @@
     background-color: rgb(220, 1, 1);
 }
 
+.containerIcons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+.icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    width: 10rem;
+    height: 10rem;
+    background-color: rgb(243, 243, 243);
+    border-radius: 5px;
+    border: 2px solid rgb(141, 141, 141);
+}
+.textIcon{
+    text-align: center;
+    margin: 1rem;
+    font-size: 12px;
+    font-weight: bold;
+}
 @media screen and (max-width: 768px) {
     .containerText {
         margin-left: 0;
