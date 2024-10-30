@@ -2,7 +2,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "./components/Header/Header";
-import Footer from "./components/footer/footer";
 import { UserContext } from "./contexts/userContext";
 import { useContext } from "react";
 import { GoTools } from "react-icons/go";
@@ -68,7 +67,6 @@ export default function Home() {
           Video
         </h1>
       </div>
-     
       </div>
     </main>
   );
