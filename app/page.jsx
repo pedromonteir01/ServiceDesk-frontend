@@ -45,6 +45,9 @@ export default function Home() {
         Seja bem-vindo ao Service Desk do SENAI-Valinhos! Aqui você pode reportar problemas e solicitar manutenções na infraestrutura da escola. Não se esqueça de preencher todos os campos do formulário para que possamos atender a sua solicitação com eficiência.
       </p>
       </div> 
+      <h1 className={styles.titleIcons}>
+        ATENÇÃO!
+        </h1>
       <div className={styles.containerIcons}>
         <div className={styles.icon}>
           <BsPencilSquare size={50} />
