@@ -9,30 +9,12 @@ export default function Home() {
     <main>
       <Header />
     <div className={styles.container}>
-      <div className={styles.sideHeader}>
+    <div className={styles.containerBoth}>
+      <div className={styles.containernothing}>
+        <p className={styles.text}>
+          alguma
+        </p>
       </div>
-      {/* <div className={styles.videobanner}>
-      <Image
-        src="/vercel.svg"
-        alt="Vercel Logo"
-        width={72}
-        height={16}
-      />
-      </div> */}
-      <div className={styles.falsedivbase}>
-        <h1 className={styles.falsetitle}>
-          Video
-        </h1>
-      </div>
-      <div className={styles.containerBoth}>
-      <div className={styles.containerImage}>
-        <Image
-          src="/ilustracao.png"
-          alt="Pessoas se ajudando a consertar uma lampâda"
-          width={400}
-          height={300}
-          />
-          </div>
       <div className={styles.containerText}>
       <h1 className={styles.title}>
         Conheça a nossa funcionalidade 
@@ -43,9 +25,15 @@ export default function Home() {
         <h1 className={styles.titleFunction}>
           Identificou alguma falha?
         </h1>
-      </div>
         <button className={styles.button}>Reportar Problema</button>
       </div>
+      </div>
+      <div className={styles.falsedivbase}>
+        <h1 className={styles.falsetitle}>
+          Video
+        </h1>
+      </div>
+     
       </div>
       <Footer />
     </main>
