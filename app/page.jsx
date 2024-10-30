@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import { UserContext } from "./contexts/userContext";
 import { useContext } from "react";
 import { BsFileEarmarkFontFill } from "react-icons/bs";
+import Link from "next/link";
 
 export default function Home() {
   const { user } = useContext(UserContext);
@@ -28,7 +29,7 @@ export default function Home() {
         <h1 className={styles.titleFunction}>
           Identificou alguma falha?
         </h1>
-        <button className={styles.button}>Reportar Problema</button>
+        <Link href='./Request' className={styles.button}>Reportar Problema</Link>
       </div>
       </div>
       <div className={styles.containerTextfUser}>
