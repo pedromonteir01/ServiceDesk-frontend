@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './userPage.module.css';
 import { UserContext } from '@/app/contexts/userContext';
 import Table from '../Table/Table';
@@ -8,7 +9,9 @@ import { getAllReqsWithLocals } from '@/app/actions/data';
 import format from '@/app/utilities/formattedDate';
 
 const UserPage = () => {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
+
+    const router = useRouter();
 
     const [email, setEmail] = useState(user.email);
     const [edit, setEdit] = useState(false);
@@ -87,6 +90,11 @@ const UserPage = () => {
         setName('');
     }, [typeSearch]);
 
+  const logoff = () => {
+    setUser(null);
+    localStorage.clear();
+    router.replace('/');
+  }
 
     return (
         <article className={styles.container}>
