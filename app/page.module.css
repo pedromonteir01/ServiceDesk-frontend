@@ -38,13 +38,21 @@
 .containernothing{
     display: none;
 }
+.containerTextfUser{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+}
 .title {
     text-align: center;
     text-decoration: underline;
     margin-top: 3rem;
     font-size: 20px;
 }
-
+.titlefUser{
+    text-decoration: underline;
+    font-size: 20px;
+}
 .description {
     text-align: center;
     align-self: center;

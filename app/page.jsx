@@ -3,8 +3,11 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/footer/footer";
+import { UserContext } from "./contexts/userContext";
+import { useContext } from "react";
 
 export default function Home() {
+  const { user } = useContext(UserContext);
   return (
     <main>
       <Header />
@@ -28,6 +31,14 @@ export default function Home() {
         <button className={styles.button}>Reportar Problema</button>
       </div>
       </div>
+      <div className={styles.containerTextfUser}>
+      <h1 className={styles.titlefUser}>
+        Olá, {user ? user.name : "visitante"}! 
+      </h1>
+      <p className={styles.descriptionfUser}>
+        Seja bem-vindo ao Service Desk do SENAI-Valinhos! Aqui você pode reportar problemas e solicitar manutenções na infraestrutura da escola. Não se esqueça de preencher todos os campos do formulário para que possamos atender a sua solicitação com eficiência.
+      </p>
+      </div>  
       <div className={styles.falsedivbase}>
         <h1 className={styles.falsetitle}>
           Video
