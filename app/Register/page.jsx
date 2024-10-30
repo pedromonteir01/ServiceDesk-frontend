@@ -1,4 +1,3 @@
-import Footer from '../Components/Footer/Footer';
 import Header from '../Components/Header/Header';
 import RegisterComponent from '../Components/RegisterComponent/RegisterComponent';
 import styles from './register.module.css'
