@@ -34,7 +34,8 @@ export default function Home() {
         </h1>
         <button className={styles.button}>Reportar Problema</button>
       </div>
-      </div>
+      </div> 
+      <div className={styles.containerB}>
       <div className={styles.containerTextfUser}>
       <h1 className={styles.titlefUser}>
         Olá, {user ? user.name : "visitante"}! 
@@ -42,7 +43,7 @@ export default function Home() {
       <p className={styles.descriptionfUser}>
         Seja bem-vindo ao Service Desk do SENAI-Valinhos! Aqui você pode reportar problemas e solicitar manutenções na infraestrutura da escola. Não se esqueça de preencher todos os campos do formulário para que possamos atender a sua solicitação com eficiência.
       </p>
-      </div>  
+      </div> 
       <div className={styles.containerIcons}>
         <div className={styles.icon}>
           <BsPencilSquare size={50} />
@@ -60,6 +61,7 @@ export default function Home() {
           <IoIosPin size={50} />
           <p className={styles.textIcon}>Informe a localização do problema</p>
         </div>
+      </div>
       </div>
       <div className={styles.falsedivbase}>
         <h1 className={styles.falsetitle}>
