@@ -5,6 +5,7 @@ import {
   FaRegSun,
   FaUserLock,
   FaUserCog,
+  FaHiking
 } from "react-icons/fa";
 import SidebarItem from "../SidebarItem/SidebarItem";
 import styles from "./sideNav.module.css";
@@ -41,10 +42,12 @@ const Sidebar = ({ isActive, onClose }) => {
         {user ? (
           <>
             <SidebarItem Icon={FaUserCog} Text="Perfil" href="/Login" />
-            { 
+            {
               user.isadmin && <SidebarItem Icon={FaUserLock} Text="Registrar" href="/Register" />
             }
-            <button className={styles.logoff} onClick={logoff}>SAIR</button>
+            <div onClick={logoff}>
+              <SidebarItem Icon={FaHiking} Text='Sair' href='./' />
+            </div>
           </>
 
         ) : (
