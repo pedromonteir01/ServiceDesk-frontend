@@ -5,7 +5,10 @@ import Header from "./components/Header/Header";
 import Footer from "./components/footer/footer";
 import { UserContext } from "./contexts/userContext";
 import { useContext } from "react";
-import { BsFileEarmarkFontFill } from "react-icons/bs";
+import { GoTools } from "react-icons/go";
+import { IoCamera } from "react-icons/io5";
+import { IoIosPin } from "react-icons/io";
+import { BsPencilSquare } from "react-icons/bs";
 
 export default function Home() {
   const { user } = useContext(UserContext);
@@ -42,10 +45,22 @@ export default function Home() {
       </div>  
       <div className={styles.containerIcons}>
         <div className={styles.icon}>
-          <BsFileEarmarkFontFill size={50} color="#FFD700" />
-          <p className={styles.textIcon}>Reporte um problema</p>
+          <BsPencilSquare size={50} />
+          <p className={styles.textIcon}>Escreva o assunto do problema</p>
         </div>
+        <div className={styles.icon}>
+          <GoTools size={50} />
+          <p className={styles.textIcon}>Descreva o problema detalhadamente</p>
         </div>
+        <div className={styles.icon}>
+          <IoCamera size={50} />
+          <p className={styles.textIcon}>Anexe uma foto do problema</p>
+        </div>
+        <div className={styles.icon}>
+          <IoIosPin size={50} />
+          <p className={styles.textIcon}>Informe a localização do problema</p>
+        </div>
+      </div>
       <div className={styles.falsedivbase}>
         <h1 className={styles.falsetitle}>
           Video
