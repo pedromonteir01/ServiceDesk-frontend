@@ -1,7 +1,7 @@
-.container {
+.container{
+    display: flex;
     flex-direction: column;
 }
-
 .falsedivbase {
     background-color: rgb(243, 243, 243);
     width: 100%;
@@ -23,44 +23,79 @@
 .containerText {
     display: flex;
     flex-direction: column;
+    margin-left: 50rem;
+}
+.containerBoth{
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    height: 25rem;
+    background-image: url(../public/senaival.png);
+    background-size: cover;
 }
-
+.containernothing{
+    display: none;
+}
+.containerTextfUser{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+}
 .title {
     text-align: center;
     text-decoration: underline;
+    margin-top: 3rem;
     font-size: 20px;
-    margin-bottom: 15px;
 }
-
+.titlefUser{
+    text-decoration: underline;
+    font-size: 20px;
+}
 .description {
     text-align: center;
+    align-self: center;
     text-align: justify;
-    font-size: 15px;
-    width: 85%;
+    margin: 1rem;
+    font-size: 12px;
+    width: 80%;
 }
 
 .titleFunction {
     font-size: 15px;
-    margin-top: 2rem;
+    margin-top: 1.2rem;
     margin-bottom: 1rem;
     text-align: center;
-}
-
-.buttonFunction {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-}
+}   
 
 .button {
     padding: 1rem;
+    align-self: center;
+    width: 10rem;
     background-color: red;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgb(220, 1, 1);
+}
+
+@media screen and (max-width: 768px) {
+    .containerText {
+        margin-left: 0;
+    }
+    .containerBoth {
+        background-image: none;
+        background-color: rgb(243, 243, 243);
+    }
+    .containernothing {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        height: 25rem;
+    }
 }
