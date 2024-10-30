@@ -57,7 +57,7 @@
     text-align: center;
     text-decoration: underline;
     margin-top: 3rem;
-    font-size: 20px;
+    font-size: 30px;
 }
 .titlefUser{
     text-decoration: underline;
@@ -68,7 +68,7 @@
     align-self: center;
     text-align: justify;
     margin: 1rem;
-    font-size: 12px;
+    font-size: 18px;
     width: 80%;
 }
 
@@ -82,7 +82,8 @@
 .button {
     padding: 1rem;
     align-self: center;
-    width: 10rem;
+    width: 25%;
+    text-align: center;
     background-color: red;
     color: white;
     border: none;
