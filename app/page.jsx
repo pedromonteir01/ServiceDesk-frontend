@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/footer/footer";
 import { UserContext } from "./contexts/userContext";
 import { useContext } from "react";
+import { BsFileEarmarkFontFill } from "react-icons/bs";
 
 export default function Home() {
   const { user } = useContext(UserContext);
@@ -39,6 +40,12 @@ export default function Home() {
         Seja bem-vindo ao Service Desk do SENAI-Valinhos! Aqui você pode reportar problemas e solicitar manutenções na infraestrutura da escola. Não se esqueça de preencher todos os campos do formulário para que possamos atender a sua solicitação com eficiência.
       </p>
       </div>  
+      <div className={styles.containerIcons}>
+        <div className={styles.icon}>
+          <BsFileEarmarkFontFill size={50} color="#FFD700" />
+          <p className={styles.textIcon}>Reporte um problema</p>
+        </div>
+        </div>
       <div className={styles.falsedivbase}>
         <h1 className={styles.falsetitle}>
           Video
