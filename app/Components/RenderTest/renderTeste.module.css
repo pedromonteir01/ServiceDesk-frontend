@@ -1,23 +1,24 @@
-.render {
+.card {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   background-color: #fff;
-  width: 35%;
-  padding: 2rem;
-  margin: 2rem;
+  width: 100%;
+  max-width: 400px; 
+  padding: 1.5rem; 
+  margin: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.render:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transform: translateY(-5px);
+.card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
 }
 
-.text {
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,90 +26,85 @@
   color: #333;
 }
 
-.tituloReq {
-  font-size: 2rem;
+.title {
+  font-size: 1.8rem; 
   color: #222;
   margin-bottom: 0.5rem;
-  font-weight: 600;
-  border-bottom: 2px solid #f0f0f0;
+  font-weight: bold;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
 }
 
-.descReq {
-  font-size: 1.2rem;
+.description {
+  font-size: 1.1rem; 
   margin: 1rem 0;
-  color: #555;
+  color: #666; 
 }
 
-.autorReq {
-  font-size: 1rem;
-  color: #777;
+.author {
+  font-size: 0.9rem; 
+  color: #888;
   margin-bottom: 1rem;
 }
 
-.statusReqP,
-.statusReqC {
-  font-size: 1rem;
+.statusPending,
+.statusCompleted {
+  font-size: 0.9rem;
   font-weight: 600;
-  padding: 0.8rem 1.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 10px;
   margin-top: 1rem;
   color: #fff;
 }
 
-.statusReqP {
-  background-color: #ff7700;
+.statusPending {
+  background-color: #ff7700; 
 }
 
-.statusReqC {
-  background-color: #00b609;
+.statusCompleted {
+  background-color: #00b609; 
 }
 
-.btns {
+.actions {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin-top: 1rem;
 }
 
-.btns .btnRemove {
-  background-color: #ff0000;
+.btnRemove,
+.btnEdit,
+.btnStatus {
+  background-color: #f44336; 
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 10px;
   cursor: pointer;
+  border: none; 
+  transition: background-color 0.3s;
 }
 
-.btns .btnEdit {
-  background-color: #ff0000;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.btns .btnStatus {
-  background-color: #ff0000;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  cursor: pointer;
+.btnRemove:hover,
+.btnEdit:hover,
+.btnStatus:hover {
+  background-color: #c62828; 
 }
 
 @media screen and (max-width: 768px) {
-  .render {
+  .card {
     width: 90%;
     margin: 1rem 0;
   }
 
-  .tituloReq {
+  .title {
     font-size: 1.5rem;
   }
 
-  .descReq {
+  .description {
     font-size: 1rem;
   }
 
-  .autorReq {
-    font-size: 0.9rem;
+  .author {
+    font-size: 0.8rem;
   }
 }
