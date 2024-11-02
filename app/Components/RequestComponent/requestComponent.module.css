@@ -1,3 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background-color: #f5f5f5;
+  padding: 5rem 2.5rem;
+  gap: 2.5rem;
+  color: #333;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2rem;
+}
+
 .requestButton {
   border: none;
   text-decoration: none;
@@ -8,7 +26,7 @@
 }
 
 .buttonRequest {
-  background-color: #ff0000;
+  background: linear-gradient(135deg, #ff5722, #ff0000);
   border: none;
   color: white;
   text-align: center;
@@ -16,11 +34,23 @@
   cursor: pointer;
   display: flex;
   border-radius: 6px;
-  width: 30rem;
-  height: 3vh;
+  width: 25rem;
+  height: 50px;
   padding: 6px;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.buttonRequest:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.buttonRequest:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .filter {
@@ -31,7 +61,7 @@
 
 .dropdown {
   position: absolute;
-  top: 27px; 
+  top: 27px;
   left: 0;
   background-color: white;
   border: 1px solid #ccc;
