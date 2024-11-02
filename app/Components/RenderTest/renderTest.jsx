@@ -17,30 +17,28 @@ export default function RenderTest({
   const { user } = useContext(UserContext);
 
   return (
-    <div className={styles.render}>
-      <div className={styles.text}>
-        <h1 className={styles.tituloReq}>{local}</h1>
-        <h4 className={styles.descReq}>{desc}</h4>
-        <p className={styles.autorReq}>{autor}</p>
+    <div className={styles.card}>
+      <div className={styles.content}>
+        <h1 className={styles.title}>{local}</h1>
+        <h4 className={styles.description}>{desc}</h4>
+        <p className={styles.author}>{autor}</p>
 
         {user && user.isadmin && (
           <>
-            {status === "PENDENTE" ? (
-              <p className={styles.statusReqP}>{status}</p>
-            ) : (
-              <p className={styles.statusReqC}>{status}</p>
-            )}
-            <div className={styles.btns}>
+            <p className={status === "PENDENTE" ? styles.statusPending : styles.statusCompleted}>
+              {status}
+            </p>
+            <div className={styles.actions}>
               <button className={styles.btnRemove} onClick={onRemove}>
-                <IoTrashOutline fontSize={25} />
+                <IoTrashOutline fontSize={20} />
               </button>
 
               <button className={styles.btnStatus} onClick={onStatusChange}>
-                <MdSwapHoriz fontSize={25} />
+                <MdSwapHoriz fontSize={20} />
               </button>
               
               <button className={styles.btnEdit} onClick={onEdit}>
-                <GoPencil fontSize={25} />
+                <GoPencil fontSize={20} />
               </button>
             </div>
           </>
