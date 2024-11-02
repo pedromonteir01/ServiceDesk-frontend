@@ -3,9 +3,8 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestCreateComponent.module.css";
 import { IoCloudDownloadOutline } from "react-icons/io5";
-import { createRequest } from "@/app/actions/request";
+import { createRequest, getLocais } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import toast from "react-hot-toast";
 
 const RequestCreateComponent = () => {
@@ -16,6 +15,7 @@ const RequestCreateComponent = () => {
   const [local, setLocal] = useState("");
   const [email, setEmail] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
+  const [locais, setLocais] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -26,6 +26,20 @@ const RequestCreateComponent = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    const fetchLocais = async () => {
+      const locaisData = await getLocais();
+      if (Array.isArray(locaisData.locais)) {
+        setLocais(locaisData.locais);
+      } else {
+        console.error("Dados de locais inválidos:", locaisData);
+        toast.error("Erro ao carregar locais");
+      }
+    };
+
+    fetchLocais();
+  }, []);
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -35,7 +49,6 @@ const RequestCreateComponent = () => {
   };
 
   const requestCreate = async (title, description, local, image) => {
-    console.log("titleasasaas");
     const date_request = new Date().toISOString();
     const date_conclusion = new Date().toISOString();
     const status_request = "inconclued";
@@ -46,16 +59,6 @@ const RequestCreateComponent = () => {
     }
 
     const formData = new FormData();
-    console.log({
-      title,
-      image,
-      description,
-      local,
-      status_request,
-      date_request,
-      date_conclusion,
-      email,
-    });
     formData.append("title", title);
     formData.append("image", image);
     formData.append("description", description);
@@ -68,7 +71,6 @@ const RequestCreateComponent = () => {
     try {
       const token = localStorage.getItem("usertoken");
       const response = await createRequest(formData, token);
-      console.log(response);
       if (response.error) {
         console.error("Server error:", response);
         toast.error(response.message || "Erro ao criar requisição");
@@ -84,79 +86,77 @@ const RequestCreateComponent = () => {
   };
 
   return (
-    <>
-      <div className={styles.main}>
-        <h1 className={styles.title}>
-          Relate aqui seu <span className={styles.problemText}>problema</span>
-        </h1>
+    <div className={styles.main}>
+      <h1 className={styles.title}>
+        Relate aqui seu <span className={styles.problemText}>problema</span>
+      </h1>
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            requestCreate(title, description, local, image);
-          }}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestCreate(title, description, local, image);
+        }}
+      >
+        <label className={styles.label}>Assunto:</label>
+        <input
+          type="text"
+          className={styles.titleInput}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <label className={styles.label}>O que aconteceu? Descreva</label>
+        <textarea
+          className={styles.descriptionInput}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <label className={styles.label}>Imagem</label>
+        <div
+          className={styles.imageUpload}
+          onClick={() => document.querySelector(`.${styles.fileInput}`).click()}
         >
-          <label className={styles.label}>Assunto:</label>
           <input
-            type="text"
-            className={styles.titleInput}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            type="file"
+            name="image"
+            onChange={handleImageChange}
+            className={styles.fileInput}
+            accept="image/*"
           />
-          <label className={styles.label}>O que aconteceu? Descreva</label>
-          <textarea
-            className={styles.descriptionInput}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+          <IoCloudDownloadOutline color="#000" fontSize={30} />
+          <span>Inserir imagem</span>
+        </div>
 
-          <label className={styles.label}>Imagem</label>
-          <div
-            className={styles.imageUpload}
-            onClick={() =>
-              document.querySelector(`.${styles.fileInput}`).click()
-            }
-          >
-            <input
-              type="file"
-              name="image"
-              onChange={handleImageChange}
-              className={styles.fileInput}
-              accept="image/*"
-            />
-            <IoCloudDownloadOutline color="#000" fontSize={30} />
-            <span>Inserir imagem</span>
+        {image && (
+          <div className={styles.previewContainer}>
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Imagem Preview"
+                className={styles.imagePreview}
+              />
+            )}
+            <p className={styles.fileName}>{image.name}</p>
           </div>
+        )}
 
-          {image && (
-            <div className={styles.previewContainer}>
-              {imagePreview && (
-                <img
-                  src={imagePreview}
-                  alt="Imagem Preview"
-                  className={styles.imagePreview}
-                />
-              )}
-              <p className={styles.fileName}>{image.name}</p>
-            </div>
-          )}
+        <label className={styles.label}>Qual foi o local?</label>
+        <select
+          className={styles.select}
+          value={local}
+          onChange={(e) => setLocal(e.target.value)}
+        >
+          <option value="">Selecione o ambiente</option>
+          {locais.map((localItem) => (
+            <option key={localItem.id} value={localItem.nome}>
+              {localItem.nome}
+            </option>
+          ))}
+        </select>
 
-          <label className={styles.label}>Qual foi o local?</label>
-          <select
-            className={styles.select}
-            value={local}
-            onChange={(e) => setLocal(e.target.value)}
-          >
-            <option value="">Selecione o ambiente</option>
-            <option value="sala1">Sala 1</option>
-            <option value="sala2">Sala 2</option>
-            <option value="laboratorio">Laboratório</option>
-          </select>
-
-          <button className={styles.submitButton}>Criar Requisição</button>
-        </form>
-      </div>
-    </>
+        <button className={styles.submitButton}>Criar Requisição</button>
+      </form>
+    </div>
   );
 };
 
