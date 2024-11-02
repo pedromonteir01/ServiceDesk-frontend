@@ -49,6 +49,16 @@ const UserPage = () => {
             else if (option != '') result = await getUserByRole(option);
             else result = await getAllUsers();
 
+            if(!result.users) {
+                setResponse([]);
+                if(result.message) {
+                    toast.error(result.message, { duration: 3000 })
+                    return false;
+                } else {
+                    return false;
+                }
+            };
+
             setResponse(
                 result.users.map(user => ({
                     0: user.name,
@@ -67,6 +77,7 @@ const UserPage = () => {
             else result = await getAllRequests();
 
             if(!result.requests) {
+                setResponse([]);
                 if(result.message) {
                     toast.error(result.message, { duration: 3000 })
                     return false;
