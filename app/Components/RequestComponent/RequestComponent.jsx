@@ -97,10 +97,11 @@ export default function RequestComponent() {
       </section>
 
       <section className={styles.requestButton}>
-        <button className={styles.buttonRequest} onClick={handleRequestCreate}>
-          Adicionar Requisição
-        </button>
-      </section>
+  <button className={styles.buttonRequest} onClick={handleRequestCreate}>
+    Adicionar Requisição
+  </button>
+</section>
+
 
       <section className={styles.table}>
         {loading ? (
