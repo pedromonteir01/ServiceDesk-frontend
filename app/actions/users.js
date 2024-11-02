@@ -1,5 +1,6 @@
 'use server';
 import axios from "axios";
+import bcrypt from 'bcrypt';
 
 const api = process.env.URL;    
 
@@ -105,6 +106,18 @@ export const refreshAccessToken = async (refreshToken) => {
         return e.response.data || { error: 'operação fracassou' };
     }
   };
+
+  export const compare = async(password, hash) => {
+        try {
+            const response = await bcrypt.compare(password, hash);
+            console.log(response);
+            return response;
+        } catch (erro) {
+            console.error("Erro ao comparar a senha:", erro);
+            return res.status(500).json(false); 
+        }
+    } 
+
 
 
   
