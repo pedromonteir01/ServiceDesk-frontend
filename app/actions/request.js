@@ -3,14 +3,23 @@
 import axios from "axios";
 
 // const api = process.env.URL;
-const api = process.env.URL + '/requests';
+const api = process.env.URL + "/requests";
 
 export const getAllRequests = async () => {
   try {
     const response = await axios.get(api);
     return response.data;
   } catch (e) {
-    return e.response.data || { error: 'operação fracassou' };
+    return e.response.data || { error: "operação fracassou" };
+  }
+};
+
+export const getLocais = async () => {
+  try {
+    const response = await axios.get(`${api}/locais`);
+    return response.data;
+  } catch (e) {
+    return e.response.data || { error: "operação fracassou" };
   }
 };
 
@@ -19,16 +28,16 @@ export const getRequestsByName = async (title) => {
     const response = await axios.get(`${api}/title/${title}`);
     return response.data;
   } catch (e) {
-    return e.response.data || { error: 'operação fracassou' };
+    return e.response.data || { error: "operação fracassou" };
   }
 };
 
 export const getRequestById = async (id) => {
   try {
     const response = await axios.get(`${api}/${id}`);
-    return response.data
+    return response.data;
   } catch (e) {
-    return e.response.data || { error: 'operação fracassou' };
+    return e.response.data || { error: "operação fracassou" };
   }
 };
 
@@ -37,7 +46,7 @@ export const getRequestByLocal = async (local) => {
     const response = await axios.get(`${api}/local/${local}`);
     return response.data;
   } catch (e) {
-    return e.response.data || { error: 'operação fracassou' };
+    return e.response.data || { error: "operação fracassou" };
   }
 };
 
@@ -46,7 +55,7 @@ export const getRequestByStatus = async (status) => {
     const response = await axios.get(`${api}/status/${status}`);
     return response.data;
   } catch (e) {
-    return e.response.data || { error: 'operação fracassou' };
+    return e.response.data || { error: "operação fracassou" };
   }
 };
 
@@ -55,7 +64,7 @@ export const getRequestByUser = async (user) => {
     const response = await axios.get(`${api}/user/${user}`);
     return response.data;
   } catch (e) {
-    return e.response.data || { error: 'operação fracassou' };
+    return e.response.data || { error: "operação fracassou" };
   }
 };
 
@@ -81,30 +90,29 @@ export const createRequest = async (formData, token) => {
   }
 };
 
-
 export const updateRequest = async (id, request) => {
   try {
     const response = await axios.put(`${api}/${id}`, request);
     return response.data;
   } catch (e) {
-    return e.response.data || { error: 'operação fracassou' };
+    return e.response.data || { error: "operação fracassou" };
   }
 };
 
 export const deleteRequest = async (id) => {
   try {
     const response = await axios.delete(`${api}/${id}`);
-    return response.data
+    return response.data;
   } catch (e) {
-    return e.response.data || { error: 'opereação fracassou' };
+    return e.response.data || { error: "opereação fracassou" };
   }
 };
 
 export const concludeStatus = async (id, status) => {
   try {
     const response = await axios.patch(`${api}/${id}/conclude`, { status });
-    return response.data
+    return response.data;
   } catch (e) {
-    return e.response.data || { error: 'operação fracassou' };
+    return e.response.data || { error: "operação fracassou" };
   }
 };
