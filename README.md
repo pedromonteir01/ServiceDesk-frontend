@@ -1,5 +1,7 @@
 # SERVICE DESK Front-End
 
+[![Capa do Projeto](https://i.imgur.com/E8YvzaC.png)](https://github.com/pedromonteir01/ServiceDesk-frontend)
+
 Este é um projeto de front-end para um sistema de Service Desk do SENAI-Valinhos. Ele permite que os usuários criem uma requisição de um problema na infraestrutura, facilitando a comunicação entre alunos e a equipe de manutenção do SENAI-Valinhos.
 
 ## Índice
