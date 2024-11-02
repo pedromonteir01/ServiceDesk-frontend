@@ -8,17 +8,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import toast from "react-hot-toast";
 
-// CREATE TABLE requests (
-//   id SERIAL PRIMARY KEY,
-//   title VARCHAR(35),
-//   image VARCHAR(255),
-//   description TEXT,
-//   local VARCHAR(255),
-//   status_request BOOLEAN,
-//   date_request DATE,
-//   date_conclusion DATE,
-//   email VARCHAR(255) REFERENCES users(email)
-// );
 const RequestCreateComponent = () => {
   const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
@@ -35,7 +24,7 @@ const RequestCreateComponent = () => {
     } else {
       setEmail("");
     }
-  }, [user]); 
+  }, [user]);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -57,7 +46,16 @@ const RequestCreateComponent = () => {
     }
 
     const formData = new FormData();
-    console.log({ title, image, description, local, status_request, date_request, date_conclusion, email });
+    console.log({
+      title,
+      image,
+      description,
+      local,
+      status_request,
+      date_request,
+      date_conclusion,
+      email,
+    });
     formData.append("title", title);
     formData.append("image", image);
     formData.append("description", description);
@@ -67,10 +65,8 @@ const RequestCreateComponent = () => {
     formData.append("date_conclusion", date_conclusion);
     formData.append("email", email);
 
-
     try {
       const token = localStorage.getItem("usertoken");
-      // const response = await createRequest(formData, token);
       const response = await createRequest(formData, token);
       console.log(response);
       if (response.error) {
@@ -89,13 +85,6 @@ const RequestCreateComponent = () => {
 
   return (
     <>
-      {/* <Image
-        src="/senaicerto.png"
-        alt="Logo do Senai"
-        width={200}
-        height={200}
-        className={styles.logo}
-      /> */}
       <div className={styles.main}>
         <h1 className={styles.title}>
           Relate aqui seu <span className={styles.problemText}>problema</span>
