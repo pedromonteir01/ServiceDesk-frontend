@@ -118,6 +118,10 @@
 }
 
 .inputSearch:focus {
+   color: #333;
+}
+
+.inputSearch:focus {
     border-color: #007bff;
     outline: none;
 }

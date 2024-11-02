@@ -7,6 +7,7 @@ import { getAllUsers, getUserByName, getUserByRole } from '@/app/actions/users';
 import { getAllRequests, getRequestByStatus, getRequestsByName } from '@/app/actions/request';
 import { getAllReqsWithLocals } from '@/app/actions/data';
 import format from '@/app/utilities/formattedDate';
+import toast from 'react-hot-toast';
 
 const UserPage = () => {
     const { user, setUser } = useContext(UserContext);
@@ -65,6 +66,15 @@ const UserPage = () => {
             else if (optionSearch == 'status') result = await getRequestByStatus(option);
             else result = await getAllRequests();
 
+            if(!result.requests) {
+                if(result.message) {
+                    toast.error(result.message, { duration: 3000 })
+                    return false;
+                } else {
+                    return false;
+                }
+            };
+
             setResponse(
                 result.requests.map(request => ({
                     0: request.title,
@@ -102,7 +112,6 @@ const UserPage = () => {
                 user.isadmin ? (
                     <>
                         <section className={styles.filters}>
-                            <h1>Olá, {user.name.toUpperCase()}! Seja bem-vindo!</h1>
                             <div className={styles.options}>
                                 <div className={styles.search}>
                                     <h3>FILTRO:</h3>

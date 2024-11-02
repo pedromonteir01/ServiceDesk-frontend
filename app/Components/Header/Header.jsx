@@ -21,7 +21,6 @@ const Header = () => {
 
   return (
     <nav className={styles.generalDiv}>
-      <div className={styles.senai}></div>
       <div className={styles.menuD}>
         <div className={styles.align}>
           <Hamburger toggled={sidebar} toggle={showSidebar} color="#fff" />

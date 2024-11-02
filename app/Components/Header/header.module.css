@@ -9,9 +9,9 @@
   top: 0;
   width: 100%;
   display: flex;
+  padding-right: 0.5rem;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5em 1em;
   font-family: "Montserrat", sans-serif;
   z-index: 1000;
 }
@@ -30,6 +30,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  margin-right: 0.5rem;
 }
 
 #senai,
