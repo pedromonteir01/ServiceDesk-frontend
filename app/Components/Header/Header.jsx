@@ -13,7 +13,6 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { FaWhatsapp } from "react-icons/fa";
 
-
 const Header = () => {
   const [sidebar, setSidebar] = useState(false);
 
@@ -51,61 +50,46 @@ const Header = () => {
           </Link>
         </li>
         <li className={styles.links}>
-          <Link
-            target="blank"
-            href="https://www.fiesp.com.br/"
-          >
+          <Link target="blank" href="https://www.fiesp.com.br/">
             IRS
           </Link>
         </li>
-        <li className={`${styles.links} ${styles.iconSocial}`}>
-          <Link
-            className={styles.barra}
-            target="blank"
-            href="https://www.facebook.com/senaisaopaulo"
-          >
+
+        <li className={styles.links}>
+          <Link target="blank" href="https://www.facebook.com/senaisaopaulo">
             <FaFacebookF />
           </Link>
         </li>
-        <li className={`${styles.links} ${styles.iconSocial}`}>
-          <Link
-            className={styles.barra}
-            target="blank"
-            href="https://twitter.com/senaisaopaulo"
-          >
+        <span className={styles.barra}>|</span>
+        <li className={styles.links}>
+          <Link target="blank" href="https://twitter.com/senaisaopaulo">
             <FaTwitter />
           </Link>
         </li>
-        <li className={`${styles.links} ${styles.iconSocial}`}>
+        <span className={styles.barra}>|</span>
+        <li className={styles.links}>
           <Link
-            className={styles.barra}
             target="blank"
             href="https://www.youtube.com/channel/UCaz1BMUVug86pd_uS598X1A"
           >
             <TfiYoutube />
           </Link>
         </li>
-        <li className={`${styles.links} ${styles.iconSocial}`}>
-          <Link
-            className={styles.barra}
-            target="blank"
-            href="https://www.linkedin.com/company/senai-sp"
-          >
+        <span className={styles.barra}>|</span>
+        <li className={styles.links}>
+          <Link target="blank" href="https://www.linkedin.com/company/senai-sp">
             <FaLinkedinIn />
           </Link>
         </li>
-        <li className={`${styles.links} ${styles.iconSocial}`}>
-          <Link
-            className={styles.barra}
-            target="blank"
-            href="https://www.instagram.com/senai.sp"
-          >
+        <span className={styles.barra}>|</span>
+        <li className={styles.links}>
+          <Link target="blank" href="https://www.instagram.com/senai.sp">
             <FaInstagram />
           </Link>
         </li>
-        <li className={`${styles.links} ${styles.iconSocial}`}>
+        <span className={styles.barra}>|</span>
+        <li className={styles.links}>
           <Link
-            className={styles.barra}
             target="blank"
             href="https://api.whatsapp.com/send?phone=551133220050"
           >
