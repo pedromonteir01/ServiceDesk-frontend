@@ -6,7 +6,12 @@ import { CiSearch } from "react-icons/ci";
 import toast from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
 import RenderTest from "../RenderTest/renderTest";
-import { getAllRequests, deleteRequest, updateRequest, getRequestByLocal } from "@/app/actions/request";
+import {
+  getAllRequests,
+  deleteRequest,
+  updateRequest,
+  getRequestByLocal,
+} from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 
 export default function RequestComponent() {
@@ -36,7 +41,9 @@ export default function RequestComponent() {
   const handleDeleteRequest = async (id) => {
     try {
       await deleteRequest(id);
-      setRequests((prevRequests) => prevRequests.filter((request) => request.id !== id));
+      setRequests((prevRequests) =>
+        prevRequests.filter((request) => request.id !== id)
+      );
     } catch (error) {
       console.error("Erro ao deletar requisição:", error);
     }
@@ -47,7 +54,9 @@ export default function RequestComponent() {
       await updateRequest(id, { status_request: newStatus });
       setRequests((prevRequests) =>
         prevRequests.map((request) =>
-          request.id === id ? { ...request, status_request: newStatus } : request
+          request.id === id
+            ? { ...request, status_request: newStatus }
+            : request
         )
       );
     } catch (error) {
@@ -62,7 +71,9 @@ export default function RequestComponent() {
   const handleFilterRequests = async (local) => {
     setLoading(true);
     try {
-      const filteredData = local ? await getRequestByLocal(local) : await getAllRequests();
+      const filteredData = local
+        ? await getRequestByLocal(local)
+        : await getAllRequests();
       setRequests(filteredData.requests || []);
     } catch (error) {
       console.error("Erro ao filtrar requisições:", error);
@@ -83,21 +94,6 @@ export default function RequestComponent() {
     <article className={styles.container}>
       <section className={styles.filters}>
         <h1>Gestão de Requisições</h1>
-        <div className={styles.search}>
-          <h3>FILTRO:</h3>
-          <label htmlFor="local">Local:</label>
-         {/*  <select
-            name="local"
-            className={styles.inputSearch}
-            value={filterValue}
-            onChange={(e) => setFilterValue(e.target.value)}
-          >
-            <option value="">Todos</option>
-            <option value="Sala 1">Sala 1</option>
-            <option value="Sala 2">Sala 2</option>
-            <option value="Biblioteca">Biblioteca</option>
-          </select> */}
-        </div>
       </section>
 
       <section className={styles.requestButton}>
@@ -109,7 +105,12 @@ export default function RequestComponent() {
       <section className={styles.table}>
         {loading ? (
           <div className={styles.loading}>
-            <TailSpin height="80" width="80" color="#ff0000" ariaLabel="tail-spin-loading" />
+            <TailSpin
+              height="80"
+              width="80"
+              color="#ff0000"
+              ariaLabel="tail-spin-loading"
+            />
           </div>
         ) : sortedRequests.length === 0 ? (
           <div className={styles.errorTxtDiv}>
@@ -125,7 +126,9 @@ export default function RequestComponent() {
               status={item.status_request ? "CONCLUIDO" : "PENDENTE"}
               onRemove={() => handleDeleteRequest(item.id)}
               onEdit={() => console.log("Editar não implementado ainda")}
-              onStatusChange={() => handleUpdateRequestStatus(item.id, !item.status_request)}
+              onStatusChange={() =>
+                handleUpdateRequestStatus(item.id, !item.status_request)
+              }
             />
           ))
         )}
