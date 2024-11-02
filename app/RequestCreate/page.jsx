@@ -6,7 +6,9 @@ export default function RequestCreate() {
   return (
     <div className={styles.generalDiv}>
       <Header />
+      <div className={styles.component}>
       <RequestCreateComponent />
+      </div>
     </div>
   );
 }
