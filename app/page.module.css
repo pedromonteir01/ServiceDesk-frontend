@@ -32,7 +32,7 @@
 .containerText {
     display: flex;
     flex-direction: column;
-    margin-left: 50rem;
+    margin-left: 40rem;
 }
 
 .containerBoth {
@@ -75,6 +75,12 @@
     margin-top: 3rem;
     font-size: 30px;
 }
+.titlef{
+    text-align: center;
+    width: 100%;
+    margin-top: 3rem;
+    font-size: 30px;
+}
 
 .titlefUser {
     text-decoration: underline;
@@ -98,7 +104,7 @@
 }
 
 .button {
-    padding: 0.5rem;
+    padding: 0.7rem;
     align-self: center;
     width: 25%;
     text-align: center;

@@ -24,7 +24,7 @@ export default function Home() {
         </p>
       </div>
       <div className={styles.containerText}>
-      <h1 className={styles.title}>
+      <h1 className={styles.titlef}>
         Conheça a nossa funcionalidade 
       </h1>
       <p className={styles.description}>
