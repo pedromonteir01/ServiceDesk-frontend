@@ -13,30 +13,13 @@ import {
   getRequestByLocal,
 } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function RequestComponent() {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterValue, setFilterValue] = useState("");
   const router = useRouter();
-
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const data = await getAllRequests();
-      if (Array.isArray(data.requests)) {
-        setRequests(data.requests);
-      }
-    } catch (error) {
-      console.error("Erro ao buscar requisições:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
 
   const handleDeleteRequest = async (id) => {
     try {
@@ -67,24 +50,43 @@ export default function RequestComponent() {
   const handleRequestCreate = () => {
     router.push("/RequestCreate");
   };
-
-  const handleFilterRequests = async (local) => {
-    setLoading(true);
-    try {
-      const filteredData = local
-        ? await getRequestByLocal(local)
-        : await getAllRequests();
-      setRequests(filteredData.requests || []);
-    } catch (error) {
-      console.error("Erro ao filtrar requisições:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  /*
+    const handleFilterRequests = async (local) => {
+      setLoading(true);
+      try {
+        const filteredData = local
+          ? await getRequestByLocal(local)
+          : await getAllRequests();
+        setRequests(filteredData.requests || []);
+      } catch (error) {
+        console.error("Erro ao filtrar requisições:", error);
+      } finally {
+        setLoading(false);
+      }
+    }; 
+  */
   useEffect(() => {
-    handleFilterRequests(filterValue);
-  }, [filterValue]);
+    setLoading(true);
+    const fetchRequests = async () => {
+      try {
+        const data = await getAllRequests();
+        if (data.requests) {
+          setRequests(data.requests);
+        } else {
+          toast.error(data.success.toUpperCase());
+        }
+      } catch (e) {
+        toast.error(e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchRequests();
+  }, []);
+  /*
+    useEffect(() => {
+      handleFilterRequests(filterValue);
+    }, [filterValue]); */
 
   const sortedRequests = [...requests].sort(
     (a, b) => (a.status_request ? 1 : 0) - (b.status_request ? 1 : 0)
@@ -97,10 +99,10 @@ export default function RequestComponent() {
       </section>
 
       <section className={styles.requestButton}>
-  <button className={styles.buttonRequest} onClick={handleRequestCreate}>
-    Adicionar Requisição
-  </button>
-</section>
+        <button className={styles.buttonRequest} onClick={handleRequestCreate}>
+          Adicionar Requisição
+        </button>
+      </section>
 
 
       <section className={styles.table}>
@@ -113,26 +115,24 @@ export default function RequestComponent() {
               ariaLabel="tail-spin-loading"
             />
           </div>
-        ) : sortedRequests.length === 0 ? (
-          <div className={styles.errorTxtDiv}>
-            {toast.error("Nenhuma requisição encontrada", { duration: 3000 })}
-          </div>
-        ) : (
-          sortedRequests.map((item) => (
-            <RenderTest
-              key={item.id || item.local}
-              local={item.local}
-              desc={item.description}
-              autor={item.email}
-              status={item.status_request ? "CONCLUIDO" : "PENDENTE"}
-              onRemove={() => handleDeleteRequest(item.id)}
-              onEdit={() => console.log("Editar não implementado ainda")}
-              onStatusChange={() =>
-                handleUpdateRequestStatus(item.id, !item.status_request)
-              }
-            />
-          ))
-        )}
+        ) : sortedRequests.length !== 0 ?
+            sortedRequests.map((item) => (
+              <RenderTest
+                key={item.id || item.local}
+                local={item.local}
+                desc={item.description}
+                autor={item.email}
+                status={item.status_request ? "CONCLUIDO" : "PENDENTE"}
+                onRemove={() => handleDeleteRequest(item.id)}
+                onEdit={() => console.log("Editar não implementado ainda")}
+                onStatusChange={() =>
+                  handleUpdateRequestStatus(item.id, !item.status_request)
+                }
+              />
+            ))
+            : 
+              <p style={{ fontSize: 25, margin: 5 }}>REALIZE ALGUMA REQUISIÇÃO!</p>
+        }
       </section>
     </article>
   );
