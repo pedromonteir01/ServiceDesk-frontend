@@ -49,7 +49,7 @@ const RequestCreateComponent = () => {
   };
  */
   const requestCreate = async (title, description, local /* image */) => {
-    const date_request = new Date().toISOString();
+    const date_request = new Date();
     const date_conclusion = new Date().toISOString();
     const status_request = "inconclued";
 
@@ -58,27 +58,30 @@ const RequestCreateComponent = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("title", title);
-    /*    formData.append("image", image); */
-    formData.append("description", description);
-    formData.append("local", local);
-    formData.append("status_request", status_request);
-    formData.append("date_request", date_request);
-    formData.append("date_conclusion", date_conclusion);
-    formData.append("email", email);
+    console.log(date_request.getUTCDate);
+
+    const request = {
+      title: title,
+      description: description,
+      local: local,
+      image: null,
+      status_request: 'inconclued',
+      date_request: date_request,
+      date_conclusion: null,
+      email: user.email
+    }
 
     try {
       const token = localStorage.getItem("usertoken");
-      const response = await createRequest(formData, token);
-      if (response.error) {
+      const response = await createRequest(request, token);
+      if (response.errors) {
         console.error("Server error:", response);
         toast.error(response.message || "Erro ao criar requisição");
         return;
+      } else {
+        toast.success("REQUISIÇÃO CRIADA");
+        router.replace("/Request");
       }
-
-      toast.success("REQUISIÇÃO CRIADA");
-      router.replace("/Request");
     } catch (error) {
       console.error("Client-side error:", error);
       toast.error("Erro ao criar requisição");
