@@ -1,13 +1,11 @@
 .card {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
   flex-direction: column;
   background-color: #fff;
   width: 100%;
-  max-width: 400px; 
-  padding: 1.5rem; 
-  margin: 1.5rem;
+  max-width: 400px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -27,7 +25,7 @@
 }
 
 .title {
-  font-size: 1.8rem; 
+  font-size: 1.8rem;
   color: #222;
   margin-bottom: 0.5rem;
   font-weight: bold;
@@ -36,13 +34,13 @@
 }
 
 .description {
-  font-size: 1.1rem; 
+  font-size: 1.1rem;
   margin: 1rem 0;
-  color: #666; 
+  color: #666;
 }
 
 .author {
-  font-size: 0.9rem; 
+  font-size: 0.9rem;
   color: #888;
   margin-bottom: 1rem;
 }
@@ -58,42 +56,42 @@
 }
 
 .statusPending {
-  background-color: #ff7700; 
+  background-color: #ff7700;
+  margin-bottom: 0.5rem;
 }
 
 .statusCompleted {
-  background-color: #00b609; 
+  background-color: #00b609;
 }
 
 .actions {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: auto;
 }
 
 .btnRemove,
 .btnEdit,
 .btnStatus {
-  background-color: #f44336; 
+  background-color: #f44336;
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 10px;
   cursor: pointer;
-  border: none; 
+  border: none;
   transition: background-color 0.3s;
 }
 
 .btnRemove:hover,
 .btnEdit:hover,
 .btnStatus:hover {
-  background-color: #c62828; 
+  background-color: #c62828;
 }
 
 @media screen and (max-width: 768px) {
   .card {
-    width: 90%;
-    margin: 1rem 0;
+    max-width: 95%;
   }
 
   .title {
@@ -106,5 +104,78 @@
 
   .author {
     font-size: 0.8rem;
+  }
+
+}
+
+@media screen and (max-width: 640px) {
+  .card {
+    max-width: 90%;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btnRemove,
+  .btnEdit,
+  .btnStatus {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    max-width: 85%;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .author {
+    font-size: 0.7rem;
+  }
+
+  .statusPending,
+  .statusCompleted {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card {
+    max-width: 90%;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .description {
+    font-size: 0.8rem;
+  }
+
+  .author {
+    font-size: 0.6rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btnRemove,
+  .btnEdit,
+  .btnStatus {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
   }
 }
