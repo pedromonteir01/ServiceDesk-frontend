@@ -95,7 +95,7 @@ export default function RequestComponent() {
   return (
     <article className={styles.container}>
       <section className={styles.filters}>
-        <h1>Gestão de Requisições</h1>
+        <h1 className={styles.h1}>Gestão de Requisições</h1>
       </section>
 
       <section className={styles.requestButton}>
