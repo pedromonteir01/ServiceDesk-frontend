@@ -92,6 +92,7 @@
 @media screen and (max-width: 768px) {
   .card {
     max-width: 95%;
+    margin: auto;
   }
 
   .title {
@@ -105,12 +106,12 @@
   .author {
     font-size: 0.8rem;
   }
-
 }
 
 @media screen and (max-width: 640px) {
   .card {
     max-width: 90%;
+    margin: auto;
   }
 
   .actions {
