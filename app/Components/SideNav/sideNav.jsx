@@ -5,7 +5,7 @@ import {
   FaRegSun,
   FaUserLock,
   FaUserCog,
-  FaHiking
+  FaHiking,
 } from "react-icons/fa";
 import SidebarItem from "../SidebarItem/SidebarItem";
 import styles from "./sideNav.module.css";
@@ -21,8 +21,8 @@ const Sidebar = ({ isActive, onClose }) => {
   const logoff = () => {
     setUser(null);
     localStorage.clear();
-    router.replace('/');
-  }
+    router.replace("/");
+  };
 
   return (
     <div
@@ -41,14 +41,17 @@ const Sidebar = ({ isActive, onClose }) => {
         {user ? (
           <>
             <SidebarItem Icon={FaUserCog} Text="Perfil" href="/Login" />
-            {
-              user.isadmin && <SidebarItem Icon={FaUserLock} Text="Registrar" href="/Register" />
-            }
-            <div onClick={logoff}>
-              <SidebarItem Icon={FaHiking} Text='Sair' href='./' />
+            {user.isadmin && (
+              <SidebarItem
+                Icon={FaUserLock}
+                Text="Registrar"
+                href="/Register"
+              />
+            )}
+            <div onClick={logoff} className={styles.exit}>
+              <SidebarItem Icon={FaHiking} Text="Sair" href="./" />
             </div>
           </>
-
         ) : (
           <>
             <SidebarItem Icon={FaUserLock} Text="Registrar" href="/Register" />
