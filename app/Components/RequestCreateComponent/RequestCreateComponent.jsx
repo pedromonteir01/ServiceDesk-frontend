@@ -10,11 +10,11 @@ import toast from "react-hot-toast";
 const RequestCreateComponent = () => {
   const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState(null);
+  /*   const [image, setImage] = useState(null); */
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
   const [email, setEmail] = useState("");
-  const [imagePreview, setImagePreview] = useState(null);
+  /*   const [imagePreview, setImagePreview] = useState(null); */
   const [locais, setLocais] = useState([]);
   const router = useRouter();
 
@@ -40,27 +40,27 @@ const RequestCreateComponent = () => {
     fetchLocais();
   }, []);
 
-  const handleImageChange = (event) => {
+  /*   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setImage(file);
       setImagePreview(URL.createObjectURL(file));
     }
   };
-
-  const requestCreate = async (title, description, local, image) => {
+ */
+  const requestCreate = async (title, description, local /* image */) => {
     const date_request = new Date().toISOString();
     const date_conclusion = new Date().toISOString();
     const status_request = "inconclued";
 
-    if (!title || !description || !local || !image) {
+    if (!title || !description || !local /* || !image */) {
       toast.error("PREENCHA TODOS OS CAMPOS");
       return;
     }
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("image", image);
+    /*    formData.append("image", image); */
     formData.append("description", description);
     formData.append("local", local);
     formData.append("status_request", status_request);
@@ -94,7 +94,7 @@ const RequestCreateComponent = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          requestCreate(title, description, local, image);
+          requestCreate(title, description, local, /* image */);
         }}
       >
         <label className={styles.label}>Assunto:</label>
@@ -111,7 +111,7 @@ const RequestCreateComponent = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <label className={styles.label}>Imagem</label>
+        {/*  <label className={styles.label}>Imagem</label>
         <div
           className={styles.imageUpload}
           onClick={() => document.querySelector(`.${styles.fileInput}`).click()}
@@ -138,7 +138,7 @@ const RequestCreateComponent = () => {
             )}
             <p className={styles.fileName}>{image.name}</p>
           </div>
-        )}
+        )} */}
 
         <label className={styles.label}>Qual foi o local?</label>
         <select
