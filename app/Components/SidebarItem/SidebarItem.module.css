@@ -1,36 +1,43 @@
 .container {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  font-size: 18px;
+  color: white;
+  padding: 0.2rem;
+  margin: 0.7rem;
+  cursor: pointer;
+}
+
+.container svg {
+  margin: 8px;
+  font-size: 20px;
+}
+
+.container:hover {
+  color: #ffffff;
+  background-color: #ce0000;
+  width: 80%;
+  border-radius: 12px;
+  scale: 1.1;
+  transition: 0.1s ease-in-out;
+}
+
+.container:hover svg {
+  color: #d6d6d6;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
     display: flex;
     align-items: center;
-    background-color: transparent;
-    font-size: 18px;
-    color: white;
-    padding: 0.2rem;
-    margin: 0.7rem;
-    cursor: pointer;
-  }
-  
-  .container svg {
-    margin: 8px;
-    font-size: 20px;
+    flex-direction: column;
+    width: 100%;
   }
 
-    .container:hover {
-    color: #ffffff;
-    background-color: #ce0000;
-    width: 80%;
-    border-radius: 12px;
-    scale: 1.1;
-    transition: 0.1s ease-in-out;
-
+  .container span {
+    width: 100%;
+    text-align: center;
+    font-size: 9px;
   }
-  
-  .container:hover svg {
-    color: #d6d6d6;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .container span{
-      display: none;
-    }
-  }
-  
+}
