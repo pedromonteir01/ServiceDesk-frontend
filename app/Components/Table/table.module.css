@@ -34,14 +34,9 @@
 
   .theader {
     padding: 8px;
-    width: 100%;
   }
 
   .tdata {
-    padding: 8px;
-  }
-
-  .trow {
-    display: block;
+    padding: 2px;
   }
 }
