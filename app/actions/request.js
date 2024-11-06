@@ -4,6 +4,7 @@ import axios from "axios";
 
 // const api = process.env.URL;
 const api = process.env.URL + "/requests";
+const apif = process.env.URL 
 
 export const getAllRequests = async () => {
   try {
@@ -71,15 +72,17 @@ export const getRequestByUser = async (user) => {
 export const createRequest = async (formData, token) => {
   console.log("testando createRequest");
   console.log("FormData no actions:", formData);
+  const USER_ID = 123;
   try {
     // const response = await axios.post(`${api}/upload-image`, formData, {
     //   headers: {
     //     Authorization: `Bearer ${token}`,
     //   },
     // });
-    const response = await axios.post(`${api}/requests`, formData, {
+    const response = await axios.post(`${apif}/requests`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
+        'x-user-id': USER_ID
       },
     });
     console.log("Response from upload-image:", response.data);
