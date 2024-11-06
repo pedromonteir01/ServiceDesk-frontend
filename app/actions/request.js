@@ -69,26 +69,38 @@ export const getRequestByUser = async (user) => {
 };
 
 export const createRequest = async (formData, token) => {
-  console.log("testando createRequest");
-  console.log("FormData no actions:", formData);
+  console.log("Testing createRequest");
+  console.log("FormData in actions:", formData);
+  
   try {
-    // const response = await axios.post(`${api}/upload-image`, formData, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // });
-    const response = await axios.post(`${api}/requests`, formData, {
+    const response = await axios.post(`${api}/request-create`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
       },
+      validateStatus: function(status) {
+        return status >= 200 && status < 300; // Default
+      }
     });
-    console.log("Response from upload-image:", response.data);
+    
+    console.log("Response from createRequest:", response.data);
     return response.data;
-  } catch (e) {
-    console.log("Error creating request:", e.response ? e.response.data : e);
-    return { error: "Error creating request", message: e.message };
+  } catch (error) {
+    console.error("Error creating request:", error.response ? error.response.data : error);
+    if (error.response) {
+      console.log("Status:", error.response.status);
+      console.log("Data:", error.response.data);
+      console.log("Headers:", error.response.headers);
+    } else if (error.request) {
+      console.log("No response received");
+    } else {
+      console.log("Error message:", error.message);
+    }
+    
+    return { error: "Error creating request", message: error.message };
   }
 };
+
 
 export const updateRequest = async (id, request) => {
   try {
