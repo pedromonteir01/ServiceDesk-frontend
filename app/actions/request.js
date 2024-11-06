@@ -78,6 +78,7 @@ export const createRequest = async (requestData, token) => {
       headers: {
         Authorization: `Bearer ${token}`,
         'x-user-id': USER_ID,
+        'Content-Type': 'application/json'
       },
     });
     console.log("Response from createRequest:", response.data);
