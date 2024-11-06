@@ -68,9 +68,9 @@ export const getRequestByUser = async (user) => {
   }
 };
 
-export const createRequest = async (formData, token) => {
+export const createRequest = async (formData, formImage, token) => {
   console.log("testando createRequest");
-  console.log("FormData no actions:", formData);
+  console.log("FormData no actions:", formData, formImage);
   try {
     // const response = await axios.post(`${api}/upload-image`, formData, {
     //   headers: {

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import axiosClient from '../config/axios';
 import toast from 'react-hot-toast';
 const useMutation = ({ url, method = 'POST' }) => {
-  const toast = useToast();
   const [state, setState] = useState({
     isLoading: false,
     error: '',

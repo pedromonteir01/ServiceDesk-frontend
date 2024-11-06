@@ -12,13 +12,27 @@ import toast from "react-hot-toast";
 const RequestCreateComponent = () => {
   const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState(null);
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
   const [email, setEmail] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const [locais, setLocais] = useState([]);
   const router = useRouter();
+  const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+  const URL = '/images';
+  const [refetch, setRefetch] = useState(0);
+
+  const {
+    mutate: uploadImage,
+    isLoading: uploading,
+    error: uploadError,
+  } = useMutation({ url: URL });
+
+  const {
+    data: imageUrls = [],
+    isLoading: imagesLoading,
+    error: fetchError,
+  } = useQuery(URL, refetch);
 
   useEffect(() => {
     if (user) {
@@ -42,14 +56,15 @@ const RequestCreateComponent = () => {
     fetchLocais();
   }, []);
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
-    }
-  };
+  
+  const handleUpload = async e => {
+    const file = e.target.files[0];
 
+    if (!validFileTypes.find(type => type === file.type)) {
+      setError('File must be in JPG/PNG format');
+      return;
+    }
+  }
   const requestCreate = async (title, description, local, image) => {
     const date_request = new Date().toISOString();
     const date_conclusion = new Date().toISOString();
@@ -62,7 +77,6 @@ const RequestCreateComponent = () => {
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("image", image);
     formData.append("description", description);
     formData.append("local", local);
     formData.append("status_request", status_request);
@@ -70,9 +84,13 @@ const RequestCreateComponent = () => {
     formData.append("date_conclusion", date_conclusion);
     formData.append("email", email);
 
+    const formImage = new FormData();
+    formImage.append("file", image);
+    await uploadImage(formImage);
+
     try {
       const token = localStorage.getItem("usertoken");
-      const response = await createRequest(formData, token);
+      const response = await createRequest(formData, token, formImage);
       if (response.error) {
         console.error("Server error:", response);
         toast.error(response.message || "Erro ao criar requisição");
@@ -86,7 +104,6 @@ const RequestCreateComponent = () => {
       toast.error("Erro ao criar requisição");
     }
   };
-
   return (
     <div className={styles.main}>
       <h1 className={styles.title}>
@@ -113,6 +130,7 @@ const RequestCreateComponent = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
 
+
         <label className={styles.label}>Imagem</label>
         <div
           className={styles.imageUpload}
@@ -121,7 +139,7 @@ const RequestCreateComponent = () => {
           <input
             type="file"
             name="image"
-            onChange={handleImageChange}
+            onChange={handleUpload}
             className={styles.fileInput}
             accept="image/*"
           />
@@ -129,7 +147,7 @@ const RequestCreateComponent = () => {
           <span>Inserir imagem</span>
         </div>
 
-        {image && (
+        {/* {image && (
           <div className={styles.previewContainer}>
             {imagePreview && (
               <img
@@ -140,7 +158,7 @@ const RequestCreateComponent = () => {
             )}
             <p className={styles.fileName}>{image.name}</p>
           </div>
-        )}
+        )} */}
 
         <label className={styles.label}>Qual foi o local?</label>
         <select
@@ -156,7 +174,13 @@ const RequestCreateComponent = () => {
           ))}
         </select>
 
-        <button className={styles.submitButton}>Criar Requisição</button>
+        <button className={styles.submitButton} 
+        disabled={uploading}
+        onClick={requestCreate}
+        type="submit">
+          Enviar
+  
+        </button>
       </form>
     </div>
   );
