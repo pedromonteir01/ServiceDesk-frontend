@@ -274,7 +274,7 @@ const AdminPage = () => {
             )}
           </div>
         </div>
-        <button onClick={() => setEdit(true)}>Mudar senha</button>
+        <button className={styles.button} onClick={() => setEdit(true)}>Mudar senha</button>
       </section>
       <section className={styles.table}>
         {typeSearch == "user" ? (

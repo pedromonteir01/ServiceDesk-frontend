@@ -3,6 +3,8 @@ import { useRouter } from 'next/navigation';
 import styles from './userPage.module.css';
 import { UserContext } from '@/app/contexts/userContext';
 import { compare, getUserByEmail, updateUser } from '@/app/actions/users';
+import Modal from '../Modal/Modal';
+import ChangePassword from '../ChangePassword/ChangePassword';
 
 const UserPage = () => {
     const { user, setUser } = useContext(UserContext);
@@ -109,6 +111,12 @@ const UserPage = () => {
                 </div>
 
             </section>
+            {
+                edit &&
+                <Modal>
+                    <ChangePassword/>
+                </Modal>
+            }
         </article>
     );
 }
