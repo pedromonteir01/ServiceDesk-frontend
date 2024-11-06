@@ -29,11 +29,11 @@ const RequestCreateComponent = () => {
     error: uploadError,
   } = useMutation({ url: URL });
 
-  const {
-    data: imageUrls = [],
-    isLoading: imagesLoading,
-    error: fetchError,
-  } = useQuery(URL, refetch);
+  // const {
+  //   data: imageUrls = [],
+  //   isLoading: imagesLoading,
+  //   error: fetchError,
+  // } = useQuery(URL, refetch);
 
   useEffect(() => {
     if (user) {
