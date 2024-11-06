@@ -15,11 +15,12 @@ const RequestCreateComponent = () => {
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [locais, setLocais] = useState([]);
   const router = useRouter();
   const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-  const URL = '/images';
+  const URL = 'http://localhost:4000/requests';
   const [refetch, setRefetch] = useState(0);
 
   const {
@@ -59,7 +60,7 @@ const RequestCreateComponent = () => {
   
   const handleUpload = async e => {
     const file = e.target.files[0];
-
+    setImage(file);
     if (!validFileTypes.find(type => type === file.type)) {
       setError('File must be in JPG/PNG format');
       return;
@@ -75,22 +76,23 @@ const RequestCreateComponent = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("local", local);
-    formData.append("status_request", status_request);
-    formData.append("date_request", date_request);
-    formData.append("date_conclusion", date_conclusion);
-    formData.append("email", email);
+    const formData = new FormData();  
+    formData.append("title", title);  
+    formData.append("description", description);  
+    formData.append("local", local);  
+    formData.append("file", image);  
+    formData.append("status_request", status_request);  
+    formData.append("date_request", date_request);  
+    formData.append("date_conclusion", date_conclusion);  
+    formData.append("email", email);  
+   
+    await uploadImage(formData);  
 
-    const formImage = new FormData();
-    formImage.append("file", image);
-    await uploadImage(formImage);
+  
 
     try {
       const token = localStorage.getItem("usertoken");
-      const response = await createRequest(formData, token, formImage);
+      const response = await createRequest(formData, token);
       if (response.error) {
         console.error("Server error:", response);
         toast.error(response.message || "Erro ao criar requisição");
@@ -147,18 +149,18 @@ const RequestCreateComponent = () => {
           <span>Inserir imagem</span>
         </div>
 
-        {/* {image && (
+        {image && (
           <div className={styles.previewContainer}>
             {imagePreview && (
               <img
-                src={imagePreview}
+                src={image}
                 alt="Imagem Preview"
                 className={styles.imagePreview}
               />
             )}
             <p className={styles.fileName}>{image.name}</p>
           </div>
-        )} */}
+        )} 
 
         <label className={styles.label}>Qual foi o local?</label>
         <select
