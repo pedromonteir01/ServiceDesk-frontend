@@ -69,30 +69,24 @@ export const getRequestByUser = async (user) => {
   }
 };
 
-export const createRequest = async (formData, token) => {
+export const createRequest = async (requestData, token) => {
   console.log("testando createRequest");
-  console.log("FormData no actions:", formData);
+  console.log("Request Data no actions:", requestData);
   const USER_ID = 123;
   try {
-    // const response = await axios.post(`${api}/upload-image`, formData, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // });
-    const response = await axios.post(`${apif}/requests`, formData, {
+    const response = await axios.post(`${api}/requests`, requestData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'x-user-id': USER_ID
+        'x-user-id': USER_ID,
       },
     });
-    console.log("Response from upload-image:", response.data);
+    console.log("Response from createRequest:", response.data);
     return response.data;
   } catch (e) {
     console.log("Error creating request:", e.response ? e.response.data : e);
     return { error: "Error creating request", message: e.message };
   }
 };
-
 export const updateRequest = async (id, request) => {
   try {
     const response = await axios.put(`${api}/${id}`, request);
