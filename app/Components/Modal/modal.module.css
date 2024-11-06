@@ -12,7 +12,8 @@
 }
 
 .modal {
-    width: 40vw;
+    width: 100%;
+    max-width: 20vw;
     border-radius: 12px;
     background-color: white;
     display: flex;
@@ -31,7 +32,7 @@
 
 .close {
     color: white;
-    background-color: #cc0000;
+    background-color: #ff0000;
     border-radius: 5px;
     width: 3rem;
     border: none;

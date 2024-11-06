@@ -63,7 +63,7 @@
 }
 
 .inputSearch:focus {
-  border-color: #007bff;
+  border-color: #cc0000;
   outline: none;
 }
 
@@ -87,6 +87,18 @@
   gap: 0.5rem;
   padding: 1rem;
   justify-content: center;
+}
+
+.button {
+  background-color: #ff0000;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
 }
 
 @media screen and (max-width: 768px) {
