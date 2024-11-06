@@ -6,6 +6,8 @@ import { getAllUsers, getUserByName, getUserByRole } from '@/app/actions/users';
 import { getAllRequests, getRequestByStatus, getRequestsByName } from '@/app/actions/request';
 import { getAllReqsWithLocals } from '@/app/actions/data';
 import format from '@/app/utilities/formattedDate';
+import Modal from '../Modal/Modal';
+import ChangePassword from '../ChangePassword/ChangePassword';
 
 const AdminPage = () => {
 
@@ -18,6 +20,9 @@ const AdminPage = () => {
     const [finish, setFinish] = useState('');
     const [byUser, setByUser] = useState('');
 
+    //for edit
+    const [edit, setEdit] = useState(false);
+
     //resposta para tabela
     const [response, setResponse] = useState([]);
 
@@ -28,9 +33,9 @@ const AdminPage = () => {
             else if (option != '') result = await getUserByRole(option);
             else result = await getAllUsers();
 
-            if(!result.users) {
+            if (!result.users) {
                 setResponse([]);
-                if(result.message) {
+                if (result.message) {
                     toast.error(result.message, { duration: 3000 })
                     return false;
                 } else {
@@ -55,9 +60,9 @@ const AdminPage = () => {
             else if (optionSearch == 'status') result = await getRequestByStatus(option);
             else result = await getAllRequests();
 
-            if(!result.requests) {
+            if (!result.requests) {
                 setResponse([]);
-                if(result.message) {
+                if (result.message) {
                     toast.error(result.message, { duration: 3000 })
                     return false;
                 } else {
@@ -272,6 +277,7 @@ const AdminPage = () => {
                         }
                     </div>
                 </div>
+                <button onClick={() => setEdit(true)}>Mudar senha</button>
             </section>
             <section className={styles.table}>
                 {
@@ -280,6 +286,12 @@ const AdminPage = () => {
                         <Table atributtes={['título', 'local', 'status', 'dia criado', 'dia finalizado', 'usuário']} content={response} />
                 }
             </section>
+            {
+                edit &&
+                <Modal closeModal={() => setEdit(false)} isOpen={edit}>
+                    <ChangePassword/>
+                </Modal>
+            }
         </article>
     )
 }
