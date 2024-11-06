@@ -13,15 +13,16 @@ import format from "@/app/utilities/formattedDate";
 import Modal from "../Modal/Modal";
 import ChangePassword from "../ChangePassword/ChangePassword";
 
-const AdminPage = () => {
-  //para pesquisa
-  const [typeSearch, setTypeSearch] = useState("user");
-  const [name, setName] = useState("");
-  const [optionSearch, setOptionSearch] = useState("name");
-  const [option, setOption] = useState("");
-  const [creation, setCreation] = useState("");
-  const [finish, setFinish] = useState("");
-  const [byUser, setByUser] = useState("");
+const AdminPage = () => { 
+
+    //para pesquisa
+    const [typeSearch, setTypeSearch] = useState('user');
+    const [name, setName] = useState('');
+    const [optionSearch, setOptionSearch] = useState('name');
+    const [option, setOption] = useState('');
+    const [creation, setCreation] = useState('');
+    const [finish, setFinish] = useState('');
+    const [byUser, setByUser] = useState('');
 
   //for edit
   const [edit, setEdit] = useState(false);
@@ -273,7 +274,7 @@ const AdminPage = () => {
             )}
           </div>
         </div>
-        <button onClick={() => setEdit(true)}>Mudar senha</button>
+        <button className={styles.button} onClick={() => setEdit(true)}>Mudar senha</button>
       </section>
       <section className={styles.table}>
         {typeSearch == "user" ? (
