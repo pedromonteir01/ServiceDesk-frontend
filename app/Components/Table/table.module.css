@@ -21,6 +21,7 @@
   padding: 12px;
   border: 1px solid black;
   text-align: center;
+  width: auto;
 }
 
 .none {
@@ -31,33 +32,19 @@
 
 @media screen and (max-width: 768px) {
   .container {
-    width: 100%;
-    max-width: 100%;
-    min-width: 100%;
-    border-collapse: collapse;
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
   }
 
   .theader {
-    padding: 12px;
-    border: 1px solid black;
-    font-weight: bold;
-    background-color: rgb(230, 230, 230);
-  }
-
-  .trow {
-    margin: 0;
+    padding: 8px;
   }
 
   .tdata {
-    padding: 12px;
-    border: 1px solid black;
-    text-align: center;
+    padding: 8px;
   }
 
-  .none {
-    font-size: x-large;
-    font-weight: bold;
-    text-transform: uppercase;
+  .head {
+    width: 100%;
   }
 }
