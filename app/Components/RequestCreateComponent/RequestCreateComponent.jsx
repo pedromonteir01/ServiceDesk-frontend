@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import useMutation from '../hooks/useMutation';
-import useQuery from '../hooks/useQuery';
+import useMutation from "@/app/hooks/useMutation";
+import useQuery from "@/app/hooks/useQuery";
 import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestCreateComponent.module.css";
 import { IoCloudDownloadOutline } from "react-icons/io5";
