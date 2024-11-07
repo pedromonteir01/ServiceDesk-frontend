@@ -73,7 +73,7 @@ export const createRequest = async (requestData, token) => {
   console.log("testando createRequest");
   console.log("Request Data no actions:", requestData);
   try {
-    const response = await axios.post(`${api}/requests`, requestData, {
+    const response = await axios.post(`${apif}/requests`, requestData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
