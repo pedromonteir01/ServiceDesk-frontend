@@ -66,33 +66,43 @@ const RequestCreateComponent = () => {
       return;
     }
   }
-         const requestCreate = async (title, description, local, image) => {
-          const date_request = new Date().toISOString();
-          const date_conclusion = new Date().toISOString();
-          const status_request = "inconclued";
-        
-          if (!title || !description || !local || !image) {
-            toast.error("PREENCHA TODOS OS CAMPOS");
-            return;
-          }
-        
-          // Convert image to base64 string
-          const imageBase64 = await convertToBase64(image);
-        
-          const requestData = {
-            title,
-            description,
-            local,
-            file: imageBase64,
-            status_request,
-            date_request,
-            date_conclusion,
-            email, 
-          };
-        
+
+  const convertToArrayBuffer = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const requestCreate = async (title, description, local, image) => {
+    const date_request = new Date().toISOString();
+    const date_conclusion = new Date().toISOString();
+    const status_request = "inconclued";
+
+    if (!title || !description || !local || !image) {
+      toast.error("PREENCHA TODOS OS CAMPOS");
+      return;
+    }
+
+    try {
+      const imageArrayBuffer = await convertToArrayBuffer(image);
+
+      const requestData = {
+        title,
+        description,
+        local,
+        image: Array.from(new Uint8Array(imageArrayBuffer)),
+        imageName: image.name,
+        imageType: image.type,
+        status_request,
+        date_request,
+        date_conclusion,
+        email,
+      };
           console.log("Request Data:", requestData);
         
-          try {
             const token = localStorage.getItem("refreshToken");
             const response = await createRequest(requestData, token);
             if (response.error) {
@@ -108,16 +118,7 @@ const RequestCreateComponent = () => {
             toast.error("Erro ao criar requisição");
           }
         };
-        
-        // Helper function to convert file to base64 string
-        const convertToBase64 = (file) => {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-          });
-        };
+      
         
         return (
           <div className={styles.main}>

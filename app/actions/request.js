@@ -72,12 +72,10 @@ export const getRequestByUser = async (user) => {
 export const createRequest = async (requestData, token) => {
   console.log("testando createRequest");
   console.log("Request Data no actions:", requestData);
-  const USER_ID = 123;
   try {
     const response = await axios.post(`${api}/requests`, requestData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'x-user-id': USER_ID,
         'Content-Type': 'application/json'
       },
     });
