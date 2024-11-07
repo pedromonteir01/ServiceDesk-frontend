@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { getAllUsers, getUserByName, getUserByRole } from "@/app/actions/users";
 import {
   getAllRequests,
+  getLocais,
   getRequestByStatus,
   getRequestsByName,
 } from "@/app/actions/request";
@@ -29,6 +30,7 @@ const AdminPage = () => {
 
   //resposta para tabela
   const [response, setResponse] = useState([]);
+  const [locals, setLocals] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -58,6 +60,10 @@ const AdminPage = () => {
     };
 
     const fetchReqs = async () => {
+
+      const localsBack = await getLocais();
+      if(localsBack.locais) setLocals(localsBack.locais);
+
       let result;
       if (name.trim()) result = await getRequestsByName(name);
       else if (optionSearch == "local")
@@ -167,8 +173,11 @@ const AdminPage = () => {
                       onChange={(e) => setOption(e.target.value)}
                     >
                       <option value="">Selecione...</option>
-                      <option value="teste1">Sala 1</option>
-                      <option value="teste2">Sala 2</option>
+                      {
+                        locals.map((local) => 
+                          (<option key={local.id} value={local.nome}>{local.nome}</option>)
+                        )
+                      }
                     </select>
                   </>
                 )}
@@ -182,8 +191,9 @@ const AdminPage = () => {
                       onChange={(e) => setOption(e.target.value)}
                     >
                       <option value="">Selecione...</option>
-                      <option value="inconclued">Concluído</option>
-                      <option value="conclued">Aguardando manutenção</option>
+                      <option value="conclued">Concluído</option>
+                      <option value="awaiting">Em andamento</option>
+                      <option value="inconclued">Aguardando manutenção</option>
                     </select>
                   </>
                 )}
