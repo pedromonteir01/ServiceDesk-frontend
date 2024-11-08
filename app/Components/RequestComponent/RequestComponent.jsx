@@ -122,6 +122,7 @@ export default function RequestComponent() {
                 local={item.local}
                 desc={item.description}
                 autor={item.email}
+                image={item.image}
                 status={item.status_request ? "CONCLUIDO" : "PENDENTE"}
                 onRemove={() => handleDeleteRequest(item.id)}
                 onEdit={() => console.log("Editar não implementado ainda")}
