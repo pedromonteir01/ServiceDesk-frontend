@@ -44,6 +44,11 @@
   font-weight: bold;
 }
 
+.linksSocial {
+  display: flex;
+  gap: 0.5em;
+}
+
 #senai:hover,
 .links:hover {
   border-radius: 8px;
@@ -59,6 +64,14 @@
 
 @media screen and (max-width: 768px) {
   .links {
+    display: none;
+  }
+
+  .barra {
+    display: none;
+  }
+
+  .linksSocial {
     display: none;
   }
 

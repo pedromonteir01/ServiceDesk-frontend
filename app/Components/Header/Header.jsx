@@ -54,45 +54,45 @@ const Header = () => {
           </Link>
         </li>
 
-        <li className={styles.links}>
+        <li className={styles.linksSocial}>
           <Link target="blank" href="https://www.facebook.com/senaisaopaulo">
-            <FaFacebookF />
+            <FaFacebookF color="#ffffff" />
           </Link>
         </li>
         <span className={styles.barra}>|</span>
-        <li className={styles.links}>
+        <li className={styles.linksSocial}>
           <Link target="blank" href="https://twitter.com/senaisaopaulo">
-            <FaTwitter />
+            <FaTwitter color="#ffffff" />
           </Link>
         </li>
         <span className={styles.barra}>|</span>
-        <li className={styles.links}>
+        <li className={styles.linksSocial}>
           <Link
             target="blank"
             href="https://www.youtube.com/channel/UCaz1BMUVug86pd_uS598X1A"
           >
-            <TfiYoutube />
+            <TfiYoutube color="#ffffff" />
           </Link>
         </li>
         <span className={styles.barra}>|</span>
-        <li className={styles.links}>
+        <li className={styles.linksSocial}>
           <Link target="blank" href="https://www.linkedin.com/company/senai-sp">
-            <FaLinkedinIn />
+            <FaLinkedinIn color="#ffffff" />
           </Link>
         </li>
         <span className={styles.barra}>|</span>
-        <li className={styles.links}>
+        <li className={styles.linksSocial}>
           <Link target="blank" href="https://www.instagram.com/senai.sp">
-            <FaInstagram />
+            <FaInstagram color="#ffffff" />
           </Link>
         </li>
         <span className={styles.barra}>|</span>
-        <li className={styles.links}>
+        <li className={styles.linksSocial}>
           <Link
             target="blank"
             href="https://api.whatsapp.com/send?phone=551133220050"
           >
-            <FaWhatsapp />
+            <FaWhatsapp color="#ffffff" />
           </Link>
         </li>
       </ul>

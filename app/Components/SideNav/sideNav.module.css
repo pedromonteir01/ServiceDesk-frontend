@@ -4,7 +4,6 @@
   top: 0px;
   left: 0px;
   z-index: 999;
-
 }
 
 .container {
@@ -40,7 +39,7 @@
   background-color: rgb(175, 175, 175);
   transition: 0.2s ease-in-out;
   scale: 1.1;
-} 
+}
 
 @keyframes showHeader {
   0% {
@@ -90,5 +89,9 @@
   }
   .container:hover svg {
     color: #d6d6d6;
+  }
+
+  .exit {
+    display: flex;
   }
 }

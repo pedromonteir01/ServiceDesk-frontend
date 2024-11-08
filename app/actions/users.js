@@ -89,9 +89,18 @@ export const deleteUser = async(email) => {
     }
 }
 
-export const changePassword = async(password) => {
+export const changePassword = async(password, confirmPassword, email, token) => {
     try {
-        const response = await axios.patch(`${api}/users/change/password${email}`, { password: password  });
+        const response = await axios.patch(
+            `${api}/users/change/password/${email}`, 
+            { password: password, confirmPassword: confirmPassword},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        console.log(response.data);
         return response.data;
     } catch(e) {
         return e.response.data || { error: 'operação fracassou' };

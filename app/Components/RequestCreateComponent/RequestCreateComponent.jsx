@@ -148,7 +148,7 @@ const RequestCreateComponent = () => {
               <label className={styles.label}>Imagem</label>
               <div
                 className={styles.imageUpload}
-                onClick={() => document.querySelector(`.${styles.fileInput}`).click()}
+                onClick={() => document.querySelector(.${styles.fileInput}).click()}
               >
                 <input
                   type="file"
