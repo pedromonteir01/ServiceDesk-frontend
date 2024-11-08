@@ -23,18 +23,6 @@ const RequestCreateComponent = () => {
   const URL = 'http://localhost:4000/requests';
   const [refetch, setRefetch] = useState(0);
 
-  // const {
-  //   mutate: uploadImage,
-  //   isLoading: uploading,
-  //   error: uploadError,
-  // } = useMutation({ url: URL });
-
-  // const {
-  //   data: imageUrls = [],
-  //   isLoading: imagesLoading,
-  //   error: fetchError,
-  // } = useQuery(URL, refetch);
-
   useEffect(() => {
     if (user) {
       setEmail(user.email);
@@ -57,15 +45,14 @@ const RequestCreateComponent = () => {
     fetchLocais();
   }, []);
 
-  
-  const handleUpload = async e => {
+  const handleUpload = async (e) => {
     const file = e.target.files[0];
     setImage(file);
-    if (!validFileTypes.find(type => type === file.type)) {
-      setError('File must be in JPG/PNG format');
+    if (!validFileTypes.includes(file.type)) {
+      toast.error("Arquivo deve estar em formato JPG/PNG");
       return;
     }
-  }
+  };
 
   const convertToArrayBuffer = (file) => {
     return new Promise((resolve, reject) => {
@@ -101,99 +88,98 @@ const RequestCreateComponent = () => {
         date_conclusion,
         email,
       };
-        
-            const token = localStorage.getItem("refreshToken");
-            const response = await createRequest(requestData, token);
-            if (response.error) {
-              console.error("Server error:", response);
-              toast.error(response.message || "Erro ao criar requisição");
-              return;
-            }
-        
-            toast.success("REQUISIÇÃO CRIADA");
-            router.replace("/Request");
-          } catch (error) {
-            console.error("Client-side error:", error);
-            toast.error("Erro ao criar requisição");
-          }
-        };
-      
-        
-        return (
-          <div className={styles.main}>
-            <h1 className={styles.title}>
-              Relate aqui seu <span className={styles.problemText}>problema</span>
-            </h1>
-        
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                requestCreate(title, description, local, image);
-              }}
-            >
-              <label className={styles.label}>Assunto:</label>
-              <input
-                type="text"
-                className={styles.titleInput}
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <label className={styles.label}>O que aconteceu? Descreva</label>
-              <textarea
-                className={styles.descriptionInput}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-        
-              <label className={styles.label}>Imagem</label>
-              <div
-                className={styles.imageUpload}
-                onClick={() => document.querySelector(.${styles.fileInput}).click()}
-              >
-                <input
-                  type="file"
-                  name="image"
-                  onChange={handleUpload}
-                  className={styles.fileInput}
-                  accept="image/*"
-                />
-                <IoCloudDownloadOutline color="#000" fontSize={30} />
-                <span>Inserir imagem</span>
-              </div>
-        
-              {image && (
-                <div className={styles.previewContainer}>
-                  {imagePreview && (
-                    <img
-                      src={imagePreview}
-                      alt="Imagem Preview"
-                      className={styles.imagePreview}
-                    />
-                  )}
-                  <p className={styles.fileName}>{image.name}</p>
-                </div>
-              )}
-        
-              <label className={styles.label}>Qual foi o local?</label>
-              <select
-                className={styles.select}
-                value={local}
-                onChange={(e) => setLocal(e.target.value)}
-              >
-                <option value="">Selecione o ambiente</option>
-                {locais.map((localItem) => (
-                  <option key={localItem.id} value={localItem.nome}>
-                    {localItem.nome}
-                  </option>
-                ))}
-              </select>
-        
-              <button className={styles.submitButton} type="submit">
-                Enviar
-              </button>
-            </form>
-          </div>
-        );
+
+      const token = localStorage.getItem("refreshToken");
+      const response = await createRequest(requestData, token);
+      if (response.error) {
+        console.error("Erro do servidor:", response);
+        toast.error(response.message || "Erro ao criar requisição");
+        return;
       }
+
+      toast.success("REQUISIÇÃO CRIADA");
+      router.replace("/Request");
+    } catch (error) {
+      console.error("Erro do lado do cliente:", error);
+      toast.error("Erro ao criar requisição");
+    }
+  };
+
+  return (
+    <div className={styles.main}>
+      <h1 className={styles.title}>
+        Relate aqui seu <span className={styles.problemText}>problema</span>
+      </h1>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestCreate(title, description, local, image);
+        }}
+      >
+        <label className={styles.label}>Assunto:</label>
+        <input
+          type="text"
+          className={styles.titleInput}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <label className={styles.label}>O que aconteceu? Descreva</label>
+        <textarea
+          className={styles.descriptionInput}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <label className={styles.label}>Imagem</label>
+        <div
+          className={styles.imageUpload}
+          onClick={() => document.querySelector(`.${styles.fileInput}`).click()}
+        >
+          <input
+            type="file"
+            name="image"
+            onChange={handleUpload}
+            className={styles.fileInput}
+            accept="image/*"
+          />
+          <IoCloudDownloadOutline color="#000" fontSize={30} />
+          <span>Inserir imagem</span>
+        </div>
+
+        {image && (
+          <div className={styles.previewContainer}>
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Imagem Preview"
+                className={styles.imagePreview}
+              />
+            )}
+            <p className={styles.fileName}>{image.name}</p>
+          </div>
+        )}
+
+        <label className={styles.label}>Qual foi o local?</label>
+        <select
+          className={styles.select}
+          value={local}
+          onChange={(e) => setLocal(e.target.value)}
+        >
+          <option value="">Selecione o ambiente</option>
+          {locais.map((localItem) => (
+            <option key={localItem.id} value={localItem.nome}>
+              {localItem.nome}
+            </option>
+          ))}
+        </select>
+
+        <button className={styles.submitButton} type="submit">
+          Enviar
+        </button>
+      </form>
+    </div>
+  );
+};
 
 export default RequestCreateComponent;
