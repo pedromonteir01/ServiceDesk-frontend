@@ -77,17 +77,32 @@ export default function RequestComponent() {
 
   return (
     <article className={styles.container}>
-      <section className={styles.filters}>
+      <motion.section
+        className={styles.filters}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
         <h1 className={styles.h1}>Gestão de Requisições</h1>
-      </section>
+      </motion.section>
 
-      <section className={styles.requestButton}>
+      <motion.section
+        className={styles.requestButton}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
         <button className={styles.buttonRequest} onClick={handleRequestCreate}>
           Adicionar Requisição
         </button>
-      </section>
+      </motion.section>
 
-      <section className={styles.table}>
+      <motion.section
+        className={styles.table}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.3 }}
+      >
         {loading ? (
           <div className={styles.loading}>
             <TailSpin
@@ -123,7 +138,7 @@ export default function RequestComponent() {
         ) : (
           <p className={styles.noRequestMsg}>REALIZE ALGUMA REQUISIÇÃO!</p>
         )}
-      </section>
+      </motion.section>
     </article>
   );
 }
