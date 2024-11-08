@@ -101,7 +101,6 @@ const RequestCreateComponent = () => {
         date_conclusion,
         email,
       };
-          console.log("Request Data:", requestData);
         
             const token = localStorage.getItem("refreshToken");
             const response = await createRequest(requestData, token);
