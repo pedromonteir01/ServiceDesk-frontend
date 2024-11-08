@@ -116,6 +116,10 @@
   width: 30%;
 }
 
+.removeImageButton:hover {
+  background-color: darkred;
+}
+
 .fileInput {
   display: none;
 }
