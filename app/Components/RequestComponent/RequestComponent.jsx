@@ -132,7 +132,7 @@ export default function RequestComponent() {
               />
             ))
             : 
-              <p style={{ fontSize: 25, margin: 5 }}>REALIZE ALGUMA REQUISIÇÃO!</p>
+              <p className={styles.noRequestMsg}>REALIZE ALGUMA REQUISIÇÃO!</p>
         }
       </section>
     </article>
