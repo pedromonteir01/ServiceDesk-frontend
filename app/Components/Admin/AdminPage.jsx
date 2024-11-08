@@ -13,17 +13,17 @@ import { getAllReqsWithLocals } from "@/app/actions/data";
 import format from "@/app/utilities/formattedDate";
 import Modal from "../Modal/Modal";
 import ChangePassword from "../ChangePassword/ChangePassword";
+import { motion } from "framer-motion"; // Importando o framer-motion
 
-const AdminPage = () => { 
-
-    //para pesquisa
-    const [typeSearch, setTypeSearch] = useState('user');
-    const [name, setName] = useState('');
-    const [optionSearch, setOptionSearch] = useState('name');
-    const [option, setOption] = useState('');
-    const [creation, setCreation] = useState('');
-    const [finish, setFinish] = useState('');
-    const [byUser, setByUser] = useState('');
+const AdminPage = () => {
+  //para pesquisa
+  const [typeSearch, setTypeSearch] = useState("user");
+  const [name, setName] = useState("");
+  const [optionSearch, setOptionSearch] = useState("name");
+  const [option, setOption] = useState("");
+  const [creation, setCreation] = useState("");
+  const [finish, setFinish] = useState("");
+  const [byUser, setByUser] = useState("");
 
   //for edit
   const [edit, setEdit] = useState(false);
@@ -60,9 +60,8 @@ const AdminPage = () => {
     };
 
     const fetchReqs = async () => {
-
       const localsBack = await getLocais();
-      if(localsBack.locais) setLocals(localsBack.locais);
+      if (localsBack.locais) setLocals(localsBack.locais);
 
       let result;
       if (name.trim()) result = await getRequestsByName(name);
@@ -109,9 +108,19 @@ const AdminPage = () => {
 
   return (
     <article className={styles.container}>
-      <section className={styles.filters}>
+      <motion.section
+        className={styles.filters}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         <div className={styles.options}>
-          <div className={styles.search}>
+          <motion.div
+            className={styles.search}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <h3>FILTRO:</h3>
             <div className={styles.typeSearch}>
               <label htmlFor="type">Usuário: </label>
@@ -173,11 +182,11 @@ const AdminPage = () => {
                       onChange={(e) => setOption(e.target.value)}
                     >
                       <option value="">Selecione...</option>
-                      {
-                        locals.map((local) => 
-                          (<option key={local.id} value={local.nome}>{local.nome}</option>)
-                        )
-                      }
+                      {locals.map((local) => (
+                        <option key={local.id} value={local.nome}>
+                          {local.nome}
+                        </option>
+                      ))}
                     </select>
                   </>
                 )}
@@ -223,8 +232,13 @@ const AdminPage = () => {
                 )}
               </>
             )}
-          </div>
-          <div className={styles.choice}>
+          </motion.div>
+          <motion.div
+            className={styles.choice}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
             <label htmlFor="choice">
               {typeSearch == "user" ? "Por nome: " : "Por título: "}
             </label>
@@ -282,11 +296,25 @@ const AdminPage = () => {
                 />
               </>
             )}
-          </div>
+          </motion.div>
         </div>
-        <button className={styles.button} onClick={() => setEdit(true)}>Mudar senha</button>
-      </section>
-      <section className={styles.table}>
+        <motion.button
+          className={styles.button}
+          onClick={() => setEdit(true)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+        >
+          Mudar senha
+        </motion.button>
+      </motion.section>
+      
+      <motion.section
+        className={styles.table}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
         {typeSearch == "user" ? (
           <Table
             atributtes={["nome", "email", "função", "acessos"]}
@@ -294,18 +322,19 @@ const AdminPage = () => {
           />
         ) : (
           <Table
-            atributtes={[
-              "título",
-              "local",
-              "status",
-              "dia criado",
-              "dia finalizado",
-              "usuário",
+            atributtes={[ 
+              "título", 
+              "local", 
+              "status", 
+              "dia criado", 
+              "dia finalizado", 
+              "usuário"
             ]}
             content={response}
           />
         )}
-      </section>
+      </motion.section>
+
       {edit && (
         <Modal closeModal={() => setEdit(false)} isOpen={edit}>
           <ChangePassword />
