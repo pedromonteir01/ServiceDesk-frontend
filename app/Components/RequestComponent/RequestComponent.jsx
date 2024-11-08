@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import styles from "./requestComponent.module.css";
 import { IoListOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
@@ -14,6 +14,7 @@ import {
 } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { motion } from 'framer-motion';
 
 export default function RequestComponent() {
   const [requests, setRequests] = useState([]);
@@ -50,21 +51,7 @@ export default function RequestComponent() {
   const handleRequestCreate = () => {
     router.push("/RequestCreate");
   };
-  /*
-    const handleFilterRequests = async (local) => {
-      setLoading(true);
-      try {
-        const filteredData = local
-          ? await getRequestByLocal(local)
-          : await getAllRequests();
-        setRequests(filteredData.requests || []);
-      } catch (error) {
-        console.error("Erro ao filtrar requisições:", error);
-      } finally {
-        setLoading(false);
-      }
-    }; 
-  */
+
   useEffect(() => {
     setLoading(true);
     const fetchRequests = async () => {
@@ -80,13 +67,9 @@ export default function RequestComponent() {
       } finally {
         setLoading(false);
       }
-    }
+    };
     fetchRequests();
   }, []);
-  /*
-    useEffect(() => {
-      handleFilterRequests(filterValue);
-    }, [filterValue]); */
 
   const sortedRequests = [...requests].sort(
     (a, b) => (a.status_request ? 1 : 0) - (b.status_request ? 1 : 0)
@@ -104,7 +87,6 @@ export default function RequestComponent() {
         </button>
       </section>
 
-
       <section className={styles.table}>
         {loading ? (
           <div className={styles.loading}>
@@ -115,8 +97,14 @@ export default function RequestComponent() {
               ariaLabel="tail-spin-loading"
             />
           </div>
-        ) : sortedRequests.length !== 0 ?
-            sortedRequests.map((item) => (
+        ) : sortedRequests.length !== 0 ? (
+          sortedRequests.map((item) => (
+            <motion.div
+              key={item.id || item.local}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
               <RenderTest
                 key={item.id || item.local}
                 local={item.local}
@@ -130,10 +118,11 @@ export default function RequestComponent() {
                   handleUpdateRequestStatus(item.id, !item.status_request)
                 }
               />
-            ))
-            : 
-              <p className={styles.noRequestMsg}>REALIZE ALGUMA REQUISIÇÃO!</p>
-        }
+            </motion.div>
+          ))
+        ) : (
+          <p className={styles.noRequestMsg}>REALIZE ALGUMA REQUISIÇÃO!</p>
+        )}
       </section>
     </article>
   );
