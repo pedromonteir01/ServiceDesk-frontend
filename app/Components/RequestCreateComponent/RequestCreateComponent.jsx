@@ -165,6 +165,19 @@ return (
           <p className={styles.fileName}>{image.name}</p>
         </div>
       )}
+      {imagePreview && (
+        <div className={styles.removeImageButtonDiv}>
+        <button
+          className={styles.removeImageButton}
+          onClick={() => {
+            setImagePreview(null);
+            setImage(null);
+          }}
+        >
+          Remover imagem
+        </button>
+      </div>
+      )}
 
       <label className={styles.label}>Qual foi o local?</label>
       <select
