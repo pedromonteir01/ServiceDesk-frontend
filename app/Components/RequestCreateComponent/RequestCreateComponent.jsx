@@ -8,6 +8,7 @@ import { IoCloudDownloadOutline } from "react-icons/io5";
 import { createRequest, getLocais } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion"; // Importando o framer-motion
 
 const RequestCreateComponent = () => {
   const { user } = useContext(UserContext);
@@ -52,7 +53,7 @@ const RequestCreateComponent = () => {
       toast.error("Arquivo deve estar em formato JPG/PNG");
       return;
     }
-  
+
     // Cria a pré-visualização da imagem
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -112,93 +113,121 @@ const RequestCreateComponent = () => {
     }
   };
 
- 
-return (
-  <div className={styles.main}>
-    <h1 className={styles.title}>
-      Relate aqui seu <span className={styles.problemText}>problema</span>
-    </h1>
+  return (
+    <motion.div className={styles.main} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+      <h1 className={styles.title}>
+        Relate aqui seu <span className={styles.problemText}>problema</span>
+      </h1>
 
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        requestCreate(title, description, local, image);
-      }}
-    >
-      <label className={styles.label}>Assunto:</label>
-      <input
-        type="text"
-        className={styles.titleInput}
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <label className={styles.label}>O que aconteceu? Descreva</label>
-      <textarea
-        className={styles.descriptionInput}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-
-      <label className={styles.label}>Imagem</label>
-      {!imagePreview ? (
-        <div
-          className={styles.imageUpload}
-          onClick={() => document.querySelector(`.${styles.fileInput}`).click()}
-        >
-          <input
-            type="file"
-            name="image"
-            onChange={handleUpload}
-            className={styles.fileInput}
-            accept="image/*"
-          />
-          <IoCloudDownloadOutline color="#000" fontSize={30} />
-          <span>Inserir imagem</span>
-        </div>
-      ) : (
-        <div className={styles.imagePreviewContainer}>
-          <img
-            src={imagePreview}
-            alt="Imagem Preview"
-            className={styles.imagePreview}
-          />
-          <p className={styles.fileName}>{image.name}</p>
-        </div>
-      )}
-      {imagePreview && (
-        <div className={styles.removeImageButtonDiv}>
-        <button
-          className={styles.removeImageButton}
-          onClick={() => {
-            setImagePreview(null);
-            setImage(null);
-          }}
-        >
-          Remover imagem
-        </button>
-      </div>
-      )}
-
-      <label className={styles.label}>Qual foi o local?</label>
-      <select
-        className={styles.select}
-        value={local}
-        onChange={(e) => setLocal(e.target.value)}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestCreate(title, description, local, image);
+        }}
       >
-        <option value="">Selecione o ambiente</option>
-        {locais.map((localItem) => (
-          <option key={localItem.id} value={localItem.nome}>
-            {localItem.nome}
-          </option>
-        ))}
-      </select>
+        <motion.label className={styles.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+          Assunto:
+        </motion.label>
+        <motion.input
+          type="text"
+          className={styles.titleInput}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        />
 
-      <button className={styles.submitButton} type="submit">
-        Enviar
-      </button>
-    </form>
-  </div>
-);
+        <motion.label className={styles.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+          O que aconteceu? Descreva
+        </motion.label>
+        <motion.textarea
+          className={styles.descriptionInput}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        />
+
+        <motion.label className={styles.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+          Imagem
+        </motion.label>
+        {!imagePreview ? (
+          <div
+            className={styles.imageUpload}
+            onClick={() => document.querySelector(`.${styles.fileInput}`).click()}
+          >
+            <input
+              type="file"
+              name="image"
+              onChange={handleUpload}
+              className={styles.fileInput}
+              accept="image/*"
+            />
+            <IoCloudDownloadOutline color="#000" fontSize={30} />
+            <span>Inserir imagem</span>
+          </div>
+        ) : (
+          <motion.div
+            className={styles.imagePreviewContainer}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <img
+              src={imagePreview}
+              alt="Imagem Preview"
+              className={styles.imagePreview}
+            />
+            <p className={styles.fileName}>{image.name}</p>
+          </motion.div>
+        )}
+        {imagePreview && (
+          <div className={styles.removeImageButtonDiv}>
+            <button
+              className={styles.removeImageButton}
+              onClick={() => {
+                setImagePreview(null);
+                setImage(null);
+              }}
+            >
+              Remover imagem
+            </button>
+          </div>
+        )}
+
+        <motion.label className={styles.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+          Qual foi o local?
+        </motion.label>
+        <motion.select
+          className={styles.select}
+          value={local}
+          onChange={(e) => setLocal(e.target.value)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <option value="">Selecione o ambiente</option>
+          {locais.map((localItem) => (
+            <option key={localItem.id} value={localItem.nome}>
+              {localItem.nome}
+            </option>
+          ))}
+        </motion.select>
+
+        <motion.button
+          className={styles.submitButton}
+          type="submit"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          Enviar
+        </motion.button>
+      </form>
+    </motion.div>
+  );
 };
 
 export default RequestCreateComponent;
