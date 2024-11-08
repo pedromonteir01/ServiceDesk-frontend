@@ -52,6 +52,13 @@ const RequestCreateComponent = () => {
       toast.error("Arquivo deve estar em formato JPG/PNG");
       return;
     }
+  
+    // Cria a pré-visualização da imagem
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const convertToArrayBuffer = (file) => {
@@ -105,33 +112,35 @@ const RequestCreateComponent = () => {
     }
   };
 
-  return (
-    <div className={styles.main}>
-      <h1 className={styles.title}>
-        Relate aqui seu <span className={styles.problemText}>problema</span>
-      </h1>
+ 
+return (
+  <div className={styles.main}>
+    <h1 className={styles.title}>
+      Relate aqui seu <span className={styles.problemText}>problema</span>
+    </h1>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          requestCreate(title, description, local, image);
-        }}
-      >
-        <label className={styles.label}>Assunto:</label>
-        <input
-          type="text"
-          className={styles.titleInput}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <label className={styles.label}>O que aconteceu? Descreva</label>
-        <textarea
-          className={styles.descriptionInput}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        requestCreate(title, description, local, image);
+      }}
+    >
+      <label className={styles.label}>Assunto:</label>
+      <input
+        type="text"
+        className={styles.titleInput}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <label className={styles.label}>O que aconteceu? Descreva</label>
+      <textarea
+        className={styles.descriptionInput}
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
 
-        <label className={styles.label}>Imagem</label>
+      <label className={styles.label}>Imagem</label>
+      {!imagePreview ? (
         <div
           className={styles.imageUpload}
           onClick={() => document.querySelector(`.${styles.fileInput}`).click()}
@@ -146,40 +155,37 @@ const RequestCreateComponent = () => {
           <IoCloudDownloadOutline color="#000" fontSize={30} />
           <span>Inserir imagem</span>
         </div>
+      ) : (
+        <div className={styles.imagePreviewContainer}>
+          <img
+            src={imagePreview}
+            alt="Imagem Preview"
+            className={styles.imagePreview}
+          />
+          <p className={styles.fileName}>{image.name}</p>
+        </div>
+      )}
 
-        {image && (
-          <div className={styles.previewContainer}>
-            {imagePreview && (
-              <img
-                src={imagePreview}
-                alt="Imagem Preview"
-                className={styles.imagePreview}
-              />
-            )}
-            <p className={styles.fileName}>{image.name}</p>
-          </div>
-        )}
+      <label className={styles.label}>Qual foi o local?</label>
+      <select
+        className={styles.select}
+        value={local}
+        onChange={(e) => setLocal(e.target.value)}
+      >
+        <option value="">Selecione o ambiente</option>
+        {locais.map((localItem) => (
+          <option key={localItem.id} value={localItem.nome}>
+            {localItem.nome}
+          </option>
+        ))}
+      </select>
 
-        <label className={styles.label}>Qual foi o local?</label>
-        <select
-          className={styles.select}
-          value={local}
-          onChange={(e) => setLocal(e.target.value)}
-        >
-          <option value="">Selecione o ambiente</option>
-          {locais.map((localItem) => (
-            <option key={localItem.id} value={localItem.nome}>
-              {localItem.nome}
-            </option>
-          ))}
-        </select>
-
-        <button className={styles.submitButton} type="submit">
-          Enviar
-        </button>
-      </form>
-    </div>
-  );
+      <button className={styles.submitButton} type="submit">
+        Enviar
+      </button>
+    </form>
+  </div>
+);
 };
 
 export default RequestCreateComponent;
