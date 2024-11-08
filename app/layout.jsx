@@ -17,17 +17,20 @@ const geistMono = localFont({
 export const metadata = {
   title: "Service Desk",
   description: "Balcão de atendimento virtual",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <UserProvider>
-          <Toaster 
-          position="bottom-left"
-          reverseOrder={false}
-          />
+          <Toaster position="bottom-left" reverseOrder={false} />
           {children}
         </UserProvider>
       </body>
