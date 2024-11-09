@@ -37,7 +37,7 @@ export default function RenderTest({
           <>
             <p
               className={
-                status === "PENDENTE"
+                status === "aguardando"
                   ? styles.statusPending
                   : styles.statusCompleted
               }

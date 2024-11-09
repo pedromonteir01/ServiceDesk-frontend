@@ -79,6 +79,12 @@ const RequestCreateComponent = () => {
     if (!title || !description || !local || !image) {
       toast.error("PREENCHA TODOS OS CAMPOS");
       return;
+    } else if (title.length < 6) {
+      toast.error("TÍTULO MUITO CURTO");
+      return;
+    } else if (description.length < 10) {
+      toast.error("DESCRIÇÃO MUITO CURTA");
+      return;
     }
 
     try {
