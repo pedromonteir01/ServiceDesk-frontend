@@ -1,14 +1,12 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import useMutation from "@/app/hooks/useMutation";
-import useQuery from "@/app/hooks/useQuery";
 import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestCreateComponent.module.css";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { createRequest, getLocais } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { motion } from "framer-motion"; // Importando o framer-motion
+import { motion } from "framer-motion"; 
 
 const RequestCreateComponent = () => {
   const { user } = useContext(UserContext);
