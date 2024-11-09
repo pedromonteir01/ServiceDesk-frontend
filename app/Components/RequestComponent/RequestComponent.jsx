@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./requestComponent.module.css";
-import { IoListOutline } from "react-icons/io5";
-import { CiSearch } from "react-icons/ci";
 import toast from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
 import RenderTest from "../RenderTest/renderTest";
@@ -13,7 +11,6 @@ import {
   getRequestByLocal,
 } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { motion } from 'framer-motion';
 
 export default function RequestComponent() {
