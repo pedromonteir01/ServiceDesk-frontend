@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import style from "@/app/Login/login.module.css";
 import toast from "react-hot-toast";
 import { UserContext } from "@/app/contexts/userContext";
+import { motion } from "framer-motion";
 
 const LoginComponent = () => {
   const { setUser, setAccessToken, setRefreshToken } = useContext(UserContext);
@@ -34,10 +35,25 @@ const LoginComponent = () => {
 
   return (
     <div className={style.loginContainer}>
-      <article className={style.loginBox}>
-        <h2 className={style.loginTitle}>Faça o Login</h2>
-
-        <form
+      <motion.article
+        className={style.loginBox}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        <motion.h2
+          className={style.loginTitle}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
+          Faça o Login
+        </motion.h2>
+  
+        <motion.form
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
           onSubmit={(e) => {
             e.preventDefault();
             login(email, password);
@@ -55,7 +71,7 @@ const LoginComponent = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </section>
-
+  
           <section className={style.inputField}>
             <label htmlFor="password" className={style.label}>
               Senha:
@@ -68,12 +84,18 @@ const LoginComponent = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </section>
-
+  
           <section className={style.btnLogin}>
-            <button className={style.btn}>ENTRAR</button>
+            <motion.button
+              className={style.btn}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              ENTRAR
+            </motion.button>
           </section>
-        </form>
-      </article>
+        </motion.form>
+      </motion.article>
     </div>
   );
 };

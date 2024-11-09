@@ -1,14 +1,12 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import useMutation from "@/app/hooks/useMutation";
-import useQuery from "@/app/hooks/useQuery";
 import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestCreateComponent.module.css";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { createRequest, getLocais } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { motion } from "framer-motion"; // Importando o framer-motion
+import { motion } from "framer-motion"; 
 
 const RequestCreateComponent = () => {
   const { user } = useContext(UserContext);
@@ -20,17 +18,19 @@ const RequestCreateComponent = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [locais, setLocais] = useState([]);
   const router = useRouter();
-  const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-  const URL = 'http://localhost:4000/requests';
+  const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
+  const URL = "http://localhost:4000/requests";
   const [refetch, setRefetch] = useState(0);
 
   useEffect(() => {
-    if (user) {
-      setEmail(user.email);
-    } else {
-      setEmail("");
+    if (!user) {
+      toast.error("Você precisa estar logado para criar uma requisição.");
+      router.push("/Login");
+      return;
     }
-  }, [user]);
+
+    setEmail(user.email);
+  }, [user, router]);
 
   useEffect(() => {
     const fetchLocais = async () => {
@@ -79,6 +79,12 @@ const RequestCreateComponent = () => {
     if (!title || !description || !local || !image) {
       toast.error("PREENCHA TODOS OS CAMPOS");
       return;
+    } else if (title.length < 6) {
+      toast.error("TÍTULO MUITO CURTO");
+      return;
+    } else if (description.length < 10) {
+      toast.error("DESCRIÇÃO MUITO CURTA");
+      return;
     }
 
     try {
@@ -114,7 +120,12 @@ const RequestCreateComponent = () => {
   };
 
   return (
-    <motion.div className={styles.main} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+    <motion.div
+      className={styles.main}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <h1 className={styles.title}>
         Relate aqui seu <span className={styles.problemText}>problema</span>
       </h1>
@@ -125,7 +136,12 @@ const RequestCreateComponent = () => {
           requestCreate(title, description, local, image);
         }}
       >
-        <motion.label className={styles.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+        <motion.label
+          className={styles.label}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           Assunto:
         </motion.label>
         <motion.input
@@ -138,7 +154,12 @@ const RequestCreateComponent = () => {
           transition={{ duration: 0.5 }}
         />
 
-        <motion.label className={styles.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+        <motion.label
+          className={styles.label}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           O que aconteceu? Descreva
         </motion.label>
         <motion.textarea
@@ -150,13 +171,20 @@ const RequestCreateComponent = () => {
           transition={{ duration: 0.5 }}
         />
 
-        <motion.label className={styles.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+        <motion.label
+          className={styles.label}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           Imagem
         </motion.label>
         {!imagePreview ? (
           <div
             className={styles.imageUpload}
-            onClick={() => document.querySelector(`.${styles.fileInput}`).click()}
+            onClick={() =>
+              document.querySelector(`.${styles.fileInput}`).click()
+            }
           >
             <input
               type="file"
@@ -197,7 +225,12 @@ const RequestCreateComponent = () => {
           </div>
         )}
 
-        <motion.label className={styles.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+        <motion.label
+          className={styles.label}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           Qual foi o local?
         </motion.label>
         <motion.select
