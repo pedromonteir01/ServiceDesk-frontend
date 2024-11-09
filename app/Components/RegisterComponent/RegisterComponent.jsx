@@ -5,6 +5,64 @@ import styles from "../../Register/register.module.css";
 import { createUser } from "@/app/actions/users";
 import toast from "react-hot-toast";
 import { UserContext } from "@/app/contexts/userContext";
+const special = ["!", "@", "#", "$", "%", "&", "*", "(", ")", "/", "?", "|"];
+const number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const upper = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+const lower = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
 
 const RegisterComponent = () => {
   const router = useRouter();
@@ -18,11 +76,33 @@ const RegisterComponent = () => {
   const [isAdmin, setIsAdmin] = useState("user");
   const [isStudent, setIsStudent] = useState("student");
 
+  const verifyEmail = (email) => {
+    const validDomains = ["sp.senai.br", "aluno.senai.br", "docente.senai.br"];
+    const domain = email.split("@")[1];
+    return validDomains.includes(domain);
+  };
+
   const signUp = async (name, email, password, confirm, isAdmin, isStudent) => {
     if (!name || !email || !password) {
       toast.error("DADOS INCOMPLETOS");
     } else if (confirm !== password) {
       toast.error("SENHAS DISCREPANTES");
+    } else if (password.length < 6) {
+      toast.error("SENHA MUITO CURTA");
+    } else if (name.length < 3) {
+      toast.error("NOME MUITO CURTO");
+    } else if (email.length < 10) {
+      toast.error("EMAIL MUITO CURTO");
+    } else if (!verifyEmail(email)) {
+      toast.error("EMAIL INVÁLIDO");
+    } else if (!password.split("").some((char) => special.includes(char))) {
+      toast.error("SENHA DEVE CONTER CARACTERES ESPECIAIS");
+    } else if (!password.split("").some((char) => lower.includes(char))) {
+      toast.error("SENHA DEVE CONTER LETRAS MINUSCULAS");
+    } else if (!password.split("").some((char) => upper.includes(char))) {
+      toast.error("SENHA DEVE CONTER LETRAS MAIUSCULAS");
+    } else if (!password.split("").some((char) => number.includes(char))) {
+      toast.error("SENHA DEVE CONTER NÚMEROS");
     } else {
       const response = await createUser({
         name: name.toLowerCase(),
@@ -36,25 +116,23 @@ const RegisterComponent = () => {
           toast.error(response.errors[i].split("_").join(" ").toUpperCase());
         }
       } else {
-        
-        if(response.error) {
-            toast.error(response.error.toUpperCase());
-            return false;
+        if (response.error) {
+          toast.error(response.error.toUpperCase());
+          return false;
         }
         toast.success("USUÁRIO CADASTRADO");
         user && user.isadmin ? clearFields() : router.replace("/Login");
       }
     }
   };
-
   const clearFields = () => {
-    setName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-    setIsAdmin('');
-    setIsStudent('');
-  }
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setIsAdmin("");
+    setIsStudent("");
+  };
 
   return (
     <div className={styles.container}>
