@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import styles from "../../Register/register.module.css";
 import { createUser } from "@/app/actions/users";
@@ -136,15 +137,31 @@ const RegisterComponent = () => {
 
   return (
     <div className={styles.container}>
-      <article className={styles.loginBox}>
-        <h2 className={styles.loginTitle}>CADASTRE-SE</h2>
+      <motion.article
+        className={styles.loginBox}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        <motion.h2
+          className={styles.loginTitle}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
+          CADASTRE-SE
+        </motion.h2>
 
-        <form
+        <motion.form
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
           onSubmit={(e) => {
             e.preventDefault();
             signUp(name, email, password, confirmPassword, isAdmin, isStudent);
           }}
         >
+          {/* Campos de entrada e selects do formulário */}
           <section className={styles.inputField}>
             <label htmlFor="name" className={styles.label}>
               Nome:
@@ -197,8 +214,7 @@ const RegisterComponent = () => {
             />
           </section>
 
-          {/* Exibe os selects apenas se o usuário atual for um administrador */}
-          {user && user.isadmin ? (
+          {user && user.isadmin && (
             <>
               <section className={styles.inputField}>
                 <label htmlFor="isAdmin" className={styles.label}>
@@ -230,15 +246,14 @@ const RegisterComponent = () => {
                 </select>
               </section>
             </>
-          ) : null}
+          )}
 
           <section className={styles.btnLogin}>
             <button className={styles.btn}>CADASTRAR</button>
           </section>
-        </form>
-      </article>
+        </motion.form>
+      </motion.article>
     </div>
-    //criando comentario para aparecer a branch e ser mergeada
   );
 };
 
