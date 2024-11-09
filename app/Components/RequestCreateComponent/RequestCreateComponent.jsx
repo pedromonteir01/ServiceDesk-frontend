@@ -25,12 +25,14 @@ const RequestCreateComponent = () => {
   const [refetch, setRefetch] = useState(0);
 
   useEffect(() => {
-    if (user) {
-      setEmail(user.email);
-    } else {
-      setEmail("");
+    if (!user) {
+      toast.error("Você precisa estar logado para criar uma requisição.");
+      router.push("/Login");
+      return; 
     }
-  }, [user]);
+
+    setEmail(user.email); // Define o email do usuário
+  }, [user, router]); // Dependência de `user` para garantir a verificação
 
   useEffect(() => {
     const fetchLocais = async () => {
