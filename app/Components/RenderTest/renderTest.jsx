@@ -4,7 +4,6 @@ import { MdSwapHoriz } from "react-icons/md";
 import { GoPencil } from "react-icons/go";
 import { useContext } from "react";
 import { UserContext } from "@/app/contexts/userContext";
-import { getAllRequests } from "@/app/actions/request";
 
 export default function RenderTest({
   local,
@@ -15,7 +14,7 @@ export default function RenderTest({
   onEdit,
   onStatusChange,
   image,
-  requests, // novo parâmetro para receber a imagem da requisição
+  requests,
 }) {
   const { user } = useContext(UserContext);
 
@@ -23,7 +22,7 @@ export default function RenderTest({
     <div className={styles.card}>
       <div className={styles.imageContainer}>
         <img
-          src={image} // usa a imagem de requests
+          src={image}
           alt="Imagem SENAI"
           className={styles.image}
         />
@@ -37,7 +36,7 @@ export default function RenderTest({
           <>
             <p
               className={
-                status === "aguardando"
+                status === "AGUARDANDO"
                   ? styles.statusPending
                   : styles.statusCompleted
               }
@@ -48,7 +47,7 @@ export default function RenderTest({
               <button className={styles.btnRemove} onClick={onRemove}>
                 <IoTrashOutline fontSize={20} />
               </button>
-             {/*  <button className={styles.btnStatus} onClick={onStatusChange}>
+              {/* <button className={styles.btnStatus} onClick={onStatusChange}>
                 <MdSwapHoriz fontSize={20} />
               </button> */}
               <button className={styles.btnEdit} onClick={onEdit}>

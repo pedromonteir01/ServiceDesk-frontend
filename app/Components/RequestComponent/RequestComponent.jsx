@@ -44,7 +44,7 @@ export default function RequestComponent() {
       }
     };
     fetchRequests();
-  }, [user, router]); // Dependência do usuário para verificar se está logado
+  }, [user, router]);
 
   const handleDeleteRequest = async (id) => {
     try {
@@ -131,11 +131,20 @@ export default function RequestComponent() {
                 desc={item.description}
                 autor={item.email}
                 image={item.image}
-                status={item.status_request ? "CONCLUIDO" : "PENDENTE"}
+                status={
+                  item.status_request === "aguardando"
+                    ? "AGUARDANDO"
+                    : "CONCLUIDA"
+                }
                 onRemove={() => handleDeleteRequest(item.id)}
                 onEdit={() => console.log("Editar não implementado ainda")}
                 onStatusChange={() =>
-                  handleUpdateRequestStatus(item.id, !item.status_request)
+                  handleUpdateRequestStatus(
+                    item.id,
+                    item.status_request === "aguardando"
+                      ? "concluida"
+                      : "aguardando"
+                  )
                 }
               />
             </motion.div>
