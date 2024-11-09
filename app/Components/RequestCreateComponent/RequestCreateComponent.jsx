@@ -101,7 +101,7 @@ const RequestCreateComponent = () => {
       const response = await createRequest(requestData, token);
       if (response.error) {
         console.error("Erro do servidor:", response);
-        toast.error(response.message || "Erro ao criar requisição");
+        toast.error(response.errors || "Erro ao criar requisição");
         return;
       }
 
@@ -109,7 +109,7 @@ const RequestCreateComponent = () => {
       router.replace("/Request");
     } catch (error) {
       console.error("Erro do lado do cliente:", error);
-      toast.error("Erro ao criar requisição");
+      toast.error(error);
     }
   };
 
