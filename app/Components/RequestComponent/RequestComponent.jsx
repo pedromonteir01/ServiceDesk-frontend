@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import styles from "./requestComponent.module.css";
 import toast from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
@@ -11,13 +11,40 @@ import {
   getRequestByLocal,
 } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import { UserContext } from "@/app/contexts/userContext";
 
 export default function RequestComponent() {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterValue, setFilterValue] = useState("");
   const router = useRouter();
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    if (!user) {
+      toast.error("Você precisa estar logado para acessar as requisições.");
+      router.push("/Login");
+      return;
+    }
+
+    setLoading(true);
+    const fetchRequests = async () => {
+      try {
+        const data = await getAllRequests();
+        if (data.requests) {
+          setRequests(data.requests);
+        } else {
+          toast.error(data.success.toUpperCase());
+        }
+      } catch (e) {
+        toast.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRequests();
+  }, [user, router]); // Dependência do usuário para verificar se está logado
 
   const handleDeleteRequest = async (id) => {
     try {
@@ -48,25 +75,6 @@ export default function RequestComponent() {
   const handleRequestCreate = () => {
     router.push("/RequestCreate");
   };
-
-  useEffect(() => {
-    setLoading(true);
-    const fetchRequests = async () => {
-      try {
-        const data = await getAllRequests();
-        if (data.requests) {
-          setRequests(data.requests);
-        } else {
-          toast.error(data.success.toUpperCase());
-        }
-      } catch (e) {
-        toast.error(e);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchRequests();
-  }, []);
 
   const sortedRequests = [...requests].sort(
     (a, b) => (a.status_request ? 1 : 0) - (b.status_request ? 1 : 0)
