@@ -36,6 +36,7 @@ export const getRequestsByName = async (title) => {
 export const getRequestById = async (id) => {
   try {
     const response = await axios.get(`${api}/${id}`);
+    console.log('RESPONSE' +response.data);
     return response.data;
   } catch (e) {
     return e.response.data || { error: "operação fracassou" };

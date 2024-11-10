@@ -9,24 +9,23 @@ import {
   deleteRequest,
   updateRequest,
   getRequestByLocal,
+  getRequestById,
 } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { UserContext } from "@/app/contexts/userContext";
 
 export default function RequestComponent() {
+
+  const { user } = useContext(UserContext);
+  const router = useRouter();
+
   const [requests, setRequests] = useState([]);
+  const [request, setRequest] = useState(null);
   const [loading, setLoading] = useState(true);
   const [filterValue, setFilterValue] = useState("");
-  const router = useRouter();
-  const { user } = useContext(UserContext);
 
   useEffect(() => {
-    if (!user) {
-      toast.error("Você precisa estar logado para acessar as requisições.");
-      router.push("/Login");
-      return;
-    }
 
     setLoading(true);
     const fetchRequests = async () => {
@@ -80,6 +79,18 @@ export default function RequestComponent() {
     (a, b) => (a.status_request ? 1 : 0) - (b.status_request ? 1 : 0)
   );
 
+  const handleRequest = async(id) => {
+    try {
+      const response = await getRequestById(id);
+      console.log(response);
+      setRequest(response);
+    } catch(e) {
+      console.log(e);
+    }
+  }
+  
+  console.log(request);
+
   return (
     <article className={styles.container}>
       <motion.section
@@ -118,37 +129,46 @@ export default function RequestComponent() {
             />
           </div>
         ) : sortedRequests.length !== 0 ? (
-          sortedRequests.map((item) => (
-            <motion.div
-              key={item.id || item.local}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            >
-              <RenderTest
-                key={item.id || item.local}
-                local={item.local}
-                desc={item.description}
-                autor={item.email}
-                image={item.image}
-                status={item.status_request}
-                onRemove={() => handleDeleteRequest(item.id)}
-                onEdit={() => console.log("Editar não implementado ainda")}
-                onStatusChange={() =>
-                  handleUpdateRequestStatus(
-                    item.id,
-                    item.status_request === "aguardando"
-                      ? "concluida"
-                      : "aguardando"
-                  )
-                }
-              />
-            </motion.div>
-          ))
+          <>
+            {
+               sortedRequests.map((item) => (
+                <motion.div
+                  key={item.id || item.local}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                  onClick={() => handleRequest(item.id)}
+                >
+                  <RenderTest
+                    key={item.id || item.local}
+                    local={item.local}
+                    desc={item.description}
+                    autor={item.email}
+                    image={item.image}
+                    status={item.status_request}
+                    onRemove={() => handleDeleteRequest(item.id)}
+                    onEdit={() => console.log("Editar não implementado ainda")}
+                    onStatusChange={() =>
+                      handleUpdateRequestStatus(
+                        item.id,
+                        item.status_request === "aguardando"
+                          ? "concluida"
+                          : "aguardando"
+                      )
+                    }
+                  />
+                </motion.div>
+              ))
+            }
+          </>
+          
         ) : (
           <p className={styles.noRequestMsg}>REALIZE ALGUMA REQUISIÇÃO!</p>
         )}
       </motion.section>
+      {
+              request && <div>teste!</div>
+            }
     </article>
   );
 }
