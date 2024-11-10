@@ -28,6 +28,12 @@ export default function Home() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
+          {/* Vídeo de fundo */}
+          <video autoPlay loop muted className={styles.backgroundVideo}>
+            <source src="/senai.mp4" type="video/mp4" />
+            Seu navegador não suporta vídeos.
+          </video>
+
           <div className={styles.containernothing}>
             <p className={styles.text}>alguma</p>
           </div>
