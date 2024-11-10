@@ -101,6 +101,13 @@
   margin-top: 1rem;
 }
 
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
 @media screen and (max-width: 768px) {
   .filters {
     width: 90%;
