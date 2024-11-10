@@ -23,7 +23,7 @@ export default function RenderTest({
       <div className={styles.imageContainer}>
         <img
           src={image}
-          alt="Imagem SENAI"
+          alt={local}
           className={styles.image}
         />
       </div>
