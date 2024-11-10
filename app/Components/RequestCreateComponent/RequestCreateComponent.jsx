@@ -7,6 +7,7 @@ import { createRequest, getLocais } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion"; 
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 const RequestCreateComponent = () => {
   const { user } = useContext(UserContext);
@@ -99,7 +100,7 @@ const RequestCreateComponent = () => {
         imageType: image.type,
         status_request,
         date_request,
-        date_conclusion,
+        date_conclusion: null,
         email,
       };
 
@@ -120,7 +121,8 @@ const RequestCreateComponent = () => {
   };
 
   return (
-    <motion.div
+    <ProtectedRoute>
+      <motion.div
       className={styles.main}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -260,6 +262,7 @@ const RequestCreateComponent = () => {
         </motion.button>
       </form>
     </motion.div>
+    </ProtectedRoute>
   );
 };
 

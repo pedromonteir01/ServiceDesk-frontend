@@ -239,7 +239,7 @@ const RegisterComponent = () => {
                   name="isStudent"
                   value={isStudent}
                   className={styles.input}
-                  onChange={(e) => setIsStudent(e.target.value === "true")}
+                  onChange={(e) => setIsStudent(e.target.value)}
                 >
                   <option value="student">Sim</option>
                   <option value="educator">Não</option>

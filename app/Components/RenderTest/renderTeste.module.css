@@ -9,6 +9,7 @@
   overflow: hidden;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   margin: 1.5rem 0;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -86,8 +87,8 @@
   background-color: #e64a19;
 }
 
-.statusPending,
-.statusCompleted {
+.statusInconclued {
+  background-color: #ff0000;
   font-size: 0.9rem;
   font-weight: 600;
   padding: 0.5rem 1rem;
@@ -96,12 +97,27 @@
   margin-top: 1rem;
 }
 
+
 .statusPending {
   background-color: #ff7700;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  color: #fff;
+  margin-top: 1rem;
+
 }
 
 .statusCompleted {
   background-color: #00b609;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  color: #fff;
+  margin-top: 1rem;
+
 }
 
 .statusCompleted {

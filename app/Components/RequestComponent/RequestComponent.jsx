@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import styles from "./requestComponent.module.css";
 import toast from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
-import RenderTest from "../RenderTest/renderTest";
+import RenderTest from "../RenderTest/RenderTest";
 import {
   getAllRequests,
   deleteRequest,
@@ -131,11 +131,7 @@ export default function RequestComponent() {
                 desc={item.description}
                 autor={item.email}
                 image={item.image}
-                status={
-                  item.status_request === "aguardando"
-                    ? "AGUARDANDO"
-                    : "CONCLUIDA"
-                }
+                status={item.status_request}
                 onRemove={() => handleDeleteRequest(item.id)}
                 onEdit={() => console.log("Editar não implementado ainda")}
                 onStatusChange={() =>

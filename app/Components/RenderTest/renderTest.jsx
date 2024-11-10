@@ -18,6 +18,16 @@ export default function RenderTest({
 }) {
   const { user } = useContext(UserContext);
 
+  const statusStyle = () => {
+    if(status == 'aguardando') {
+      return styles.statusInconclued
+    } else if( status == 'em andamento') {
+      return styles.statusPending
+    } else {
+      return styles.statusCompleted
+    }
+  }
+
   return (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
@@ -35,13 +45,9 @@ export default function RenderTest({
         {user && user.isadmin && (
           <>
             <p
-              className={
-                status === "AGUARDANDO"
-                  ? styles.statusPending
-                  : styles.statusCompleted
-              }
+              className={statusStyle()}
             >
-              {status}
+              {status.toUpperCase()}
             </p>
             <div className={styles.actions}>
               <button className={styles.btnRemove} onClick={onRemove}>
