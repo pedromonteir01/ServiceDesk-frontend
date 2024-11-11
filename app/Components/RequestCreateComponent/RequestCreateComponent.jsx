@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestCreateComponent.module.css";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { createRequest, getLocais } from "@/app/actions/request";
@@ -10,7 +9,6 @@ import { motion } from "framer-motion";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 const RequestCreateComponent = () => {
-  const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
@@ -20,18 +18,7 @@ const RequestCreateComponent = () => {
   const [locais, setLocais] = useState([]);
   const router = useRouter();
   const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
-  const URL = "http://localhost:4000/requests";
-  const [refetch, setRefetch] = useState(0);
 
-  useEffect(() => {
-    if (!user) {
-      toast.error("Você precisa estar logado para criar uma requisição.");
-      router.push("/Login");
-      return;
-    }
-
-    setEmail(user.email);
-  }, [user, router]);
 
   useEffect(() => {
     const fetchLocais = async () => {
@@ -74,7 +61,6 @@ const RequestCreateComponent = () => {
 
   const requestCreate = async (title, description, local, image) => {
     const date_request = new Date().toISOString();
-    const date_conclusion = new Date().toISOString();
     const status_request = "inconclued";
 
     if (!title || !description || !local || !image) {

@@ -25,13 +25,6 @@ export default function RequestComponent() {
   const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
-
-    if (!user) {
-      toast.error("Você precisa estar logado para acessar essa página");
-      router.push("/Login");
-      return;
-    }
-
     setLoading(true);
     const fetchRequests = async () => {
       try {
@@ -77,6 +70,11 @@ export default function RequestComponent() {
   };
 
   const handleRequestCreate = () => {
+    if (!user) {
+      toast.error("Você precisa estar logado para acessar essa página");
+      router.push("/Login");
+      return;
+    }
     router.push("/RequestCreate");
   };
 
