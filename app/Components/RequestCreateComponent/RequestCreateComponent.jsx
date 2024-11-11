@@ -24,16 +24,6 @@ const RequestCreateComponent = () => {
   const [refetch, setRefetch] = useState(0);
 
   useEffect(() => {
-    if (!user) {
-      toast.error("Você precisa estar logado para criar uma requisição.");
-      router.push("/Login");
-      return;
-    }
-
-    setEmail(user.email);
-  }, [user, router]);
-
-  useEffect(() => {
     const fetchLocais = async () => {
       const locaisData = await getLocais();
       if (Array.isArray(locaisData.locais)) {
