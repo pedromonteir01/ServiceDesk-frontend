@@ -61,9 +61,28 @@ export const getRequestByStatus = async (status) => {
   }
 };
 
+export const getRequestByCreationDate = async (date) => {
+  try {
+    const response = await axios.get(`${api}/creation/${date}`);
+    return response.data;
+  } catch(e) {
+    return e.response.data || { error: "operação fracassou" };
+  }
+}
+
+export const getRequestByFinishDate = async (date) => {
+  try {
+    const response = await axios.get(`${api}/finish/${date}`);
+    return response.data;
+  } catch(e) {
+    return e.response.data || { error: "operação fracassou" };
+  }
+}
+
 export const getRequestByUser = async (user) => {
   try {
     const response = await axios.get(`${api}/user/${user}`);
+    console.log(response.data);
     return response.data;
   } catch (e) {
     return e.response.data || { error: "operação fracassou" };
