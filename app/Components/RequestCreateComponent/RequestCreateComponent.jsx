@@ -4,11 +4,13 @@ import styles from "./requestCreateComponent.module.css";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { createRequest, getLocais } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/app/contexts/userContext";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion"; 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 const RequestCreateComponent = () => {
+  const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
@@ -20,6 +22,9 @@ const RequestCreateComponent = () => {
   const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
 
 
+  useEffect(() => {
+    setEmail(user.email);
+  }, [user]);
   useEffect(() => {
     const fetchLocais = async () => {
       const locaisData = await getLocais();
@@ -67,9 +72,13 @@ const RequestCreateComponent = () => {
       toast.error("PREENCHA TODOS OS CAMPOS");
       return;
     } else if (title.length < 6) {
-      toast.error("TÍTULO MUITO CURTO");
+      toast.error("TÍTULO MUITO LONGO MIN 6 MAX 35 CARACTERES");
       return;
-    } else if (description.length < 10) {
+    } else if(title.length > 35){
+      toast.error("TÍTULO MUITO LONGO MIN 6 MAX 35 CARACTERES");
+      return;
+
+    }else if (description.length < 10) {
       toast.error("DESCRIÇÃO MUITO CURTA");
       return;
     }
