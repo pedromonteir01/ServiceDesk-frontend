@@ -1,6 +1,7 @@
 import styles from "./adminPage.module.css";
 import toast from "react-hot-toast";
 import Table from "../Table/Table";
+import Card from "../Card/Card";
 import { useState, useEffect } from "react";
 import { getAllUsers, getUserByName, getUserByRole } from "@/app/actions/users";
 import {
@@ -355,6 +356,17 @@ const AdminPage = () => {
             content={response}
           />
         )}
+      </motion.section>
+
+      <motion.section
+        className={styles.cards}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        {response.map((data, index) => (
+          <Card key={index} data={data} />
+        ))}
       </motion.section>
 
       {edit && (
