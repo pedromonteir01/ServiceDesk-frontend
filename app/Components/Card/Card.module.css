@@ -1,0 +1,38 @@
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px 0;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cardItem {
+  margin-bottom: 8px;
+}
+
+.cardItem strong {
+  display: inline-block;
+  width: 100px;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .card {
+    margin: 8px 0;
+    padding: 12px;
+  }
+
+  .cardItem {
+    margin-bottom: 6px;
+  }
+
+  .cardItem strong {
+    width: 80px;
+  }
+}
