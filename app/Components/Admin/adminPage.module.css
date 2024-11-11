@@ -74,7 +74,9 @@
   justify-content: center;
   width: 80%;
 }
-
+.cards {
+  display: none;
+}
 .table {
   width: 80%;
   display: flex;
@@ -114,7 +116,7 @@
   }
 
   .table {
-    width: 100%;
+    display: none;
   }
 
   .options {
@@ -124,7 +126,9 @@
   .typeSearch {
     padding: 0.5rem;
   }
-
+  .cards {
+    display: block;
+  }
   .search {
     padding: 0.5rem;
   }
