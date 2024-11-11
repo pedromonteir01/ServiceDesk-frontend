@@ -1,5 +1,4 @@
 import styles from "./renderTeste.module.css";
-import { IoTrashOutline } from "react-icons/io5";
 import { MdSwapHoriz } from "react-icons/md";
 import { GoPencil } from "react-icons/go";
 import { useContext } from "react";
@@ -10,7 +9,6 @@ export default function RenderTest({
   desc,
   autor,
   status,
-  onRemove,
   onEdit,
   onStatusChange,
   image,
@@ -39,9 +37,6 @@ export default function RenderTest({
       </div>
       <div className={styles.content}>
             <div className={styles.actions}>
-              <button className={styles.btnRemove} onClick={onRemove}>
-                <IoTrashOutline fontSize={30} />
-              </button>
               {/* <button className={styles.btnStatus} onClick={onStatusChange}>
                 <MdSwapHoriz fontSize={20} />
               </button> */}
