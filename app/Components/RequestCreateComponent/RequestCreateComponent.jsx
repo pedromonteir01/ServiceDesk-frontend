@@ -72,9 +72,13 @@ const RequestCreateComponent = () => {
       toast.error("PREENCHA TODOS OS CAMPOS");
       return;
     } else if (title.length < 6) {
-      toast.error("TÍTULO MUITO CURTO");
+      toast.error("TÍTULO MUITO LONGO MIN 6 MAX 35 CARACTERES");
       return;
-    } else if (description.length < 10) {
+    } else if(title.length > 35){
+      toast.error("TÍTULO MUITO LONGO MIN 6 MAX 35 CARACTERES");
+      return;
+
+    }else if (description.length < 10) {
       toast.error("DESCRIÇÃO MUITO CURTA");
       return;
     }
