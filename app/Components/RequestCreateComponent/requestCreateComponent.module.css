@@ -98,6 +98,28 @@
   border: 2px dashed #000;
 }
 
+.removeImageButtonDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.removeImageButton {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 30%;
+}
+
+.removeImageButton:hover {
+  background-color: darkred;
+}
+
 .fileInput {
   display: none;
 }
@@ -127,9 +149,9 @@
 @media screen and (max-width: 768px) {
   .main {
     padding: 20px;
-    width: 100%;
+    width: 80%;
     align-items: center;
     display: flex;
-    margin-top: 25vh;
+    margin-top: 2vh;
   }
 }

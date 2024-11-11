@@ -4,6 +4,7 @@ import axios from "axios";
 
 // const api = process.env.URL;
 const api = process.env.URL + "/requests";
+const apif = process.env.URL;
 
 export const getAllRequests = async () => {
   try {
@@ -35,6 +36,7 @@ export const getRequestsByName = async (title) => {
 export const getRequestById = async (id) => {
   try {
     const response = await axios.get(`${api}/${id}`);
+    console.log('RESPONSE' +response.data);
     return response.data;
   } catch (e) {
     return e.response.data || { error: "operação fracassou" };
@@ -59,48 +61,51 @@ export const getRequestByStatus = async (status) => {
   }
 };
 
+export const getRequestByCreationDate = async (date) => {
+  try {
+    const response = await axios.get(`${api}/creation/${date}`);
+    return response.data;
+  } catch(e) {
+    return e.response.data || { error: "operação fracassou" };
+  }
+}
+
+export const getRequestByFinishDate = async (date) => {
+  try {
+    const response = await axios.get(`${api}/finish/${date}`);
+    return response.data;
+  } catch(e) {
+    return e.response.data || { error: "operação fracassou" };
+  }
+}
+
 export const getRequestByUser = async (user) => {
   try {
     const response = await axios.get(`${api}/user/${user}`);
+    console.log(response.data);
     return response.data;
   } catch (e) {
     return e.response.data || { error: "operação fracassou" };
   }
 };
 
-export const createRequest = async (formData, token) => {
-  console.log("Testing createRequest");
-  console.log("FormData in actions:", formData);
-  
+export const createRequest = async (requestData, token) => {
+  console.log("testando createRequest");
+  console.log("Request Data no actions:", requestData);
   try {
-    const response = await axios.post(`${api}/request-create`, formData, {
+    const response = await axios.post(`${apif}/requests`, requestData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      validateStatus: function(status) {
-        return status >= 200 && status < 300; // Default
-      }
     });
-    
     console.log("Response from createRequest:", response.data);
     return response.data;
-  } catch (error) {
-    console.error("Error creating request:", error.response ? error.response.data : error);
-    if (error.response) {
-      console.log("Status:", error.response.status);
-      console.log("Data:", error.response.data);
-      console.log("Headers:", error.response.headers);
-    } else if (error.request) {
-      console.log("No response received");
-    } else {
-      console.log("Error message:", error.message);
-    }
-    
-    return { error: "Error creating request", message: error.message };
+  } catch (e) {
+    console.log("Error creating request:", e.response ? e.response.data : e);
+    return { error: "Error creating request", message: e.message };
   }
 };
-
 
 export const updateRequest = async (id, request) => {
   try {
@@ -116,7 +121,7 @@ export const deleteRequest = async (id) => {
     const response = await axios.delete(`${api}/${id}`);
     return response.data;
   } catch (e) {
-    return e.response.data || { error: "opereação fracassou" };
+    return e.response.data || { error: "operação fracassou" };
   }
 };
 

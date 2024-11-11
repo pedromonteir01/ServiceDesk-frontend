@@ -1,31 +1,30 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import { UserContext } from "@/app/contexts/userContext";
 import styles from "./requestCreateComponent.module.css";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { createRequest, getLocais } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/app/contexts/userContext";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion"; 
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 const RequestCreateComponent = () => {
   const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
-  /*   const [image, setImage] = useState(null); */
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
   const [email, setEmail] = useState("");
-  /*   const [imagePreview, setImagePreview] = useState(null); */
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [locais, setLocais] = useState([]);
   const router = useRouter();
+  const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
+
 
   useEffect(() => {
-    if (user) {
-      setEmail(user.email);
-    } else {
-      setEmail("");
-    }
+    setEmail(user.email);
   }, [user]);
-
   useEffect(() => {
     const fetchLocais = async () => {
       const locaisData = await getLocais();
@@ -40,56 +39,90 @@ const RequestCreateComponent = () => {
     fetchLocais();
   }, []);
 
-  /*   const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
-    }
-  };
- */
-  const requestCreate = async (title, description, local /* image */) => {
-    const date_request = new Date();
-    const date_conclusion = new Date().toISOString();
-    const status_request = "inconclued";
-
-    if (!title || !description || !local /* || !image */) {
-      toast.error("PREENCHA TODOS OS CAMPOS");
+  const handleUpload = async (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+    if (!validFileTypes.includes(file.type)) {
+      toast.error("Arquivo deve estar em formato JPG/PNG");
       return;
     }
 
-    console.log(date_request.getUTCDate);
+    // Cria a pré-visualização da imagem
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
 
-    const request = {
-      title: title,
-      description: description,
-      local: local,
-      image: null,
-      status_request: 'inconclued',
-      date_request: date_request,
-      date_conclusion: null,
-      email: user.email
+  const convertToArrayBuffer = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const requestCreate = async (title, description, local, image) => {
+    const date_request = new Date().toISOString();
+    const status_request = "inconclued";
+
+    if (!title || !description || !local || !image) {
+      toast.error("PREENCHA TODOS OS CAMPOS");
+      return;
+    } else if (title.length < 6) {
+      toast.error("TÍTULO MUITO LONGO MIN 6 MAX 35 CARACTERES");
+      return;
+    } else if(title.length > 35){
+      toast.error("TÍTULO MUITO LONGO MIN 6 MAX 35 CARACTERES");
+      return;
+
+    }else if (description.length < 10) {
+      toast.error("DESCRIÇÃO MUITO CURTA");
+      return;
     }
 
     try {
-      const token = localStorage.getItem("usertoken");
-      const response = await createRequest(request, token);
-      if (response.errors) {
-        console.error("Server error:", response);
-        toast.error(response.message || "Erro ao criar requisição");
+      const imageArrayBuffer = await convertToArrayBuffer(image);
+
+      const requestData = {
+        title,
+        description,
+        local,
+        image: Array.from(new Uint8Array(imageArrayBuffer)),
+        imageName: image.name,
+        imageType: image.type,
+        status_request,
+        date_request,
+        date_conclusion: null,
+        email,
+      };
+
+      const token = localStorage.getItem("refreshToken");
+      const response = await createRequest(requestData, token);
+      if (response.error) {
+        console.error("Erro do servidor:", response);
+        toast.error(response.errors || "Erro ao criar requisição");
         return;
-      } else {
-        toast.success("REQUISIÇÃO CRIADA");
-        router.replace("/Request");
       }
+
+      toast.success("REQUISIÇÃO CRIADA");
+      router.replace("/Request");
     } catch (error) {
-      console.error("Client-side error:", error);
-      toast.error("Erro ao criar requisição");
+      console.error("Erro do lado do cliente:", error);
+      toast.error(error);
     }
   };
 
   return (
-    <div className={styles.main}>
+    <ProtectedRoute>
+      <motion.div
+      className={styles.main}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <h1 className={styles.title}>
         Relate aqui seu <span className={styles.problemText}>problema</span>
       </h1>
@@ -97,57 +130,113 @@ const RequestCreateComponent = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          requestCreate(title, description, local, /* image */);
+          requestCreate(title, description, local, image);
         }}
       >
-        <label className={styles.label}>Assunto:</label>
-        <input
+        <motion.label
+          className={styles.label}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          Assunto:
+        </motion.label>
+        <motion.input
           type="text"
           className={styles.titleInput}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         />
-        <label className={styles.label}>O que aconteceu? Descreva</label>
-        <textarea
+
+        <motion.label
+          className={styles.label}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          O que aconteceu? Descreva
+        </motion.label>
+        <motion.textarea
           className={styles.descriptionInput}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         />
 
-        {/*  <label className={styles.label}>Imagem</label>
-        <div
-          className={styles.imageUpload}
-          onClick={() => document.querySelector(`.${styles.fileInput}`).click()}
+        <motion.label
+          className={styles.label}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          <input
-            type="file"
-            name="image"
-            onChange={handleImageChange}
-            className={styles.fileInput}
-            accept="image/*"
-          />
-          <IoCloudDownloadOutline color="#000" fontSize={30} />
-          <span>Inserir imagem</span>
-        </div>
-
-        {image && (
-          <div className={styles.previewContainer}>
-            {imagePreview && (
-              <img
-                src={imagePreview}
-                alt="Imagem Preview"
-                className={styles.imagePreview}
-              />
-            )}
-            <p className={styles.fileName}>{image.name}</p>
+          Imagem
+        </motion.label>
+        {!imagePreview ? (
+          <div
+            className={styles.imageUpload}
+            onClick={() =>
+              document.querySelector(`.${styles.fileInput}`).click()
+            }
+          >
+            <input
+              type="file"
+              name="image"
+              onChange={handleUpload}
+              className={styles.fileInput}
+              accept="image/*"
+            />
+            <IoCloudDownloadOutline color="#000" fontSize={30} />
+            <span>Inserir imagem</span>
           </div>
-        )} */}
+        ) : (
+          <motion.div
+            className={styles.imagePreviewContainer}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <img
+              src={imagePreview}
+              alt="Imagem Preview"
+              className={styles.imagePreview}
+            />
+            <p className={styles.fileName}>{image.name}</p>
+          </motion.div>
+        )}
+        {imagePreview && (
+          <div className={styles.removeImageButtonDiv}>
+            <button
+              className={styles.removeImageButton}
+              onClick={() => {
+                setImagePreview(null);
+                setImage(null);
+              }}
+            >
+              Remover imagem
+            </button>
+          </div>
+        )}
 
-        <label className={styles.label}>Qual foi o local?</label>
-        <select
+        <motion.label
+          className={styles.label}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          Qual foi o local?
+        </motion.label>
+        <motion.select
           className={styles.select}
           value={local}
           onChange={(e) => setLocal(e.target.value)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <option value="">Selecione o ambiente</option>
           {locais.map((localItem) => (
@@ -155,11 +244,20 @@ const RequestCreateComponent = () => {
               {localItem.nome}
             </option>
           ))}
-        </select>
+        </motion.select>
 
-        <button className={styles.submitButton}>Criar Requisição</button>
+        <motion.button
+          className={styles.submitButton}
+          type="submit"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          Enviar
+        </motion.button>
       </form>
-    </div>
+    </motion.div>
+    </ProtectedRoute>
   );
 };
 

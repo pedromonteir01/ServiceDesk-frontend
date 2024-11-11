@@ -1,7 +1,7 @@
 import styles from "./renderTeste.module.css";
 import { IoTrashOutline } from "react-icons/io5";
-import { GoPencil } from "react-icons/go";
 import { MdSwapHoriz } from "react-icons/md";
+import { GoPencil } from "react-icons/go";
 import { useContext } from "react";
 import { UserContext } from "@/app/contexts/userContext";
 
@@ -13,11 +13,30 @@ export default function RenderTest({
   onRemove,
   onEdit,
   onStatusChange,
+  image,
+  requests,
 }) {
   const { user } = useContext(UserContext);
 
+  const statusStyle = () => {
+    if(status == 'aguardando') {
+      return styles.statusInconclued
+    } else if( status == 'em andamento') {
+      return styles.statusPending
+    } else {
+      return styles.statusCompleted
+    }
+  }
+
   return (
     <div className={styles.card}>
+      <div className={styles.imageContainer}>
+        <img
+          src={image}
+          alt={local}
+          className={styles.image}
+        />
+      </div>
       <div className={styles.content}>
         <h1 className={styles.title}>{local}</h1>
         <h4 className={styles.description}>{desc}</h4>
@@ -25,18 +44,18 @@ export default function RenderTest({
 
         {user && user.isadmin && (
           <>
-            <p className={status === "PENDENTE" ? styles.statusPending : styles.statusCompleted}>
-              {status}
+            <p
+              className={statusStyle()}
+            >
+              {status.toUpperCase()}
             </p>
             <div className={styles.actions}>
               <button className={styles.btnRemove} onClick={onRemove}>
                 <IoTrashOutline fontSize={20} />
               </button>
-
-              <button className={styles.btnStatus} onClick={onStatusChange}>
+              {/* <button className={styles.btnStatus} onClick={onStatusChange}>
                 <MdSwapHoriz fontSize={20} />
-              </button>
-              
+              </button> */}
               <button className={styles.btnEdit} onClick={onEdit}>
                 <GoPencil fontSize={20} />
               </button>

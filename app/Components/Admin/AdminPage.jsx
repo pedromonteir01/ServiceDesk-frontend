@@ -5,37 +5,46 @@ import { useState, useEffect } from "react";
 import { getAllUsers, getUserByName, getUserByRole } from "@/app/actions/users";
 import {
   getAllRequests,
+  getLocais,
   getRequestByStatus,
   getRequestsByName,
+  getRequestByCreationDate,
+  getRequestByFinishDate,
+  getRequestByUser
 } from "@/app/actions/request";
 import { getAllReqsWithLocals } from "@/app/actions/data";
 import format from "@/app/utilities/formattedDate";
 import Modal from "../Modal/Modal";
 import ChangePassword from "../ChangePassword/ChangePassword";
+import { motion } from "framer-motion"; // Importando o framer-motion
 
-const AdminPage = () => { 
-
-    //para pesquisa
-    const [typeSearch, setTypeSearch] = useState('user');
-    const [name, setName] = useState('');
-    const [optionSearch, setOptionSearch] = useState('name');
-    const [option, setOption] = useState('');
-    const [creation, setCreation] = useState('');
-    const [finish, setFinish] = useState('');
-    const [byUser, setByUser] = useState('');
+const AdminPage = () => {
+  //para pesquisa
+  const [typeSearch, setTypeSearch] = useState("user");
+  const [name, setName] = useState("");
+  const [optionSearch, setOptionSearch] = useState("name");
+  const [option, setOption] = useState("");
+  const [creation, setCreation] = useState("");
+  const [finish, setFinish] = useState("");
+  const [byUser, setByUser] = useState("");
 
   //for edit
   const [edit, setEdit] = useState(false);
 
   //resposta para tabela
   const [response, setResponse] = useState([]);
+  const [locals, setLocals] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       let result;
-      if (name.trim()) result = await getUserByName(name);
-      else if (option != "") result = await getUserByRole(option);
-      else result = await getAllUsers();
+      if (optionSearch == 'name') {
+        name.trim() ? result = await getUserByName(name) : result = await getAllUsers();
+      } else if (optionSearch == 'role') {
+        result = await getUserByRole(option);
+      } else {
+        result = await getAllUsers();
+      }
 
       if (!result.users) {
         setResponse([]);
@@ -58,12 +67,21 @@ const AdminPage = () => {
     };
 
     const fetchReqs = async () => {
+      const localsBack = await getLocais();
+      if (localsBack.locais) setLocals(localsBack.locais);
+
       let result;
-      if (name.trim()) result = await getRequestsByName(name);
+      if (optionSearch == 'name') name.trim() ? result = await getRequestsByName(name) : result = await getAllRequests();
       else if (optionSearch == "local")
         result = await getAllReqsWithLocals(option);
       else if (optionSearch == "status")
-        result = await getRequestByStatus(option);
+        option.trim() ? result = await getRequestByStatus(option) : result = await getAllRequests();
+      else if (optionSearch == "create")
+        result = await getRequestByCreationDate(creation);
+      else if (optionSearch == "finish")
+        result = await getRequestByFinishDate(finish);
+      else if (optionSearch == 'user')
+        result = await getRequestByUser(byUser);
       else result = await getAllRequests();
 
       if (!result.requests) {
@@ -80,7 +98,7 @@ const AdminPage = () => {
         result.requests.map((request) => ({
           0: request.title,
           1: request.local,
-          2: request.status ? "Concluído" : "Em andamento",
+          2: request.status_request,
           3: format(request.date_request),
           4: format(request.date_conclusion),
           5: request.email,
@@ -89,23 +107,23 @@ const AdminPage = () => {
     };
 
     typeSearch == "user" ? fetchUsers() : fetchReqs();
-  }, [name, byUser, option, typeSearch]);
-
-  useEffect(() => {
-    setName("");
-  }, [optionSearch]);
-
-  useEffect(() => {
-    setResponse([]);
-    setOptionSearch("name");
-    setName("");
-  }, [typeSearch]);
+  }, [name, option, optionSearch, creation, finish, typeSearch, byUser]);
 
   return (
     <article className={styles.container}>
-      <section className={styles.filters}>
+      <motion.section
+        className={styles.filters}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         <div className={styles.options}>
-          <div className={styles.search}>
+          <motion.div
+            className={styles.search}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <h3>FILTRO:</h3>
             <div className={styles.typeSearch}>
               <label htmlFor="type">Usuário: </label>
@@ -167,8 +185,11 @@ const AdminPage = () => {
                       onChange={(e) => setOption(e.target.value)}
                     >
                       <option value="">Selecione...</option>
-                      <option value="teste1">Sala 1</option>
-                      <option value="teste2">Sala 2</option>
+                      {locals.map((local) => (
+                        <option key={local.id} value={local.nome}>
+                          {local.nome}
+                        </option>
+                      ))}
                     </select>
                   </>
                 )}
@@ -182,8 +203,9 @@ const AdminPage = () => {
                       onChange={(e) => setOption(e.target.value)}
                     >
                       <option value="">Selecione...</option>
-                      <option value="inconclued">Concluído</option>
-                      <option value="conclued">Aguardando manutenção</option>
+                      <option value="conclued">Concluído</option>
+                      <option value="awaiting">Em andamento</option>
+                      <option value="inconclued">Aguardando manutenção</option>
                     </select>
                   </>
                 )}
@@ -211,10 +233,26 @@ const AdminPage = () => {
                     />
                   </>
                 )}
+                {optionSearch == "user" && (
+                  <>
+                    <label htmlFor="user">Usuário</label>
+                    <input
+                      name="user"
+                      className={styles.inputSearch}
+                      value={byUser}
+                      onChange={(e) => setByUser(e.target.value)}
+                    />
+                  </>
+                )}
               </>
             )}
-          </div>
-          <div className={styles.choice}>
+          </motion.div>
+          <motion.div
+            className={styles.choice}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
             <label htmlFor="choice">
               {typeSearch == "user" ? "Por nome: " : "Por título: "}
             </label>
@@ -270,13 +308,35 @@ const AdminPage = () => {
                   checked={optionSearch === "finish"}
                   onChange={(e) => setOptionSearch(e.target.value)}
                 />
+                <label htmlFor="choice">Por usuário:</label>
+                <input
+                  name="choice"
+                  type="radio"
+                  value="user"
+                  checked={optionSearch === "user"}
+                  onChange={(e) => setOptionSearch(e.target.value)}
+                />
               </>
             )}
-          </div>
+          </motion.div>
         </div>
-        <button className={styles.button} onClick={() => setEdit(true)}>Mudar senha</button>
-      </section>
-      <section className={styles.table}>
+        <motion.button
+          className={styles.button}
+          onClick={() => setEdit(true)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+        >
+          Mudar senha
+        </motion.button>
+      </motion.section>
+
+      <motion.section
+        className={styles.table}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
         {typeSearch == "user" ? (
           <Table
             atributtes={["nome", "email", "função", "acessos"]}
@@ -290,15 +350,24 @@ const AdminPage = () => {
               "status",
               "dia criado",
               "dia finalizado",
-              "usuário",
+              "usuário"
             ]}
             content={response}
           />
         )}
-      </section>
+      </motion.section>
+
       {edit && (
-        <Modal closeModal={() => setEdit(false)} isOpen={edit}>
-          <ChangePassword />
+        <Modal isOpen={edit} closeModal={() => setEdit(false)}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5 }}
+            className={styles.modalContent}
+          >
+            <ChangePassword />
+          </motion.div>
         </Modal>
       )}
     </article>
