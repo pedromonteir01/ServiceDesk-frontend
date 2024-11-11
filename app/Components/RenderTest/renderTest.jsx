@@ -38,10 +38,19 @@ export default function RenderTest({
         />
       </div>
       <div className={styles.content}>
+            <div className={styles.actions}>
+              <button className={styles.btnRemove} onClick={onRemove}>
+                <IoTrashOutline fontSize={30} />
+              </button>
+              {/* <button className={styles.btnStatus} onClick={onStatusChange}>
+                <MdSwapHoriz fontSize={20} />
+              </button> */}
+              <button className={styles.btnEdit} onClick={onEdit}>
+                <GoPencil fontSize={30} />
+              </button>
+            </div>
         <h1 className={styles.title}>{local}</h1>
         <h4 className={styles.description}>{desc}</h4>
-        <p className={styles.author}>{autor}</p>
-
         {user && user.isadmin && (
           <>
             <p
@@ -49,19 +58,10 @@ export default function RenderTest({
             >
               {status.toUpperCase()}
             </p>
-            <div className={styles.actions}>
-              <button className={styles.btnRemove} onClick={onRemove}>
-                <IoTrashOutline fontSize={20} />
-              </button>
-              {/* <button className={styles.btnStatus} onClick={onStatusChange}>
-                <MdSwapHoriz fontSize={20} />
-              </button> */}
-              <button className={styles.btnEdit} onClick={onEdit}>
-                <GoPencil fontSize={20} />
-              </button>
-            </div>
           </>
         )}
+        <p className={styles.author}>{autor}</p>
+
       </div>
     </div>
   );

@@ -86,12 +86,10 @@ export default function RequestComponent() {
       const response = await getRequestById(id);
       console.log(response);
       setRequest(response);
-    } catch (e) {
-      console.log(e);
+    } catch(e) {
+      toast.error(e.message || e.error);
     }
-  };
-
-  console.log(request);
+  }
 
   return (
     <article className={styles.container}>
