@@ -8,6 +8,9 @@ import {
   getLocais,
   getRequestByStatus,
   getRequestsByName,
+  getRequestByCreationDate,
+  getRequestByFinishDate,
+  getRequestByUser
 } from "@/app/actions/request";
 import { getAllReqsWithLocals } from "@/app/actions/data";
 import format from "@/app/utilities/formattedDate";
@@ -35,9 +38,13 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       let result;
-      if (name.trim()) result = await getUserByName(name);
-      else if (option != "") result = await getUserByRole(option);
-      else result = await getAllUsers();
+      if (optionSearch == 'name') {
+        name.trim() ? result = await getUserByName(name) : result = await getAllUsers();
+      } else if (optionSearch == 'role') {
+        result = await getUserByRole(option);
+      } else {
+        result = await getAllUsers();
+      }
 
       if (!result.users) {
         setResponse([]);
@@ -64,11 +71,17 @@ const AdminPage = () => {
       if (localsBack.locais) setLocals(localsBack.locais);
 
       let result;
-      if (name.trim()) result = await getRequestsByName(name);
+      if (optionSearch == 'name') name.trim() ? result = await getRequestsByName(name) : result = await getAllRequests();
       else if (optionSearch == "local")
         result = await getAllReqsWithLocals(option);
       else if (optionSearch == "status")
-        result = await getRequestByStatus(option);
+        option.trim() ? result = await getRequestByStatus(option) : result = await getAllRequests();
+      else if (optionSearch == "create")
+        result = await getRequestByCreationDate(creation);
+      else if (optionSearch == "finish")
+        result = await getRequestByFinishDate(finish);
+      else if (optionSearch == 'user')
+        result = await getRequestByUser(byUser);
       else result = await getAllRequests();
 
       if (!result.requests) {
@@ -85,7 +98,7 @@ const AdminPage = () => {
         result.requests.map((request) => ({
           0: request.title,
           1: request.local,
-          2: request.status ? "Concluído" : "Em andamento",
+          2: request.status_request,
           3: format(request.date_request),
           4: format(request.date_conclusion),
           5: request.email,
@@ -94,17 +107,7 @@ const AdminPage = () => {
     };
 
     typeSearch == "user" ? fetchUsers() : fetchReqs();
-  }, [name, byUser, option, typeSearch]);
-
-  useEffect(() => {
-    setName("");
-  }, [optionSearch]);
-
-  useEffect(() => {
-    setResponse([]);
-    setOptionSearch("name");
-    setName("");
-  }, [typeSearch]);
+  }, [name, option, optionSearch, creation, finish, typeSearch, byUser]);
 
   return (
     <article className={styles.container}>
@@ -230,6 +233,17 @@ const AdminPage = () => {
                     />
                   </>
                 )}
+                {optionSearch == "user" && (
+                  <>
+                    <label htmlFor="user">Usuário</label>
+                    <input
+                      name="user"
+                      className={styles.inputSearch}
+                      value={byUser}
+                      onChange={(e) => setByUser(e.target.value)}
+                    />
+                  </>
+                )}
               </>
             )}
           </motion.div>
@@ -294,6 +308,14 @@ const AdminPage = () => {
                   checked={optionSearch === "finish"}
                   onChange={(e) => setOptionSearch(e.target.value)}
                 />
+                <label htmlFor="choice">Por usuário:</label>
+                <input
+                  name="choice"
+                  type="radio"
+                  value="user"
+                  checked={optionSearch === "user"}
+                  onChange={(e) => setOptionSearch(e.target.value)}
+                />
               </>
             )}
           </motion.div>
@@ -308,7 +330,7 @@ const AdminPage = () => {
           Mudar senha
         </motion.button>
       </motion.section>
-      
+
       <motion.section
         className={styles.table}
         initial={{ opacity: 0 }}
@@ -322,12 +344,12 @@ const AdminPage = () => {
           />
         ) : (
           <Table
-            atributtes={[ 
-              "título", 
-              "local", 
-              "status", 
-              "dia criado", 
-              "dia finalizado", 
+            atributtes={[
+              "título",
+              "local",
+              "status",
+              "dia criado",
+              "dia finalizado",
               "usuário"
             ]}
             content={response}
@@ -336,18 +358,18 @@ const AdminPage = () => {
       </motion.section>
 
       {edit && (
-                <Modal isOpen={edit} closeModal={() => setEdit(false)}>
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
-                        transition={{ duration: 0.5 }}
-                        className={styles.modalContent}
-                    >
-                        <ChangePassword />
-                    </motion.div>
-                </Modal>
-            )}
+        <Modal isOpen={edit} closeModal={() => setEdit(false)}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5 }}
+            className={styles.modalContent}
+          >
+            <ChangePassword />
+          </motion.div>
+        </Modal>
+      )}
     </article>
   );
 };
