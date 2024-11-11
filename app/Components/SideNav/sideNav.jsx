@@ -37,9 +37,8 @@ const Sidebar = ({ isActive, onClose }) => {
     >
       <div className={styles.container}>
         <SidebarItem Icon={FaHome} Text="Início" href="/" />
-        {user ? (
-          <SidebarItem Icon={FaTools} Text="Solicitações" href="/Request" />
-        ) : null}
+        <SidebarItem Icon={FaTools} Text="Solicitações" href="/Request" />
+
         {user ? (
           <>
             <SidebarItem Icon={FaUserCog} Text="Perfil" href="/Login" />
