@@ -28,15 +28,6 @@
 
 @media screen and (max-width: 768px) {
   .container {
-    display: block;
-    width: 100%;
-  }
-
-  .theader {
-    padding: 8px;
-  }
-
-  .tdata {
-    padding: 2px;
+    display: none;
   }
 }
