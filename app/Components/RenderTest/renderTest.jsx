@@ -38,6 +38,15 @@ export default function RenderTest({
         />
       </div>
       <div className={styles.content}>
+              {user && user.isadmin && (
+                <>
+                  <p
+                    className={statusStyle()}
+                  >
+                    {status.toUpperCase()}
+                  </p>
+                </>
+              )}
             <div className={styles.actions}>
               <button className={styles.btnRemove} onClick={onRemove}>
                 <IoTrashOutline fontSize={30} />
@@ -51,15 +60,6 @@ export default function RenderTest({
             </div>
         <h1 className={styles.title}>{local}</h1>
         <h4 className={styles.description}>{desc}</h4>
-        {user && user.isadmin && (
-          <>
-            <p
-              className={statusStyle()}
-            >
-              {status.toUpperCase()}
-            </p>
-          </>
-        )}
         <p className={styles.author}>{autor}</p>
 
       </div>
