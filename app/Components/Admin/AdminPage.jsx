@@ -34,6 +34,7 @@ const AdminPage = () => {
 
   //resposta para tabela
   const [response, setResponse] = useState([]);
+  const [responseCard, setResponseCard] = useState([]);
   const [locals, setLocals] = useState([]);
 
   useEffect(() => {
@@ -49,6 +50,7 @@ const AdminPage = () => {
 
       if (!result.users) {
         setResponse([]);
+        setResponseCard([]);
         if (result.message) {
           toast.error(result.message, { duration: 3000 });
           return false;
@@ -63,6 +65,15 @@ const AdminPage = () => {
           1: user.email,
           2: user.isstudent ? "estudante" : "funcionário",
           3: user.isadmin ? "administrador" : "usuário",
+        }))
+      );
+
+      setResponseCard(
+        result.users.map((user) => ({
+          nome: user.name,
+          email: user.email,
+          função: user.isstudent ? "estudante" : "funcionário",
+          acessos: user.isadmin ? "administrador" : "usuário",
         }))
       );
     };
@@ -87,6 +98,7 @@ const AdminPage = () => {
 
       if (!result.requests) {
         setResponse([]);
+        setResponseCard([]);
         if (result.message) {
           toast.error(result.message, { duration: 3000 });
           return false;
@@ -103,6 +115,17 @@ const AdminPage = () => {
           3: format(request.date_request),
           4: format(request.date_conclusion),
           5: request.email,
+        }))
+      );
+
+      setResponseCard(
+        result.requests.map((request) => ({
+          título: request.title,
+          local: request.local,
+          status: request.status_request,
+          "dia criado": format(request.date_request),
+          "dia finalizado": format(request.date_conclusion),
+          usuário: request.email,
         }))
       );
     };
@@ -364,7 +387,7 @@ const AdminPage = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        {response.map((data, index) => (
+        {responseCard.map((data, index) => (
           <Card key={index} data={data} />
         ))}
       </motion.section>
