@@ -51,13 +51,13 @@ export default function RenderTest({
             </p>
             <div className={styles.actions}>
               <button className={styles.btnRemove} onClick={onRemove}>
-                <IoTrashOutline fontSize={20} />
+                <IoTrashOutline fontSize={50} />
               </button>
               {/* <button className={styles.btnStatus} onClick={onStatusChange}>
                 <MdSwapHoriz fontSize={20} />
               </button> */}
               <button className={styles.btnEdit} onClick={onEdit}>
-                <GoPencil fontSize={20} />
+                <GoPencil fontSize={50} />
               </button>
             </div>
           </>
