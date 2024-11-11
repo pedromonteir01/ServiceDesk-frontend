@@ -73,7 +73,7 @@ const AdminPage = () => {
           nome: user.name,
           email: user.email,
           função: user.isstudent ? "estudante" : "funcionário",
-          acessos: user.isadmin ? "administrador" : "usuário",
+          acesso: user.isadmin ? "administrador" : "usuário",
         }))
       );
     };
@@ -363,7 +363,7 @@ const AdminPage = () => {
       >
         {typeSearch == "user" ? (
           <Table
-            atributtes={["nome", "email", "função", "acessos"]}
+            atributtes={["nome", "email", "função", ""]}
             content={response}
           />
         ) : (
