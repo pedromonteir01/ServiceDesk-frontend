@@ -19,13 +19,18 @@ export default function RequestComponent() {
 
   const { user } = useContext(UserContext);
   const router = useRouter();
-
   const [requests, setRequests] = useState([]);
   const [request, setRequest] = useState(null);
   const [loading, setLoading] = useState(true);
   const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
+
+    if (!user) {
+      toast.error("Você precisa estar logado para acessar essa página");
+      router.push("/Login");
+      return;
+    }
 
     setLoading(true);
     const fetchRequests = async () => {
