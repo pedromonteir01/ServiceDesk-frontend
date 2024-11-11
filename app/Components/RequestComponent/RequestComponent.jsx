@@ -88,11 +88,9 @@ export default function RequestComponent() {
       console.log(response);
       setRequest(response);
     } catch(e) {
-      console.log(e);
+      toast.error(e.message || e.error);
     }
   }
-  
-  console.log(request);
 
   return (
     <article className={styles.container}>

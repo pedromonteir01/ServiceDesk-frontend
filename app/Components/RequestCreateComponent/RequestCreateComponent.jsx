@@ -23,7 +23,11 @@ const RequestCreateComponent = () => {
 
 
   useEffect(() => {
-    setEmail(user.email);
+    if(!user) {
+      router.replace('/Login');
+    } else {
+      setEmail(user.email);
+    }
   }, [user]);
   useEffect(() => {
     const fetchLocais = async () => {
@@ -98,7 +102,6 @@ const RequestCreateComponent = () => {
         date_conclusion: null,
         email,
       };
-
       const token = localStorage.getItem("refreshToken");
       const response = await createRequest(requestData, token);
       if (response.error) {

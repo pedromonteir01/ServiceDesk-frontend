@@ -19,7 +19,7 @@ export const getLocais = async () => {
   try {
     const response = await axios.get(`${api}/locais`);
     return response.data;
-  } catch (e) {
+  } catch (e) {    
     return e.response.data || { error: "operação fracassou" };
   }
 };
@@ -90,8 +90,6 @@ export const getRequestByUser = async (user) => {
 };
 
 export const createRequest = async (requestData, token) => {
-  console.log("testando createRequest");
-  console.log("Request Data no actions:", requestData);
   try {
     const response = await axios.post(`${apif}/requests`, requestData, {
       headers: {
@@ -99,10 +97,8 @@ export const createRequest = async (requestData, token) => {
         'Content-Type': 'application/json'
       },
     });
-    console.log("Response from createRequest:", response.data);
     return response.data;
   } catch (e) {
-    console.log("Error creating request:", e.response ? e.response.data : e);
     return { error: "Error creating request", message: e.message };
   }
 };
