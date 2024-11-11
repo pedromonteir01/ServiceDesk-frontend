@@ -149,9 +149,9 @@
 @media screen and (max-width: 768px) {
   .main {
     padding: 20px;
-    width: 100%;
+    width: 80%;
     align-items: center;
     display: flex;
-    margin-top: 25vh;
+    margin-top: 2vh;
   }
 }
