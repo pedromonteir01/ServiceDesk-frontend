@@ -229,4 +229,27 @@
   .requestCard {
     margin-top: 3rem;
   }
+
+  .tooCards {
+    flex-direction: column; 
+  }
+
+  .requestCard {
+    width: 100%; 
+    margin-top: 2rem;
+  }
+
+  .info {
+    width: 100%; 
+    margin-top: 2rem;  
+  }
+
+  .about {
+    padding: 1rem;  
+  }
+
+  .buttonRequest {
+    width: 100%; 
+  }
 }
+
