@@ -36,15 +36,7 @@ export default function RenderTest({
         />
       </div>
       <div className={styles.content}>
-              {user && user.isadmin && (
-                <>
-                  <p
-                    className={statusStyle()}
-                  >
-                    {status.toUpperCase()}
-                  </p>
-                </>
-              )}
+             
             <div className={styles.actions}>
               {/* <button className={styles.btnStatus} onClick={onStatusChange}>
                 <MdSwapHoriz fontSize={20} />
@@ -56,7 +48,15 @@ export default function RenderTest({
         <h1 className={styles.title}>{local}</h1>
         <h4 className={styles.description}>{desc}</h4>
         <p className={styles.author}>{autor}</p>
-
+        {user && user.isadmin && (
+                <>
+                  <p
+                    className={statusStyle()}
+                  >
+                    {status.toUpperCase()}
+                  </p>
+                </>
+              )}
       </div>
     </div>
   );

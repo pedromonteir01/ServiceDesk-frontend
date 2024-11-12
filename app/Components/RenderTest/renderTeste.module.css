@@ -36,7 +36,9 @@
   text-align: center;
   padding: 1rem;
   color: #333;
+  position: relative;
 }
+
 .title {
   font-size: 1.5rem;
   color: #222;
@@ -99,15 +101,17 @@
   margin-top: auto;
 }
 
-.btnRemove,
 .btnEdit {
-  background-color:#ffffff00 ;
+  background-color: #ffffff00;
   color: #000000;
   padding: 0.5rem 1rem;
   border-radius: 10px;
   cursor: pointer;
   border: none;
   transition: background-color 0.3s;
+  position: absolute; 
+  top: -0.5rem; 
+  right: -0.5rem; 
 }
 
 @media screen and (max-width: 768px) {
