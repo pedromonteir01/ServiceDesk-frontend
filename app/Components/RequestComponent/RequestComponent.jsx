@@ -56,7 +56,7 @@ export default function RequestComponent() {
 
         if (response.id == request.id) setRequest(null);
       } else {
-        toast.error('Requisição não existe');
+        toast.error("Requisição não existe");
       }
       return;
     } catch (error) {
@@ -99,7 +99,7 @@ export default function RequestComponent() {
     } catch (e) {
       toast.error(e.message || e.error);
     }
-  }
+  };
 
   console.log(request);
 
@@ -154,8 +154,6 @@ export default function RequestComponent() {
                   <RenderTest
                     key={item.id || item.local}
                     local={item.local}
-                    desc={item.description}
-                    autor={item.email}
                     image={item.image}
                     status={item.status_request}
                     onEdit={() => console.log("Editar não implementado ainda")}
@@ -175,27 +173,42 @@ export default function RequestComponent() {
             <p className={styles.noRequestMsg}>REALIZE ALGUMA REQUISIÇÃO!</p>
           )}
         </motion.section>
-        {
-          request &&
-          <div className={styles.info}>
-            <div className={styles.about}>
-              <p>{request.title}</p>
-              <Image src={request.image} width={200} height={200} />
-              <p>feito por: {request.email} em {format(request.date_request)}</p>
-              <p>{request.local}</p>
-              <p>{request.description}</p>
-              <p>{request.status_request.toUpperCase()}</p>
-              {
-                request.status_request == 'concluida' && <p>finalizada em: {format(request.date_conclusion)}</p>
-              }
-              <div className={styles.buttons}>
-                <button className={styles.btnRemove} onClick={() => handleDeleteRequest(request.id)}>
-                  <IoTrashOutline fontSize={30} />
-                </button>
-              </div>
-            </div>
-          </div>
-        }
+        {request && (
+         <motion.div
+         className={styles.info}
+         initial={{ opacity: 0, y: 20 }}
+         animate={{ opacity: 1, y: 0 }}
+         transition={{ duration: 1 }}
+       >
+         <div className={styles.about}>
+           <div className={styles.buttons}>
+             <button
+               className={styles.btnRemove}
+               onClick={() => handleDeleteRequest(request.id)}
+             >
+               <IoTrashOutline fontSize={30} />
+             </button>
+           </div>
+           <h2 className={styles.title}>{request.title}</h2>
+           <div className={styles.imageContainer}>
+             <Image src={request.image} width={200} height={200} />
+           </div>
+           <p className={styles.details}>
+             feito por: {request.email} em {format(request.date_request)}
+           </p>
+           <p className={styles.location}>{request.local}</p>
+           <p className={styles.description}>{request.description}</p>
+           <p className={styles.status}>
+             {request.status_request.toUpperCase()}
+           </p>
+           {request.status_request === "concluida" && (
+             <p className={styles.dateConclusion}>
+               finalizada em: {format(request.date_conclusion)}
+             </p>
+           )}
+         </div>
+       </motion.div>
+        )}
       </div>
     </article>
   );

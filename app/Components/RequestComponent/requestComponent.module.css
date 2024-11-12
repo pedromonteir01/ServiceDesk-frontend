@@ -121,25 +121,90 @@
 .tooCards {
   display: flex;
 }
-
 .info {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  min-width: 70%;
-  padding: 5rem;
+  padding: 1.5rem;
+  background-color: #f5f5f5;
 }
 
 .about {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-  border-radius: 15px;
-  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  text-align: center;
   width: 100%;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #222;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.details {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.location {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.status {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: #ff0000;
+  margin-bottom: 1rem;
+}
+
+.dateConclusion {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.btnRemove {
+  background-color: transparent;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.btnRemove:hover {
+  transform: scale(1.1);
 }
 
 /* Estilo responsivo */
