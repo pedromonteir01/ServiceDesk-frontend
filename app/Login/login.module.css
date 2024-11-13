@@ -103,7 +103,7 @@
   border-radius: 12px;
   width: 100%;
   text-align: center;
-  margin-top: 10rem;
+  margin-top: 4rem;
 }
 
 /* Responsividade */
@@ -123,5 +123,9 @@
   .btn {
     width: 100%;
     font-size: 0.9rem;
+  }
+
+  .bg {
+    margin-top: 10rem;
   }
 }
