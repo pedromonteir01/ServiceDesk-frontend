@@ -3,12 +3,12 @@ import React, { useState, useContext } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Hamburger from 'hamburger-react';
-import { FaHome, FaTools, FaUser, FaRegSun, FaUserLock, FaUserCog, FaHiking, FaBars, FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaHome, FaTools, FaUser, FaUserLock, FaUserCog, FaHiking, FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { TfiYoutube } from 'react-icons/tfi';
 import { UserContext } from '@/app/contexts/userContext';
 import stylesI from '@/app/Components/SidebarItem/SidebarItem.module.css';
 import stylesB from '@/app/Components/SideNav/sideNav.module.css';
-import styles from './Header.module.css';
+import styles from '@/app/Components/Header/Header.module.css';
 
 const SidebarItem = ({ Icon, Text, href }) => {
   return (
