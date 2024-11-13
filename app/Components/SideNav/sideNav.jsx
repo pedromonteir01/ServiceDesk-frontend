@@ -26,16 +26,16 @@ const Sidebar = ({ isActive, onClose }) => {
 
   return (
     <div
-    className={`sidebar ${isActive ? "sidebar-open" : ""}`}
-    style={{
-      backgroundColor: "#ff0000",
-      height: "100vh",
-      position: "fixed",
-      zIndex: 999,
-      transition: "all 0.3s ease-in-out",
-      width: "12rem",
-    }}
-  >
+      className={`sidebar ${isActive ? "sidebar-open" : ""}`}
+      style={{
+        backgroundColor: "#ff0000",
+        height: "100vh",
+        position: "fixed",
+        zIndex: 999,
+        transition: "all 0.3s ease-in-out",
+        width: `${window.innerWidth <= 768 ? "8rem" : "20rem"}`,
+      }}
+    >
       <div className={styles.container}>
         <SidebarItem Icon={FaHome} Text="Início" href="/" />
 
