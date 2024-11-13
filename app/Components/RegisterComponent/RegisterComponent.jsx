@@ -249,18 +249,26 @@ const RegisterComponent = () => {
           )}
 
           <section className={styles.btnLogin}>
-            <button className={styles.btn}>CADASTRAR</button>
-            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={styles.btn}
+            >
+              CADASTRAR
+            </motion.button>
           </section>
         </motion.form>
         {!user && (
-              <button
-                className={styles.btnNoLogin}
-                onClick={() => router.replace("/Login")}
-              >
-                Já possui cadastro? Clique para login
-              </button>
-            )}
+          <motion.button
+            className={styles.btnNoLogin}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            onClick={() => router.replace("/Login")}
+          >
+            Já possui cadastro? Clique para login
+          </motion.button>
+        )}
       </motion.article>
     </div>
   );
