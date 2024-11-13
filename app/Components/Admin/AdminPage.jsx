@@ -11,7 +11,8 @@ import {
   getRequestsByName,
   getRequestByCreationDate,
   getRequestByFinishDate,
-  getRequestByUser
+  getRequestByUser,
+  getRequestByLocal
 } from "@/app/actions/request";
 import { getAllReqsWithLocals } from "@/app/actions/data";
 import format from "@/app/utilities/formattedDate";
@@ -85,7 +86,7 @@ const AdminPage = () => {
       let result;
       if (optionSearch == 'name') name.trim() ? result = await getRequestsByName(name) : result = await getAllRequests();
       else if (optionSearch == "local")
-        result = await getAllReqsWithLocals(option);
+        option.trim() ? result = await getRequestByLocal(option) : result = await getAllRequests();
       else if (optionSearch == "status")
         option.trim() ? result = await getRequestByStatus(option) : result = await getAllRequests();
       else if (optionSearch == "create")
