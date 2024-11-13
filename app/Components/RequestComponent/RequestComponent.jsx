@@ -183,7 +183,7 @@ export default function RequestComponent() {
                   <IoTrashOutline fontSize={30} />
                 </button>
                 <button
-                  className={styles.btnRemove}
+                  className={styles.btnRemovex}
                   onClick={() => setRequest(null)}
                 >
                   X
