@@ -102,18 +102,18 @@ export default function RequestComponent() {
     }
   };
 
-  const changeStatus = async(id, status) => {
+  const changeStatus = async (id, status) => {
     try {
       const request = await getRequestById(id);
-      const token = localStorage.getItem('refreshtoken');
+      const token = localStorage.getItem("refreshtoken");
       await updateStatus(id, status, token);
-      if(request) {
+      if (request) {
         setRequest(request);
       }
-    } catch(e) {
-      toast.error('ERRO EM ALTERAR STATUS');
+    } catch (e) {
+      toast.error("ERRO EM ALTERAR STATUS");
     }
-  }
+  };
 
   return (
     <article className={styles.container}>
@@ -219,18 +219,21 @@ export default function RequestComponent() {
               <p className={styles.status}>
                 {request.status_request.toUpperCase()}
               </p>
-              {
-                request.status_request === 'aguardando' &&
-                <button onClick={() => changeStatus(request.id, 'awaiting')} >INICIAR SOLICITAÇÃO</button>
-              }
-              {
-                request.status_request === 'em andamento' &&
-                <button onClick={() => changeStatus(request.id, 'conclued')}>FINALIZAR SOLICITAÇÃO</button>
-              }
-              {
-                request.status_request === 'concluida' &&
-                <button onClick={() => changeStatus(request.id, 'awaiting')}>CORRIGIR SOLICITAÇÃO</button>
-              }
+              {request.status_request === "aguardando" && (
+                <button onClick={() => changeStatus(request.id, "awaiting")}>
+                  INICIAR SOLICITAÇÃO
+                </button>
+              )}
+              {request.status_request === "em andamento" && (
+                <button onClick={() => changeStatus(request.id, "conclued")}>
+                  FINALIZAR SOLICITAÇÃO
+                </button>
+              )}
+              {request.status_request === "concluida" && (
+                <button onClick={() => changeStatus(request.id, "awaiting")}>
+                  CORRIGIR SOLICITAÇÃO
+                </button>
+              )}
               {request.status_request === "concluida" && (
                 <p className={styles.dateConclusion}>
                   finalizada em: {format(request.date_conclusion)}

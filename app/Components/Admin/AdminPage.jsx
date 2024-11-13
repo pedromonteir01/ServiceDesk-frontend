@@ -86,15 +86,15 @@ const AdminPage = () => {
       let result;
       if (optionSearch == 'name') name.trim() ? result = await getRequestsByName(name) : result = await getAllRequests();
       else if (optionSearch == "local")
-        option.trim() ? result = await getRequestByLocal(option) : result = await getAllRequests();
+        option.trim() ? result = await getAllReqsWithLocals(option) : result = await getAllRequests(); 
       else if (optionSearch == "status")
         option.trim() ? result = await getRequestByStatus(option) : result = await getAllRequests();
       else if (optionSearch == "create")
-        result = await getRequestByCreationDate(creation);
+        creation.trim() ? result = await getRequestByCreationDate(creation) : await getAllRequests();
       else if (optionSearch == "finish")
-        result = await getRequestByFinishDate(finish);
+        finish.trim() ? result = await getRequestByFinishDate(finish) : await getAllRequests();
       else if (optionSearch == 'user')
-        result = await getRequestByUser(byUser);
+        byUser.trim() ? result = await getRequestByUser(byUser) : result = await getAllRequests();
       else result = await getAllRequests();
 
       if (!result.requests) {
@@ -133,6 +133,8 @@ const AdminPage = () => {
 
     typeSearch == "user" ? fetchUsers() : fetchReqs();
   }, [name, option, optionSearch, creation, finish, typeSearch, byUser]);
+
+  console.log(response);
 
   return (
     <article className={styles.container}>
