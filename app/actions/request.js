@@ -19,7 +19,16 @@ export const getLocais = async () => {
   try {
     const response = await axios.get(`${api}/locais`);
     return response.data;
-  } catch (e) {    
+  } catch (e) {
+    return e.response.data || { error: "operação fracassou" };
+  }
+};
+
+export const getRequestByLocal = async (local) => {
+  try {
+    const response = await axios.get(`${api}/local/${local}`);
+    return response.data;
+  } catch (e) {
     return e.response.data || { error: "operação fracassou" };
   }
 };
@@ -36,16 +45,7 @@ export const getRequestsByName = async (title) => {
 export const getRequestById = async (id) => {
   try {
     const response = await axios.get(`${api}/${id}`);
-    console.log('RESPONSE' +response.data);
-    return response.data;
-  } catch (e) {
-    return e.response.data || { error: "operação fracassou" };
-  }
-};
-
-export const getRequestByLocal = async (local) => {
-  try {
-    const response = await axios.get(`${api}/local/${local}`);
+    console.log("RESPONSE" + response.data);
     return response.data;
   } catch (e) {
     return e.response.data || { error: "operação fracassou" };
@@ -65,19 +65,19 @@ export const getRequestByCreationDate = async (date) => {
   try {
     const response = await axios.get(`${api}/creation/${date}`);
     return response.data;
-  } catch(e) {
+  } catch (e) {
     return e.response.data || { error: "operação fracassou" };
   }
-}
+};
 
 export const getRequestByFinishDate = async (date) => {
   try {
     const response = await axios.get(`${api}/finish/${date}`);
     return response.data;
-  } catch(e) {
+  } catch (e) {
     return e.response.data || { error: "operação fracassou" };
   }
-}
+};
 
 export const getRequestByUser = async (user) => {
   try {
@@ -94,7 +94,7 @@ export const createRequest = async (requestData, token) => {
     const response = await axios.post(`${apif}/requests`, requestData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
     });
     return response.data;
@@ -124,12 +124,16 @@ export const deleteRequest = async (id) => {
 export const updateStatus = async (id, status, token) => {
   try {
     console.log({ status });
-    const response = await axios.patch(`${api}/status/${id}`, { status }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
+    const response = await axios.patch(
+      `${api}/status/${id}`,
+      { status },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     return response.data;
   } catch (e) {
     return e.response.data || { error: "operação fracassou" };
