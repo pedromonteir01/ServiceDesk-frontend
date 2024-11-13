@@ -3,7 +3,8 @@ import React, { useState, useContext } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Hamburger from 'hamburger-react';
-import { FaHome, FaTools, FaUser, FaUserLock, FaUserCog, FaHiking, FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaHome, FaTools, FaUser, FaUserLock, FaUserCog, FaHiking, FaFacebookF, FaLinkedinIn, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
 import { TfiYoutube } from 'react-icons/tfi';
 import { UserContext } from '@/app/contexts/userContext';
 import stylesI from '@/app/Components/SidebarItem/SidebarItem.module.css';
@@ -113,7 +114,7 @@ const Header = () => {
         <span className={styles.barra}>|</span>
         <li className={styles.linksSocial}>
           <Link target="blank" href="https://twitter.com/senaisaopaulo">
-            <FaTwitter color="#ffffff" />
+            <FaXTwitter color="#ffffff" />
           </Link>
         </li>
         <span className={styles.barra}>|</span>
