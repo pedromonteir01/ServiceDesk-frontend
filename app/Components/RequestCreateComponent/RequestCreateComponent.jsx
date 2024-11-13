@@ -219,7 +219,9 @@ const RequestCreateComponent = () => {
                   setImage(null);
                 }}
               >
-                <MdImageNotSupported />
+                <MdImageNotSupported size={20} />
+                
+              <p className={styles.removeImageText}>Remover imagem</p>
               </button>
             </div>
           )}
