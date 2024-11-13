@@ -7,9 +7,9 @@ import { FaHome, FaTools, FaUser, FaUserLock, FaUserCog, FaHiking, FaFacebookF, 
 import { FaXTwitter } from "react-icons/fa6";
 import { TfiYoutube } from 'react-icons/tfi';
 import { UserContext } from '@/app/contexts/userContext';
-import stylesI from '@/app/Components/SidebarItem/SidebarItem.module.css';
-import stylesB from '@/app/Components/SideNav/sideNav.module.css';
-import styles from '@/app/Components/Header/Header.module.css';
+import stylesI from '@/app/components/SidebarItem/SidebarItem.module.css';
+import stylesB from '@/app/components/SideNav/sideNav.module.css';
+import styles from '@/app/components/Header/Header.module.css';
 
 const SidebarItem = ({ Icon, Text, href }) => {
   return (
