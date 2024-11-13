@@ -18,6 +18,8 @@ import { UserContext } from "@/app/contexts/userContext";
 import Image from "next/image";
 import format from "@/app/utilities/formattedDate";
 import { IoTrashOutline } from "react-icons/io5";
+import { FaWindowClose } from "react-icons/fa";
+import { red } from "@mui/material/colors";
 
 export default function RequestComponent() {
   const { user } = useContext(UserContext);
@@ -175,18 +177,13 @@ export default function RequestComponent() {
             transition={{ duration: 1 }}
           >
             <div className={styles.about}>
+
               <div className={styles.buttons}>
-                <button
-                  className={styles.btnRemove}
-                  onClick={() => handleDeleteRequest(request.id)}
-                >
-                  <IoTrashOutline fontSize={30} />
-                </button>
                 <button
                   className={styles.btnRemovex}
                   onClick={() => setRequest(null)}
                 >
-                  X
+                  <FaWindowClose fontSize={50} color={"red"}/>
                 </button>
               </div>
               <h2 className={styles.title}>{request.title}</h2>
@@ -207,18 +204,26 @@ export default function RequestComponent() {
                 <>
                   {
                     request.status_request === 'aguardando' &&
-                    <button onClick={() => changeStatus(request.id, 'awaiting')} >INICIAR SOLICITAÇÃO</button>
+                    <button className={styles.buttonr} onClick={() => changeStatus(request.id, 'awaiting')} >INICIAR SOLICITAÇÃO</button>
                   }
                   {
                     request.status_request === 'em andamento' &&
-                    <button onClick={() => changeStatus(request.id, 'conclued')}>FINALIZAR SOLICITAÇÃO</button>
+                    <button className={styles.buttonra} onClick={() => changeStatus(request.id, 'conclued')}>FINALIZAR SOLICITAÇÃO</button>
                   }
                   {
                     request.status_request === 'concluida' &&
-                    <button onClick={() => changeStatus(request.id, 'awaiting')}>CORRIGIR SOLICITAÇÃO</button>
+                    <button className={styles.buttonrc} onClick={() => changeStatus(request.id, 'awaiting')}>CORRIGIR SOLICITAÇÃO</button>
                   }
                 </>
               }
+              <div className={styles.buttonsdelete}>
+              <button
+                  className={styles.btnRemove}
+                  onClick={() => handleDeleteRequest(request.id)}
+                >
+                  <IoTrashOutline fontSize={40} />
+                </button>
+              </div>
               {request.status_request === "concluida" && (
                 <p className={styles.dateConclusion}>
                   finalizada em: {format(request.date_conclusion)}

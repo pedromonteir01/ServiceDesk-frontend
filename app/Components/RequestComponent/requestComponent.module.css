@@ -140,7 +140,7 @@
   position: relative;
   align-items: center;
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   padding: 2rem;
   text-align: center;
@@ -201,8 +201,88 @@
 
 .buttons {
   position: absolute;
-  top: 0%;
-  right: 0%;  
+  top: 3px;
+  right: 7px;  
+}
+
+.buttonr{
+  background: linear-gradient(135deg, #3c3c3c, #000000);
+  border: none;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.buttonr:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10x rgba(0, 0, 0, 0.3);
+}
+
+.buttonr:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(183, 183, 183, 0.2);
+}
+
+.buttonra{
+  background: linear-gradient(1deg, #15e41c, #12cd19);
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.buttonra:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10x rgba(0, 0, 0, 0.3);
+}
+
+.buttonra:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(183, 183, 183, 0.2);
+}
+
+.buttonrc{
+  background: linear-gradient(1deg, #fb5c00, #e35300);
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.buttonrc:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10x rgba(0, 0, 0, 0.3);
+}
+
+.buttonrc:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(183, 183, 183, 0.2);
+}
+
+.buttonsdelete {
+  margin: auto;
+  display: flex;
 }
 
 .btnRemove {
