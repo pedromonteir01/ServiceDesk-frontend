@@ -133,6 +133,11 @@
     font-size: 0.9rem;
   }
 
+  .btnNoLogin {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
   .bg {
     margin-top: 4rem;
   }

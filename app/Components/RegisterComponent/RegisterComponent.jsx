@@ -140,7 +140,7 @@ const RegisterComponent = () => {
     <div className={styles.container}>
       <div className={styles.bg}>
           <Image src="/senai.png" alt="SENAI logo" width={300} height={70} />
-          <h1 className={styles.title}>Cadastre-se</h1>
+          <h1 className={styles.title}>Service Desk</h1>
         </div>
       <motion.article
         className={styles.loginBox}

@@ -143,6 +143,11 @@
     font-size: 0.9rem;
   }
 
+  .btnNoAccount {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
   .bg {
     margin-top: 10rem;
   }
