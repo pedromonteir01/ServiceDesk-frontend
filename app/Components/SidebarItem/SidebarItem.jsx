@@ -6,7 +6,7 @@ const SidebarItem = ({ Icon, Text, href }) => {
   return (
     <Link className={styles.container} href={href}>
       <Icon />
-      <span>{Text}</span>
+      <span className={styles.span}>{Text}</span>
     </Link>
   );
 };
