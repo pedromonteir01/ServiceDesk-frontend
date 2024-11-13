@@ -9,11 +9,12 @@
   max-width: 570px; /* Limita o tamanho do card */
   background-color: #f9f9f9; /* Fundo claro e neutro */
   border: 1px solid #e2e2e2; /* Borda suave e discreta */
+  margin-bottom: 0.2rem; /* Espaço entre os cards */
 }
 
 /* Efeito hover para interação */
 .card:hover {
-  transform: translateY(-5px); /* Leve elevação ao passar o mouse */
+  transform: translateY(-1px); /* Leve elevação ao passar o mouse */
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1); /* Sombra mais forte */
 }
 
@@ -30,7 +31,7 @@
 
 /* Alteração de cor dos itens quando hover */
 .cardItem:hover {
-  color: #007bff; /* Cor de destaque azul */
+  color: #4f4f4f; /* Cor de destaque azul */
 }
 
 /* Estilo do título (strong) para os keys */
