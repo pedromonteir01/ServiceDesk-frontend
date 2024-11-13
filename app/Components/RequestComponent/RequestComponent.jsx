@@ -88,6 +88,7 @@ export default function RequestComponent() {
   };
 
   const changeStatus = async (id, status) => {
+  const changeStatus = async (id, status) => {
     try {
       const request = await getRequestById(id);
       const token = localStorage.getItem('refreshToken');
