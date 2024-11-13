@@ -6,7 +6,7 @@ const Card = ({ data }) => {
     <div className={styles.card}>
       {Object.keys(data).map((key, index) => (
         <div key={index} className={styles.cardItem}>
-          <strong>{key}:</strong> {data[key]}
+          <strong>{key.toUpperCase()}:</strong> {data[key]}
         </div>
       ))}
     </div>

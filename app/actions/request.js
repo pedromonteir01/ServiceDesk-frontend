@@ -121,9 +121,15 @@ export const deleteRequest = async (id) => {
   }
 };
 
-export const concludeStatus = async (id, status) => {
+export const updateStatus = async (id, status, token) => {
   try {
-    const response = await axios.patch(`${api}/${id}/conclude`, { status });
+    console.log({ status });
+    const response = await axios.patch(`${api}/status/${id}`, { status }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     return response.data;
   } catch (e) {
     return e.response.data || { error: "operação fracassou" };

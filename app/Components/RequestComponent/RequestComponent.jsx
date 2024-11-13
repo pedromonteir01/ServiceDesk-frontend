@@ -10,6 +10,7 @@ import {
   updateRequest,
   getRequestByLocal,
   getRequestById,
+  updateStatus,
 } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -101,7 +102,18 @@ export default function RequestComponent() {
     }
   };
 
-  console.log(request);
+  const changeStatus = async(id, status) => {
+    try {
+      const request = await getRequestById(id);
+      const token = localStorage.getItem('refreshtoken');
+      await updateStatus(id, status, token);
+      if(request) {
+        setRequest(request);
+      }
+    } catch(e) {
+      toast.error('ERRO EM ALTERAR STATUS');
+    }
+  }
 
   return (
     <article className={styles.container}>
@@ -174,40 +186,58 @@ export default function RequestComponent() {
           )}
         </motion.section>
         {request && (
-         <motion.div
-         className={styles.info}
-         initial={{ opacity: 0, y: 20 }}
-         animate={{ opacity: 1, y: 0 }}
-         transition={{ duration: 1 }}
-       >
-         <div className={styles.about}>
-           <div className={styles.buttons}>
-             <button
-               className={styles.btnRemove}
-               onClick={() => handleDeleteRequest(request.id)}
-             >
-               <IoTrashOutline fontSize={30} />
-             </button>
-           </div>
-           <h2 className={styles.title}>{request.title}</h2>
-           <div className={styles.imageContainer}>
-             <Image src={request.image} width={200} height={200} />
-           </div>
-           <p className={styles.details}>
-             feito por: {request.email} em {format(request.date_request)}
-           </p>
-           <p className={styles.location}>{request.local}</p>
-           <p className={styles.description}>{request.description}</p>
-           <p className={styles.status}>
-             {request.status_request.toUpperCase()}
-           </p>
-           {request.status_request === "concluida" && (
-             <p className={styles.dateConclusion}>
-               finalizada em: {format(request.date_conclusion)}
-             </p>
-           )}
-         </div>
-       </motion.div>
+          <motion.div
+            className={styles.info}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <div className={styles.about}>
+              <div className={styles.buttons}>
+                <button
+                  className={styles.btnRemove}
+                  onClick={() => handleDeleteRequest(request.id)}
+                >
+                  <IoTrashOutline fontSize={30} />
+                </button>
+                <button
+                  className={styles.btnRemove}
+                  onClick={() => setRequest(null)}
+                >
+                  X
+                </button>
+              </div>
+              <h2 className={styles.title}>{request.title}</h2>
+              <div className={styles.imageContainer}>
+                <Image src={request.image} width={200} height={200} />
+              </div>
+              <p className={styles.details}>
+                feito por: {request.email} em {format(request.date_request)}
+              </p>
+              <p className={styles.location}>{request.local}</p>
+              <p className={styles.description}>{request.description}</p>
+              <p className={styles.status}>
+                {request.status_request.toUpperCase()}
+              </p>
+              {
+                request.status_request === 'aguardando' &&
+                <button onClick={() => changeStatus(request.id, 'awaiting')} >INICIAR SOLICITAÇÃO</button>
+              }
+              {
+                request.status_request === 'em andamento' &&
+                <button onClick={() => changeStatus(request.id, 'conclued')}>FINALIZAR SOLICITAÇÃO</button>
+              }
+              {
+                request.status_request === 'concluida' &&
+                <button onClick={() => changeStatus(request.id, 'awaiting')}>CORRIGIR SOLICITAÇÃO</button>
+              }
+              {request.status_request === "concluida" && (
+                <p className={styles.dateConclusion}>
+                  finalizada em: {format(request.date_conclusion)}
+                </p>
+              )}
+            </div>
+          </motion.div>
         )}
       </div>
     </article>

@@ -363,7 +363,7 @@ const AdminPage = () => {
       >
         {typeSearch == "user" ? (
           <Table
-            atributtes={["nome", "email", "função", ""]}
+            atributtes={["nome", "email", "função", "acesso"]}
             content={response}
           />
         ) : (

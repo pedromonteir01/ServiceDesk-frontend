@@ -31,21 +31,6 @@ const UserPage = () => {
         setName(user.name.toUpperCase());
     }, [edit]);
 
-    const confirm = async () => {
-        try {
-            const find = await getUserByEmail(user.email);
-            await updateUser(user, user.email);
-            if (await compare(password, find.password)) {
-                setUser(null);
-                localStorage.clear();
-            } else {
-                // Lógica em caso de falha de autenticação
-            }
-        } catch (e) {
-            console.log('Server error');
-        }
-    }
-
     const logoff = () => {
         setUser(null);
         localStorage.clear();
