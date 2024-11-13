@@ -36,10 +36,15 @@ const LoginComponent = () => {
 
   return (
     <div className={style.container}>
-      <div className={style.bg}>
+      <motion.div
+        className={style.bg}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
         <Image src="/senai.png" alt="logo" width={300} height={70} />
         <h1 className={style.title}>Service Desk</h1>
-      </div>
+      </motion.div>
       <div className={style.loginContainer}>
         <motion.article
           className={style.loginBox}

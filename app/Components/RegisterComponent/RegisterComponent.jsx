@@ -138,18 +138,21 @@ const RegisterComponent = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.bg}>
-          <Image src="/senai.png" alt="SENAI logo" width={300} height={70} />
-          <h1 className={styles.title}>Service Desk</h1>
-        </div>
+      <motion.div
+        className={styles.bg}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        <Image src="/senai.png" alt="SENAI logo" width={300} height={70} />
+        <h1 className={styles.title}>Service Desk</h1>
+      </motion.div>
       <motion.article
         className={styles.loginBox}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-
-
         <motion.h2
           className={styles.loginTitle}
           initial={{ opacity: 0 }}
