@@ -191,7 +191,7 @@ export default function RequestComponent() {
               </div>
               <h2 className={styles.title}>{request.title}</h2>
               <div className={styles.imageContainer}>
-                <Image src={request.image} width={200} height={200} alt="image-request" />
+                <Image className={styles.imagex} src={request.image} width={370} height={300} alt="image-request" />
               </div>
               <p className={styles.details}>
                 feito por: {request.email} em {format(request.date_request)}
