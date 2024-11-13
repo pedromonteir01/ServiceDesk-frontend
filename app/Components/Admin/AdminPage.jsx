@@ -14,7 +14,6 @@ import {
   getRequestByUser,
   getRequestByLocal
 } from "@/app/actions/request";
-import { getAllReqsWithLocals } from "@/app/actions/data";
 import format from "@/app/utilities/formattedDate";
 import Modal from "../Modal/Modal";
 import ChangePassword from "../ChangePassword/ChangePassword";
