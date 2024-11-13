@@ -1,6 +1,4 @@
 import styles from "./renderTeste.module.css";
-import { MdSwapHoriz } from "react-icons/md";
-import { GoPencil } from "react-icons/go";
 import { useContext } from "react";
 import { UserContext } from "@/app/contexts/userContext";
 
@@ -10,9 +8,7 @@ export default function RenderTest({
   autor,
   status,
   onEdit,
-  onStatusChange,
   image,
-  requests,
 }) {
   const { user } = useContext(UserContext);
 
@@ -36,15 +32,6 @@ export default function RenderTest({
         />
       </div>
       <div className={styles.content}>
-             
-            <div className={styles.actions}>
-              {/* <button className={styles.btnStatus} onClick={onStatusChange}>
-                <MdSwapHoriz fontSize={20} />
-              </button> */}
-              <button className={styles.btnEdit} onClick={onEdit}>
-                <GoPencil fontSize={30} />
-              </button>
-            </div>
         <h1 className={styles.title}>{local}</h1>
         <h4 className={styles.description}>{desc}</h4>
         <p className={styles.author}>{autor}</p>
