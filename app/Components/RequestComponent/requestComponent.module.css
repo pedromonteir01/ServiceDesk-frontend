@@ -216,6 +216,21 @@
 .btnRemove:hover {
   transform: scale(1.1);
 }
+.btnRemovex {
+  background-color: transparent;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.btnRemovex:hover {
+  transform: scale(1.1);
+}
+
 
 /* Estilo responsivo */
 @media screen and (max-width: 768px) {
