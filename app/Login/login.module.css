@@ -2,11 +2,14 @@
 .loginContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100%;
-  min-height: 100dvh;
+  min-height: 77dvh;
   background-color: #f4f4f4;
   padding: 2rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* Caixa de login */
@@ -19,6 +22,7 @@
   width: 100%;
   max-width: 400px;
   text-align: center;
+  max-height: 25rem;
 }
 
 /* Título */
@@ -68,7 +72,7 @@
 
 .btn {
   padding: 0.75rem;
-  width: 90%;
+  width: 80%;
   border-radius: 12px;
   border: none;
   background-color: #ff0000;
@@ -76,7 +80,6 @@
   font-size: 1rem;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
-  margin-bottom: 1rem;  
 }
 
 .btn:hover {
@@ -84,21 +87,23 @@
   background-color: #cc0000;
 }
 
-.btnNoAccount {
-  padding: 0.75rem;
-  width: 90%;
-  border-radius: 12px;
-  border: none;
-  background-color: #000000bb;
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+.container {
+  background-color: #f4f4f4;
+  padding-top: 2rem;
+  padding-bottom: 0;
 }
 
-.btnNoAccount:hover {
-  transform: scale(1.05);
-  background-color: #000000;
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.bg {
+  border-radius: 12px;
+  width: 100%;
+  text-align: center;
+  margin-top: 4rem;
 }
 
 /* Responsividade */
@@ -118,5 +123,9 @@
   .btn {
     width: 100%;
     font-size: 0.9rem;
+  }
+
+  .bg {
+    margin-top: 10rem;
   }
 }
