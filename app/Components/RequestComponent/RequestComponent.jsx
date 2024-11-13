@@ -65,21 +65,6 @@ export default function RequestComponent() {
     }
   };
 
-  const handleUpdateRequestStatus = async (id, newStatus) => {
-    try {
-      await updateRequest(id, { status_request: newStatus });
-      setRequests((prevRequests) =>
-        prevRequests.map((request) =>
-          request.id === id
-            ? { ...request, status_request: newStatus }
-            : request
-        )
-      );
-    } catch (error) {
-      console.error("Erro ao atualizar requisição:", error);
-    }
-  };
-
   const handleRequestCreate = () => {
     if (!user) {
       toast.error("Você precisa estar logado para acessar essa página");
@@ -102,18 +87,24 @@ export default function RequestComponent() {
     }
   };
 
-  const changeStatus = async(id, status) => {
+  const changeStatus = async (id, status) => {
     try {
       const request = await getRequestById(id);
-      const token = localStorage.getItem('refreshtoken');
+      const token = localStorage.getItem('refreshToken');
       await updateStatus(id, status, token);
       if(request) {
-        setRequest(request);
+        const response = await getAllRequests();
+        setRequests(response.requests);
+        const requestUpdated = await getRequestById(id);
+        setRequest(requestUpdated);
       }
-    } catch(e) {
+    } catch (e) {
       toast.error('ERRO EM ALTERAR STATUS');
     }
   }
+
+  console.log(requests);
+
 
   return (
     <article className={styles.container}>
@@ -168,15 +159,6 @@ export default function RequestComponent() {
                     local={item.local}
                     image={item.image}
                     status={item.status_request}
-                    onEdit={() => console.log("Editar não implementado ainda")}
-                    onStatusChange={() =>
-                      handleUpdateRequestStatus(
-                        item.id,
-                        item.status_request === "aguardando"
-                          ? "concluida"
-                          : "aguardando"
-                      )
-                    }
                   />
                 </motion.div>
               ))}
@@ -209,7 +191,7 @@ export default function RequestComponent() {
               </div>
               <h2 className={styles.title}>{request.title}</h2>
               <div className={styles.imageContainer}>
-                <Image src={request.image} width={200} height={200} />
+                <Image src={request.image} width={200} height={200} alt="image-request" />
               </div>
               <p className={styles.details}>
                 feito por: {request.email} em {format(request.date_request)}
@@ -220,16 +202,22 @@ export default function RequestComponent() {
                 {request.status_request.toUpperCase()}
               </p>
               {
-                request.status_request === 'aguardando' &&
-                <button onClick={() => changeStatus(request.id, 'awaiting')} >INICIAR SOLICITAÇÃO</button>
-              }
-              {
-                request.status_request === 'em andamento' &&
-                <button onClick={() => changeStatus(request.id, 'conclued')}>FINALIZAR SOLICITAÇÃO</button>
-              }
-              {
-                request.status_request === 'concluida' &&
-                <button onClick={() => changeStatus(request.id, 'awaiting')}>CORRIGIR SOLICITAÇÃO</button>
+                user &&
+                user.isadmin &&
+                <>
+                  {
+                    request.status_request === 'aguardando' &&
+                    <button onClick={() => changeStatus(request.id, 'awaiting')} >INICIAR SOLICITAÇÃO</button>
+                  }
+                  {
+                    request.status_request === 'em andamento' &&
+                    <button onClick={() => changeStatus(request.id, 'conclued')}>FINALIZAR SOLICITAÇÃO</button>
+                  }
+                  {
+                    request.status_request === 'concluida' &&
+                    <button onClick={() => changeStatus(request.id, 'awaiting')}>CORRIGIR SOLICITAÇÃO</button>
+                  }
+                </>
               }
               {request.status_request === "concluida" && (
                 <p className={styles.dateConclusion}>
