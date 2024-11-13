@@ -6,8 +6,9 @@ import { createRequest, getLocais } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/app/contexts/userContext";
 import toast from "react-hot-toast";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { MdImageNotSupported } from "react-icons/md";
 
 const RequestCreateComponent = () => {
   const { user } = useContext(UserContext);
@@ -21,10 +22,9 @@ const RequestCreateComponent = () => {
   const router = useRouter();
   const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
 
-
   useEffect(() => {
-    if(!user) {
-      router.replace('/Login');
+    if (!user) {
+      router.replace("/Login");
     } else {
       setEmail(user.email);
     }
@@ -78,11 +78,10 @@ const RequestCreateComponent = () => {
     } else if (title.length < 6) {
       toast.error("TÍTULO MUITO LONGO MIN 6 MAX 35 CARACTERES");
       return;
-    } else if(title.length > 35){
+    } else if (title.length > 35) {
       toast.error("TÍTULO MUITO LONGO MIN 6 MAX 35 CARACTERES");
       return;
-
-    }else if (description.length < 10) {
+    } else if (description.length < 10) {
       toast.error("DESCRIÇÃO MUITO CURTA");
       return;
     }
@@ -121,145 +120,145 @@ const RequestCreateComponent = () => {
   return (
     <ProtectedRoute>
       <motion.div
-      className={styles.main}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h1 className={styles.title}>
-        Relate aqui seu <span className={styles.problemText}>problema</span>
-      </h1>
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          requestCreate(title, description, local, image);
-        }}
+        className={styles.main}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
       >
-        <motion.label
-          className={styles.label}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          Assunto:
-        </motion.label>
-        <motion.input
-          type="text"
-          className={styles.titleInput}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        />
+        <h1 className={styles.title}>
+          Relate aqui seu <span className={styles.problemText}>problema</span>
+        </h1>
 
-        <motion.label
-          className={styles.label}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            requestCreate(title, description, local, image);
+          }}
         >
-          O que aconteceu? Descreva
-        </motion.label>
-        <motion.textarea
-          className={styles.descriptionInput}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        />
-
-        <motion.label
-          className={styles.label}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          Imagem
-        </motion.label>
-        {!imagePreview ? (
-          <div
-            className={styles.imageUpload}
-            onClick={() =>
-              document.querySelector(`.${styles.fileInput}`).click()
-            }
-          >
-            <input
-              type="file"
-              name="image"
-              onChange={handleUpload}
-              className={styles.fileInput}
-              accept="image/*"
-            />
-            <IoCloudDownloadOutline color="#000" fontSize={30} />
-            <span>Inserir imagem</span>
-          </div>
-        ) : (
-          <motion.div
-            className={styles.imagePreviewContainer}
+          <motion.label
+            className={styles.label}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <img
-              src={imagePreview}
-              alt="Imagem Preview"
-              className={styles.imagePreview}
-            />
-            <p className={styles.fileName}>{image.name}</p>
-          </motion.div>
-        )}
-        {imagePreview && (
-          <div className={styles.removeImageButtonDiv}>
-            <button
-              className={styles.removeImageButton}
-              onClick={() => {
-                setImagePreview(null);
-                setImage(null);
-              }}
+            Assunto:
+          </motion.label>
+          <motion.input
+            type="text"
+            className={styles.titleInput}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          />
+
+          <motion.label
+            className={styles.label}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            O que aconteceu? Descreva
+          </motion.label>
+          <motion.textarea
+            className={styles.descriptionInput}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          />
+
+          <motion.label
+            className={styles.label}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            Imagem
+          </motion.label>
+          {!imagePreview ? (
+            <div
+              className={styles.imageUpload}
+              onClick={() =>
+                document.querySelector(`.${styles.fileInput}`).click()
+              }
             >
-              Remover imagem
-            </button>
-          </div>
-        )}
+              <input
+                type="file"
+                name="image"
+                onChange={handleUpload}
+                className={styles.fileInput}
+                accept="image/*"
+              />
+              <IoCloudDownloadOutline color="#000" fontSize={30} />
+              <span>Inserir imagem</span>
+            </div>
+          ) : (
+            <motion.div
+              className={styles.imagePreviewContainer}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <img
+                src={imagePreview}
+                alt="Imagem Preview"
+                className={styles.imagePreview}
+              />
+              <p className={styles.fileName}>{image.name}</p>
+            </motion.div>
+          )}
+          {imagePreview && (
+            <div className={styles.removeImageButtonDiv}>
+              <button
+                className={styles.removeImageButton}
+                onClick={() => {
+                  setImagePreview(null);
+                  setImage(null);
+                }}
+              >
+                <MdImageNotSupported />
+              </button>
+            </div>
+          )}
 
-        <motion.label
-          className={styles.label}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          Qual foi o local?
-        </motion.label>
-        <motion.select
-          className={styles.select}
-          value={local}
-          onChange={(e) => setLocal(e.target.value)}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <option value="">Selecione o ambiente</option>
-          {locais.map((localItem) => (
-            <option key={localItem.id} value={localItem.nome}>
-              {localItem.nome}
-            </option>
-          ))}
-        </motion.select>
+          <motion.label
+            className={styles.label}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            Qual foi o local?
+          </motion.label>
+          <motion.select
+            className={styles.select}
+            value={local}
+            onChange={(e) => setLocal(e.target.value)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <option value="">Selecione o ambiente</option>
+            {locais.map((localItem) => (
+              <option key={localItem.id} value={localItem.nome}>
+                {localItem.nome}
+              </option>
+            ))}
+          </motion.select>
 
-        <motion.button
-          className={styles.submitButton}
-          type="submit"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          Enviar
-        </motion.button>
-      </form>
-    </motion.div>
+          <motion.button
+            className={styles.submitButton}
+            type="submit"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            Enviar
+          </motion.button>
+        </form>
+      </motion.div>
     </ProtectedRoute>
   );
 };

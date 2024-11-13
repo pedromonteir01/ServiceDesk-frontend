@@ -120,6 +120,8 @@
 
 .tooCards {
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .info {
   width: 100%;
@@ -237,25 +239,24 @@
   }
 
   .tooCards {
-    flex-direction: column; 
+    flex-direction: column;
   }
 
   .requestCard {
-    width: 100%; 
+    width: 100%;
     margin-top: 2rem;
   }
 
   .info {
-    width: 100%; 
-    margin-top: 2rem;  
+    width: 100%;
+    margin-top: 2rem;
   }
 
   .about {
-    padding: 1rem;  
+    padding: 1rem;
   }
 
   .buttonRequest {
-    width: 100%; 
+    width: 100%;
   }
 }
-
