@@ -250,7 +250,10 @@ const RegisterComponent = () => {
 
           <section className={styles.btnLogin}>
             <button className={styles.btn}>CADASTRAR</button>
-            {!user && (
+            
+          </section>
+        </motion.form>
+        {!user && (
               <button
                 className={styles.btnNoLogin}
                 onClick={() => router.replace("/Login")}
@@ -258,8 +261,6 @@ const RegisterComponent = () => {
                 Já possui cadastro? Clique para login
               </button>
             )}
-          </section>
-        </motion.form>
       </motion.article>
     </div>
   );
