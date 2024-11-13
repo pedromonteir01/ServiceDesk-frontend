@@ -189,6 +189,7 @@
   padding: 0.5rem 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
+  margin-left: 1rem;
   width: 60%;
 }
 
@@ -196,6 +197,30 @@
   font-size: 0.9rem;
   color: #333;
   margin-bottom: 1rem;
+}
+
+.awaiting {
+  background-color: #ffcc00; 
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.inProgress {
+  background-color: #007bff; 
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.concluded {
+  background-color: #28a745; 
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
 }
 
 .buttons {
