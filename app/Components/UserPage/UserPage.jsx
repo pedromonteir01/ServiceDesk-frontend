@@ -79,19 +79,37 @@ const UserPage = () => {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.6 }}
                     >
-                        Senha:
+                        Email:
                     </motion.label>
                     <motion.input
                         type="text"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                         readOnly
                         className={styles.inputUser}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.7 }}
                     />
-                    
+
+                    <motion.label
+                        className={styles.labelfor}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                    >
+                        Senha:
+                    </motion.label>
+                    <motion.input
+                        type='password'
+                        value={'*****************'}
+                        readOnly
+                        className={styles.inputUser}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.7 }}
+                    />
+
                     <motion.button
                         className={styles.button}
                         onClick={() => setEdit(true)}
