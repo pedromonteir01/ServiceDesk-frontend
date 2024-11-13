@@ -6,6 +6,7 @@ import styles from "../../Register/register.module.css";
 import { createUser } from "@/app/actions/users";
 import toast from "react-hot-toast";
 import { UserContext } from "@/app/contexts/userContext";
+import Image from "next/image";
 const special = ["!", "@", "#", "$", "%", "&", "*", "(", ")", "/", "?", "|"];
 const number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const upper = [
@@ -137,12 +138,18 @@ const RegisterComponent = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.bg}>
+          <Image src="/senai.png" alt="SENAI logo" width={300} height={70} />
+          <h1 className={styles.title}>Cadastre-se</h1>
+        </div>
       <motion.article
         className={styles.loginBox}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
+
+
         <motion.h2
           className={styles.loginTitle}
           initial={{ opacity: 0 }}

@@ -101,6 +101,19 @@
   background-color: #cc0000;
 }
 
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.bg {
+  border-radius: 12px;
+  width: 100%;
+  text-align: center;
+  margin-top: 6rem;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .loginBox {
@@ -118,5 +131,9 @@
   .btn {
     width: 100%;
     font-size: 0.9rem;
+  }
+
+  .bg {
+    margin-top: 4rem;
   }
 }
