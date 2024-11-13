@@ -195,9 +195,20 @@ export default function RequestComponent() {
               </p>
               <p className={styles.location}>{request.local}</p>
               <p className={styles.description}>{request.description}</p>
-              <p className={styles.status}>
-                {request.status_request.toUpperCase()}
-              </p>
+              <div className={styles.status}>
+                {request.status_request === "aguardando" && (
+                  <p className={styles.awaiting}>Aguardando</p>
+                )}
+                {request.status_request === "em andamento" && (
+                  <p className={styles.inProgress}>Em andamento</p>
+                )}
+                {request.status_request === "concluida" && (
+                  <p className={styles.concluded}>Concluída
+                  </p>
+                )
+                
+                }
+              </div>
               {
                 user &&
                 user.isadmin &&
