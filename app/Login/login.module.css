@@ -2,11 +2,14 @@
 .loginContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100%;
-  min-height: 100dvh;
+  min-height: 77dvh;
   background-color: #f4f4f4;
   padding: 2rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* Caixa de login */
@@ -19,6 +22,7 @@
   width: 100%;
   max-width: 400px;
   text-align: center;
+  max-height: 25rem;
 }
 
 /* Título */
@@ -81,6 +85,25 @@
 .btn:hover {
   transform: scale(1.05);
   background-color: #cc0000;
+}
+
+.container {
+  background-color: #f4f4f4;
+  padding-top: 2rem;
+  padding-bottom: 0;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.bg {
+  border-radius: 12px;
+  width: 100%;
+  text-align: center;
+  margin-top: 10rem;
 }
 
 /* Responsividade */

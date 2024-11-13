@@ -33,7 +33,7 @@ const UserComponent = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: 'white'
+            backgroundColor: "white",
           }}
         >
           <TailSpin
