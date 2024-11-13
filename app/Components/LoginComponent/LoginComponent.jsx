@@ -101,6 +101,16 @@ const LoginComponent = () => {
               </motion.button>
             </section>
           </motion.form>
+
+          <motion.button
+            className={style.btnNoAccount}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            onClick={() => router.replace("/Register")}
+          >
+            Não possui cadastro? Cadastre-se
+          </motion.button>
         </motion.article>
       </div>
     </div>
