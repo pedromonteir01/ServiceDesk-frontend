@@ -33,7 +33,7 @@ const Sidebar = ({ isActive, onClose }) => {
       position: "fixed",
       zIndex: 999,
       transition: "all 0.3s ease-in-out",
-      width: "10rem",
+      width: "12rem",
     }}
   >
       <div className={styles.container}>
