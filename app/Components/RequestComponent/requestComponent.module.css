@@ -348,8 +348,9 @@
 }
 
 .buttonsdelete {
-  margin: auto;
-  display: flex;
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .btnRemove {
@@ -358,6 +359,8 @@
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease;
+  position: absolute;
+  right: 0;
 }
 
 .btnRemove:hover {
@@ -418,5 +421,9 @@
 
   .buttonRequest {
     width: 100%;
+  }
+
+  .buttonsdelete {
+    margin-bottom: 2rem;
   }
 }

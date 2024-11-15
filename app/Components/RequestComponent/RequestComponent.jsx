@@ -97,27 +97,32 @@ export default function RequestComponent() {
   const changeStatus = async (id, status) => {
     try {
       const request = await getRequestById(id);
-      const token = localStorage.getItem('refreshToken');
+      const token = localStorage.getItem("refreshToken");
       await updateStatus(id, status, token);
-      if(request) {
+      if (request) {
         const response = await getAllRequests();
         setRequests(response.requests);
         const requestUpdated = await getRequestById(id);
         setRequest(requestUpdated);
       }
     } catch (e) {
-      toast.error('ERRO EM ALTERAR STATUS');
+      toast.error("ERRO EM ALTERAR STATUS");
     }
-  }
+  };
 
   console.log(requests);
 
-
   return (
     <article className={styles.container}>
-       {modalVisible && (
+      {modalVisible && (
         <div className={styles.modalOverlay}>
-          <div className={styles.modal}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5 }}
+            className={styles.modal}
+          >
             <p>Tem certeza de que deseja excluir esta solicitação?</p>
             <div className={styles.modalActions}>
               <button
@@ -126,14 +131,11 @@ export default function RequestComponent() {
               >
                 Sim
               </button>
-              <button
-                className={styles.modalButtonCancel}
-                onClick={closeModal}
-              >
+              <button className={styles.modalButtonCancel} onClick={closeModal}>
                 Não
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
 
@@ -204,18 +206,23 @@ export default function RequestComponent() {
             transition={{ duration: 1 }}
           >
             <div className={styles.about}>
-
               <div className={styles.buttons}>
                 <button
                   className={styles.btnRemovex}
                   onClick={() => setRequest(null)}
                 >
-                  <FaWindowClose fontSize={50} color={"red"}/>
+                  <FaWindowClose fontSize={50} color={"red"} />
                 </button>
               </div>
               <h2 className={styles.title}>{request.title}</h2>
               <div className={styles.imageContainer}>
-                <Image className={styles.imagex} src={request.image} width={370} height={300} alt="image-request" />
+                <Image
+                  className={styles.imagex}
+                  src={request.image}
+                  width={370}
+                  height={300}
+                  alt="image-request"
+                />
               </div>
               <p className={styles.details}>
                 feito por: {request.email} em {format(request.date_request)}
@@ -230,30 +237,37 @@ export default function RequestComponent() {
                   <p className={styles.inProgress}>Em andamento</p>
                 )}
                 {request.status_request === "concluida" && (
-                  <p className={styles.concluded}>Concluída
-                  </p>
-                )
-                
-                }
+                  <p className={styles.concluded}>Concluída</p>
+                )}
               </div>
-              {
-                user &&
-                user.isadmin &&
+              {user && user.isadmin && (
                 <>
-                  {
-                    request.status_request === 'aguardando' &&
-                    <button className={styles.buttonr} onClick={() => changeStatus(request.id, 'awaiting')} >INICIAR SOLICITAÇÃO</button>
-                  }
-                  {
-                    request.status_request === 'em andamento' &&
-                    <button className={styles.buttonra} onClick={() => changeStatus(request.id, 'conclued')}>FINALIZAR SOLICITAÇÃO</button>
-                  }
-                  {
-                    request.status_request === 'concluida' &&
-                    <button className={styles.buttonrc} onClick={() => changeStatus(request.id, 'awaiting')}>CORRIGIR SOLICITAÇÃO</button>
-                  }
+                  {request.status_request === "aguardando" && (
+                    <button
+                      className={styles.buttonr}
+                      onClick={() => changeStatus(request.id, "awaiting")}
+                    >
+                      INICIAR SOLICITAÇÃO
+                    </button>
+                  )}
+                  {request.status_request === "em andamento" && (
+                    <button
+                      className={styles.buttonra}
+                      onClick={() => changeStatus(request.id, "conclued")}
+                    >
+                      FINALIZAR SOLICITAÇÃO
+                    </button>
+                  )}
+                  {request.status_request === "concluida" && (
+                    <button
+                      className={styles.buttonrc}
+                      onClick={() => changeStatus(request.id, "awaiting")}
+                    >
+                      CORRIGIR SOLICITAÇÃO
+                    </button>
+                  )}
                 </>
-              }
+              )}
               <div className={styles.buttonsdelete}>
                 <button
                   className={styles.btnRemove}
