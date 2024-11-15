@@ -159,9 +159,8 @@
   overflow: hidden;
   border-radius: 20px;
   margin-bottom: 1rem;
-
 }
-.imagex{
+.imagex {
   border-radius: 20px;
 }
 .details {
@@ -200,7 +199,7 @@
 }
 
 .awaiting {
-  background-color: #ffcc00; 
+  background-color: #ffcc00;
   color: #fff;
   padding: 10px;
   border-radius: 6px;
@@ -208,7 +207,7 @@
 }
 
 .inProgress {
-  background-color: #007bff; 
+  background-color: #007bff;
   color: #fff;
   padding: 10px;
   border-radius: 6px;
@@ -216,20 +215,64 @@
 }
 
 .concluded {
-  background-color: #28a745; 
+  background-color: #28a745;
   color: #fff;
   padding: 10px;
   border-radius: 6px;
   text-align: center;
 }
 
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.modalButtonConfirm {
+  background: #ff4d4f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modalButtonCancel {
+  background: #ccc;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .buttons {
   position: absolute;
   top: 3px;
-  right: 7px;  
+  right: 7px;
 }
 
-.buttonr{
+.buttonr {
   background: linear-gradient(135deg, #3c3c3c, #000000);
   border: none;
   padding: 10px;
@@ -254,7 +297,7 @@
   box-shadow: 0 4px 8px rgba(183, 183, 183, 0.2);
 }
 
-.buttonra{
+.buttonra {
   background: linear-gradient(1deg, #15e41c, #12cd19);
   border: none;
   padding: 10px;
@@ -279,7 +322,7 @@
   box-shadow: 0 4px 8px rgba(183, 183, 183, 0.2);
 }
 
-.buttonrc{
+.buttonrc {
   background: linear-gradient(1deg, #fb5c00, #e35300);
   border: none;
   padding: 10px;
@@ -331,7 +374,6 @@
 .btnRemovex:hover {
   transform: scale(1.1);
 }
-
 
 /* Estilo responsivo */
 @media screen and (max-width: 768px) {

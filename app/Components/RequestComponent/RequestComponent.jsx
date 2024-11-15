@@ -7,8 +7,6 @@ import RenderTest from "../RenderTest/RenderTest";
 import {
   getAllRequests,
   deleteRequest,
-  updateRequest,
-  getRequestByLocal,
   getRequestById,
   updateStatus,
 } from "@/app/actions/request";
@@ -19,7 +17,6 @@ import Image from "next/image";
 import format from "@/app/utilities/formattedDate";
 import { IoTrashOutline } from "react-icons/io5";
 import { FaWindowClose } from "react-icons/fa";
-import { red } from "@mui/material/colors";
 
 export default function RequestComponent() {
   const { user } = useContext(UserContext);
@@ -27,7 +24,8 @@ export default function RequestComponent() {
   const [requests, setRequests] = useState([]);
   const [request, setRequest] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [filterValue, setFilterValue] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedRequestId, setSelectedRequestId] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -50,21 +48,28 @@ export default function RequestComponent() {
 
   const handleDeleteRequest = async (id) => {
     try {
-      const response = await getRequestById(id);
-      if (response) {
-        await deleteRequest(id);
-        setRequests((prevRequests) =>
-          prevRequests.filter((request) => request.id !== id)
-        );
-
-        if (response.id == request.id) setRequest(null);
-      } else {
-        toast.error("Requisição não existe");
-      }
-      return;
+      await deleteRequest(id);
+      setRequests((prevRequests) =>
+        prevRequests.filter((request) => request.id !== id)
+      );
+      setRequest(null);
+      toast.success("Requisição excluída com sucesso!");
     } catch (error) {
       console.error("Erro ao deletar requisição:", error);
+      toast.error("Erro ao excluir requisição");
+    } finally {
+      setModalVisible(false);
     }
+  };
+
+  const openModal = (id) => {
+    setSelectedRequestId(id);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setSelectedRequestId(null);
   };
 
   const handleRequestCreate = () => {
@@ -110,6 +115,28 @@ export default function RequestComponent() {
 
   return (
     <article className={styles.container}>
+       {modalVisible && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modal}>
+            <p>Tem certeza de que deseja excluir esta solicitação?</p>
+            <div className={styles.modalActions}>
+              <button
+                className={styles.modalButtonConfirm}
+                onClick={() => handleDeleteRequest(selectedRequestId)}
+              >
+                Sim
+              </button>
+              <button
+                className={styles.modalButtonCancel}
+                onClick={closeModal}
+              >
+                Não
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <motion.section
         className={styles.filters}
         initial={{ opacity: 0, y: -20 }}
@@ -228,9 +255,9 @@ export default function RequestComponent() {
                 </>
               }
               <div className={styles.buttonsdelete}>
-              <button
+                <button
                   className={styles.btnRemove}
-                  onClick={() => handleDeleteRequest(request.id)}
+                  onClick={() => openModal(request.id)}
                 >
                   <IoTrashOutline fontSize={40} />
                 </button>
