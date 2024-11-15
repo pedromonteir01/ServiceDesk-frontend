@@ -129,10 +129,10 @@ export default function RequestComponent() {
                 className={styles.modalButtonConfirm}
                 onClick={() => handleDeleteRequest(selectedRequestId)}
               >
-                Sim
+               SIM
               </button>
               <button className={styles.modalButtonCancel} onClick={closeModal}>
-                Não
+                NÃO
               </button>
             </div>
           </motion.div>
