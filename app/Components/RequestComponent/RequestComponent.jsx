@@ -129,7 +129,7 @@ export default function RequestComponent() {
                 className={styles.modalButtonConfirm}
                 onClick={() => handleDeleteRequest(selectedRequestId)}
               >
-               SIM
+                SIM
               </button>
               <button className={styles.modalButtonCancel} onClick={closeModal}>
                 NÃO
@@ -268,14 +268,17 @@ export default function RequestComponent() {
                   )}
                 </>
               )}
-              <div className={styles.buttonsdelete}>
-                <button
-                  className={styles.btnRemove}
-                  onClick={() => openModal(request.id)}
-                >
-                  <IoTrashOutline fontSize={40} />
-                </button>
-              </div>
+              {user?.email && request.email === user.email && (
+                <div className={styles.buttonsdelete}>
+                  <button
+                    className={styles.btnRemove}
+                    onClick={() => openModal(request.id)}
+                  >
+                    <IoTrashOutline fontSize={40} />
+                  </button>
+                </div>
+              )}
+
               {request.status_request === "concluida" && (
                 <p className={styles.dateConclusion}>
                   finalizada em: {format(request.date_conclusion)}
