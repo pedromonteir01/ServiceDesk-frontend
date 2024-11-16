@@ -11,6 +11,22 @@ import { UserContext } from "./contexts/userContext";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const words = [
+    "Bem-vindo ao Service Desk",
+    "Agilidade e eficiência no suporte à infraestrutura do SENAI-Valinhos.",
+  ];
+
+  const typingAnimation = (i) => ({
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: i * 0.03, // Delay baseado na posição da letra (para digitar cada letra com intervalo)
+        duration: 0.3, // A duração da animação de cada letra
+      },
+    },
+  });
+
   const { user } = useContext(UserContext);
 
   return (
@@ -29,17 +45,39 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className={styles.title}>Bem-vindo ao Service Desk</h1>
+            <h1 className={styles.title}>
+              {words[0].split("").map((letter, index) => (
+                <motion.span
+                  key={index}
+                  variants={typingAnimation(index)}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </h1>
+
             <p className={styles.subtitle}>
-              Agilidade e eficiência no suporte à infraestrutura do SENAI-Valinhos.
+              {words[1].split("").map((letter, index) => (
+                <motion.span
+                  key={index}
+                  variants={typingAnimation(index + words[0].length)}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {letter}
+                </motion.span>
+              ))}
             </p>
+
             <Link href="./Request" className={styles.ctaButton}>
               Reportar Problema
             </Link>
           </motion.div>
         </div>
 
-    {/*     <motion.div className={styles.parallaxContainer}
+        {/*     <motion.div className={styles.parallaxContainer}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -64,7 +102,8 @@ export default function Home() {
           </h2>
           <p className={styles.description}>
             Seja bem-vindo ao Service Desk do SENAI-Valinhos! Aqui você pode
-            reportar problemas e solicitar manutenções de forma prática e rápida.
+            reportar problemas e solicitar manutenções de forma prática e
+            rápida.
           </p>
           <h3 className={styles.attention}>ATENÇÃO!</h3>
           <div className={styles.iconsContainer}>
