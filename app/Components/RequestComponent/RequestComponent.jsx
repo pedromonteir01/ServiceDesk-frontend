@@ -268,7 +268,8 @@ export default function RequestComponent() {
                   )}
                 </>
               )}
-              {user?.email && request.email === user.email && (
+              {(user?.email && request.email === user.email) ||
+              user?.isadmin ? (
                 <div className={styles.buttonsdelete}>
                   <button
                     className={styles.btnRemove}
@@ -277,7 +278,7 @@ export default function RequestComponent() {
                     <IoTrashOutline fontSize={40} />
                   </button>
                 </div>
-              )}
+              ) : null}
 
               {request.status_request === "concluida" && (
                 <p className={styles.dateConclusion}>
