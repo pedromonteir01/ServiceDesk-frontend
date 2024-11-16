@@ -8,9 +8,9 @@
 }
 
 .heroSection {
-  width: 100vw; 
-  height: 30vh; 
-  background-color: #ff0000; 
+  width: 100vw;
+  height: 30vh;
+  background-color: #ff0000;
   padding: 50px 20px;
   text-align: center;
   color: white;
@@ -36,6 +36,7 @@
 }
 
 .ctaButton {
+  display: inline-block;
   padding: 12px 24px;
   font-size: 1rem;
   background-color: white;
