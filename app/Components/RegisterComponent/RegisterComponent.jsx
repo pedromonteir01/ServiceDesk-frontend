@@ -144,7 +144,13 @@ const RegisterComponent = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        <Image src="/senai.png" alt="SENAI logo" width={300} height={70} />
+        <Image
+          src="/senai.png"
+          alt="SENAI logo"
+          width={300}
+          height={70}
+          layout="responsive"
+        />
         <h1 className={styles.title}>Service Desk</h1>
       </motion.div>
       <motion.article

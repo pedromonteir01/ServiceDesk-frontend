@@ -48,16 +48,15 @@
 }
 
 .noRequestMsg {
-  position: absolute; 
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 .buttonRequest:hover {
   transform: translateY(-2px);
@@ -439,5 +438,9 @@
 
   .buttonsdelete {
     margin-bottom: 2rem;
+  }
+  .noRequestMsg {
+    align-items: center;
+    width: 100%;
   }
 }
