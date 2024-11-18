@@ -3,10 +3,16 @@ import styles from "../../page.module.css";
 import { getAllRequests } from "@/app/actions/request";
 import format from "@/app/utilities/formattedDate";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function LatestRequests() {
   const [latestRequests, setLatestRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  const handleRequestPage = () => {
+    router.push("/Request");
+  }
 
   useEffect(() => {
     const fetchLatestRequests = async () => {
@@ -73,6 +79,13 @@ export default function LatestRequests() {
       ) : (
         <p className={styles.noRequests}>Nenhuma requisição encontrada.</p>
       )}
+
+      <button
+        className={styles.seeAllButton}
+        onClick={handleRequestPage}
+      >
+        Ver todas as requisições
+      </button>
     </motion.section>
   );
 }

@@ -235,6 +235,30 @@
   font-weight: bold;
 }
 
+.seeAllButton {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #e63946;  
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.seeAllButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #d62828;  
+}
+
+.seeAllButton:focus {
+  outline: none;
+}
+
 @media screen and (max-width: 768px) {
   .heroSection {
     padding: 30px 15px;
@@ -264,5 +288,10 @@
   .card {
     width: 100%;
     max-width: 350px;
+  }
+
+  .seeAllButton {
+    width: 100%;
+    padding: 14px 28px;
   }
 }
