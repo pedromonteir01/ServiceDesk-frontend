@@ -17,6 +17,8 @@ import Image from "next/image";
 import format from "@/app/utilities/formattedDate";
 import { IoTrashOutline } from "react-icons/io5";
 import { FaWindowClose } from "react-icons/fa";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 export default function RequestComponent() {
   const { user } = useContext(UserContext);
@@ -118,6 +120,25 @@ export default function RequestComponent() {
     } catch (e) {
       toast.error("ERRO EM ALTERAR STATUS");
     }
+  };
+
+  const generatePDF = async (item) => {
+    const doc = new jsPDF();
+    const input = document.getElementById('request-detail');
+    const canvas = await html2canvas(input);
+    const imgData = canvas.toDataURL('image/png')
+    doc.text(`Título da requisição: ${item.title}`, 10, 10);
+    doc.text(`Descrição: ${item.description}`, 10, 20);
+    doc.text(`Local: ${item.local}`, 10, 30);
+    doc.text(`Status: ${item.status_request}`, 10, 50);
+    doc.text(`Data da solicitação: ${format(item.date_request)}`, 10, 40);
+    if (item.status_request === "concluida") {
+      doc.text(`Data da conclusão: ${format(item.date_conclusion)}`, 10, 50);
+    }
+    doc.text(`Email: ${item.email}`, 10, 60);
+    doc.addImage(imgData, 'PNG', -248, 80, 700, 140);
+
+    doc.save(`Request_${item.id || item.local}.pdf`);
   };
 
   console.log(requests);
@@ -225,7 +246,7 @@ export default function RequestComponent() {
                 </button>
               </div>
               <h2 className={styles.title}>{request.title}</h2>
-              <div className={styles.imageContainer}>
+              <div className={styles.imageContainer} id='request-detail'>
                 <Image
                   className={styles.imagex}
                   src={request.image}
@@ -296,6 +317,12 @@ export default function RequestComponent() {
                 </p>
               )}
             </div>
+            <button
+                    className={styles.btnPDF}
+                    onClick={() => generatePDF(request)}
+                  >
+                    Baixar
+                  </button>
           </motion.div>
         )}
       </div>
