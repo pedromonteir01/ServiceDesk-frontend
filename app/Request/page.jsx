@@ -1,6 +1,6 @@
-import Header from "../Components/Header/Header";
+import Header from "../components/Header/Header";
 import styles from "./page.module.css";
-import RequestComponent from "../Components/RequestComponent/RequestComponent";
+import RequestComponent from "../components/RequestComponent/RequestComponent";
 
 export default function Request() {
   return (
