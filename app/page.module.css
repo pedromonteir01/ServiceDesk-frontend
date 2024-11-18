@@ -140,6 +140,7 @@
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+  min-height: 32vh;
 }
 
 .latestRequests .title {
@@ -266,9 +267,10 @@
 }
 
 .noRequests {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #e63946;
   font-weight: bold;
+  margin-top: 2.5rem;
 }
 
 .seeAllButton {
@@ -281,7 +283,7 @@
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 3rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease,
     background-color 0.3s ease;
 }
