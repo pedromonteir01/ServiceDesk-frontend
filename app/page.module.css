@@ -185,9 +185,6 @@
   transition: transform 0.3s ease;
 }
 
-.card img:hover {
-  transform: scale(1.05);
-}
 
 .cardTitle {
   font-size: 1.3rem;
