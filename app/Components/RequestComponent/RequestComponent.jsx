@@ -82,7 +82,17 @@ export default function RequestComponent() {
   };
 
   const sortedRequests = [...requests].sort(
-    (a, b) => (a.status_request ? 1 : 0) - (b.status_request ? 1 : 0)
+    (a, b) =>
+      (a.status_request === "aguardando" ? -1 : 0) -
+      (b.status_request === "aguardando" ? -1 : 0)
+  );
+
+  sortedRequests.sort((a, b) =>
+    a.status_request === "concluida"
+      ? 1
+      : b.status_request === "concluida"
+      ? -1
+      : 0
   );
 
   const handleRequest = async (id) => {

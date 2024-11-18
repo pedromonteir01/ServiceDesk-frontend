@@ -75,10 +75,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .sidebar {
-    width: 6rem;
-  }
-
   .sidebar span {
     margin-left: 0;
     font-size: 14px;
