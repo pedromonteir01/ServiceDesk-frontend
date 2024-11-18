@@ -121,12 +121,11 @@ export const deleteRequest = async (id) => {
   }
 };
 
-export const updateStatus = async (id, status, token) => {
+export const updateStatus = async (id, status, email, token) => {
   try {
-    console.log({ status });
     const response = await axios.patch(
       `${api}/status/${id}`,
-      { status },
+      { status, email },
       {
         headers: {
           Authorization: `Bearer ${token}`,

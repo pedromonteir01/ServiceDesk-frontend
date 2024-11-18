@@ -94,11 +94,11 @@ export default function RequestComponent() {
     }
   };
 
-  const changeStatus = async (id, status) => {
+  const changeStatus = async (id, status, email) => {
     try {
       const request = await getRequestById(id);
       const token = localStorage.getItem("refreshToken");
-      await updateStatus(id, status, token);
+      await updateStatus(id, status, email, token);
       if (request) {
         const response = await getAllRequests();
         setRequests(response.requests);
@@ -245,7 +245,7 @@ export default function RequestComponent() {
                   {request.status_request === "aguardando" && (
                     <button
                       className={styles.buttonr}
-                      onClick={() => changeStatus(request.id, "awaiting")}
+                      onClick={() => changeStatus(request.id, "awaiting", request.email)}
                     >
                       INICIAR SOLICITAÇÃO
                     </button>

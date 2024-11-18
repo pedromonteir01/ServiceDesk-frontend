@@ -89,9 +89,9 @@ const AdminPage = () => {
       else if (optionSearch == "status")
         option.trim() ? result = await getRequestByStatus(option) : result = await getAllRequests();
       else if (optionSearch == "create")
-        creation.trim() ? result = await getRequestByCreationDate(creation) : await getAllRequests();
+        creation.trim() ? result = await getRequestByCreationDate(creation) : result = await getAllRequests();
       else if (optionSearch == "finish")
-        finish.trim() ? result = await getRequestByFinishDate(finish) : await getAllRequests();
+        finish.trim() ? result = await getRequestByFinishDate(finish) : result = await getAllRequests();
       else if (optionSearch == 'user')
         byUser.trim() ? result = await getRequestByUser(byUser) : result = await getAllRequests();
       else result = await getAllRequests();
