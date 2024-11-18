@@ -20,7 +20,7 @@ const RequestCreateComponent = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [locais, setLocais] = useState([]);
   const router = useRouter();
-  const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
+  const validFileTypes = ["image/jpg", "image/jpeg", "image/png", "image/webp", "image/svg+xml"]
 
   useEffect(() => {
     if (!user) {

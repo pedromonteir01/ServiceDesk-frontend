@@ -9,14 +9,14 @@
 
 .heroSection {
   width: 100vw;
-  height: 40vh;
+  height: 18rem;
   background-color: #ff0000;
   padding: 2.5rem;
   text-align: center;
   color: white;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .heroText {
@@ -119,7 +119,7 @@
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
-  min-height: 32vh;
+  min-height: 34vh;
 }
 
 .latestRequests .title {
@@ -145,7 +145,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease,
-  background-color 0.3s ease;
+    background-color 0.3s ease;
   overflow: hidden;
 }
 

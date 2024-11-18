@@ -7,17 +7,11 @@ const nextConfig = {
               port: '',
               pathname: '/**',
             },
-            {
-              protocol: 'https',
-              hostname: 'example.com',
-              port: '',
-              pathname: '/**',
-            },
         ],
     },
     experimental: {
         serverActions: {
-            bodySizeLimit: '5mb',
+            bodySizeLimit: '25mb',
         },
     },
 };
