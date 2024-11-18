@@ -43,7 +43,7 @@ const AdminPage = () => {
       if (optionSearch == 'name') {
         name.trim() ? result = await getUserByName(name) : result = await getAllUsers();
       } else if (optionSearch == 'role') {
-        result = await getUserByRole(option);
+        option.trim() ? result = await getUserByRole(option) : result = await getAllUsers();
       } else {
         result = await getAllUsers();
       }
