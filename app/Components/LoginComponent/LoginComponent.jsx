@@ -42,7 +42,6 @@ const LoginComponent = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        <Image src="/senai.png" alt="logo" width={300} height={70} />
         <h1 className={style.title}>Service Desk</h1>
       </motion.div>
       <div className={style.loginContainer}>
