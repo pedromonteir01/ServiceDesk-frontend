@@ -150,6 +150,7 @@ const RegisterComponent = () => {
           width={300}
           height={70}
           layout="responsive"
+          className={styles.logo}
         />
         <h1 className={styles.title}>Service Desk</h1>
       </motion.div>

@@ -10,6 +10,12 @@
   padding: 2rem;
 }
 
+.logo {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 1.5rem;
+}
+
 /* Caixa de login */
 .loginBox {
   background-color: #ffffff;
@@ -76,7 +82,7 @@
   font-size: 1rem;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
-  margin-bottom: 1rem
+  margin-bottom: 1rem;
 }
 
 .btnNoLogin {
