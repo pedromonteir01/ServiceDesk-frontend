@@ -9,6 +9,7 @@ import Link from "next/link";
 import Header from "./components/Header/Header";
 import { UserContext } from "./contexts/userContext";
 import styles from "./page.module.css";
+import LatestRequests from "./Components/LatestRequest/LatestRequest";
 
 export default function Home() {
   const words = [
@@ -125,6 +126,8 @@ export default function Home() {
             </div>
           </div>
         </motion.div>
+        
+          <LatestRequests />
       </motion.div>
     </main>
   );
