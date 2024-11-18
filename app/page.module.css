@@ -173,9 +173,10 @@
 
 .cardDescription {
   font-size: 1rem;
-  color: #666;
+  margin-bottom: 30px;
   line-height: 1.5;
-  margin-bottom: 15px;
+  white-space: normal; 
+  word-wrap: break-word;
 }
 
 .cardFooter {
