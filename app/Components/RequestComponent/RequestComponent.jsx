@@ -263,7 +263,7 @@ export default function RequestComponent() {
                   {request.status_request === "em andamento" && (
                     <button
                       className={styles.buttonra}
-                      onClick={() => changeStatus(request.id, "conclued")}
+                      onClick={() => changeStatus(request.id, "conclued", request.email)}
                     >
                       FINALIZAR SOLICITAÇÃO
                     </button>
@@ -271,7 +271,7 @@ export default function RequestComponent() {
                   {request.status_request === "concluida" && (
                     <button
                       className={styles.buttonrc}
-                      onClick={() => changeStatus(request.id, "awaiting")}
+                      onClick={() => changeStatus(request.id, "awaiting", request.email)}
                     >
                       CORRIGIR SOLICITAÇÃO
                     </button>
