@@ -78,20 +78,6 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/*     <motion.div className={styles.parallaxContainer}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <video
-            className={styles.parallaxVideo}
-            autoPlay
-            loop
-            muted
-            src="/senai2.mp4"
-          />
-        </motion.div> */}
-
         <motion.div
           className={styles.content}
           initial={{ opacity: 0 }}
@@ -126,8 +112,8 @@ export default function Home() {
             </div>
           </div>
         </motion.div>
-        
-          <LatestRequests />
+
+        <LatestRequests />
       </motion.div>
     </main>
   );

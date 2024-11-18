@@ -4,6 +4,7 @@ import { getAllRequests } from "@/app/actions/request";
 import format from "@/app/utilities/formattedDate";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { TailSpin } from "react-loader-spinner";
 
 export default function LatestRequests() {
   const [latestRequests, setLatestRequests] = useState([]);
@@ -44,7 +45,9 @@ export default function LatestRequests() {
     >
       <h2 className={styles.title}>Últimas Requisições</h2>
       {loading ? (
-        <div className={styles.loading}>Carregando...</div>
+        <div className={styles.loading}>
+          <TailSpin color="#ff0000" height={50} width={50} />
+        </div>
       ) : latestRequests.length > 0 ? (
         <div className={styles.cardsContainer}>
           {latestRequests.map((request) => (
