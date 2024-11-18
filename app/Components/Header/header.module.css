@@ -1,82 +1,83 @@
 @font-face {
-    font-family: Montserrat;
-    src: url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-  }
-  
-  .generalDiv {
-    background-color: #ff0000;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    padding-right: 0.5rem;
-    align-items: center;
-    justify-content: space-between;
-    font-family: "Montserrat";
-    z-index: 1000;
-  }
-  
-  .titleSenai {
-    font-size: 1rem;
-    color: #ffffff;
-    margin-right: 1em;
-    font-weight: bold;
-  }
-  
-  .menu {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    margin-right: 0.5rem;
-  }
-  
-  #senai,
+  font-family: Montserrat;
+  src: url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+}
+
+.generalDiv {
+  background-color: #ff0000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  padding-right: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Montserrat";
+  z-index: 1000;
+}
+
+.titleSenai {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-right: 1em;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-right: 0.5rem;
+}
+
+#senai,
+.links {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.linksSocial {
+  display: flex;
+  gap: 0.5em;
+}
+
+#senai:hover,
+.links:hover {
+  border-radius: 8px;
+  background-color: rgb(200, 0, 0);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.barra {
+  color: #ffffff;
+  font-weight: 800;
+  padding: 0 0.5em;
+  width: 1px;
+  height: 1.5em;
+}
+
+@media screen and (max-width: 768px) {
   .links {
-    color: #ffffff;
-    text-decoration: none;
-    padding: 0.5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+    display: none;
   }
-  
-  .linksSocial {
-    display: flex;
-    gap: 0.5em;
-  }
-  
-  #senai:hover,
-  .links:hover {
-    border-radius: 8px;
-    background-color: rgb(200, 0, 0);
-    transition: background-color 0.2s ease-in-out;
-  }
-  
+
   .barra {
-    color: #ffffff;
-    font-weight: 800;
-    padding: 0 0.5em;
+    display: none;
   }
-  
-  @media screen and (max-width: 768px) {
-    .links {
-      display: none;
-    }
-  
-    .barra {
-      display: none;
-    }
-  
-    .linksSocial {
-      display: none;
-    }
-  
-    #senai {
-      font-size: 18px;
-    }
+
+  .linksSocial {
+    display: none;
   }
-  
+
+  #senai {
+    font-size: 18px;
+  }
+}
