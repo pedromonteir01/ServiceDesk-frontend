@@ -225,6 +225,42 @@
   font-weight: 500;
 }
 
+.status {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.awaiting {
+  background-color: #ffcc00;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.inProgress {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.concluded {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
 .cardFooter p {
   margin-bottom: 10px;
 }
@@ -239,20 +275,21 @@
   display: inline-block;
   padding: 12px 24px;
   font-size: 1rem;
-  background-color: #e63946;  
+  background-color: #e63946;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
   margin-top: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .seeAllButton:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: #d62828;  
+  background-color: #d62828;
 }
 
 .seeAllButton:focus {

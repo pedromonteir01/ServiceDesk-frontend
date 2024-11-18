@@ -12,7 +12,7 @@ export default function LatestRequests() {
 
   const handleRequestPage = () => {
     router.push("/Request");
-  }
+  };
 
   useEffect(() => {
     const fetchLatestRequests = async () => {
@@ -70,7 +70,17 @@ export default function LatestRequests() {
                   <strong>Data:</strong> {format(request.date_request)}
                 </p>
                 <p className={styles.cardStatus}>
-                  <strong>Status:</strong> {request.status_request}
+                  <div className={styles.status}>
+                    {request.status_request === "aguardando" && (
+                      <p className={styles.awaiting}>Aguardando</p>
+                    )}
+                    {request.status_request === "em andamento" && (
+                      <p className={styles.inProgress}>Em andamento</p>
+                    )}
+                    {request.status_request === "concluida" && (
+                      <p className={styles.concluded}>Concluída</p>
+                    )}
+                  </div>
                 </p>
               </div>
             </motion.div>
@@ -80,10 +90,7 @@ export default function LatestRequests() {
         <p className={styles.noRequests}>Nenhuma requisição encontrada.</p>
       )}
 
-      <button
-        className={styles.seeAllButton}
-        onClick={handleRequestPage}
-      >
+      <button className={styles.seeAllButton} onClick={handleRequestPage}>
         Ver todas as requisições
       </button>
     </motion.section>
