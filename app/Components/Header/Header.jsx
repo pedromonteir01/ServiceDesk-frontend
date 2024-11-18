@@ -126,6 +126,7 @@ const Header = () => {
             IRS
           </Link>
         </li>
+        <span style={{marginLeft: -15}} className={styles.barra}>|</span>
         <li className={styles.linksSocial}>
           <Link target="blank" href="https://www.facebook.com/senaisaopaulo">
             <FaFacebookF color="#ffffff" />
