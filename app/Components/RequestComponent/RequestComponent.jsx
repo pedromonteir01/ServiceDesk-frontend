@@ -112,13 +112,19 @@ export default function RequestComponent() {
     }
   };
 
-  const generatePDF = async (request) => {
+  const generatePDF = async (item) => {
+    const doc = new jsPDF();
     const input = document.getElementById('request-detail');
     const canvas = await html2canvas(input);
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF();
-    pdf.addImage(imgData, 'PNG', 0, 0);
-    pdf.save(`Request_${request.id || request.local}.pdf`);
+    const imgData = canvas.toDataURL('image/png')
+    doc.text(`Título: ${item.title}`, 10, 10);
+    doc.text(`Descrição: ${item.description}`, 10, 20);
+    doc.text(`Local: ${item.local}`, 10, 30);
+    doc.text(`Status: ${item.status_request}`, 10, 50);
+    doc.text(`Email: ${item.email}`, 10, 60);
+    doc.addImage(imgData, 'PNG', 10, 80, 190, 150);
+
+    doc.save(`Request_${item.id || item.local}.pdf`);
   };
 
   console.log(requests);
@@ -211,7 +217,6 @@ export default function RequestComponent() {
         </motion.section>
         {request && (
           <motion.div
-            id='request-detail'
             className={styles.info}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -227,7 +232,7 @@ export default function RequestComponent() {
                 </button>
               </div>
               <h2 className={styles.title}>{request.title}</h2>
-              <div className={styles.imageContainer}>
+              <div className={styles.imageContainer} id='request-detail'>
                 <Image
                   className={styles.imagex}
                   src={request.image}
