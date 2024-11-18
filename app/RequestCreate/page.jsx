@@ -1,6 +1,6 @@
-import Header from "../Components/Header/Header";
+import Header from "../components/Header/Header";
 import styles from "./page.module.css";
-import RequestCreateComponent from "../Components/RequestCreateComponent/RequestCreateComponent";
+import RequestCreateComponent from "../components/RequestCreateComponent/RequestCreateComponent";
 
 export default function RequestCreate() {
   return (

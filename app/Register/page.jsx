@@ -1,5 +1,5 @@
-import Header from '../Components/Header/Header';
-import RegisterComponent from '../Components/RegisterComponent/RegisterComponent';
+import Header from '../components/Header/Header';
+import RegisterComponent from '../components/RegisterComponent/RegisterComponent';
 import styles from './register.module.css'
 
 export default function Register() {
