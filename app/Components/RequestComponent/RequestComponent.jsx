@@ -17,6 +17,8 @@ import Image from "next/image";
 import format from "@/app/utilities/formattedDate";
 import { IoTrashOutline } from "react-icons/io5";
 import { FaWindowClose } from "react-icons/fa";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 export default function RequestComponent() {
   const { user } = useContext(UserContext);
@@ -110,6 +112,15 @@ export default function RequestComponent() {
     }
   };
 
+  const generatePDF = async (request) => {
+    const input = document.getElementById('request-detail');
+    const canvas = await html2canvas(input);
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF();
+    pdf.addImage(imgData, 'PNG', 0, 0);
+    pdf.save(`Request_${request.id || request.local}.pdf`);
+  };
+
   console.log(requests);
 
   return (
@@ -200,6 +211,7 @@ export default function RequestComponent() {
         </motion.section>
         {request && (
           <motion.div
+            id='request-detail'
             className={styles.info}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -286,6 +298,12 @@ export default function RequestComponent() {
                 </p>
               )}
             </div>
+            <button
+                    className={styles.btnPDF}
+                    onClick={() => generatePDF(request)}
+                  >
+                    Baixar
+                  </button>
           </motion.div>
         )}
       </div>
