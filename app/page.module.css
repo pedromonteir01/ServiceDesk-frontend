@@ -9,14 +9,14 @@
 
 .heroSection {
   width: 100vw;
-  height: 30vh;
+  height: 40vh;
   background-color: #ff0000;
   padding: 2.5rem;
   text-align: center;
   color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
 }
 
 .heroText {
@@ -51,27 +51,6 @@
 .ctaButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.parallaxContainer {
-  position: relative;
-  width: 100vw;
-  height: 50vh;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.parallaxVideo {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
-  z-index: -1;
 }
 
 .content {
