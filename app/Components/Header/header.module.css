@@ -58,8 +58,9 @@
   
   .barra {
     color: #ffffff;
-    font-weight: 800;
-    padding: 0 0.5em;
+    font-weight: 500;
+    padding: 0 0.2em;
+    font-size: 1.4rem;
   }
   
   @media screen and (max-width: 768px) {
