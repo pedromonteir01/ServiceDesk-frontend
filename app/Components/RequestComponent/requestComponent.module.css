@@ -201,7 +201,7 @@
 }
 
 .awaiting {
-  background-color: #ffcc00;
+  background-color: #ff0000;
   color: #fff;
   padding: 10px;
   border-radius: 6px;
@@ -209,7 +209,7 @@
 }
 
 .inProgress {
-  background-color: #007bff;
+  background-color: #ff7700;
   color: #fff;
   padding: 10px;
   border-radius: 6px;

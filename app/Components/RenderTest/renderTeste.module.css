@@ -80,19 +80,16 @@
 }
 
 .statusCompleted {
-  background-color: #00b609;
+  background-color: #28a745;
   font-size: 0.9rem;
   font-weight: 600;
   padding: 0.5rem 1rem;
   border-radius: 10px;
   color: #fff;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
-.statusCompleted {
-  background-color: #00b609;
-  margin-bottom: 1.5rem;
-}
+
 
 .actions {
   display: flex;
