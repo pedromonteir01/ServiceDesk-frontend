@@ -96,7 +96,7 @@ const Header = () => {
     <nav className={styles.generalDiv}>
       <div className={styles.menuD}>
         <div className={styles.align}>
-          <Hamburger toggled={sidebar} toggle={showSidebar} color="#fff" />
+          <Hamburger toggled={sidebar} toggle={showSidebar} color="#fff" clasName={styles.top}/>
           {sidebar && <Sidebar isActive={sidebar} onClose={closeSidebar} />}
         </div>
       </div>

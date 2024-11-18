@@ -14,6 +14,7 @@
     justify-content: space-between;
     font-family: "Montserrat";
     z-index: 1000;
+    
   }
   
   .titleSenai {
@@ -47,6 +48,7 @@
   .linksSocial {
     display: flex;
     gap: 0.5em;
+    
   }
   
   #senai:hover,
@@ -56,11 +58,31 @@
     transition: background-color 0.2s ease-in-out;
   }
   
-  .barra {
-    color: #ffffff;
-    font-weight: 800;
-    padding: 0 0.5em;
+  .social-bar {
+    width: 100%;
+    height: 2px;
+    background-color: #ccc;
+    margin: 10px 0;
   }
+  
+  .social-icons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .social-icons li {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .social-icons li:last-child {
+    margin-right: 0;
+  }
+
+  
+
   
   @media screen and (max-width: 768px) {
     .links {
