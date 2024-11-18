@@ -125,7 +125,7 @@ export const updateStatus = async (id, status, email, token) => {
   try {
     const response = await axios.patch(
       `${api}/status/${id}`,
-      { status, email },
+      { status: status, email: email },
       {
         headers: {
           Authorization: `Bearer ${token}`,
