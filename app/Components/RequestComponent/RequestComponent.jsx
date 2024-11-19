@@ -125,22 +125,51 @@ export default function RequestComponent() {
 
   const generatePDF = async (item) => {
     const doc = new jsPDF();
+    
+    doc.setFont("helvetica", "normal");
+    
     const input = document.getElementById("request-detail");
     const canvas = await html2canvas(input);
     const imgData = canvas.toDataURL("image/png");
-    doc.text(`Título da requisição: ${item.title}`, 10, 10);
-    doc.text(`Descrição: ${item.description}`, 10, 20);
-    doc.text(`Local: ${item.local}`, 10, 30);
-    doc.text(`Status: ${item.status_request}`, 10, 50);
-    doc.text(`Data da solicitação: ${format(item.date_request)}`, 10, 40);
+    doc.addImage(imgData, "PNG", 10, 30, 180, 100);  
+    
+    doc.setFontSize(16);
+    doc.text("Detalhes da Requisição", 105, 140, null, null, "center");
+    
+    doc.setFontSize(12);
+    
+    doc.text(`Título da requisição:`, 10, 160);
+    doc.setFont("helvetica", "normal");
+    doc.text(item.title, 10, 165);
+    
+    doc.text(`Descrição:`, 10, 175);
+    doc.text(item.description, 10, 180);
+    
+    doc.text(`Local:`, 10, 190);
+    doc.text(item.local, 10, 195);
+    
+    doc.text(`Status:`, 10, 205);
+    doc.text(item.status_request, 10, 210);
+    
+    doc.text(`Data da solicitação:`, 10, 220);
+    doc.text(format(item.date_request), 10, 225);
+    
     if (item.status_request === "concluida") {
-      doc.text(`Data da conclusão: ${format(item.date_conclusion)}`, 10, 50);
+      doc.text(`Data da conclusão:`, 10, 235);
+      doc.text(format(item.date_conclusion), 10, 240);
     }
-    doc.text(`Email: ${item.email}`, 10, 60);
-    doc.addImage(imgData, "PNG", -248, 80, 700, 140);
-
+    
+    doc.text(`Email:`, 10, 250);
+    doc.text(item.email, 10, 255);
+    
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Gerado em: ${new Date().toLocaleDateString()}`, 10, doc.internal.pageSize.height - 10);
+    doc.text(`Solicitação: ${item.title || item.local}`, 105, doc.internal.pageSize.height - 10, null, null, "center");
+    
     doc.save(`${item.title || item.local}.pdf`);
   };
+  
 
   console.log(requests);
 
