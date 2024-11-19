@@ -207,7 +207,6 @@ const RequestCreateComponent = () => {
                 alt="Imagem Preview"
                 className={styles.imagePreview}
               />
-              <p className={styles.fileName}>{image.name}</p>
             </motion.div>
           )}
           {imagePreview && (
