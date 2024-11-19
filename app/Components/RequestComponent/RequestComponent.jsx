@@ -323,19 +323,20 @@ export default function RequestComponent() {
                   finalizada em: {format(request.date_conclusion)}
                 </p>
               )}
-               <button
-              className={styles.exportButton}
-              onClick={() => generatePDF(request)}
-              title="Exportar para PDF"
-            >
-              Baixar PDF
-              <p>
-              <FaFilePdf fontSize={20} />
-
-              </p>
-            </button>
+              {(user?.email && request.email === user.email) ||
+              user?.isadmin ? (
+                <button
+                  className={styles.exportButton}
+                  onClick={() => generatePDF(request)}
+                  title="Exportar para PDF"
+                >
+                  Baixar PDF
+                  <p>
+                    <FaFilePdf fontSize={20} />
+                  </p>
+                </button>
+              ) : null}
             </div>
-           
           </motion.div>
         )}
       </div>
