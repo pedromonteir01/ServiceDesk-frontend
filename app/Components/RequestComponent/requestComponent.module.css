@@ -205,6 +205,7 @@
   padding: 10px;
   border-radius: 6px;
   text-align: center;
+  margin: 0 auto;
 }
 
 .inProgress {
@@ -213,6 +214,7 @@
   padding: 10px;
   border-radius: 6px;
   text-align: center;
+  margin: 0 auto;
 }
 
 .concluded {
@@ -221,6 +223,7 @@
   padding: 10px;
   border-radius: 6px;
   text-align: center;
+  margin: 0 auto;
 }
 
 .modalOverlay {
@@ -298,6 +301,7 @@
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
+  margin-left: 1rem;
 }
 
 .buttonr:hover {
@@ -374,6 +378,7 @@
   transition: transform 0.2s ease;
   position: absolute;
   right: 0;
+  bottom: -5rem;
 }
 
 .btnRemove:hover {
@@ -390,6 +395,40 @@
 .btnRemovex:hover {
   transform: scale(1.1);
 }
+
+.exportButton {
+  background: linear-gradient(135deg, #ff5722, #ff0000);  
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold; 
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16%;
+  height: 3rem;
+  border-radius: 8px; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s; 
+  padding: 0 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
+}
+
+.exportButton:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); 
+  background: linear-gradient(135deg, #ff3d00, #ff0000);  
+}
+
+.exportButton:active {
+  transform: translateY(0);  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+}
+
+
 
 /* Estilo responsivo */
 @media screen and (max-width: 768px) {
@@ -442,5 +481,12 @@
   .noRequestMsg {
     align-items: center;
     width: 100%;
+  }
+
+  .exportButton {
+    width: 40%; 
+    height: 45px; 
+    font-size: 16px; 
+    margin-left: 1.5rem;
   }
 }

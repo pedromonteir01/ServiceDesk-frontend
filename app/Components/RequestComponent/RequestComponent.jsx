@@ -17,6 +17,7 @@ import Image from "next/image";
 import format from "@/app/utilities/formattedDate";
 import { IoTrashOutline } from "react-icons/io5";
 import { FaWindowClose } from "react-icons/fa";
+import { FaFilePdf } from "react-icons/fa6";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
@@ -124,9 +125,9 @@ export default function RequestComponent() {
 
   const generatePDF = async (item) => {
     const doc = new jsPDF();
-    const input = document.getElementById('request-detail');
+    const input = document.getElementById("request-detail");
     const canvas = await html2canvas(input);
-    const imgData = canvas.toDataURL('image/png')
+    const imgData = canvas.toDataURL("image/png");
     doc.text(`Título da requisição: ${item.title}`, 10, 10);
     doc.text(`Descrição: ${item.description}`, 10, 20);
     doc.text(`Local: ${item.local}`, 10, 30);
@@ -136,7 +137,7 @@ export default function RequestComponent() {
       doc.text(`Data da conclusão: ${format(item.date_conclusion)}`, 10, 50);
     }
     doc.text(`Email: ${item.email}`, 10, 60);
-    doc.addImage(imgData, 'PNG', -248, 80, 700, 140);
+    doc.addImage(imgData, "PNG", -248, 80, 700, 140);
 
     doc.save(`${item.title || item.local}.pdf`);
   };
@@ -246,7 +247,7 @@ export default function RequestComponent() {
                 </button>
               </div>
               <h2 className={styles.title}>{request.title}</h2>
-              <div className={styles.imageContainer} id='request-detail'>
+              <div className={styles.imageContainer} id="request-detail">
                 <Image
                   className={styles.imagex}
                   src={request.image}
@@ -276,7 +277,9 @@ export default function RequestComponent() {
                   {request.status_request === "aguardando" && (
                     <button
                       className={styles.buttonr}
-                      onClick={() => changeStatus(request.id, "awaiting", request.email)}
+                      onClick={() =>
+                        changeStatus(request.id, "awaiting", request.email)
+                      }
                     >
                       INICIAR SOLICITAÇÃO
                     </button>
@@ -284,7 +287,9 @@ export default function RequestComponent() {
                   {request.status_request === "em andamento" && (
                     <button
                       className={styles.buttonra}
-                      onClick={() => changeStatus(request.id, "conclued", request.email)}
+                      onClick={() =>
+                        changeStatus(request.id, "conclued", request.email)
+                      }
                     >
                       FINALIZAR SOLICITAÇÃO
                     </button>
@@ -292,7 +297,9 @@ export default function RequestComponent() {
                   {request.status_request === "concluida" && (
                     <button
                       className={styles.buttonrc}
-                      onClick={() => changeStatus(request.id, "awaiting", request.email)}
+                      onClick={() =>
+                        changeStatus(request.id, "awaiting", request.email)
+                      }
                     >
                       CORRIGIR SOLICITAÇÃO
                     </button>
@@ -316,13 +323,19 @@ export default function RequestComponent() {
                   finalizada em: {format(request.date_conclusion)}
                 </p>
               )}
+               <button
+              className={styles.exportButton}
+              onClick={() => generatePDF(request)}
+              title="Exportar para PDF"
+            >
+              Baixar PDF
+              <p>
+              <FaFilePdf fontSize={20} />
+
+              </p>
+            </button>
             </div>
-            <button
-                    className={styles.btnPDF}
-                    onClick={() => generatePDF(request)}
-                  >
-                    Baixar
-                  </button>
+           
           </motion.div>
         )}
       </div>
