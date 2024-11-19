@@ -138,7 +138,7 @@ export default function RequestComponent() {
     doc.text(`Email: ${item.email}`, 10, 60);
     doc.addImage(imgData, 'PNG', -248, 80, 700, 140);
 
-    doc.save(`Request_${item.id || item.local}.pdf`);
+    doc.save(`${item.title || item.local}.pdf`);
   };
 
   console.log(requests);
