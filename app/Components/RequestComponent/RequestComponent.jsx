@@ -349,13 +349,12 @@ export default function RequestComponent() {
 
               {
                 (
-                  (user?.email && request.email === user.email && request.status === 'aguardando') ||
-                  (user?.isadmin && request.status !== 'concluida')
-                ) && 
-                  <button>
+                  (user?.email && request.email === user.email && request.status_request === 'aguardando') ||
+                  (user?.isadmin && request.status_request !== 'concluida')
+                ) &&
+                  <button onClick={() => router.replace(`/RequestCreate/${request.id}}`)}>
                     editar
                   </button>
-                
               }
 
               {request.status_request === "concluida" && (
