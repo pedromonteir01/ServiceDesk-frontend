@@ -170,8 +170,22 @@ export default function RequestComponent() {
     doc.save(`${item.title || item.local}.pdf`);
   };
 
+    doc.text(
+      `Gerado em: ${new Date().toLocaleDateString()}`,
+      10,
+      doc.internal.pageSize.height - 10
+    );
+    doc.text(
+      `Solicitação: ${item.title || item.local}`,
+      105,
+      doc.internal.pageSize.height - 10,
+      null,
+      null,
+      "center"
+    );
 
-  console.log(requests);
+    doc.save(`${item.title || item.local}.pdf`);
+  };
 
   return (
     <article className={styles.container}>
@@ -226,39 +240,42 @@ export default function RequestComponent() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          {loading ? (
-            <div className={styles.loading}>
-              <TailSpin
-                height="80"
-                width="80"
-                color="#ff0000"
-                ariaLabel="tail-spin-loading"
-              />
-            </div>
-          ) : sortedRequests.length !== 0 ? (
-            <>
-              {sortedRequests.map((item) => (
-                <motion.div
-                  key={item.id || item.local}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                  onClick={() => handleRequest(item.id)}
-                  className={styles.requestCard}
-                >
-                  <RenderTest
+          <div className={styles.requestScroll}>
+            {loading ? (
+              <div className={styles.loading}>
+                <TailSpin
+                  height="80"
+                  width="80"
+                  color="#ff0000"
+                  ariaLabel="tail-spin-loading"
+                />
+              </div>
+            ) : sortedRequests.length !== 0 ? (
+              <>
+                {sortedRequests.map((item) => (
+                  <motion.div
                     key={item.id || item.local}
-                    local={item.local}
-                    image={item.image}
-                    status={item.status_request}
-                  />
-                </motion.div>
-              ))}
-            </>
-          ) : (
-            <p className={styles.noRequestMsg}>REALIZE ALGUMA REQUISIÇÃO!</p>
-          )}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    onClick={() => handleRequest(item.id)}
+                    className={styles.requestCard}
+                  >
+                    <RenderTest
+                      key={item.id || item.local}
+                      local={item.local}
+                      image={item.image}
+                      status={item.status_request}
+                    />
+                  </motion.div>
+                ))}
+              </>
+            ) : (
+              <p className={styles.noRequestMsg}>REALIZE ALGUMA REQUISIÇÃO!</p>
+            )}
+          </div>
         </motion.section>
+
         {request && (
           <motion.div
             className={styles.info}

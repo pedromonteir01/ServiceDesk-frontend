@@ -126,6 +126,31 @@
 .tooCards {
   display: flex;
 }
+
+.requestScroll {
+  max-height: 700px;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.requestScroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.requestScroll::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.requestScroll::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
+.requestScroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}
 .info {
   width: 100%;
   display: flex;
@@ -254,7 +279,7 @@
 }
 
 .modalButtonConfirm {
-  background: #ff4d4f;
+  background: #ff0000;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -398,20 +423,20 @@
 }
 
 .exportButton {
-  background: linear-gradient(135deg, #ff5722, #ff0000);  
+  background: linear-gradient(135deg, #ff5722, #ff0000);
   border: none;
   color: white;
   font-size: 18px;
-  font-weight: bold; 
+  font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 16%;
   height: 3rem;
-  border-radius: 8px; 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s; 
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
   padding: 0 1rem;
   align-items: center;
   justify-content: center;
@@ -420,16 +445,14 @@
 
 .exportButton:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); 
-  background: linear-gradient(135deg, #ff3d00, #ff0000);  
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ff3d00, #ff0000);
 }
 
 .exportButton:active {
-  transform: translateY(0);  
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-
-
 
 /* Estilo responsivo */
 @media screen and (max-width: 768px) {
@@ -486,13 +509,33 @@
   }
 
   .exportButton {
-    width: 60%; 
-    height: 45px; 
-    font-size: 16px; 
+    width: 60%;
+    height: 45px;
+    font-size: 16px;
     margin-left: 1.5rem;
   }
 
   .status {
     width: 250%;
+  }
+
+  .requestScroll {
+    max-height: 350px;
+    padding-right: 5px;
+  }
+
+  .requestScroll::-webkit-scrollbar {
+    width: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .requestScroll {
+    max-height: 200px;
+    padding-right: 3px;
+  }
+
+  .requestScroll::-webkit-scrollbar {
+    width: 4px;
   }
 }
