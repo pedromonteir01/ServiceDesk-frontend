@@ -52,15 +52,16 @@ const EditComponent = ({ id }) => {
 
     useEffect(() => {
       const fetchReq = async() => {
-        setLoading(true);
         try {
+          setLoading(true);
           const response = await getRequestById(formattedId);
+          console.log(response);
           if(response.error) {
             toast.error('Não foi possível encontrar sua requisição', { duration: 3000 });
             router.replace('/');
           } else {
             setRequest(response);
-            fillFields();
+            fillFields(response);
           }
         } catch(e) {
           toast.error('Não foi possível encontrar sua requisição', { duration: 3000 });
@@ -73,11 +74,12 @@ const EditComponent = ({ id }) => {
       fetchReq();
     }, []);
 
-    const fillFields = () => {
-      setTitle(request.title);
-      setDescription(request.description);
-      setLocal(request.local);
-      setImage(request.image);
+    const fillFields = (data) => {
+      setTitle(data.title);
+      setDescription(data.description);
+      setLocal(data.local);
+      setImage(data.image);
+      setImagePreview(data.image);
     }
   
     const handleUpload = async (e) => {
@@ -105,9 +107,9 @@ const EditComponent = ({ id }) => {
       });
     };
   
-    const requestCreate = async (title, description, local, image) => {
+    const updateRequest = async (title, description, local, image) => {
       const date_request = new Date().toISOString();
-      const status_request = "inconclued";
+      const status_request = request.status_request;
   
       if (!title || !description || !local || !image) {
         toast.error("PREENCHA TODOS OS CAMPOS");
@@ -141,7 +143,7 @@ const EditComponent = ({ id }) => {
           email,
         };
         const token = localStorage.getItem("refreshToken");
-        const response = await createRequest(requestData, token);
+        const response = await updateRequest(requestData, token);
         if (response.error) {
           console.error("Erro do servidor:", response);
           toast.error(response.errors || "Erro ao criar requisição");
@@ -158,8 +160,6 @@ const EditComponent = ({ id }) => {
       }
     };
   
-    console.log(request);
-
     return (
         <ProtectedRoute>
             {
@@ -187,7 +187,7 @@ const EditComponent = ({ id }) => {
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault();
-                                requestCreate(title, description, local, image);
+                                updateRequest(title, description, local, image);
                             }}
                         >
                             <motion.label
@@ -311,7 +311,7 @@ const EditComponent = ({ id }) => {
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.5 }}
                             >
-                                Enviar
+                                Atualizar
                             </motion.button>
                         </form>
                     </motion.div>
