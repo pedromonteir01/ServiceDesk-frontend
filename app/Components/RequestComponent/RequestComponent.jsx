@@ -94,8 +94,8 @@ export default function RequestComponent() {
     a.status_request === "concluida"
       ? 1
       : b.status_request === "concluida"
-      ? -1
-      : 0
+        ? -1
+        : 0
   );
 
   const handleRequest = async (id) => {
@@ -164,6 +164,12 @@ export default function RequestComponent() {
 
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
+    doc.text(`Gerado em: ${new Date().toLocaleDateString()}`, 10, doc.internal.pageSize.height - 10);
+    doc.text(`Solicitação: ${item.title || item.local}`, 105, doc.internal.pageSize.height - 10, null, null, "center");
+
+    doc.save(`${item.title || item.local}.pdf`);
+  };
+
     doc.text(
       `Gerado em: ${new Date().toLocaleDateString()}`,
       10,
@@ -180,8 +186,6 @@ export default function RequestComponent() {
 
     doc.save(`${item.title || item.local}.pdf`);
   };
-
-  console.log(requests);
 
   return (
     <article className={styles.container}>
@@ -349,7 +353,7 @@ export default function RequestComponent() {
                 </>
               )}
               {(user?.email && request.email === user.email) ||
-              user?.isadmin ? (
+                user?.isadmin ? (
                 <div className={styles.buttonsdelete}>
                   <button
                     className={styles.btnRemove}
@@ -360,13 +364,23 @@ export default function RequestComponent() {
                 </div>
               ) : null}
 
+              {
+                (
+                  (user?.email && request.email === user.email && request.status_request === 'aguardando') ||
+                  (user?.isadmin && request.status_request !== 'concluida')
+                ) &&
+                  <button onClick={() => router.replace(`/RequestCreate/${request.id}}`)}>
+                    editar
+                  </button>
+              }
+
               {request.status_request === "concluida" && (
                 <p className={styles.dateConclusion}>
                   finalizada em: {format(request.date_conclusion)}
                 </p>
               )}
               {(user?.email && request.email === user.email) ||
-              user?.isadmin ? (
+                user?.isadmin ? (
                 <button
                   className={styles.exportButton}
                   onClick={() => generatePDF(request)}

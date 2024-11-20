@@ -1,6 +1,7 @@
 import styles from "./renderTeste.module.css";
 import { useContext } from "react";
 import { UserContext } from "@/app/contexts/userContext";
+import { useRouter } from "next/navigation";
 
 export default function RenderTest({
   local,

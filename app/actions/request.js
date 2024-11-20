@@ -103,9 +103,15 @@ export const createRequest = async (requestData, token) => {
   }
 };
 
-export const updateRequest = async (id, request) => {
+export const updateRequest = async (id, request, token) => {  
   try {
-    const response = await axios.put(`${api}/${id}`, request);
+    const response = await axios.put(`${api}/${id}`, request, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response.data);
     return response.data;
   } catch (e) {
     return e.response.data || { error: "operação fracassou" };
