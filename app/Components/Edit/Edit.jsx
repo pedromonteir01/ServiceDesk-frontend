@@ -2,7 +2,7 @@
 import styles from './editComponent.module.css';
 import { useState, useEffect, useContext } from "react";
 import { IoCloudDownloadOutline } from "react-icons/io5";
-import { getLocais, getRequestById } from "@/app/actions/request";
+import { getLocais, getRequestById, updateRequest } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/app/contexts/userContext";
 import toast from "react-hot-toast";
@@ -107,7 +107,7 @@ const EditComponent = ({ id }) => {
       });
     };
   
-    const updateRequest = async (title, description, local, image) => {
+    const editRequest = async (title, description, local, image) => {
   
       if (!title || !description || !local || !image) {
         toast.error("PREENCHA TODOS OS CAMPOS");
@@ -155,6 +155,7 @@ const EditComponent = ({ id }) => {
         };
         const token = localStorage.getItem("refreshToken");
         const response = await updateRequest(formattedId, requestData, token);
+                
         if (response.success) {
           toast.success("REQUISIÇÃO ALTERADA");
           router.replace("/Request");
@@ -165,7 +166,7 @@ const EditComponent = ({ id }) => {
         return;
       } catch (error) {
         console.error("Erro do lado do cliente:", error);
-        toast.error(error);
+        toast.error('OPERAÇÃO FALHOU');
       } finally {
         setLoading(false);
       }
@@ -176,7 +177,7 @@ const EditComponent = ({ id }) => {
             {
                 loading ? (
                     <div className={styles.loading}>
-                        <p className={styles.loadingtxt}>Gerando requisição...</p>
+                        <p className={styles.loadingtxt}>Alterando requisição...</p>
                         <TailSpin
                             height="80"
                             width="80"
@@ -198,7 +199,7 @@ const EditComponent = ({ id }) => {
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault();
-                                updateRequest(title, description, local, image);
+                                editRequest(title, description, local, image);
                             }}
                         >
                             <motion.label
