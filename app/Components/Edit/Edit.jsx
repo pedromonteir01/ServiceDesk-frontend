@@ -147,6 +147,7 @@ const EditComponent = ({ id }) => {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5 }}
                     >
+                        <p>{id}</p>
                         <h1 className={styles.title}>
                             Relate aqui seu <span className={styles.problemText}>problema</span>
                         </h1>
