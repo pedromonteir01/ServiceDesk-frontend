@@ -2,7 +2,7 @@
 import styles from './editComponent.module.css';
 import { useState, useEffect, useContext } from "react";
 import { IoCloudDownloadOutline } from "react-icons/io5";
-import { createRequest, getLocais } from "@/app/actions/request";
+import { createRequest, getLocais, getRequestById } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/app/contexts/userContext";
 import toast from "react-hot-toast";
@@ -23,8 +23,10 @@ const EditComponent = ({ id }) => {
     const [imagePreview, setImagePreview] = useState(null);
     const [locais, setLocais] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [request, setRequest] = useState(null);
     const router = useRouter();
-    const validFileTypes = ["image/jpg", "image/jpeg", "image/png", "image/webp", "image/svg+xml"]
+    const validFileTypes = ["image/jpg", "image/jpeg", "image/png", "image/webp", "image/svg+xml"];
+    const formattedId = id.split('%')[0];
   
     useEffect(() => {
       if (!user) {
@@ -47,6 +49,36 @@ const EditComponent = ({ id }) => {
   
       fetchLocais();
     }, []);
+
+    useEffect(() => {
+      const fetchReq = async() => {
+        setLoading(true);
+        try {
+          const response = await getRequestById(formattedId);
+          if(response.error) {
+            toast.error('Não foi possível encontrar sua requisição', { duration: 3000 });
+            router.replace('/');
+          } else {
+            setRequest(response);
+            fillFields();
+          }
+        } catch(e) {
+          toast.error('Não foi possível encontrar sua requisição', { duration: 3000 });
+          router.replace('/');
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      fetchReq();
+    }, []);
+
+    const fillFields = () => {
+      setTitle(request.title);
+      setDescription(request.description);
+      setLocal(request.local);
+      setImage(request.image);
+    }
   
     const handleUpload = async (e) => {
       const file = e.target.files[0];
@@ -126,6 +158,7 @@ const EditComponent = ({ id }) => {
       }
     };
   
+    console.log(request);
 
     return (
         <ProtectedRoute>
@@ -147,9 +180,8 @@ const EditComponent = ({ id }) => {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <p>{id}</p>
                         <h1 className={styles.title}>
-                            Relate aqui seu <span className={styles.problemText}>problema</span>
+                            Edite o seu <span className={styles.problemText}>problema</span>
                         </h1>
 
                         <form

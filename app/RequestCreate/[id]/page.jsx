@@ -4,7 +4,7 @@ import EditComponent from '@/app/Components/Edit/Edit';
 
 export default function EditRequest({ params }) {
 
-    const { id } = params;
+    const { id } = params;    
 
     return (
         <main className={styles.generalDiv}>
