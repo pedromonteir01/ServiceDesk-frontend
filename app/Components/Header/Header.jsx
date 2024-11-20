@@ -46,7 +46,8 @@ const Sidebar = ({ isActive, onClose }) => {
     <div
       className={`sidebar ${isActive ? "sidebar-open" : ""}`}
       style={{
-        backgroundColor: "#ff0000",
+        backgroundColor: "#e60000",
+        boxShadow: "5px 0 20px rgba(0, 0, 0, 0.7)",
         height: "100vh",
         position: "fixed",
         zIndex: 999,
@@ -96,7 +97,12 @@ const Header = () => {
     <nav className={styles.generalDiv}>
       <div className={styles.menuD}>
         <div className={styles.align}>
-          <Hamburger toggled={sidebar} toggle={showSidebar} color="#fff" clasName={styles.top}/>
+          <Hamburger
+            toggled={sidebar}
+            toggle={showSidebar}
+            color="#fff"
+            clasName={styles.top}
+          />
           {sidebar && <Sidebar isActive={sidebar} onClose={closeSidebar} />}
         </div>
       </div>
@@ -126,7 +132,9 @@ const Header = () => {
             IRS
           </Link>
         </li>
-        <span style={{marginLeft: -15}} className={styles.barra}>|</span>
+        <span style={{ marginLeft: -15 }} className={styles.barra}>
+          |
+        </span>
         <li className={styles.linksSocial}>
           <Link target="blank" href="https://www.facebook.com/senaisaopaulo">
             <FaFacebookF color="#ffffff" />
