@@ -124,68 +124,77 @@ export default function RequestComponent() {
   };
 
   const generatePDF = async (item) => {
-    const doc = new jsPDF();
+    try {
+        const doc = new jsPDF();
+        doc.setFont("helvetica", "normal");
 
-    doc.setFont("helvetica", "normal");
+        // Captura o conteúdo do elemento HTML
+        const input = document.getElementById("request-detail");
+        if (!input) {
+            console.error("Elemento 'request-detail' não encontrado");
+            return;
+        }
 
-    const input = document.getElementById("request-detail");
-    const canvas = await html2canvas(input);
-    const imgData = canvas.toDataURL("image/png");
-    doc.addImage(imgData, "PNG", 10, 30, 180, 100);
+        const canvas = await html2canvas(input);
+        const imgData = canvas.toDataURL("image/png");
+        doc.addImage(imgData, "PNG", 10, 30, 180, 100);
 
-    doc.setFontSize(16);
-    doc.text("Detalhes da Requisição", 105, 140, null, null, "center");
+        // Título principal do PDF
+        doc.setFontSize(16);
+        doc.text("Detalhes da Requisição", 105, 140, { align: "center" });
 
-    doc.setFontSize(12);
+        doc.setFontSize(12);
 
-    doc.text(`Título da requisição:`, 10, 160);
-    doc.setFont("helvetica", "normal");
-    doc.text(item.title, 10, 165);
+        // Campos dinâmicos do item
+        const fields = [
+            { label: "Título da requisição:", value: item.title, offsetY: 160 },
+            { label: "Descrição:", value: item.description, offsetY: 175 },
+            { label: "Local:", value: item.local, offsetY: 190 },
+            { label: "Status:", value: item.status_request, offsetY: 205 },
+            { label: "Data da solicitação:", value: format(item.date_request), offsetY: 220 },
+        ];
 
-    doc.text(`Descrição:`, 10, 175);
-    doc.text(item.description, 10, 180);
+        if (item.status_request === "concluida") {
+            fields.push({
+                label: "Data da conclusão:",
+                value: format(item.date_conclusion),
+                offsetY: 235,
+            });
+        }
 
-    doc.text(`Local:`, 10, 190);
-    doc.text(item.local, 10, 195);
+        fields.push({ label: "Email:", value: item.email, offsetY: 250 });
 
-    doc.text(`Status:`, 10, 205);
-    doc.text(item.status_request, 10, 210);
+        // Renderiza campos no PDF
+        fields.forEach((field, index) => {
+            if (field.value) {
+                const yOffset = field.offsetY + index * 3; // Ajusta a posição Y
+                doc.text(field.label, 10, yOffset);
+                doc.setFont("helvetica", "normal");
+                doc.text(field.value, 10, yOffset + 5);
+            }
+        });
 
-    doc.text(`Data da solicitação:`, 10, 220);
-    doc.text(format(item.date_request), 10, 225);
+        // Rodapé com informações dinâmicas
+        const pageHeight = doc.internal.pageSize.height;
+        const currentDate = new Date().toLocaleDateString();
 
-    if (item.status_request === "concluida") {
-      doc.text(`Data da conclusão:`, 10, 235);
-      doc.text(format(item.date_conclusion), 10, 240);
+        doc.setFontSize(10);
+        doc.text(`Gerado em: ${currentDate}`, 10, pageHeight - 10);
+        doc.text(
+            `Solicitação: ${item.title || item.local || "Desconhecida"}`,
+            105,
+            pageHeight - 10,
+            { align: "center" }
+        );
+
+        // Salva o PDF com o título ou local da requisição
+        doc.save(`${item.title || item.local || "Requisicao"}.pdf`);
+    } catch (error) {
+        console.error("Erro ao gerar PDF:", error);
+        alert("Houve um erro ao gerar o PDF. Tente novamente.");
     }
+};
 
-    doc.text(`Email:`, 10, 250);
-    doc.text(item.email, 10, 255);
-
-    doc.setFontSize(10);
-    doc.setFont("helvetica", "normal");
-    doc.text(`Gerado em: ${new Date().toLocaleDateString()}`, 10, doc.internal.pageSize.height - 10);
-    doc.text(`Solicitação: ${item.title || item.local}`, 105, doc.internal.pageSize.height - 10, null, null, "center");
-
-    doc.save(`${item.title || item.local}.pdf`);
-  };
-
-    doc.text(
-      `Gerado em: ${new Date().toLocaleDateString()}`,
-      10,
-      doc.internal.pageSize.height - 10
-    );
-    doc.text(
-      `Solicitação: ${item.title || item.local}`,
-      105,
-      doc.internal.pageSize.height - 10,
-      null,
-      null,
-      "center"
-    );
-
-    doc.save(`${item.title || item.local}.pdf`);
-  };
 
   return (
     <article className={styles.container}>
