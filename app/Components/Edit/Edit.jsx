@@ -2,7 +2,7 @@
 import styles from './editComponent.module.css';
 import { useState, useEffect, useContext } from "react";
 import { IoCloudDownloadOutline } from "react-icons/io5";
-import { createRequest, getLocais, getRequestById } from "@/app/actions/request";
+import { getLocais, getRequestById } from "@/app/actions/request";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/app/contexts/userContext";
 import toast from "react-hot-toast";
@@ -108,8 +108,6 @@ const EditComponent = ({ id }) => {
     };
   
     const updateRequest = async (title, description, local, image) => {
-      const date_request = new Date().toISOString();
-      const status_request = request.status_request;
   
       if (!title || !description || !local || !image) {
         toast.error("PREENCHA TODOS OS CAMPOS");
@@ -129,6 +127,19 @@ const EditComponent = ({ id }) => {
         setLoading(true);
   
         const imageArrayBuffer = await convertToArrayBuffer(image);
+
+        let statusRequest;
+        switch (request.status_request.toLowerCase()) {
+          case "em andamento":
+            statusRequest = "awaiting";
+            break;
+          case "aguardando":
+            statusRequest = "inconclued";
+            break;
+          default:
+            toast.error('STATUS INVÁLIDO', { duration: 3000 });
+            break;
+        }
   
         const requestData = {
           title,
@@ -137,21 +148,21 @@ const EditComponent = ({ id }) => {
           image: Array.from(new Uint8Array(imageArrayBuffer)),
           imageName: image.name,
           imageType: image.type,
-          status_request,
-          date_request,
+          status_request: statusRequest,
+          date_request: request.date_request,
           date_conclusion: null,
           email,
         };
         const token = localStorage.getItem("refreshToken");
-        const response = await updateRequest(requestData, token);
-        if (response.error) {
-          console.error("Erro do servidor:", response);
-          toast.error(response.errors || "Erro ao criar requisição");
+        const response = await updateRequest(formattedId, requestData, token);
+        if (response.success) {
+          toast.success("REQUISIÇÃO ALTERADA");
+          router.replace("/Request");
           return;
         }
-  
-        toast.success("REQUISIÇÃO CRIADA");
-        router.replace("/Request");
+        console.error("Erro do servidor:", response);
+        toast.error(response.errors || "Erro ao criar requisição");
+        return;
       } catch (error) {
         console.error("Erro do lado do cliente:", error);
         toast.error(error);
