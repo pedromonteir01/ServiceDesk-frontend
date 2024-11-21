@@ -404,12 +404,34 @@
   transition: transform 0.2s ease;
   position: absolute;
   right: 0;
-  bottom: -5rem;
+  bottom: -5.5rem;
 }
 
 .btnRemove:hover {
   transform: scale(1.1);
 }
+
+.buttonsEdit {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.btnEdit {
+  background-color: transparent;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: absolute;
+  left: 0;
+  bottom: -4.10rem;
+}
+
+.btnEdit:hover {
+  transform: scale(1.1);
+}
+
 .btnRemovex {
   background-color: transparent;
   color: #000;

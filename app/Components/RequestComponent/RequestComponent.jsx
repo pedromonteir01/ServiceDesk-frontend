@@ -20,6 +20,7 @@ import { FaWindowClose } from "react-icons/fa";
 import { FaFilePdf } from "react-icons/fa6";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { LuPencil } from "react-icons/lu";
 
 export default function RequestComponent() {
   const { user } = useContext(UserContext);
@@ -378,9 +379,11 @@ export default function RequestComponent() {
                   (user?.email && request.email === user.email && request.status_request === 'aguardando') ||
                   (user?.isadmin && request.status_request !== 'concluida')
                 ) &&
-                  <button onClick={() => router.replace(`/RequestCreate/${request.id}}`)}>
-                    editar
+                <div className={styles.buttonsEdit}>
+                  <button className={styles.btnEdit} onClick={() => router.replace(`/RequestCreate/${request.id}}`)}>
+                    <LuPencil fontSize={35} />
                   </button>
+                </div>
               }
 
               {request.status_request === "concluida" && (
