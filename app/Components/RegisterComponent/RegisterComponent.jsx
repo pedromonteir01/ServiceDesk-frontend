@@ -166,7 +166,7 @@ const RegisterComponent = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          CADASTRE-SE
+          {user && user.isadmin ? 'CADASTRAR' : 'CADASTRE-SE'}
         </motion.h2>
 
         <motion.form
