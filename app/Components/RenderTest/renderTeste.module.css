@@ -112,6 +112,27 @@
   right: -0.5rem; 
 }
 
+.high {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.medium {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #ff7700;
+}
+
+.low {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #28a745;
+}
+
 @media screen and (max-width: 768px) {
   .card {
     max-width: 95%;

@@ -10,6 +10,7 @@ export default function RenderTest({
   status,
   onEdit,
   image,
+  priority
 }) {
   const { user } = useContext(UserContext);
 
@@ -22,6 +23,16 @@ export default function RenderTest({
       return styles.statusCompleted
     }
   }
+
+  const priorityStyle = () => {
+    if(priority == 'alta') {
+      return styles.high
+    } else if(priority == 'média') {
+      return styles.medium
+    } else {
+      return styles.low
+    }
+   }
 
   return (
     <div className={styles.card}>
@@ -36,6 +47,9 @@ export default function RenderTest({
         <h1 className={styles.title}>{local}</h1>
         <h4 className={styles.description}>{desc}</h4>
         <p className={styles.author}>{autor}</p>
+        <div className={priorityStyle()}>
+
+        </div>
         {user && user.isadmin && (
                 <>
                   <p

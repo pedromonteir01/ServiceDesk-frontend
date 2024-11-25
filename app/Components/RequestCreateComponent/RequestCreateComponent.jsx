@@ -16,6 +16,7 @@ const RequestCreateComponent = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [local, setLocal] = useState("");
+  const [priority, setPriority] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -104,6 +105,7 @@ const RequestCreateComponent = () => {
         status_request,
         date_request,
         date_conclusion: null,
+        priority: priority,
         email,
       };
       const token = localStorage.getItem("refreshToken");
@@ -131,11 +133,11 @@ const RequestCreateComponent = () => {
           <div className={styles.loading}>
             <p className={styles.loadingtxt}>Gerando requisição...</p>
             <TailSpin
-            height="80"
-            width="80"
-            color="#ff0000"
-            ariaLabel="tail-spin-loading"
-          />
+              height="80"
+              width="80"
+              color="#ff0000"
+              ariaLabel="tail-spin-loading"
+            />
           </div>
         ) : (
           <motion.div
@@ -266,6 +268,28 @@ const RequestCreateComponent = () => {
                     {localItem.nome}
                   </option>
                 ))}
+              </motion.select>
+
+              <motion.label
+                className={styles.label}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}>
+                  Qual a prioridade?
+              </motion.label>
+
+              <motion.select
+                className={styles.select}
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <option value="">Selecione...</option>
+                <option value="high">Alta</option>
+                <option value="medium">Média</option>
+                <option value="low">Baixa</option>
               </motion.select>
 
               <motion.button

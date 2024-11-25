@@ -153,6 +153,7 @@ export default function RequestComponent() {
             { label: "Local:", value: item.local, offsetY: 190 },
             { label: "Status:", value: item.status_request, offsetY: 205 },
             { label: "Data da solicitação:", value: format(item.date_request), offsetY: 220 },
+            { label: "Prioridade:", value: item.priority, offsetY: 230 }
         ];
 
         if (item.status_request === "concluida") {
@@ -276,6 +277,7 @@ export default function RequestComponent() {
                       local={item.local}
                       image={item.image}
                       status={item.status_request}
+                      priority={item.priority}
                     />
                   </motion.div>
                 ))}
@@ -327,6 +329,8 @@ export default function RequestComponent() {
                 {request.status_request === "concluida" && (
                   <p className={styles.concluded}>Concluída</p>
                 )}
+
+                <span className={styles.description}>PRIORIDADE: {request.priority.toUpperCase()}</span>
               </div>
               {user && user.isadmin && (
                 <>
