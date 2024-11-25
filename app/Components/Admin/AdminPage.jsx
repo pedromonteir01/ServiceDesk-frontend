@@ -115,6 +115,7 @@ const AdminPage = () => {
           3: format(request.date_request),
           4: format(request.date_conclusion),
           5: request.email,
+          6: request.priority,
         }))
       );
 
@@ -126,6 +127,7 @@ const AdminPage = () => {
           "dia criado": format(request.date_request),
           "dia finalizado": format(request.date_conclusion),
           usuário: request.email,
+          prioridade: request.priority
         }))
       );
     };
@@ -376,7 +378,8 @@ const AdminPage = () => {
               "status",
               "dia criado",
               "dia finalizado",
-              "usuário"
+              "usuário",
+              "prioridade"
             ]}
             content={response}
           />
