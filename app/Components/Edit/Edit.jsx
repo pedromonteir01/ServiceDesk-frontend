@@ -21,6 +21,7 @@ const EditComponent = ({ id }) => {
   const [priority, setPriority] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState(null);
+  const [originalImage, setOriginalImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [locais, setLocais] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -79,7 +80,7 @@ const EditComponent = ({ id }) => {
     setTitle(data.title);
     setDescription(data.description);
     setLocal(data.local);
-    setImage(data.image);
+    setOriginalImage(data.image);
     setImagePreview(data.image);
     switch (data.priority) {
       case 'alta':
@@ -121,10 +122,11 @@ const EditComponent = ({ id }) => {
 
   const editRequest = async (title, description, local, image) => {
 
-    if (!title || !description || !local || !image) {
-      toast.error("PREENCHA TODOS OS CAMPOS");
-      return;
-    } else if (title.length < 3) {
+    // if (!title || !description || !local || !image) {
+    //   toast.error("PREENCHA TODOS OS CAMPOS");
+    //   return;
+    // } else
+     if (title.length < 3) {
       toast.error("TÍTULO MUITO LONGO MIN 3 MAX 35 CARACTERES");
       return;
     } else if (title.length > 35) {
@@ -133,12 +135,15 @@ const EditComponent = ({ id }) => {
     } else if (description.length < 10) {
       toast.error("DESCRIÇÃO MUITO CURTA");
       return;
+    } else if(!imagePreview) {
+      toast.error("INSIRA UMA IMAGEM");
+      return;
     }
+
 
     try {
       setLoading(true);
 
-      const imageArrayBuffer = await fetchImageAsArrayBuffer(image);
 
       let statusRequest;
       switch (request.status_request.toLowerCase()) {
@@ -152,19 +157,38 @@ const EditComponent = ({ id }) => {
           toast.error('STATUS INVÁLIDO', { duration: 3000 });
           break;
       }
-
-      const requestData = {
+      let imageBoolean;
+      let requestData = {
         title,
         description,
-        local,
-        image: Array.from(new Uint8Array(imageArrayBuffer)),
-        imageName: image.name,
-        imageType: image.type,
-        status_request: statusRequest,
-        date_request: request.date_request,
-        date_conclusion: null,
-        priority: priority,
-        email,
+          local,
+        };
+  
+        if (image) {
+          imageBoolean = false;
+          const imageArrayBuffer = await convertToArrayBuffer(image);
+          requestData = {
+            ...requestData,
+            image: Array.from(new Uint8Array(imageArrayBuffer)),
+            imageName: image.name,
+            imageType: image.type,
+          };
+        } else {
+          imageBoolean = true;
+          requestData = {
+            ...requestData,
+            image: originalImage,
+          };
+        }
+  
+        requestData = {
+          ...requestData,
+          imageBoolean : imageBoolean,
+          status_request: statusRequest,
+          date_request: request.date_request,
+          date_conclusion: null,
+          priority: priority,
+          email,
       };
       const token = localStorage.getItem("refreshToken");
       const response = await updateRequest(formattedId, requestData, token);
@@ -185,18 +209,18 @@ const EditComponent = ({ id }) => {
     }
   };
 
-  const fetchImageAsArrayBuffer = async (url) => {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Erro ao baixar a imagem");
-      }
-      return await response.arrayBuffer();
-    } catch (error) {
-      console.error("Erro ao processar imagem:", error);
-      throw error;
-    }
-  };
+  // const fetchImageAsArrayBuffer = async (url) => {
+  //   try {
+  //     const response = await fetch(url);
+  //     if (!response.ok) {
+  //       throw new Error("Erro ao baixar a imagem");
+  //     }
+  //     return await response.arrayBuffer();
+  //   } catch (error) {
+  //     console.error("Erro ao processar imagem:", error);
+  //     throw error;
+  //   }
+  // };
 
   return (
     <ProtectedRoute>
