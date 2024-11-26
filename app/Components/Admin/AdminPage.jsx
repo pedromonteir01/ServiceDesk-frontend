@@ -19,6 +19,7 @@ import Modal from "../Modal/Modal";
 import ChangePassword from "../ChangePassword/ChangePassword";
 import { motion } from "framer-motion"; // Importando o framer-motion
 import { getAllDataRequests } from "@/app/actions/data";
+import DataRequest from "../Data/DataRequest";
 
 const AdminPage = () => {
   //para pesquisa
@@ -179,16 +180,8 @@ const AdminPage = () => {
         {
           data &&
           <div className={styles.content}>
-            <div className={styles.month}>
-              <h1>No mês de {months[data.this_month.split('-')[1]]}</h1>
-              <h1>foram feitas um total de {data.reqs_this_month} solicitações</h1>
-              <h1>onde {data.attended_reqs_this_month} foram atendidas</h1>
-            </div>
-            <div className={styles.month}>
-            <h1>No mês de {months[data.last_month.split('-')[1]]}</h1>
-              <h1>foram feitas um total de {data.reqs_last_month} solicitações</h1>
-              <h1>onde {data.attended_reqs_last_month} foram atendidas</h1>
-            </div>
+            <DataRequest month={months[data.last_month.split('-')[1]]} requests={data.reqs_last_month} attented={data.attended_reqs_last_month} />
+            <DataRequest month={months[data.this_month.split('-')[1]]} requests={data.reqs_this_month} attented={data.attended_reqs_this_month} />
           </div>
         }
       </motion.section>
