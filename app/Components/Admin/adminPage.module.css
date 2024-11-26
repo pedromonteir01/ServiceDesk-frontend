@@ -110,6 +110,29 @@
   gap: 1rem;
 }
 
+.data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.25rem;
+  margin-top: 5rem;
+  width: 90vw;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.month {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 768px) {
   .filters {
     width: 90%;

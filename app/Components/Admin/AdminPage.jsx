@@ -18,6 +18,7 @@ import format from "@/app/utilities/formattedDate";
 import Modal from "../Modal/Modal";
 import ChangePassword from "../ChangePassword/ChangePassword";
 import { motion } from "framer-motion"; // Importando o framer-motion
+import { getAllDataRequests } from "@/app/actions/data";
 
 const AdminPage = () => {
   //para pesquisa
@@ -36,6 +37,21 @@ const AdminPage = () => {
   const [response, setResponse] = useState([]);
   const [responseCard, setResponseCard] = useState([]);
   const [locals, setLocals] = useState([]);
+
+  //para as estatisticas
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getAllDataRequests();
+        setData(response);
+      } catch (e) {
+        toast.error(e, { duration: 2000 });
+      }
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -85,7 +101,7 @@ const AdminPage = () => {
       let result;
       if (optionSearch == 'name') name.trim() ? result = await getRequestsByName(name) : result = await getAllRequests();
       else if (optionSearch == "local")
-        option.trim() ? result = await getRequestByLocal(option) : result = await getAllRequests(); 
+        option.trim() ? result = await getRequestByLocal(option) : result = await getAllRequests();
       else if (optionSearch == "status")
         option.trim() ? result = await getRequestByStatus(option) : result = await getAllRequests();
       else if (optionSearch == "create")
@@ -135,10 +151,47 @@ const AdminPage = () => {
     typeSearch == "user" ? fetchUsers() : fetchReqs();
   }, [name, option, optionSearch, creation, finish, typeSearch, byUser]);
 
-  console.log(response);
+  const months = {
+    1: 'Janeiro',
+    2: 'Fevereiro',
+    3: 'Março',
+    4: 'Abril',
+    5: 'Maio',
+    6: 'Junho',
+    7: 'Julho',
+    8: 'Agosto',
+    9: 'Setembro',
+    10: 'Outubro',
+    11: 'Novembro',
+    12: 'Dezembro',
+  };
+
+  console.log(data);
+
 
   return (
     <article className={styles.container}>
+      <motion.section
+        className={styles.data}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}>
+        {
+          data &&
+          <div className={styles.content}>
+            <div className={styles.month}>
+              <h1>No mês de {months[data.this_month.split('-')[1]]}</h1>
+              <h1>foram feitas um total de {data.reqs_this_month} solicitações</h1>
+              <h1>onde {data.attended_reqs_this_month} foram atendidas</h1>
+            </div>
+            <div className={styles.month}>
+            <h1>No mês de {months[data.last_month.split('-')[1]]}</h1>
+              <h1>foram feitas um total de {data.reqs_last_month} solicitações</h1>
+              <h1>onde {data.attended_reqs_last_month} foram atendidas</h1>
+            </div>
+          </div>
+        }
+      </motion.section>
       <motion.section
         className={styles.filters}
         initial={{ opacity: 0 }}
