@@ -2,14 +2,22 @@
 
 import axios from "axios";
 
-const api = process.env.URL;
+const api = process.env.URL + '/data';
 
 export const getAllReqsWithLocals = async() => {
     try {
-        const response = await axios.get(`${api}/data`);
-        console.log(response.data);
+        const response = await axios.get(api);
         return response.data;
     } catch(e) {
-        console.log(e); 
+        return e.response.data;
     }   
+}
+
+export const getAllDataRequests = async() => {
+    try {
+        const response = await axios.get(api + '/requests_data');
+        return response.data;
+    } catch(e) {
+        return e.response.data;
+    }
 }
