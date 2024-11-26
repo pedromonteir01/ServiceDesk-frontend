@@ -126,13 +126,6 @@
   gap: 2rem;
 }
 
-.month {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 @media screen and (max-width: 768px) {
   .filters {
     width: 90%;
