@@ -90,8 +90,6 @@
   margin-bottom: 1rem;
 }
 
-
-
 .actions {
   display: flex;
   justify-content: space-between;
@@ -107,9 +105,9 @@
   cursor: pointer;
   border: none;
   transition: background-color 0.3s;
-  position: absolute; 
-  top: -0.5rem; 
-  right: -0.5rem; 
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
 }
 
 .high {
@@ -150,6 +148,24 @@
   .author {
     font-size: 0.8rem;
   }
+
+  .medium {
+    margin-bottom: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .high {
+    margin-bottom: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .low {
+    margin-bottom: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -157,7 +173,6 @@
     max-width: 90%;
     margin: auto;
   }
-
 
   .btnRemove,
   .btnEdit,
@@ -206,7 +221,6 @@
   .author {
     font-size: 0.6rem;
   }
-
 
   .btnRemove,
   .btnEdit,

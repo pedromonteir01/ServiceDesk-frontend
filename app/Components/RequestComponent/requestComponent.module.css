@@ -128,7 +128,7 @@
 }
 
 .requestScroll {
-  max-height: 700px;
+  height: 700px;
   overflow-y: auto;
   padding-right: 10px;
   scrollbar-width: thin;
@@ -425,7 +425,7 @@
   transition: transform 0.2s ease;
   position: absolute;
   left: 0;
-  bottom: -4.10rem;
+  bottom: -4.1rem;
 }
 
 .btnEdit:hover {
@@ -501,6 +501,7 @@
 
   .tooCards {
     flex-direction: column;
+    height: 100%;
   }
 
   .requestCard {
@@ -542,18 +543,21 @@
   }
 
   .requestScroll {
-    max-height: 350px;
+    height: 500px;
     padding-right: 5px;
   }
 
   .requestScroll::-webkit-scrollbar {
     width: 6px;
   }
+
+  .status {
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: 480px) {
   .requestScroll {
-    max-height: 200px;
     padding-right: 3px;
   }
 
