@@ -153,7 +153,7 @@ export default function RequestComponent() {
             { label: "Local:", value: item.local, offsetY: 190 },
             { label: "Status:", value: item.status_request, offsetY: 205 },
             { label: "Data da solicitação:", value: format(item.date_request), offsetY: 220 },
-            { label: "Prioridade:", value: item.priority, offsetY: 230 }
+            { label: "Prioridade:", value: item.priority, offsetY: 228 }
         ];
 
         if (item.status_request === "concluida") {
