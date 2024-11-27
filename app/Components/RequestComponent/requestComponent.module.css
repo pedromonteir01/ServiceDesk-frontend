@@ -315,7 +315,7 @@
 }
 
 .buttonr {
-  background: linear-gradient(135deg, #3c3c3c, #000000);
+  background: linear-gradient(135deg, #24973f, #28a745);
   border: none;
   padding: 10px;
   font-weight: bold;
@@ -341,7 +341,7 @@
 }
 
 .buttonra {
-  background: linear-gradient(1deg, #15e41c, #12cd19);
+  background: linear-gradient(1deg, #24973f, #28a745);
   border: none;
   padding: 10px;
   border-radius: 6px;
@@ -366,7 +366,7 @@
 }
 
 .buttonrc {
-  background: linear-gradient(1deg, #fb5c00, #e35300);
+  background: linear-gradient(1deg, rgb(243, 89, 0), #ff7700);
   border: none;
   padding: 10px;
   border-radius: 6px;
