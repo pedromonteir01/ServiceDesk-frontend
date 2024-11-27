@@ -95,8 +95,8 @@ export default function RequestComponent() {
     a.status_request === "concluida"
       ? 1
       : b.status_request === "concluida"
-        ? -1
-        : 0
+      ? -1
+      : 0
   );
 
   const handleRequest = async (id) => {
@@ -126,77 +126,80 @@ export default function RequestComponent() {
 
   const generatePDF = async (item) => {
     try {
-        const doc = new jsPDF();
-        doc.setFont("helvetica", "normal");
+      const doc = new jsPDF();
+      doc.setFont("helvetica", "normal");
 
-        // Captura o conteúdo do elemento HTML
-        const input = document.getElementById("request-detail");
-        if (!input) {
-            console.error("Elemento 'request-detail' não encontrado");
-            return;
-        }
+      // Captura o conteúdo do elemento HTML
+      const input = document.getElementById("request-detail");
+      if (!input) {
+        console.error("Elemento 'request-detail' não encontrado");
+        return;
+      }
 
-        const canvas = await html2canvas(input);
-        const imgData = canvas.toDataURL("image/png");
-        doc.addImage(imgData, "PNG", 10, 30, 180, 100);
+      const canvas = await html2canvas(input);
+      const imgData = canvas.toDataURL("image/png");
+      doc.addImage(imgData, "PNG", 10, 30, 180, 100);
 
-        // Título principal do PDF
-        doc.setFontSize(16);
-        doc.text("Detalhes da Requisição", 105, 140, { align: "center" });
+      // Título principal do PDF
+      doc.setFontSize(16);
+      doc.text("Detalhes da Requisição", 105, 140, { align: "center" });
 
-        doc.setFontSize(12);
+      doc.setFontSize(12);
 
-        // Campos dinâmicos do item
-        const fields = [
-            { label: "Título da requisição:", value: item.title, offsetY: 160 },
-            { label: "Descrição:", value: item.description, offsetY: 175 },
-            { label: "Local:", value: item.local, offsetY: 190 },
-            { label: "Status:", value: item.status_request, offsetY: 205 },
-            { label: "Data da solicitação:", value: format(item.date_request), offsetY: 220 },
-            { label: "Prioridade:", value: item.priority, offsetY: 228 }
-        ];
+      // Campos dinâmicos do item
+      const fields = [
+        { label: "Título da requisição:", value: item.title, offsetY: 160 },
+        { label: "Descrição:", value: item.description, offsetY: 175 },
+        { label: "Local:", value: item.local, offsetY: 190 },
+        { label: "Status:", value: item.status_request, offsetY: 205 },
+        {
+          label: "Data da solicitação:",
+          value: format(item.date_request),
+          offsetY: 220,
+        },
+        { label: "Prioridade:", value: item.priority, offsetY: 228 },
+      ];
 
-        if (item.status_request === "concluida") {
-            fields.push({
-                label: "Data da conclusão:",
-                value: format(item.date_conclusion),
-                offsetY: 235,
-            });
-        }
-
-        fields.push({ label: "Email:", value: item.email, offsetY: 250 });
-
-        // Renderiza campos no PDF
-        fields.forEach((field, index) => {
-            if (field.value) {
-                const yOffset = field.offsetY + index * 3; // Ajusta a posição Y
-                doc.text(field.label, 10, yOffset);
-                doc.setFont("helvetica", "normal");
-                doc.text(field.value, 10, yOffset + 5);
-            }
+      if (item.status_request === "concluida") {
+        fields.push({
+          label: "Data da conclusão:",
+          value: format(item.date_conclusion),
+          offsetY: 235,
         });
+      }
 
-        // Rodapé com informações dinâmicas
-        const pageHeight = doc.internal.pageSize.height;
-        const currentDate = new Date().toLocaleDateString();
+      fields.push({ label: "Email:", value: item.email, offsetY: 250 });
 
-        doc.setFontSize(10);
-        doc.text(`Gerado em: ${currentDate}`, 10, pageHeight - 10);
-        doc.text(
-            `Solicitação: ${item.title || item.local || "Desconhecida"}`,
-            105,
-            pageHeight - 10,
-            { align: "center" }
-        );
+      // Renderiza campos no PDF
+      fields.forEach((field, index) => {
+        if (field.value) {
+          const yOffset = field.offsetY + index * 3; // Ajusta a posição Y
+          doc.text(field.label, 10, yOffset);
+          doc.setFont("helvetica", "normal");
+          doc.text(field.value, 10, yOffset + 5);
+        }
+      });
 
-        // Salva o PDF com o título ou local da requisição
-        doc.save(`${item.title || item.local || "Requisicao"}.pdf`);
+      // Rodapé com informações dinâmicas
+      const pageHeight = doc.internal.pageSize.height;
+      const currentDate = new Date().toLocaleDateString();
+
+      doc.setFontSize(10);
+      doc.text(`Gerado em: ${currentDate}`, 10, pageHeight - 10);
+      doc.text(
+        `Solicitação: ${item.title || item.local || "Desconhecida"}`,
+        105,
+        pageHeight - 10,
+        { align: "center" }
+      );
+
+      // Salva o PDF com o título ou local da requisição
+      doc.save(`${item.title || item.local || "Requisicao"}.pdf`);
     } catch (error) {
-        console.error("Erro ao gerar PDF:", error);
-        alert("Houve um erro ao gerar o PDF. Tente novamente.");
+      console.error("Erro ao gerar PDF:", error);
+      alert("Houve um erro ao gerar o PDF. Tente novamente.");
     }
-};
-
+  };
 
   return (
     <article className={styles.container}>
@@ -332,9 +335,11 @@ export default function RequestComponent() {
                 {request.status_request === "concluida" && (
                   <p className={styles.concluded}>Concluída</p>
                 )}
-
-                <span className={styles.description}>PRIORIDADE: {request.priority.toUpperCase()}</span>
               </div>
+              <span className={styles.priority}>
+                PRIORIDADE: {request.priority.toUpperCase()}
+              </span>
+
               {user && user.isadmin && (
                 <>
                   {request.status_request === "aguardando" && (
@@ -370,7 +375,7 @@ export default function RequestComponent() {
                 </>
               )}
               {(user?.email && request.email === user.email) ||
-                user?.isadmin ? (
+              user?.isadmin ? (
                 <div className={styles.buttonsdelete}>
                   <button
                     className={styles.btnRemove}
@@ -381,17 +386,21 @@ export default function RequestComponent() {
                 </div>
               ) : null}
 
-              {
-                (
-                  (user?.email && request.email === user.email && request.status_request === 'aguardando') ||
-                  (user?.isadmin && request.status_request !== 'concluida')
-                ) &&
+              {((user?.email &&
+                request.email === user.email &&
+                request.status_request === "aguardando") ||
+                (user?.isadmin && request.status_request !== "concluida")) && (
                 <div className={styles.buttonsEdit}>
-                  <button className={styles.btnEdit} onClick={() => router.replace(`/RequestCreate/${request.id}}`)}>
+                  <button
+                    className={styles.btnEdit}
+                    onClick={() =>
+                      router.replace(`/RequestCreate/${request.id}}`)
+                    }
+                  >
                     <LuPencil fontSize={35} />
                   </button>
                 </div>
-              }
+              )}
 
               {request.status_request === "concluida" && (
                 <p className={styles.dateConclusion}>
@@ -399,7 +408,7 @@ export default function RequestComponent() {
                 </p>
               )}
               {(user?.email && request.email === user.email) ||
-                user?.isadmin ? (
+              user?.isadmin ? (
                 <button
                   className={styles.exportButton}
                   onClick={() => generatePDF(request)}
