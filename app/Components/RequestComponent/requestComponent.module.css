@@ -38,8 +38,8 @@
   cursor: pointer;
   display: flex;
   border-radius: 6px;
-  width: 25rem;
-  height: 50px;
+  width: 100%;
+  min-width: fit-content;
   padding: 6px;
   align-items: center;
   justify-content: center;
@@ -232,6 +232,7 @@
   text-align: center;
   margin: 0 auto;
   width: 30%;
+  min-width: fit-content;
 }
 
 .inProgress {
@@ -240,6 +241,8 @@
   padding: 10px;
   border-radius: 6px;
   text-align: center;
+  width: 30%;
+  min-width: fit-content;
   margin: 0 auto;
 }
 
@@ -249,6 +252,8 @@
   padding: 10px;
   border-radius: 6px;
   text-align: center;
+  width: 30%;
+  min-width: fit-content;
   margin: 0 auto;
 }
 
@@ -314,22 +319,69 @@
   right: 7px;
 }
 
-.buttonr {
+/* .buttonr {
   background: linear-gradient(135deg, #24973f, #28a745);
-  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 10px;
   font-weight: bold;
   border-radius: 6px;
   color: white;
-  cursor: pointer;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
   margin-left: 1rem;
+} */
+
+
+/* CSS */
+.buttonr {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1.25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: bold;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
 }
 
+.buttonr:hover,
+.buttonr:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.buttonr:hover {
+  transform: translateY(-1px);
+}
+
+.buttonr:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
 .buttonr:hover {
   transform: translateY(-1px);
   box-shadow: 0 5px 10x rgba(0, 0, 0, 0.3);
@@ -371,6 +423,8 @@
   padding: 10px;
   border-radius: 6px;
   color: white;
+  width: 30%;
+  min-width: fit-content;
   cursor: pointer;
   display: flex;
   font-weight: bold;
@@ -454,7 +508,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 16%;
+  min-width: fit-content;
   height: 3rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
