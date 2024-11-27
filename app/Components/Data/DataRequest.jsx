@@ -15,7 +15,7 @@ const DataRequest = ({ month, requests, attented }) => {
     <div className={styles.container}>
       <p>
         No mês de {month} foram feitas um total de {requests} onde {attented}{" "}
-        foram atendidas{percent()}
+        foram atendidas {percent()}
       </p>
     </div>
   );
