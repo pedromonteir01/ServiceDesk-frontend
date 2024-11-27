@@ -8,6 +8,7 @@ export default function RenderTest({
   desc,
   autor,
   status,
+  title,
   onEdit,
   image,
   priority
@@ -44,9 +45,7 @@ export default function RenderTest({
         />
       </div>
       <div className={styles.content}>
-        <h1 className={styles.title}>{local}</h1>
-        <h4 className={styles.description}>{desc}</h4>
-        <p className={styles.author}>{autor}</p>
+        <h1 className={styles.title}>{title}</h1>
         <div className={priorityStyle()}>
 
         </div>

@@ -275,6 +275,9 @@ export default function RequestComponent() {
                     <RenderTest
                       key={item.id || item.local}
                       local={item.local}
+                      desc={item.description}
+                      autor={item.email}
+                      title={item.title}
                       image={item.image}
                       status={item.status_request}
                       priority={item.priority}
