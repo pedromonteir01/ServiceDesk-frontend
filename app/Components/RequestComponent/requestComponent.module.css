@@ -422,7 +422,6 @@
   padding: calc(.875rem - 1px) calc(1.5rem - 1px);
   border-radius: 6px;
   color: white;
-  width: 30%;
   min-width: fit-content;
   cursor: pointer;
   display: flex;
