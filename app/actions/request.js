@@ -82,12 +82,20 @@ export const getRequestByFinishDate = async (date) => {
 export const getRequestByUser = async (user) => {
   try {
     const response = await axios.get(`${api}/user/${user}`);
-    console.log(response.data);
     return response.data;
   } catch (e) {
     return e.response.data || { error: "operação fracassou" };
   }
 };
+
+export const getRequestsByPriority = async(priority) => {
+  try {
+    const response = await axios.get(`${api}/priority/${priority}`);
+    return response.data;
+  } catch(e) {
+    return e.response.data || { error: "operação fracassou" };
+  }
+}
 
 export const createRequest = async (requestData, token) => {
   try {

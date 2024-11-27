@@ -12,7 +12,8 @@ import {
   getRequestByCreationDate,
   getRequestByFinishDate,
   getRequestByUser,
-  getRequestByLocal
+  getRequestByLocal,
+  getRequestsByPriority
 } from "@/app/actions/request";
 import format from "@/app/utilities/formattedDate";
 import Modal from "../Modal/Modal";
@@ -111,7 +112,14 @@ const AdminPage = () => {
         finish.trim() ? result = await getRequestByFinishDate(finish) : result = await getAllRequests();
       else if (optionSearch == 'user')
         byUser.trim() ? result = await getRequestByUser(byUser) : result = await getAllRequests();
+      else if (optionSearch == 'priority')
+        option.trim() ? result = await getRequestsByPriority(option) : result = await getAllRequests();
       else result = await getAllRequests();
+
+      console.log(optionSearch);
+      console.log(option);
+      console.log(result);
+      
 
       if (!result.requests) {
         setResponse([]);
@@ -166,9 +174,6 @@ const AdminPage = () => {
     11: 'Novembro',
     12: 'Dezembro',
   };
-
-  console.log(data);
-
 
   return (
     <article className={styles.container}>
@@ -318,6 +323,23 @@ const AdminPage = () => {
                     />
                   </>
                 )}
+                {optionSearch == 'priority' && (
+                  <>
+                    <label htmlFor="choice">Qual a prioridade:</label>
+                    <select
+                      name="choice"
+                      className={styles.inputSearch}
+                      value={option}
+                      onChange={(e) => setOption(e.target.value)}
+                    >
+                      <option value="">Selecione...</option>
+                      <option value="high">Alta</option>
+                      <option value="medium">Média</option>
+                      <option value="low">Baixa</option>
+                    </select>
+                  </>
+                )
+                }
               </>
             )}
           </motion.div>
@@ -388,6 +410,14 @@ const AdminPage = () => {
                   type="radio"
                   value="user"
                   checked={optionSearch === "user"}
+                  onChange={(e) => setOptionSearch(e.target.value)}
+                />
+                <label htmlFor="choice">Por prioridade:</label>
+                <input
+                  name="choice"
+                  type="radio"
+                  value="priority"
+                  checked={optionSearch === "priority"}
                   onChange={(e) => setOptionSearch(e.target.value)}
                 />
               </>
