@@ -359,7 +359,7 @@ export default function RequestComponent() {
                         changeStatus(request.id, "conclued", request.email)
                       }
                     >
-                      FINALIZAR SOLICITAÇÃO
+                      <span> FINALIZAR SOLICITAÇÃO</span>
                     </button>
                   )}
                   {request.status_request === "concluida" && (

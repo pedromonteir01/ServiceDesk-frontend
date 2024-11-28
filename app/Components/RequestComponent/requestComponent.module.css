@@ -338,6 +338,8 @@
 
 
 .buttonra {
+  position: relative; 
+  overflow: hidden;
   background-color: white;
   border: 3px solid #28a745;
   color: #28a745;
@@ -354,13 +356,32 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.buttonra::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #28a745, #31c052);
+  transition: width 0.4s ease; 
+  z-index: 0; 
+}
+
+.buttonra:hover::before {
+  width: 100%; 
 }
 
 .buttonra:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(135deg, #28a745, #31c052);
-  color: white ;
+  color: white;
+}
+
+.buttonra span {
+  position: relative;
+  z-index: 1;
 }
 
 .buttonra:active {
