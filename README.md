@@ -72,7 +72,8 @@ Este projeto visa fornecer uma interface intuitiva para um sistema de gerenciame
    Crie um arquivo `.env` na raiz do projeto e configure a URL da API do back-end:
 
    ```
-   REACT_APP_API_URL=http://localhost:3001
+   URL=http://localhost:4000
+   REACT_APP_API_URL=http://localhost:4000
    ```
 
 ## Como Usar
