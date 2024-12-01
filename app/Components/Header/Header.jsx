@@ -46,8 +46,7 @@ const Sidebar = ({ isActive, onClose }) => {
     <div
       className={`sidebar ${isActive ? "sidebar-open" : ""}`}
       style={{
-        backgroundColor: "#e60000",
-        boxShadow: "5px 0 20px rgba(0, 0, 0, 0.7)",
+        backgroundColor: "#ff0000",
         height: "100vh",
         position: "fixed",
         zIndex: 999,
