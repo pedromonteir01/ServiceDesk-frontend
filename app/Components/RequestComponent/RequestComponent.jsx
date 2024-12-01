@@ -289,7 +289,9 @@ export default function RequestComponent() {
                 ))}
               </>
             ) : (
+              <div className={styles.noRequestMsgDiv}>
               <p className={styles.noRequestMsg}>REALIZE ALGUMA REQUISIÇÃO!</p>
+              </div>
             )}
           </div>
         </motion.section>
