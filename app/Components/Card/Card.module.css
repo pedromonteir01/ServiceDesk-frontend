@@ -9,7 +9,7 @@
   max-width: 570px; /* Limita o tamanho do card */
   background-color: #f9f9f9; /* Fundo claro e neutro */
   border: 1px solid #e2e2e2; /* Borda suave e discreta */
-  margin-bottom: 0.2rem; /* Espaço entre os cards */
+  margin-bottom: 1rem; /* Espaço entre os cards */
 }
 
 /* Efeito hover para interação */
