@@ -2,9 +2,8 @@
 
 import axios from "axios";
 
-// const api = process.env.URL;
-const api = process.env.URL + "/requests";
-const apif = process.env.URL;
+const url = process.env.URL || process.env.BACKUP_AWS;
+const api = url + "/requests";
 
 export const getAllRequests = async () => {
   try {
@@ -99,7 +98,7 @@ export const getRequestsByPriority = async(priority) => {
 
 export const createRequest = async (requestData, token) => {
   try {
-    const response = await axios.post(`${apif}/requests`, requestData, {
+    const response = await axios.post(`${api}`, requestData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",

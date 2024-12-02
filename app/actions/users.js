@@ -2,7 +2,7 @@
 import axios from "axios";
 import bcrypt from 'bcrypt';
 
-const api = process.env.URL;    
+const api = process.env.URL || process.env.BACKUP_AWS;    
 
 export const getAllUsers = async() => {
     try {
