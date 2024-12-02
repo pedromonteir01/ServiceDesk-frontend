@@ -19,8 +19,6 @@ import {
 import { FaXTwitter } from "react-icons/fa6";
 import { TfiYoutube } from "react-icons/tfi";
 import { UserContext } from "../../contexts/userContext.jsx";
-// import styles from "@/app/components/SidebarItem/SidebarItem.module.css";
-// import styles from "@/app/components/SideNav/sideNav.module.css";
 import styles from "./header.module.css";
 
 const SidebarItem = ({ Icon, Text, href }) => {
