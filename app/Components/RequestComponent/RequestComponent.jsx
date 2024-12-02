@@ -103,6 +103,13 @@ export default function RequestComponent() {
     try {
       const response = await getRequestById(id);
       setRequest(response);
+
+      setTimeout(() => {
+        const detailSection = document.querySelector(`.${styles.info}`);
+        if (detailSection) {
+          detailSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      }, 100); 
     } catch (e) {
       toast.error(e.message || e.error);
     }
@@ -290,7 +297,9 @@ export default function RequestComponent() {
               </>
             ) : (
               <div className={styles.noRequestMsgDiv}>
-              <p className={styles.noRequestMsg}>REALIZE ALGUMA REQUISIÇÃO!</p>
+                <p className={styles.noRequestMsg}>
+                  REALIZE ALGUMA REQUISIÇÃO!
+                </p>
               </div>
             )}
           </div>
