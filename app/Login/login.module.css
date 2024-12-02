@@ -52,6 +52,24 @@
   color: #555;
 }
 
+.passwordWrapper {
+  position: relative;
+}
+
+.showPasswordButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+
+
 .input {
   width: 100%;
   padding: 0.75rem;
@@ -59,7 +77,7 @@
   border-radius: 8px;
   font-size: 1rem;
   color: #333;
-  background-color: #fff; /* Cor branca */
+  background-color: #fff;
   transition: border 0.3s;
 }
 

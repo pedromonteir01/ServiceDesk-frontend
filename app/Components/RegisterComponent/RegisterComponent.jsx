@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import styles from "../../Register/register.module.css";
 import { createUser } from "@/app/actions/users";
 import toast from "react-hot-toast";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 import { UserContext } from "@/app/contexts/userContext";
 import Image from "next/image";
 const special = ["!", "@", "#", "$", "%", "&", "*", "(", ")", "/", "?", "|"];
@@ -70,6 +72,9 @@ const RegisterComponent = () => {
   const router = useRouter();
 
   const { user } = useContext(UserContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -166,7 +171,7 @@ const RegisterComponent = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          {user && user.isadmin ? 'CADASTRAR' : 'CADASTRE-SE'}
+          {user && user.isadmin ? "CADASTRAR" : "CADASTRE-SE"}
         </motion.h2>
 
         <motion.form
@@ -209,26 +214,52 @@ const RegisterComponent = () => {
             <label htmlFor="password" className={styles.label}>
               Senha:
             </label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              className={styles.input}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className={styles.passwordWrapper}>
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={password}
+                className={styles.input}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                className={styles.showPasswordButton}
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                {showPassword ? (
+                  <FaEyeSlash fontSize={20} />
+                ) : (
+                  <FaEye fontSize={20} />
+                )}
+              </button>
+            </div>
           </section>
 
           <section className={styles.inputField}>
             <label htmlFor="confirmPassword" className={styles.label}>
               Confirmar senha:
             </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={confirmPassword}
-              className={styles.input}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+            <div className={styles.passwordWrapper}>
+              <input
+                type={showPassword2 ? "text" : "password"}
+                name="confirmPassword"
+                value={confirmPassword}
+                className={styles.input}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                className={styles.showPasswordButton}
+                onClick={() => setShowPassword2((prev) => !prev)}
+              >
+                {showPassword2 ? (
+                  <FaEyeSlash fontSize={20} />
+                ) : (
+                  <FaEye fontSize={20} />
+                )}
+              </button>
+            </div>
           </section>
 
           {user && user.isadmin && (

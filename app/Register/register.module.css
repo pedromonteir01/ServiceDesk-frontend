@@ -41,6 +41,22 @@
   margin-bottom: 1.5rem;
 }
 
+.passwordWrapper {
+  position: relative;
+}
+
+.showPasswordButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
 .label {
   font-size: 1rem;
   margin-bottom: 0.5rem;
