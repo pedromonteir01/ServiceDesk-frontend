@@ -10,7 +10,9 @@
 .heroSection {
   width: 100vw;
   height: 18rem;
-  background-color: #ff0000;
+  background-image: url('../public/bgimage.jpg');
+  background-size: cover;
+  background-position: center;
   padding: 2.5rem;
   text-align: center;
   color: white;
