@@ -2,7 +2,7 @@
 import axios from "axios";
 import bcrypt from 'bcrypt';
 
-const api = process.env.URL || process.env.BACKUP_AWS;    
+const api = process.env.URL;    
 
 export const getAllUsers = async() => {
     try {
@@ -54,7 +54,7 @@ export const loginInAPI = async({ email, password }) => {
       }
       return { error: 'credenciais inválidas' };
     } catch (e) {
-      return e.response.data || { error: 'operação fracassou' };
+        return e.response.data || { error: 'operação fracassou' };
     }
   };
 
