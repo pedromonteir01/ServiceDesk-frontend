@@ -53,8 +53,8 @@ export default function LatestRequests() {
               alignItems: "center",
             }}
             color="#ff0000"
-            height={50}
-            width={50}
+            height={200}
+            width={100}
           />
         </div>
       ) : latestRequests.length > 0 ? (
