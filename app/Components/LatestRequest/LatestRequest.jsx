@@ -46,7 +46,16 @@ export default function LatestRequests() {
       <h2 className={styles.title}>Últimas Requisições</h2>
       {loading ? (
         <div className={styles.loading}>
-          <TailSpin color="#ff0000" height={50} width={50} />
+          <TailSpin
+            wrapperStyle={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            color="#ff0000"
+            height={50}
+            width={50}
+          />
         </div>
       ) : latestRequests.length > 0 ? (
         <div className={styles.cardsContainer}>

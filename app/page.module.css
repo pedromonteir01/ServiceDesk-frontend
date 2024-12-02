@@ -182,6 +182,12 @@
   color: #000;
 }
 
+.loading {
+  font-size: 3rem;
+  color: #e63946;
+  font-weight: bold;
+}
+
 .cardFooter {
   font-size: 0.95rem;
   color: #777;
