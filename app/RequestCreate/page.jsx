@@ -1,4 +1,4 @@
-import Header from "../components/Header/Header";
+import { Header } from "../components/Header/header";
 import styles from "./page.module.css";
 import RequestCreateComponent from "../components/RequestCreateComponent/RequestCreateComponent";
 
@@ -7,7 +7,7 @@ export default function RequestCreate() {
     <div className={styles.generalDiv}>
       <Header />
       <div className={styles.component}>
-      <RequestCreateComponent />
+        <RequestCreateComponent />
       </div>
     </div>
   );

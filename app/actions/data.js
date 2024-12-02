@@ -2,7 +2,8 @@
 
 import axios from "axios";
 
-const api = process.env.URL + '/data';
+const url = process.env.URL || process.env.BACKUP_AWS;
+const api = url + '/data';
 
 export const getAllReqsWithLocals = async() => {
     try {
