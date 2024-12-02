@@ -6,6 +6,8 @@ import style from "@/app/Login/login.module.css";
 import toast from "react-hot-toast";
 import { UserContext } from "@/app/contexts/userContext";
 import { motion } from "framer-motion";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 import Image from "next/image";
 
 const LoginComponent = () => {
@@ -15,6 +17,7 @@ const LoginComponent = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Estado para controlar a visibilidade da senha
 
   const login = async (email, password) => {
     const response = await loginInAPI({ email, password });
@@ -94,13 +97,22 @@ const LoginComponent = () => {
               <label htmlFor="password" className={style.label}>
                 Senha:
               </label>
-              <input
-                type="password"
-                name="password"
-                value={password}
-                className={style.input}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className={style.passwordWrapper}>
+                <input
+                  type={showPassword ? "text" : "password"} 
+                  name="password"
+                  value={password}
+                  className={style.input}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className={style.showPasswordButton}
+                  onClick={() => setShowPassword((prev) => !prev)}
+                > 
+                  {showPassword ? <FaEyeSlash fontSize={20} /> : <FaEye fontSize={20} />}
+                </button>
+              </div>
             </section>
 
             <section className={style.btnLogin}>
