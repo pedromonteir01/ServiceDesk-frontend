@@ -17,8 +17,8 @@ const LoginComponent = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Estado para controlar a visibilidade da senha
-
+  const [showPassword, setShowPassword] = useState(false);
+  
   const login = async (email, password) => {
     const response = await loginInAPI({ email, password });
     if (response.user) {
