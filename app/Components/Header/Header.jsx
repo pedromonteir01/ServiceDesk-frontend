@@ -21,7 +21,7 @@ import { TfiYoutube } from "react-icons/tfi";
 import { UserContext } from "@/app/contexts/userContext";
 // import styles from "@/app/components/SidebarItem/SidebarItem.module.css";
 // import styles from "@/app/components/SideNav/sideNav.module.css";
-import styles from "@/app/components/Header/Header.module.css";
+import styles from "./header.module.css";
 
 const SidebarItem = ({ Icon, Text, href }) => {
   return (
