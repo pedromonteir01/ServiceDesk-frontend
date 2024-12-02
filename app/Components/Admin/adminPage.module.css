@@ -131,6 +131,10 @@
     width: 90%;
   }
 
+  .content {
+    flex-direction: column;
+  } 
+
   .table {
     display: none;
   }
