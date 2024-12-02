@@ -1,6 +1,6 @@
-import Header from '@/app/Components/Header/Header';
+import Header from '@/app/components/Header/header';
 import styles from './edit.module.css';
-import EditComponent from '@/app/Components/Edit/Edit';
+import EditComponent from '@/app/components/Edit/Edit';
 
 export default function EditRequest({ params }) {
 

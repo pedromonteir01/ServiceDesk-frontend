@@ -6,10 +6,10 @@ import { IoCamera } from "react-icons/io5";
 import { IoIosPin } from "react-icons/io";
 import { BsPencilSquare } from "react-icons/bs";
 import Link from "next/link";
-import Header from "./components/Header/Header";
+import Header from "./components/Header/header";
 import { UserContext } from "./contexts/userContext";
 import styles from "./page.module.css";
-import LatestRequests from "./Components/LatestRequest/LatestRequest";
+import LatestRequests from "./components/LatestRequest/LatestRequest";
 
 export default function Home() {
   const words = [
