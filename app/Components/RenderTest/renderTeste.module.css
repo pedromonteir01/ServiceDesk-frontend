@@ -41,7 +41,7 @@
 .title {
   font-size: 1rem;
   line-height: 1.5;
-  white-space: normal; 
+  white-space: normal;
   word-wrap: break-word;
   color: #000;
   width: 70%;
@@ -117,6 +117,8 @@
   height: 1rem;
   border-radius: 50%;
   background-color: red;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .medium {
@@ -124,6 +126,8 @@
   height: 1rem;
   border-radius: 50%;
   background-color: #ff7700;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .low {
@@ -131,6 +135,8 @@
   height: 1rem;
   border-radius: 50%;
   background-color: #28a745;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 768px) {
