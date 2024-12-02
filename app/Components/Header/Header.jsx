@@ -86,7 +86,7 @@ const Sidebar = ({ isActive, onClose }) => {
   );
 };
 
-const Header = () => {
+export const Header = () => {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -180,4 +180,3 @@ const Header = () => {
   );
 };
 
-export default Header;
