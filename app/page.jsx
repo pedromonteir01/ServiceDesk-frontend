@@ -9,7 +9,7 @@ import Link from "next/link";
 // import Header from "@/app/components/Header/header.jsx";
 import { UserContext } from "./contexts/userContext.jsx";
 import styles from "./page.module.css";
-import LatestRequests from "@/app/components/LatestRequest/LatestRequest.jsx";
+// import LatestRequests from "@/app/components/LatestRequest/LatestRequest.jsx";
 
 export default function Home() {
   const words = [
@@ -113,7 +113,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <LatestRequests />
+        {/* <LatestRequests /> */}
       </motion.div>
     </main>
   );
