@@ -19,13 +19,13 @@ import {
 import { FaXTwitter } from "react-icons/fa6";
 import { TfiYoutube } from "react-icons/tfi";
 import { UserContext } from "@/app/contexts/userContext";
-import stylesI from "@/app/components/SidebarItem/SidebarItem.module.css";
-import stylesB from "@/app/components/SideNav/sideNav.module.css";
+// import styles from "@/app/components/SidebarItem/SidebarItem.module.css";
+// import styles from "@/app/components/SideNav/sideNav.module.css";
 import styles from "@/app/components/Header/Header.module.css";
 
 const SidebarItem = ({ Icon, Text, href }) => {
   return (
-    <Link className={stylesI.container} href={href}>
+    <Link className={styles.container} href={href}>
       <Icon />
       <span style={{ marginLeft: 15 }}>{Text}</span>
     </Link>
@@ -54,7 +54,7 @@ const Sidebar = ({ isActive, onClose }) => {
         width: "12rem",
       }}
     >
-      <div className={stylesB.container}>
+      <div className={styles.container}>
         <SidebarItem Icon={FaHome} Text="Início" href="/" />
         <SidebarItem Icon={FaTools} Text="Solicitações" href="/Request" />
         {user ? (
@@ -71,7 +71,7 @@ const Sidebar = ({ isActive, onClose }) => {
                 href="/Register"
               />
             )}
-            <div onClick={logoff} className={stylesB.exit}>
+            <div onClick={logoff} className={styles.exit}>
               <SidebarItem Icon={FaHiking} Text="Sair" href="./" />
             </div>
           </>
