@@ -5,7 +5,7 @@ const DataRequest = ({ month, requests, attented }) => {
     if (requests == 0 || attented == 0) {
       return false;
     } else {
-      return `representando ${Math.floor(
+      return `requisições, representando ${Math.floor(
         (attented / requests) * 100
       )}% de resoluções este mês`;
     }

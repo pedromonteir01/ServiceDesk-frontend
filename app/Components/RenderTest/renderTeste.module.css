@@ -116,6 +116,7 @@
   height: 1rem;
   border-radius: 50%;
   background-color: red;
+  margin: 0.5rem;
 }
 
 .medium {
@@ -123,6 +124,7 @@
   height: 1rem;
   border-radius: 50%;
   background-color: #ff7700;
+  margin: 0.5rem;
 }
 
 .low {
@@ -130,6 +132,7 @@
   height: 1rem;
   border-radius: 50%;
   background-color: #28a745;
+  margin: 0.5rem;
 }
 
 @media screen and (max-width: 768px) {
